@@ -1,0 +1,932 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="src/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="src/css/navbar.css" />
+    <link rel="stylesheet" href="src/css/animations.css" />
+  </head>
+  <body>
+    <div id="navbar-container"></div>
+
+    <!-- Hero -->
+    <section
+      class="page-content relative w-full h-[80vh] min-h-[560px] overflow-hidden"
+    >
+      <!-- Background Image -->
+      <img
+        src="/front/src/assets/images/heronew.jpg"
+        alt="Luxury Jewelry"
+        class="absolute inset-0 w-full h-full object-cover object-right"
+      />
+
+      <!-- Gradient Overlay (IMPORTANT) -->
+      <!-- Premium Gradient Overlay -->
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#F9F6F2]/85 via-[#F9F6F2]/50 to-transparent"
+      ></div>
+
+      <!-- Content -->
+      <div class="relative z-10 h-full flex items-center">
+        <div class="container-main">
+          <div class="max-w-xl">
+            <!-- Label -->
+            <p
+              class="text-[0.75rem] tracking-[0.3em] uppercase text-[#6B1A2A]/70 mb-4"
+            >
+              Jewellery for Every Moment
+            </p>
+
+            <!-- Heading -->
+            <h1
+              class="text-[2.8rem] md:text-[3.6rem] font-light text-[#1A1A1A] leading-tight mb-6"
+            >
+              Timeless Jewellery,<br />
+              Crafted for Your Story
+            </h1>
+
+            <!-- CTA -->
+            <a
+              href="#"
+              class="inline-block px-6 py-3 rounded-sm border border-[#6B1A2A] text-[#6B1A2A] text-[0.95rem] font-semibold tracking-wide hover:bg-[#6B1A2A] hover:text-white transition-all duration-300"
+            >
+              Shop Collection
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category -->
+    <section class="section-sm bg-[#F9F6F2]/80 py-14">
+      <div class="container-main">
+        <!-- Section heading -->
+        <div class="text-center max-w-xl mx-auto mb-14">
+          <h2 class="text-[2.2rem] font-light text-[#1A1A1A] mb-3">
+            Explore Our Collections
+          </h2>
+          <p class="text-[1rem] text-black/60">
+            Timeless pieces crafted for every moment.
+          </p>
+        </div>
+
+        <!-- Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12"
+        >
+          <!-- Rings -->
+          <div class="text-center">
+            <a href="/rings" class="block group">
+              <div class="overflow-hidden mb-5">
+                <img
+                  src="/front/src/assets/images/ring.webp"
+                  class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+              <h3
+                class="text-[1.4rem] font-light text-[#1A1A1A] transition duration-300 group-hover:text-[#6B1A2A]"
+              >
+                Rings
+              </h3>
+            </a>
+          </div>
+
+          <!-- Necklaces -->
+          <div class="text-center">
+            <a href="/necklaces" class="block group">
+              <div class="overflow-hidden mb-5">
+                <img
+                  src="/front/src/assets/images/necklace.webp"
+                  class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+              <h3
+                class="text-[1.4rem] font-light text-[#1A1A1A] transition duration-300 group-hover:text-[#6B1A2A]"
+              >
+                Necklaces
+              </h3>
+            </a>
+          </div>
+
+          <!-- Earrings -->
+          <div class="text-center">
+            <a href="/earrings" class="block group">
+              <div class="overflow-hidden mb-5">
+                <img
+                  src="/front/src/assets/images/earrings.webp"
+                  class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+              <h3
+                class="text-[1.4rem] font-light text-[#1A1A1A] transition duration-300 group-hover:text-[#6B1A2A]"
+              >
+                Earrings
+              </h3>
+            </a>
+          </div>
+
+          <!-- Bracelets -->
+          <div class="text-center">
+            <a href="/bracelets" class="block group">
+              <div class="overflow-hidden mb-5">
+                <img
+                  src="/front/src/assets/images/bracelets.webp"
+                  class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+              <h3
+                class="text-[1.4rem] font-light text-[#1A1A1A] transition duration-300 group-hover:text-[#6B1A2A]"
+              >
+                Bracelets
+              </h3>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sacred Bonds -->
+    <section
+      class="relative section-sm container-main py-14 overflow-hidden reveal reveal-stagger"
+    >
+      <!-- Background Image -->
+      <img
+        src="/front/src/assets/images/sacredBond.jpg"
+        class="absolute inset-0 w-full h-full object-cover opacity-65 scale-105"
+      />
+
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-[#F9F6F2]/80"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 container-main">
+        <div class="max-w-4xl mx-auto px-6 md:px-0 text-center md:text-left">
+          <h2
+            class="text-[2.6rem] md:text-[3rem] font-light text-[#1A1A1A] leading-snug mb-5"
+          >
+            Sacred Bonds & Celebrations
+          </h2>
+
+          <div class="w-12 h-[1px] bg-[#C6A96A] mb-5 mx-auto md:mx-0"></div>
+
+          <p
+            class="text-[1rem] leading-relaxed text-black/60 max-w-2xl mx-auto md:mx-0"
+          >
+            From timeless wedding rituals to cherished everyday elegance,
+            discover jewellery crafted to celebrate every moment of your
+            journey.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm bg-[#F9F6F2]/80 py-14">
+      <div class="container-main">
+        <div
+          class="grid md:grid-cols-2 items-center gap-16 reveal reveal-stagger"
+        >
+          <!-- Image -->
+          <div>
+            <img
+              src="/front/src/assets/images/gemoraCollection.png"
+              alt="Gemora Craftsmanship"
+              class="w-full aspect-[4/3] md:h-[420px] md:aspect-auto object-cover object-center"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="max-w-lg">
+            <!-- Heading -->
+            <h2
+              class="text-[2.2rem] md:text-[2.8rem] font-light text-[#1A1A1A] mb-6 leading-tight"
+            >
+              Crafted in Tradition, <br />
+              Designed for Today
+            </h2>
+
+            <!-- Description -->
+            <p class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8">
+              At Gemora, every piece carries the essence of timeless Indian
+              craftsmanship blended with contemporary elegance. From festive
+              celebrations to everyday moments, our jewellery is created to be a
+              part of your story — rooted in tradition, yet made for the modern
+              world.
+            </p>
+
+            <!-- CTA -->
+            <a
+              href="#"
+              class="inline-block px-6 py-3 rounded-sm border border-[#6B1A2A] text-[#6B1A2A] text-sm font-semibold tracking-wide hover:bg-[#6B1A2A] hover:text-white transition-all duration-300"
+            >
+              Discover More
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- scrollable card  -->
+    <section class="section-sm py-14 bg-[#F9F6F2]">
+      <div class="container-main">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-10">
+          <h2 class="text-[1.8rem] font-light">Good Gold</h2>
+          <a href="#" class="text-sm text-[#6B1A2A]">View All →</a>
+        </div>
+
+        <!-- SCROLL CONTAINER -->
+        <div class="flex gap-6 overflow-x-auto scrollbar-hide pb-4">
+          <!-- Card -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/ring1.jpg"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/ring2.jpg"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 32,000</p>
+            </div>
+          </div>
+
+          <!-- Repeat -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/necklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/connectionNecklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 12,000</p>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/ring1.jpg"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/ring2.jpg"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 32,000</p>
+            </div>
+          </div>
+
+          <!-- Repeat -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/necklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/connectionNecklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 12,000</p>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/ring1.jpg"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/ring2.jpg"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 32,000</p>
+            </div>
+          </div>
+
+          <!-- Repeat -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/necklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/connectionNecklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 12,000</p>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/ring1.jpg"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/ring2.jpg"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 32,000</p>
+            </div>
+          </div>
+
+          <!-- Repeat -->
+          <div class="min-w-[260px] flex-shrink-0 group">
+            <div class="bg-white p-5 hover:shadow-md transition duration-300">
+              <!-- IMAGE WRAPPER -->
+              <div class="relative w-full h-[260px] overflow-hidden mb-4">
+                <!-- Default Image -->
+                <img
+                  src="src/assets/images/necklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:opacity-0 group-hover:scale-105"
+                />
+
+                <!-- Hover Image -->
+                <img
+                  src="src/assets/images/connectionNecklace.webp"
+                  class="absolute inset-0 w-full h-full object-cover opacity-0 transition duration-500 group-hover:opacity-100 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Content -->
+              <h3 class="text-sm font-medium">Diamond Ring</h3>
+              <p class="text-sm text-black/50">₹ 12,000</p>
+            </div>
+          </div>
+
+          <!-- Repeat more... -->
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- video section  -->
+     
+   <section class="relative w-full h-[75vh] min-h-[520px] overflow-hidden">
+
+  <!-- VIDEO -->
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src="/front/src/assets/images/video.mp4" type="video/mp4" />
+  </video>
+
+  <!-- OVERLAY -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
+
+  <!-- CONTENT -->
+  <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+
+    <div class="max-w-xl">
+
+      <!-- Label -->
+      <p class="text-[0.8rem] tracking-[0.3em] uppercase text-white/70 mb-4">
+        Crafted in Motion
+      </p>
+
+      <!-- Heading -->
+      <h2 class="text-white text-[2.2rem] md:text-[3rem] font-light leading-tight mb-6">
+        Designed to Shine With You
+      </h2>
+
+      <!-- CTA -->
+      <a
+        href="#"
+        class="inline-block px-6 py-3 border border-white text-white text-[0.95rem] tracking-wide hover:bg-white hover:text-black transition-all duration-300"
+      >
+        Explore Collection
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- shop by gender  -->
+    <section class="section-sm py-14 bg-[#F9F6F2]">
+      <div class="container-main">
+        <!-- Heading -->
+        <div class="text-center mb-14 section-heading">
+          <h2 class="text-[2rem] md:text-[2.5rem] font-light mb-2">
+            Curated For You
+          </h2>
+          <p class="text-sm text-black/60 tracking-wide">For Every Occasion</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Card -->
+          <a href="src/assets/images/female.jpg" class="group block">
+            <div class="relative overflow-hidden rounded-xl">
+              <!-- Image -->
+              <img
+                src="src/assets/images/female.jpg"
+                class="w-full h-[380px] object-cover transition duration-500 group-hover:scale-105"
+              />
+
+              <!-- Overlay -->
+              <div
+                class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"
+              ></div>
+            </div>
+
+            <!-- Label -->
+            <h3 class="text-center mt-4 text-[1.1rem] font-medium">For Her</h3>
+          </a>
+
+          <!-- Card -->
+          <a href="/category/men" class="group block">
+            <div class="relative overflow-hidden rounded-xl">
+              <img
+                src="src/assets/images/men.jpg"
+                class="w-full h-[380px] object-cover transition duration-500 group-hover:scale-105"
+              />
+
+              <div
+                class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"
+              ></div>
+            </div>
+
+            <h3 class="text-center mt-4 text-[1.1rem] font-medium">For Him</h3>
+          </a>
+
+          <!-- Card -->
+          <a href="/category/kids" class="group block">
+            <div class="relative overflow-hidden rounded-xl">
+              <img
+                src="src/assets/images/kid.jpg"
+                class="w-full h-[380px] object-cover transition duration-500 group-hover:scale-105"
+              />
+
+              <div
+                class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"
+              ></div>
+            </div>
+
+            <h3 class="text-center mt-4 text-[1.1rem] font-medium">
+              For Little Ones
+            </h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- right scrollable left sticky  -->
+    <section class="bg-[#F9F6F2] py-14">
+      <div class="container-main">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+          <!-- LEFT (STICKY IMAGE) -->
+          <div class="h-fit md:sticky md:top-[120px]">
+            <div class="relative overflow-hidden rounded-[12px]">
+              <img
+                src="src/assets/images/leftWhyUs.webp"
+                class="w-full h-[500px] object-cover"
+              />
+
+              <!-- Optional overlay text -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <p class="text-white text-lg text-center max-w-xs">
+                  Fine jewelry designed to be worthy of those who wear it
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT (SCROLL CONTENT) -->
+          <div class="flex flex-col gap-24">
+            <!-- Block 1 -->
+            <div>
+              <img
+                src="src/assets/images/highestQuality.webp"
+                class="w-full mb-6 rounded-[12px]"
+              />
+              <h3 class="text-xl tracking-wide mb-3">HIGHEST QUALITY</h3>
+              <p class="text-[1rem] text-black/60 leading-relaxed">
+                Every piece is crafted with precision using responsibly sourced
+                materials and expert finishing. From design to final polish, our
+                jewellery is made to meet the highest standards of durability,
+                shine, and comfort.
+              </p>
+            </div>
+
+            <!-- Block 2 -->
+            <div>
+              <img
+                src="src/assets/images/fairestPrice.webp"
+                class="w-full mb-6 rounded-[12px]"
+              />
+              <h3 class="text-xl tracking-wide mb-3">FAIR PRICING</h3>
+              <p class="text-[1rem] text-black/60 leading-relaxed">
+                Luxury should feel honest. By streamlining our process and
+                working directly with skilled artisans, we eliminate unnecessary
+                markups—so you get exceptional jewellery at a price that truly
+                reflects its value.
+              </p>
+            </div>
+
+            <!-- Block 3 -->
+            <div>
+              <img
+                src="src/assets/images/longestLife.webp"
+                class="w-full mb-6 rounded-[12px]"
+              />
+              <h3 class="text-xl tracking-wide mb-3">CRAFTED TO LAST</h3>
+              <p class="text-[1rem] text-black/60 leading-relaxed">
+                Designed for everyday elegance and special moments alike, each
+                piece is built to last beyond trends. Timeless forms, strong
+                settings, and careful detailing ensure your jewellery stays with
+                you for years.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section
+      class="section-sm container-main relative py-14 overflow-hidden reveal"
+    >
+      <!-- Background Image -->
+      <img
+        src="/front/src/assets/images/pexels-sejio402-34372559.jpg"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+
+      <!-- Warm overlay (IMPORTANT: not dark like David Morris) -->
+      <div class="absolute inset-0 bg-[#F9F6F2]/80"></div>
+
+      <!-- Content -->
+      <div class="relative z-10 container-main text-center max-w-2xl mx-auto">
+        <p
+          class="text-[0.8rem] tracking-[0.25em] text-[#6B1A2A]/80 uppercase mb-4"
+        >
+          Personal Experience
+        </p>
+
+        <h2 class="text-[2.5rem] md:text-[3rem] font-light text-[#1A1A1A] mb-6">
+          Book a Private Consultation
+        </h2>
+
+        <p class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8">
+          Connect with our jewellery experts for a personalised experience.
+          Discover pieces crafted for your story — whether for celebrations or
+          everyday elegance.
+        </p>
+
+        <a
+          href="#"
+          class="inline-block px-6 py-3 rounded-sm border border-[#6B1A2A] text-[#6B1A2A] text-sm font-semibold tracking-wide hover:bg-[#6B1A2A] hover:text-white transition-all duration-300"
+        >
+          Book Appointment
+        </a>
+      </div>
+    </section>
+
+    <!-- Customer Stories -->
+    <section class="bg-[#F9F6F2]/80 py-14">
+      <div class="container-main">
+        <!-- Heading -->
+        <h2 class="text-center text-[2rem] md:text-[2.4rem] font-light mb-20">
+          Customer Stories
+        </h2>
+
+        <!-- Grid -->
+        <div class="grid md:grid-cols-3 gap-12 reveal reveal-stagger">
+          <!-- Card -->
+
+          <a href="#" class="group block pt-10">
+            <div
+              class="bg-white rounded-xl px-8 pb-8 pt-14 text-center border border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transform transition-all duration-300 group-hover:-translate-y-2 relative"
+            >
+              <!-- Image — half outside top -->
+              <div
+                class="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)]"
+              >
+                <img
+                  src="src/assets/images/ring1.jpg"
+                  class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Name -->
+              <h3 class="text-[1.2rem] font-medium mb-3">Virda</h3>
+
+              <!-- Review -->
+              <p class="text-[1rem] text-black/60 leading-relaxed mb-5">
+                Completely in love with my ring. The quality feels truly
+                premium.
+              </p>
+
+              <!-- CTA -->
+              <span
+                class="text-sm text-[#6B1A2A] opacity-70 group-hover:opacity-100 transition"
+              >
+                View Product →
+              </span>
+            </div>
+          </a>
+
+          <a href="#" class="group block pt-10">
+            <div
+              class="bg-white rounded-xl px-8 pb-8 pt-14 text-center border border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transform transition-all duration-300 group-hover:-translate-y-2 relative"
+            >
+              <!-- Image — half outside top -->
+              <div
+                class="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)]"
+              >
+                <img
+                  src="src/assets/images/earrings.webp"
+                  class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Name -->
+              <h3 class="text-[1.2rem] font-medium mb-3">Shanaya</h3>
+
+              <!-- Review -->
+              <p class="text-[1rem] text-black/60 leading-relaxed mb-5">
+                Made my mom’s birthday truly special. Elegant and beautifully
+                crafted.
+              </p>
+
+              <!-- CTA -->
+              <span
+                class="text-sm text-[#6B1A2A] opacity-70 group-hover:opacity-100 transition"
+              >
+                View Product →
+              </span>
+            </div>
+          </a>
+
+          <a href="#" class="group block pt-10">
+            <div
+              class="bg-white rounded-xl px-8 pb-8 pt-14 text-center border border-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transform transition-all duration-300 group-hover:-translate-y-2 relative"
+            >
+              <!-- Image — half outside top -->
+              <div
+                class="absolute -top-10 left-1/2 -translate-x-1/2 w-20 h-20 rounded-full overflow-hidden border-4 border-white shadow-[0_8px_20px_rgba(0,0,0,0.12)]"
+              >
+                <img
+                  src="src/assets/images/connectionNecklace.webp"
+                  class="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                />
+              </div>
+
+              <!-- Name -->
+              <h3 class="text-[1.2rem] font-medium mb-3">Shruti</h3>
+
+              <!-- Review -->
+              <p class="text-[1rem] text-black/60 leading-relaxed mb-5">
+                Gifted this and she absolutely loved it. Perfect for special
+                moments.
+              </p>
+
+              <!-- CTA -->
+              <span
+                class="text-sm text-[#6B1A2A] opacity-70 group-hover:opacity-100 transition"
+              >
+                View Product →
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+
+    <section class="bg-[#F9F6F2]/80 py-20">
+      <div class="container-main">
+        <!-- Section heading -->
+        <div class="text-center max-w-xl mx-auto mb-14">
+          <p
+            class="text-[0.8rem] tracking-[0.25em] text-[#6B1A2A]/80 uppercase mb-4"
+          >
+            Why Choose Gemora
+          </p>
+          <h2 class="text-[1.8rem] md:text-[2.2rem] font-light text-[#1A1A1A]">
+            Quality, Trust & Timeless Elegance
+          </h2>
+        </div>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-center reveal reveal-stagger"
+        >
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 8v4l3 3"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+            </svg>
+
+            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+              10+ Years Legacy
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 3l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V7l7-4z"></path>
+            </svg>
+
+            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+              Certified Jewellery
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 12h18"></path>
+              <path d="M7 8l-4 4 4 4"></path>
+            </svg>
+
+            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+              Easy Returns
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"></path>
+            </svg>
+
+            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+              Lifetime Warranty
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M3 7h13v10H3z"></path>
+              <path d="M16 10h4l2 3v4h-6z"></path>
+            </svg>
+
+            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+              Free Shipping
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path d="M18 10c0 4-3 7-6 7s-6-3-6-7 3-7 6-7 6 3 6 7z"></path>
+              <path d="M12 17v4"></path>
+            </svg>
+
+            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+              24/7 Support
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+  <!-- footer  -->
+<div id="footer-container"></div>
+
+
+
+    <script src="src/js/config.js"></script>
+    <script src="src/js/main.js"></script>
+    <script type="module" src="src/js/components/navbar.js"></script>
+    <script src="src/js/components/footer.js"></script>
+  </body>
+</html>

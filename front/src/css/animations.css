@@ -1,0 +1,113 @@
+/* =========================
+   SECTION HEADING REVEAL
+========================= */
+
+.section-label {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.section-title {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+}
+
+.section-underline {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease 0.3s;
+}
+
+/* Active */
+.heading-revealed .section-label,
+.heading-revealed .section-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading-revealed .section-underline {
+  transform: scaleX(1);
+}
+
+
+/* =========================
+   SCROLL REVEAL (REFINED)
+========================= */
+
+.reveal {
+  --x: 0;
+  --y: 24px;
+
+  opacity: 0;
+  transform: translate(var(--x), var(--y));
+
+  transition: transform 0.6s cubic-bezier(.22,1,.36,1),
+              opacity 0.6s cubic-bezier(.22,1,.36,1);
+
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  --x: 0;
+  --y: 0;
+  opacity: 1;
+}
+
+
+/* Desktop directional (VERY SUBTLE) */
+@media (min-width: 768px) {
+  .reveal-left  { --x: -24px; --y: 0; }
+  .reveal-right { --x: 24px;  --y: 0; }
+}
+
+
+/* =========================
+   LIMITED STAGGER (USE RARELY)
+========================= */
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal.active.reveal-stagger > * {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.reveal.active.reveal-stagger > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal.active.reveal-stagger > *:nth-child(2) { transition-delay: 0.1s; }
+.reveal.active.reveal-stagger > *:nth-child(3) { transition-delay: 0.15s; }
+.reveal.active.reveal-stagger > *:nth-child(4) { transition-delay: 0.2s; }
+
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .section-label,
+  .section-title {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+
+
+
+/* Hide horizontal scrollbar (keep scroll working) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}

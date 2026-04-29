@@ -1,0 +1,82 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+body {
+  font-family: 'Jost', sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+html {
+
+  scroll-behavior: smooth;
+}
+
+.page-content {
+  padding-top: 108px;
+}
+
+
+/* Main layout container */
+.container-main {
+  width: 100%;
+  max-width: 1500px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 60px);
+}
+
+/* Narrow reading container */
+.container-narrow {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* medium container  */
+.container-medium {
+  width: 100%;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+
+
+/* Main sections */
+.section {
+  padding-block: clamp(50px, 6vw, 80px);
+}
+
+/* big sections */
+.section-lg {
+  padding-block: clamp(80px, 10vw, 110px);
+}
+
+/* Tight sections */
+.section-sm {
+  padding-block: clamp(30px, 4vw, 50px);
+}
+
+
+
+.section-tight {
+  padding-top: 0;
+}
+
+.section-bottom-tight {
+  padding-bottom: 0;
+}
+
+
+
+
+
+.container-narrow h2 {
+  letter-spacing: -0.01em;
+
+}
+
+
+
+

@@ -1,0 +1,84 @@
+<div
+  id="authModal"
+  class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm z-[9999]"
+>
+  <div class="flex items-center justify-center min-h-full p-4">
+    <!-- MODAL BOX -->
+    <div
+      class="bg-[#FDF6EC] w-full max-w-[850px] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] flex flex-col md:flex-row overflow-hidden border border-[#EADBC8] relative"
+    >
+      <!-- LEFT (Promo) — desktop only -->
+      <div
+        class="w-full md:w-1/2 hidden md:flex text-[#6B1A2A] p-10 flex-col justify-center items-center text-center border-r border-[#EADBC8]"
+      >
+        <h2 class="text-2xl font-serif mb-4">Welcome to Gemora</h2>
+        <p class="text-sm opacity-70 mb-6">On your first order get</p>
+        <div
+          class="bg-[#C8963E] text-black px-6 py-3 rounded-full font-semibold text-lg"
+        >
+          ₹500 OFF
+        </div>
+        <p class="text-xs mt-6 opacity-60">Handcrafted • Certified • Secure</p>
+      </div>
+
+      <!-- RIGHT (Login) -->
+      <div class="w-full md:w-1/2 p-6 md:p-8 bg-white rounded-2xl">
+        <!-- Close -->
+        <button
+          id="closeModal"
+          class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition"
+        >
+          ✕
+        </button>
+
+        <h3 class="text-xl font-semibold text-[#6B1A2A] mb-2">
+          Welcome to Gemora!
+        </h3>
+        <p class="text-sm text-gray-500 mb-6">
+          Login/Signup to get exclusive Gemora privileges
+        </p>
+
+        <button
+          id="google-btn"
+          class="w-full border border-gray-200 rounded-lg py-3 flex items-center justify-center gap-3 bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-200"
+        >
+          <img src="/front/src/assets/icon/google.svg" class="w-5 h-5" />
+          <span class="font-medium text-sm">Continue with Google</span>
+        </button>
+
+        <div class="flex items-center gap-2 my-6">
+          <div class="flex-1 h-px bg-gray-200"></div>
+          <span class="text-xs text-gray-400">or</span>
+          <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+
+        <div
+          class="flex border border-gray-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#6B1A2A]/20"
+        >
+          <span class="px-3 flex items-center text-sm"
+            ><img src="/front/src/assets/icon/indianFlag.jpg" class="w-5 h-5"
+          /></span>
+          <input
+            type="text"
+            placeholder="Enter mobile number"
+            class="flex-1 px-3 py-3 outline-none text-sm"
+          />
+        </div>
+
+        <button
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg mt-4 shadow-md hover:shadow-lg hover:bg-[#4A1019] transition-all duration-200"
+        >
+          Request OTP
+        </button>
+
+        <p class="text-xs text-gray-400 mt-6">
+          By continuing, you agree to our
+          <span class="underline cursor-pointer text-[#6B1A2A]">Terms</span> &
+          <span class="underline cursor-pointer text-[#6B1A2A]"
+            >Privacy Policy</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

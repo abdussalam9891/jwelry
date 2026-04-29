@@ -1,0 +1,687 @@
+import { openAuthModal } from "./authModal.js";
+
+
+
+
+let placeholderInterval;
+
+// fetch hata do — ye karo
+function loadNavbar() {
+  const navbarHTML = `
+
+    <!-- Mobile overlay -->
+<div
+  id="navOverlay"
+  class="fixed inset-0 bg-black/40 backdrop-blur-[2px] opacity-0 pointer-events-none transition-opacity duration-300 z-[998]"
+></div>
+
+<!-- Mobile drawer -->
+<div
+  id="mobileMenu"
+  class="fixed top-0 right-0 z-[999] w-full max-w-[320px] h-[100dvh] bg-[#F9F6F2] translate-x-full transition-transform duration-300 flex flex-col overflow-y-auto px-5 pt-5 pb-6 shadow-[ -10px_0_40px_rgba(0,0,0,0.15) ]"
+>
+  <button
+    id="drawerClose"
+    class="absolute top-5 right-5 z-[1000] p-1 hover:bg-black/5 rounded-lg transition-colors"
+  >
+    <svg
+      class="w-6 h-6 text-[#1A1A1A]"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+
+  <nav class="flex flex-col gap-0 mt-4">
+    <a
+       href="/front/pages/products.html"
+      class="py-3 px-2 text-[#1A1A1A] text-[1rem] font-medium border-b border-black/5 hover:text-[#6B1A2A] transition-colors"
+      >All Jewellery</a
+    >
+
+    <a
+      href="/front/pages/products.html?subcategory=rings"
+      class="py-3 px-2 text-[#1A1A1A] text-[1rem] font-medium border-b border-black/5 hover:text-[#6B1A2A] transition-colors"
+      >Rings</a
+    >
+
+     <a
+      href="/front/pages/products.html?subcategory=earrings"
+      class="py-3 px-2 text-[#1A1A1A] text-[1rem] font-medium border-b border-black/5 hover:text-[#6B1A2A] transition-colors"
+      >Earrings</a
+    >
+
+
+    <a
+      href="/front/pages/products.html?subcategory=bracelets"
+      class="py-3 px-2 text-[#1A1A1A] text-[1rem] font-medium border-b border-black/5 hover:text-[#6B1A2A] transition-colors"
+      >Bracelets</a
+    >
+    <a
+       href="/front/pages/products.html?subcategory=necklaces"
+      class="py-3 px-2 text-[#1A1A1A] text-[1rem] font-medium border-b border-black/5 hover:text-[#6B1A2A] transition-colors"
+      >Necklaces</a
+    >
+
+
+
+
+
+  </nav>
+
+  <div  class="mt-6 pt-4 border-t border-black/5">
+    <a
+      id="mobileLoginBtn"
+      href="#"
+      class="block py-2.5 px-3 text-center text-sm font-semibold border border-[#6B1A2A] text-[#6B1A2A] hover:bg-[#6B1A2A] hover:text-white transition-colors duration-250"
+    >
+      Login / Signup
+    </a>
+  </div>
+</div>
+
+<!-- Main navbar -->
+<nav
+  id="mainNav"
+  class="fixed top-0 left-0 right-0 z-[1000] bg-[#F9F6F2] transition-transform duration-300"
+>
+  <!-- ROW 1: Logo + Icons -->
+
+  <div
+    class="container-main flex items-center justify-between px-6 h-[64px]   border-b border-black/5 transition-all duration-300"
+  >
+    <!-- LEFT -->
+    <div class="flex items-center gap-4">
+      <!-- Mobile Hamburger -->
+      <button id="navToggle" class="md:hidden p-2 flex flex-col gap-1.5">
+        <span class="block w-5 h-0.5 bg-[#6B1A2A]"></span>
+        <span class="block w-5 h-0.5 bg-[#6B1A2A]"></span>
+        <span class="block w-3 h-0.5 bg-[#6B1A2A]"></span>
+      </button>
+
+      <!-- Logo -->
+      <a href="/front/index.html" class="flex-shrink-0">
+        <img
+          src="/front/src/assets/icon/logo.png"
+          class="h-16 w-auto object-contain"
+        />
+      </a>
+    </div>
+
+    <!-- CENTER SEARCH (desktop only) -->
+    <div class="hidden md:flex flex-1 justify-center px-6">
+      <div class="w-full max-w-md relative">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search jewellery..."
+          class="w-full px-4 py-2 pr-10 rounded-full border border-black/10 bg-[#F9F6F2] focus:outline-none focus:ring-2 focus:ring-[#6B1A2A]/30"
+        />
+
+        <!-- Search Icon INSIDE input -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-5 h-5 text-[#6B1A2A] absolute right-3 top-1/2 -translate-y-1/2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- RIGHT ICONS -->
+    <div class="flex items-center gap-2">
+      <!-- Wishlist -->
+      <button
+        id="wishlistBtn"
+        class="hidden md:flex p-2 hover:bg-black/5 rounded-lg"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-8 h-8 text-[#6B1A2A]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25Z"
+          />
+        </svg>
+      </button>
+
+      <!-- Cart -->
+      <button class="p-2 hover:bg-black/5 rounded-lg relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-8 h-8 text-[#6B1A2A]"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 3h1.386a1.125 1.125 0 0 1 1.11.843l.383 1.437m0 0L6.75 14.25h10.5l1.621-6.072a1.125 1.125 0 0 0-1.088-1.428H5.13m0 0L4.5 3m2.25 11.25a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m9 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0"
+          />
+        </svg>
+      </button>
+
+      <!-- Mobile Search Icon -->
+<button id="mobileSearchBtn" class="md:hidden p-2 hover:bg-black/5 rounded-lg">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-[#6B1A2A]">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"/>
+  </svg>
+</button>
+
+
+
+
+<!-- USER DROPDOWN -->
+<div class="relative hidden md:block">
+  <button data-user="trigger" class="p-2 hover:bg-black/5 rounded-lg">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-8 h-8 text-[#6B1A2A]"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"
+      />
+    </svg>
+  </button>
+  <div
+    id="userDropdown"
+    class="absolute right-0 mt-2 w-40 bg-white border border-black/10 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-200 z-[1100]"
+  >
+    <a href="#" id="mobileLoginBtn" class="block px-4 py-2 text-sm hover:bg-black/5">Login/Signup</a>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <!-- Mobile Search Bar -->
+<div id="mobileSearchBar" class="md:hidden px-4 py-2 border-t border-black/5 hidden">
+  <div class="relative">
+    <input id="mobileSearchInput" type="text" placeholder="Search jewellery..."
+      class="w-full px-4 py-2 pr-10 rounded-full border border-black/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#6B1A2A]/30 text-sm"/>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-[#6B1A2A] absolute right-3 top-1/2 -translate-y-1/2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"/>
+    </svg>
+  </div>
+</div>
+</nav>
+
+<!-- row 2  -->
+<div
+  id="categoryNav"
+  class="hidden md:flex items-center justify-center gap-8 px-6 h-[44px] fixed left-0 right-0 bg-[#F9F6F2] z-[999] border-b border-black/10 transition-[top] duration-300"
+>
+  <ul class="flex items-center justify-center gap-8 w-full list-none">
+    <!-- all jewellery  -->
+    <li>
+      <a
+        href="/front/pages/products.html"
+        data-nav="all jewellery"
+
+        class="text-[#1A1A1A] text-[0.95rem] font-medium relative group transition-colors duration-250 hover:text-[#6B1A2A]"
+      >
+        All Jewellery
+        <span
+          class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-[#6B1A2A] group-hover:w-full transition-all duration-250"
+        ></span>
+      </a>
+    </li>
+    <!-- rings  -->
+    <li>
+      <a
+        href="/front/pages/products.html?subcategory=rings"
+        data-nav="rings"
+        class="text-[#1A1A1A] text-[0.95rem] font-medium relative group transition-colors duration-250 hover:text-[#6B1A2A]"
+      >
+        Rings
+        <span
+          class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-[#6B1A2A] group-hover:w-full transition-all duration-250"
+        ></span>
+      </a>
+    </li>
+    <!-- necklaces  -->
+    <li>
+      <a
+         href="/front/pages/products.html?subcategory=necklaces"
+         data-nav="necklaces"
+        class="text-[#1A1A1A] text-[0.95rem] font-medium relative group transition-colors duration-250 hover:text-[#6B1A2A]"
+      >
+        Necklaces
+        <span
+          class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-[#6B1A2A] group-hover:w-full transition-all duration-250"
+        ></span>
+      </a>
+    </li>
+    <!-- earrings  -->
+    <li>
+      <a
+      href="/front/pages/products.html?subcategory=earrings"
+       data-nav="earrings"
+        class="text-[#1A1A1A] text-[0.95rem] font-medium relative group transition-colors duration-250 hover:text-[#6B1A2A]"
+      >
+        Earrings
+        <span
+          class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-[#6B1A2A] group-hover:w-full transition-all duration-250"
+        ></span>
+      </a>
+    </li>
+    <!-- bracelets  -->
+    <li>
+      <a
+        href="/front/pages/products.html?subcategory=bracelets"
+        data-nav="bracelets"
+        class="text-[#1A1A1A] text-[0.95rem] font-medium relative group transition-colors duration-250 hover:text-[#6B1A2A]"
+      >
+        Bracelets
+        <span
+          class="absolute bottom-[-4px] left-0 w-0 h-0.5 bg-[#6B1A2A] group-hover:w-full transition-all duration-250"
+        ></span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+  `;
+
+  document.getElementById("navbar-container").innerHTML = navbarHTML;
+  initializeNavbar();
+  checkAuthState();
+  initSearchPlaceholder();
+  initNavbarScroll();
+   setActiveNav();
+   initSearchHandlers();
+
+}
+
+loadNavbar();
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ─── Mobile Menu
+
+function initializeNavbar() {
+  let isOpen = false;
+
+  const mainNav = document.getElementById("mainNav");
+  const navToggle = document.getElementById("navToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const navOverlay = document.getElementById("navOverlay");
+  const drawerClose = document.getElementById("drawerClose");
+
+
+
+const userWrapper = document.querySelector('[data-user="trigger"]')?.parentElement;
+const userDropdown = document.getElementById("userDropdown");
+let userTimeout;
+
+if (userWrapper && userDropdown) {
+  userWrapper.addEventListener("mouseenter", () => {
+    clearTimeout(userTimeout);
+    userDropdown.style.opacity = "1";
+    userDropdown.style.pointerEvents = "auto";
+  });
+  userWrapper.addEventListener("mouseleave", () => {
+    userTimeout = setTimeout(() => {
+      userDropdown.style.opacity = "0";
+      userDropdown.style.pointerEvents = "none";
+    }, 150);
+  });
+}
+
+
+
+  const mobileSearchBtn = document.getElementById("mobileSearchBtn");
+const mobileSearchBar = document.getElementById("mobileSearchBar");
+const mobileSearchInput = document.getElementById("mobileSearchInput");
+
+mobileSearchBtn?.addEventListener("click", () => {
+  const isHidden = mobileSearchBar.classList.contains("hidden");
+  mobileSearchBar.classList.toggle("hidden");
+  if (isHidden) mobileSearchInput?.focus();
+});
+
+
+
+  if (!navToggle || !mobileMenu || !navOverlay) {
+    console.warn("[Navbar] Missing required DOM elements for mobile menu");
+    return;
+  }
+
+  function openMenu() {
+    mobileMenu.classList.remove("translate-x-full");
+    navOverlay.classList.remove("opacity-0", "pointer-events-none");
+    document.body.classList.add("overflow-hidden");
+    mainNav.style.transform = "translateY(-100%)";
+    mobileSearchBar?.classList.add("hidden"); // ← ADD
+    isOpen = true;
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.add("translate-x-full");
+    navOverlay.classList.add("opacity-0", "pointer-events-none");
+    document.body.classList.remove("overflow-hidden");
+    mainNav.style.transform = "translateY(0)";
+    isOpen = false;
+  }
+
+  function toggleMenu() {
+    isOpen ? closeMenu() : openMenu();
+  }
+
+  navToggle.addEventListener("click", toggleMenu);
+  drawerClose?.addEventListener("click", closeMenu);
+  navOverlay.addEventListener("click", closeMenu);
+  document.getElementById("mobileLoginBtn")?.addEventListener("click", closeMenu); // ← YAHAN
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && isOpen) {
+      closeMenu();
+    }
+  });
+}
+
+   function initNavbarScroll() {
+  const mainNav = document.getElementById("mainNav");
+  const categoryNav = document.getElementById("categoryNav");
+
+  if (!mainNav || !categoryNav) {
+    console.warn("[Navbar] initNavbarScroll: element not found", {
+      mainNav,
+      categoryNav,
+    });
+    return;
+  }
+
+  const ROW1_H = 64;
+
+  // Initial position
+  categoryNav.style.top = ROW1_H + "px";
+
+  let lastScrollY = window.scrollY;
+  let isHidden = false;
+
+  function handleScroll() {
+    if (document.body.classList.contains("overflow-hidden")) return;
+
+    const currentScrollY = window.scrollY;
+    const scrollDiff = currentScrollY - lastScrollY;
+
+    if (Math.abs(scrollDiff) < 5) return;
+
+    if (scrollDiff > 0 && currentScrollY > 80 && !isHidden) {
+      mainNav.style.transform = "translateY(-100%)";
+      categoryNav.style.top = "0px";
+      isHidden = true;
+    } else if (scrollDiff < 0 && isHidden) {
+      mainNav.style.transform = "translateY(0)";
+      categoryNav.style.top = ROW1_H + "px";
+      isHidden = false;
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+}
+
+// authstatte
+async function checkAuthState() {
+  const token = localStorage.getItem("token");
+
+  const loginBtn = document.getElementById("loginBtn");
+  const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+  const wishlistBtn = document.getElementById("wishlistBtn");
+
+  if (!token) {
+    wishlistBtn?.classList.add("hidden");
+    bindLoginButtons(loginBtn, mobileLoginBtn);
+    return;
+  }
+
+  try {
+    const res = await fetch(`${CONFIG.API_BASE}/api/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.loggedIn) {
+      wishlistBtn?.classList.remove("hidden");
+      bindLogoutButtons(loginBtn, mobileLoginBtn);
+    } else {
+      localStorage.removeItem("token");
+      wishlistBtn?.classList.add("hidden");
+      bindLoginButtons(loginBtn, mobileLoginBtn);
+    }
+  } catch (err) {
+    console.error("[Navbar] Auth check failed:", err);
+    wishlistBtn?.classList.add("hidden");
+  }
+}
+
+// ─── Button Binders ──────────────────────────────────────────
+
+function bindLoginButtons(loginBtn, mobileLoginBtn) {
+  const handler = async (e) => {
+    e.preventDefault();
+    // drawer band karo pehle
+    mobileLoginBtn?.dispatchEvent(new Event("closemenu"));
+    await openAuthModal();
+  };
+
+  if (loginBtn) {
+    loginBtn.textContent = "Login";
+    loginBtn.onclick = handler;
+  }
+  if (mobileLoginBtn) {
+    mobileLoginBtn.textContent = "Login";
+    mobileLoginBtn.onclick = handler;
+  }
+}
+
+function bindLogoutButtons(loginBtn, mobileLoginBtn) {
+  const handler = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
+  if (loginBtn) {
+    loginBtn.textContent = "Logout";
+    loginBtn.onclick = handler;
+  }
+  if (mobileLoginBtn) {
+    mobileLoginBtn.textContent = "Logout";
+    mobileLoginBtn.onclick = handler;
+  }
+}
+
+// ─── Search Placeholder ──────────────────────────────────────
+
+
+
+function initSearchPlaceholder() {
+  const placeholders = [
+    "Search for diamond jewellery",
+    "Search for gold rings",
+    "Search for earrings",
+    "Search for necklaces",
+  ];
+
+  const input = document.getElementById("searchInput");
+  if (!input) return;
+
+  let index = 0;
+
+  if (placeholderInterval) clearInterval(placeholderInterval);
+
+  placeholderInterval = setInterval(() => {
+    index = (index + 1) % placeholders.length;
+    input.setAttribute("placeholder", placeholders[index]);
+  }, 4000);
+}
+
+
+
+function setActiveNav() {
+  const params = new URLSearchParams(window.location.search);
+  const subcategory = params.get("subcategory");
+
+  const isProductsPage = window.location.pathname.includes("products.html");
+
+  document.querySelectorAll("[data-nav]").forEach(link => {
+    link.classList.remove("text-[#6B1A2A]");
+
+    const underline = link.querySelector("span");
+    if (underline) underline.style.width = "0";
+
+    if (isProductsPage && link.dataset.nav === subcategory) {
+      link.classList.add("text-[#6B1A2A]");
+      if (underline) underline.style.width = "100%";
+    }
+  });
+
+  // default active (ONLY on products page)
+  if (isProductsPage && !subcategory) {
+    const all = document.querySelector('[data-nav="all jewellery"]');
+    if (all) all.classList.add("text-[#6B1A2A]");
+  }
+}
+
+
+
+
+
+
+
+
+
+
+function initSearchHandlers() {
+  const desktopInput = document.getElementById("searchInput");
+  const mobileInput = document.getElementById("mobileSearchInput");
+
+  function handleSearch(input) {
+    input?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const value = input.value.trim();
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (value) {
+          params.set("search", value);
+        } else {
+          params.delete("search");
+        }
+
+        window.location.href = `/front/pages/products.html?${params.toString()}`;
+      }
+    });
+  }
+
+  handleSearch(desktopInput);
+  handleSearch(mobileInput);
+}
+
+
+
+document.getElementById("searchBtn")?.addEventListener("click", () => {
+  const input = document.getElementById("searchInput");
+  if (!input) return;
+
+  const value = input.value.trim();
+  const params = new URLSearchParams(window.location.search);
+
+  if (value) {
+    params.set("search", value);
+  }
+
+  window.location.href = `/front/pages/products.html?${params.toString()}`;
+});
+
+
+const params = new URLSearchParams(window.location.search);
+const search = params.get("search");
+
+if (search) {
+  document.getElementById("pageTitle").textContent = `Results for "${search}"`;
+}
+
+
+
+
+function syncSearchInput() {
+  const params = new URLSearchParams(window.location.search);
+  const search = params.get("search");
+
+  if (search) {
+    const desktopInput = document.getElementById("searchInput");
+    const mobileInput = document.getElementById("mobileSearchInput");
+
+    if (desktopInput) desktopInput.value = search;
+    if (mobileInput) mobileInput.value = search;
+  }
+}
+
+
+
+function showEmpty() {
+  const search = new URLSearchParams(window.location.search).get("search");
+
+  grid.innerHTML = `
+    <p class="col-span-full text-sm text-black/60 text-center">
+      ${search ? `No results for "${search}"` : "No products found"}
+    </p>
+  `;
+}
