@@ -36,22 +36,21 @@ export function createProductCard(product) {
           loading="lazy"
         />
 
-        <!-- ❤️ WISHLIST BUTTON -->
-        <button
-          class="wishlist-btn absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 backdrop-blur hover:bg-white transition"
-          data-id="${productId}"
-          onclick="event.preventDefault(); event.stopPropagation();"
-        >
-          <svg
-            class="w-4 h-4 stroke-black fill-none transition duration-200"
-            viewBox="0 0 24 24"
-            stroke-width="1.8"
-          >
-            <path
-              d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
-            />
-          </svg>
-        </button>
+        <!-- WISHLIST BUTTON -->
+      <button
+  class="wishlist-btn absolute top-3 right-3 w-10 h-10 flex items-center justify-center rounded-full       transition"
+  data-id="${productId}"
+>
+  <svg
+    class="w-8 h-8 stroke-gray-400 fill-none transition duration-200"
+    viewBox="0 0 24 24"
+    stroke-width="1.8"
+  >
+    <path
+      d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+    />
+  </svg>
+</button>
 
         <!-- BESTSELLER -->
         ${

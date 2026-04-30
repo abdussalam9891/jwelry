@@ -6,5 +6,5 @@ const isLocalHost =
 const CONFIG = {
   API_BASE: isLocalHost
     ? "http://localhost:5000"
-    : "https://your-production-api.com", // ← deploy karte waqt yahan apna URL daal
+    : "https://your-production-api.com", 
 };

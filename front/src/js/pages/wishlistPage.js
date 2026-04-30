@@ -5,7 +5,7 @@ import Auth from "../core/auth.js";
 import { openAuthModal } from "../components/authModal.js";
 import { initWishlist } from "../features/wishlist.js";
 
-const API_BASE = "http://localhost:5000";
+
 const grid = document.getElementById("wishlistGrid");
 
 async function loadWishlistPage() {
@@ -17,8 +17,8 @@ async function loadWishlistPage() {
   try {
     grid.innerHTML = `<p class="text-sm text-black/60">Loading wishlist...</p>`;
 
-    const res = await fetch(`${API_BASE}/api/wishlist`, {
-      headers: authHeader(),
+    const res = await fetch(`${CONFIG.API_BASE}/api/wishlist`, {
+      headers: Auth.authHeader(),
     });
 
     if (!res.ok) throw new Error("Failed");
@@ -38,15 +38,7 @@ async function loadWishlistPage() {
   }
 }
 
-function authHeader() {
-  const token = localStorage.getItem("token");
 
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
-}
-
-// 🚀 INIT
+// INIT
 loadWishlistPage();
 initWishlist();

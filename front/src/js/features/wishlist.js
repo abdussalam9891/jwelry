@@ -1,12 +1,14 @@
 // features/wishlist.js
 
-import Auth from "../core/auth.js";
 import { openAuthModal } from "../components/authModal.js";
+import Auth from "../core/auth.js";
 import { updateWishlistCount } from "../core/wishlistCount.js";
 
+let wishlistSet = new Set(); // source of truth
 
-const API_BASE = "http://localhost:5000";
-
+// ─────────────────────────────
+// INIT (event delegation)
+// ─────────────────────────────
 export function initWishlist() {
   document.addEventListener("click", async (e) => {
     const btn = e.target.closest(".wishlist-btn");
@@ -15,65 +17,97 @@ export function initWishlist() {
     e.preventDefault();
     e.stopPropagation();
 
+    const productId = btn.dataset.id;
+
     if (!Auth.isLoggedIn()) {
       await openAuthModal();
       return;
     }
 
-    const id = btn.dataset.id;
+    const isSaved = wishlistSet.has(productId);
+
+    // 🔥 OPTIMISTIC UI
+    if (isSaved) {
+      wishlistSet.delete(productId);
+      btn.classList.remove("active");
+    } else {
+      wishlistSet.add(productId);
+      btn.classList.add("active");
+    }
+
+    updateWishlistCount();
 
     try {
-      if (btn.classList.contains("active")) {
-        await fetch(`${API_BASE}/api/wishlist/${id}`, {
-          method: "DELETE",
-          headers: authHeader(),
-        });
-        btn.classList.remove("active");
-      } else {
-        await fetch(`${API_BASE}/api/wishlist/${id}`, {
-          method: "POST",
-          headers: authHeader(),
-        });
-        btn.classList.add("active");
+      const res = await fetch(`${CONFIG.API_BASE}/api/wishlist/${productId}`, {
+        method: isSaved ? "DELETE" : "POST",
+        headers: Auth.authHeader(),
+      });
+
+      if (!res.ok) throw new Error("Wishlist API failed");
+
+      // remove card if on wishlist page
+      if (isSaved && window.location.pathname.includes("wishlist.html")) {
+        btn.closest("a")?.remove();
+
+        const grid = document.getElementById("wishlistGrid");
+        if (grid && !grid.querySelector(".wishlist-btn")) {
+          grid.innerHTML = `<p class="text-sm text-black/60">Your wishlist is empty</p>`;
+        }
       }
+
     } catch (err) {
-      console.error("Wishlist error", err);
+      console.error("Wishlist sync failed", err);
+
+      // 🔥 ROLLBACK
+      if (isSaved) {
+        wishlistSet.add(productId);
+        btn.classList.add("active");
+      } else {
+        wishlistSet.delete(productId);
+        btn.classList.remove("active");
+      }
+
+      updateWishlistCount(); // rollback sync
     }
   });
 }
 
+// ─────────────────────────────
+// LOAD STATE (on page load)
+// ─────────────────────────────
 export async function loadWishlistState() {
   if (!Auth.isLoggedIn()) return;
 
   try {
-    const res = await fetch(`${API_BASE}/api/wishlist`, {
-      headers: authHeader(),
+    const res = await fetch(`${CONFIG.API_BASE}/api/wishlist`, {
+      headers: Auth.authHeader(),
     });
 
-    const products = await res.json();
-    const ids = products.map(p => p._id);
+    const data = await res.json();
 
-    document.querySelectorAll(".wishlist-btn").forEach(btn => {
-      if (ids.includes(btn.dataset.id)) {
-        btn.classList.add("active");
-      }
-    });
+    // 🔥 SAFE update (don’t replace reference)
+    wishlistSet.clear();
+    data.items.forEach(id => wishlistSet.add(id));
+
+    applyWishlistUI();
+    updateWishlistCount(); // 🔥 sync navbar
 
   } catch (err) {
     console.error("Failed to load wishlist", err);
   }
 }
 
-function authHeader() {
-  const token = localStorage.getItem("token");
+// ─────────────────────────────
+// APPLY UI STATE
+// ─────────────────────────────
+function applyWishlistUI() {
+  document.querySelectorAll(".wishlist-btn").forEach((btn) => {
+    const id = btn.dataset.id;
 
-  return {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  };
+    if (wishlistSet.has(id)) {
+      btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
+    }
+  });
 }
-
-
-
-
-updateWishlistCount();

@@ -79,8 +79,8 @@ html {
 
 
 .wishlist-btn.active svg {
-  fill: black;
-  stroke: black;
+  fill: #6B1A2A;   /* or your theme color */
+  stroke: #6B1A2A;
 }
 
 

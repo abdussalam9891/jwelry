@@ -44,7 +44,7 @@ async function loadProducts() {
 
 
     // wishlist state
-    loadWishlistState();
+     await loadWishlistState();
 
   } catch (error) {
     console.error(error);

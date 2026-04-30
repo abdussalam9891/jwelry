@@ -1,5 +1,5 @@
 import { createProductCard } from "../components/productCard.js";
-import { initWishlist } from "../features/wishlist.js";
+import { initWishlist, loadWishlistState } from "../features/wishlist.js";
 
 
 
@@ -49,7 +49,7 @@ async function fetchProducts(type) {
 }
 
 
-function renderProducts(products) {
+ async function renderProducts(products) {
   if (!products || products.length === 0) {
     container.innerHTML = "No products found";
     return;
@@ -60,6 +60,9 @@ function renderProducts(products) {
   ${createProductCard(p)}
 </div>
   `).join("");
+
+
+   await loadWishlistState();
 }
 
 

@@ -32,6 +32,13 @@ const Auth = {
       window.location.href = '/pages/auth.html';
     }
   },
+
+  authHeader() {
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.getToken()}`,
+    };
+  },
 };
 
 export default Auth;
