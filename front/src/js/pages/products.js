@@ -1,56 +1,11 @@
+import { createProductCard } from "../components/productCard.js";
+import { initWishlist, loadWishlistState  } from "../features/wishlist.js";
+
 const API_URL = "http://localhost:5000/api/products";
 const grid = document.getElementById("productsGrid");
 const sortSelect = document.getElementById("sortSelect");
 
-// ---- CARD ----
-function createProductCard(product) {
-  const img1 = product.images?.[0] || "/front/src/assets/images/placeholder.jpg";
-  const img2 = product.images?.[1] || img1;
 
-  return `
-    <a href="/front/pages/product.html?slug=${product.slug}" class="group block">
-
-      <div class="relative overflow-hidden bg-[#F9F6F2]">
-        <img
-          src="${img1}"
-          class="w-full aspect-[3/4] object-cover transition duration-500 group-hover:opacity-0"
-          loading="lazy"
-        />
-        <img
-          src="${img2}"
-          class="w-full aspect-[3/4] object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
-          loading="lazy"
-        />
-
-        ${
-          product.isBestSeller
-            ? `<span class="absolute top-3 left-3 text-[10px] px-2 py-1 bg-white/90 backdrop-blur">
-                 BESTSELLER
-               </span>`
-            : ""
-        }
-      </div>
-
-      <div class="mt-3">
-        <h3 class="text-[0.95rem] font-medium leading-snug">
-          ${product.name}
-        </h3>
-
-        <div class="flex items-center gap-2 mt-1">
-          <span class="text-[0.95rem] font-semibold">₹${product.price}</span>
-          ${
-            product.originalPrice
-              ? `<span class="text-[0.85rem] line-through text-black/40">
-                   ₹${product.originalPrice}
-                 </span>`
-              : ""
-          }
-        </div>
-      </div>
-
-    </a>
-  `;
-}
 
 // ---- UI STATES ----
 function showLoading() {
@@ -80,12 +35,16 @@ async function loadProducts() {
     const res = await fetch(`${API_URL}?${params}`);
     const data = await res.json();
 
-    if (!data.products || !data.products.length) {
-      showEmpty();
-      return;
-    }
+    if (!data || !Array.isArray(data.products) || data.products.length === 0) {
+  showEmpty();
+  return;
+}
 
     grid.innerHTML = data.products.map(createProductCard).join("");
+
+
+    // wishlist state
+    loadWishlistState();
 
   } catch (error) {
     console.error(error);
@@ -113,21 +72,40 @@ document.addEventListener("click", (e) => {
   const params = new URLSearchParams(window.location.search);
 
   let changed = false;
+const filterBtn = e.target.closest("[data-filter]");
+const materialBtn = e.target.closest("[data-material]");
 
-  if (e.target.dataset.filter) {
-    params.set("subcategory", e.target.dataset.filter);
-    changed = true;
+if (filterBtn) {
+  const current = params.get("subcategory");
+
+  if (current === filterBtn.dataset.filter) {
+    params.delete("subcategory");
+  } else {
+    params.set("subcategory", filterBtn.dataset.filter);
   }
 
-  if (e.target.dataset.material) {
-    params.set("category", e.target.dataset.material);
-    changed = true;
+  changed = true;
+}
+
+if (materialBtn) {
+  const current = params.get("category");
+
+  if (current === materialBtn.dataset.material) {
+    params.delete("category");
+  } else {
+    params.set("category", materialBtn.dataset.material);
   }
 
-  if (changed) {
-    drawer?.classList.add("translate-x-full"); // close mobile drawer
-    window.location.search = params.toString();
-  }
+  changed = true;
+}
+
+ if (changed) {
+  drawer?.classList.add("translate-x-full");
+
+  window.scrollTo({ top: 0, behavior: "smooth" }); //  ADD THIS
+
+  window.location.search = params.toString();
+}
 
 
 
@@ -220,3 +198,4 @@ function syncSearchInput() {
 loadProducts();
 setActiveFilters();
 syncSearchInput();
+initWishlist();

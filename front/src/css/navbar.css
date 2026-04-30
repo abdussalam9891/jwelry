@@ -1,0 +1,7 @@
+#wishlistBtn svg {
+  transition: transform 0.2s ease;
+}
+
+#wishlistBtn:hover svg {
+  transform: scale(1.1);
+}

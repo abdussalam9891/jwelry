@@ -1,4 +1,8 @@
-import { openAuthModal } from "./authModal.js";
+
+import { openAuthModal } from "../components/authModal.js";
+import { updateWishlistCount } from "../core/wishlistCount.js";
+
+
 
 
 
@@ -78,9 +82,9 @@ function loadNavbar() {
 
   <div  class="mt-6 pt-4 border-t border-black/5">
     <a
-      id="mobileLoginBtn"
+
       href="#"
-      class="block py-2.5 px-3 text-center text-sm font-semibold border border-[#6B1A2A] text-[#6B1A2A] hover:bg-[#6B1A2A] hover:text-white transition-colors duration-250"
+      class="loginBtn block py-2.5 px-3 text-center text-sm font-semibold border border-[#6B1A2A] text-[#6B1A2A] hover:bg-[#6B1A2A] hover:text-white transition-colors duration-250"
     >
       Login / Signup
     </a>
@@ -146,25 +150,31 @@ function loadNavbar() {
     <!-- RIGHT ICONS -->
     <div class="flex items-center gap-2">
       <!-- Wishlist -->
-      <button
-        id="wishlistBtn"
-        class="hidden md:flex p-2 hover:bg-black/5 rounded-lg"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-8 h-8 text-[#6B1A2A]"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25Z"
-          />
-        </svg>
-      </button>
+    <button
+  id="wishlistBtn"
+  class="relative  flex items-center gap-2 text-sm p-2 hover:bg-black/5 rounded-lg"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-7 h-7 text-[#6B1A2A]"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25Z"
+    />
+  </svg>
+   <span
+    id="wishlistCount"
+    class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-[#6B1A2A] text-white hidden"
+  >
+    0
+  </span>
+</button>
 
       <!-- Cart -->
       <button class="p-2 hover:bg-black/5 rounded-lg relative">
@@ -216,7 +226,7 @@ function loadNavbar() {
     id="userDropdown"
     class="absolute right-0 mt-2 w-40 bg-white border border-black/10 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-200 z-[1100]"
   >
-    <a href="#" id="mobileLoginBtn" class="block px-4 py-2 text-sm hover:bg-black/5">Login/Signup</a>
+    <a href="#" class="loginBtn  block px-4 py-2 text-sm hover:bg-black/5">Login/Signup</a>
 
   </div>
 </div>
@@ -325,12 +335,31 @@ function loadNavbar() {
   `;
 
   document.getElementById("navbar-container").innerHTML = navbarHTML;
+
+  const wishlistBtn = document.getElementById("wishlistBtn");
+
+  wishlistBtn?.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      await openAuthModal();
+      return;
+    }
+
+    window.location.href = "/front/pages/wishlist.html";
+  });
+
+
+
   initializeNavbar();
   checkAuthState();
   initSearchPlaceholder();
   initNavbarScroll();
    setActiveNav();
    initSearchHandlers();
+   updateWishlistCount();
 
 }
 
@@ -478,14 +507,11 @@ mobileSearchBtn?.addEventListener("click", () => {
 // authstatte
 async function checkAuthState() {
   const token = localStorage.getItem("token");
-
-  const loginBtn = document.getElementById("loginBtn");
-  const mobileLoginBtn = document.getElementById("mobileLoginBtn");
   const wishlistBtn = document.getElementById("wishlistBtn");
 
   if (!token) {
-    wishlistBtn?.classList.add("hidden");
-    bindLoginButtons(loginBtn, mobileLoginBtn);
+    wishlistBtn?.classList.remove("hidden"); // optional UX decision
+    bindLoginButtons();
     return;
   }
 
@@ -498,53 +524,49 @@ async function checkAuthState() {
 
     if (res.ok && data.loggedIn) {
       wishlistBtn?.classList.remove("hidden");
-      bindLogoutButtons(loginBtn, mobileLoginBtn);
+      bindLogoutButtons();
     } else {
       localStorage.removeItem("token");
-      wishlistBtn?.classList.add("hidden");
-      bindLoginButtons(loginBtn, mobileLoginBtn);
+      wishlistBtn?.classList.remove("hidden"); // don't hide
+      bindLoginButtons();
     }
   } catch (err) {
     console.error("[Navbar] Auth check failed:", err);
-    wishlistBtn?.classList.add("hidden");
+    wishlistBtn?.classList.remove("hidden"); // don't punish UI
+    bindLoginButtons();
   }
 }
+
+
+
+
+
 
 // ─── Button Binders ──────────────────────────────────────────
 
-function bindLoginButtons(loginBtn, mobileLoginBtn) {
-  const handler = async (e) => {
-    e.preventDefault();
-    // drawer band karo pehle
-    mobileLoginBtn?.dispatchEvent(new Event("closemenu"));
-    await openAuthModal();
-  };
+function bindLoginButtons() {
+  const loginBtns = document.querySelectorAll(".loginBtn");
 
-  if (loginBtn) {
-    loginBtn.textContent = "Login";
-    loginBtn.onclick = handler;
-  }
-  if (mobileLoginBtn) {
-    mobileLoginBtn.textContent = "Login";
-    mobileLoginBtn.onclick = handler;
-  }
+  loginBtns.forEach(btn => {
+    btn.textContent = "Login";
+    btn.onclick = async (e) => {
+      e.preventDefault();
+      await openAuthModal();
+    };
+  });
 }
 
-function bindLogoutButtons(loginBtn, mobileLoginBtn) {
-  const handler = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
+function bindLogoutButtons() {
+  const loginBtns = document.querySelectorAll(".loginBtn");
 
-  if (loginBtn) {
-    loginBtn.textContent = "Logout";
-    loginBtn.onclick = handler;
-  }
-  if (mobileLoginBtn) {
-    mobileLoginBtn.textContent = "Logout";
-    mobileLoginBtn.onclick = handler;
-  }
+  loginBtns.forEach(btn => {
+    btn.textContent = "Logout";
+    btn.onclick = (e) => {
+      e.preventDefault();
+      localStorage.removeItem("token");
+      window.location.reload();
+    };
+  });
 }
 
 // ─── Search Placeholder ──────────────────────────────────────
@@ -685,3 +707,9 @@ function showEmpty() {
     </p>
   `;
 }
+
+
+
+
+
+

@@ -78,5 +78,34 @@ html {
 }
 
 
+.wishlist-btn.active svg {
+  fill: black;
+  stroke: black;
+}
 
 
+
+/* Hide scrollbar but keep scrolling */
+
+/* Chrome, Safari, Edge */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* IE / old Edge */
+.no-scrollbar {
+  -ms-overflow-style: none;
+}
+
+#productContainer {
+  cursor: grab;
+}
+
+#productContainer:active {
+  cursor: grabbing;
+}
