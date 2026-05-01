@@ -11,7 +11,7 @@ export function initWishlist() {
   document.addEventListener("click", async (e) => {
 
 
-    // ❌ REMOVE (wishlist page)
+    // REMOVE (wishlist page)
 
     const removeBtn = e.target.closest(".wishlist-remove");
     if (removeBtn) {
@@ -47,7 +47,7 @@ export function initWishlist() {
 
 
 
-    // 🛒 MOVE TO CART
+    // MOVE TO CART
 
     const cartBtn = e.target.closest(".move-to-cart");
     if (cartBtn) {
@@ -127,7 +127,7 @@ updateWishlistCount(wishlistSet.size);
   if (!res.ok) throw new Error("Wishlist API failed");
       })
       .catch(err => {
-        console.error("❌ rollback firing:", err.message);
+        console.error(" rollback firing:", err.message);
 
         // rollback
         if (isSaved) {

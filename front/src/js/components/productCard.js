@@ -150,11 +150,11 @@ export function createProductCard(product, options = {}) {
         showWishlistButton
           ? `
         <button
-          class="wishlist-btn absolute top-3 right-3 z-20 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 backdrop-blur transition"
+          class="wishlist-btn absolute top-3 right-3 z-20   flex items-center justify-center rounded-full   backdrop-blur transition"
           data-id="${productId}"
         >
           <svg
-  class="w-7 h-7 transition duration-200"
+  class="w-6 h-6 transition duration-200"
   viewBox="0 0 24 24"
   stroke-width="1.8"
 >
