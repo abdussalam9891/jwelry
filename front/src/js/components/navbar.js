@@ -1,16 +1,11 @@
-
 import { openAuthModal } from "../components/authModal.js";
 import { updateWishlistCount } from "../core/wishlistCount.js";
-
-
-
-
-
+import { loadWishlistState } from "../features/wishlist.js";
 
 let placeholderInterval;
 
-// fetch hata do — ye karo
-function loadNavbar() {
+// load navbar
+async function loadNavbar() {
   const navbarHTML = `
 
     <!-- Mobile overlay -->
@@ -91,15 +86,23 @@ function loadNavbar() {
   </div>
 </div>
 
+
+
+
 <!-- Main navbar -->
 <nav
   id="mainNav"
   class="fixed top-0 left-0 right-0 z-[1000] bg-[#F9F6F2] transition-transform duration-300"
 >
+
+
+
+
+
   <!-- ROW 1: Logo + Icons -->
 
   <div
-    class="container-main flex items-center justify-between px-6 h-[64px]   border-b border-black/5 transition-all duration-300"
+    class="container-main flex items-center justify-between px-6 h-[64px] border-b border-black/5 transition-all duration-300"
   >
     <!-- LEFT -->
     <div class="flex items-center gap-4">
@@ -148,43 +151,52 @@ function loadNavbar() {
     </div>
 
     <!-- RIGHT ICONS -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-end gap-3 md:gap-4">
       <!-- Wishlist -->
-    <button
-  id="wishlistBtn"
-  class="relative  flex items-center gap-2 text-sm p-2 hover:bg-black/5 rounded-lg"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-7 h-7 text-[#6B1A2A]"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25Z"
-    />
-  </svg>
-   <span
-    id="wishlistCount"
-    class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-[#6B1A2A] text-white hidden"
-  >
-    0
-  </span>
-</button>
+      <button
+        id="wishlistBtn"
+        class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg relative"
+      >
+        <div class="relative">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-7 h-7 text-[#6B1A2A]"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25Z"
+            />
+          </svg>
+
+          <!-- Badge -->
+          <span
+            id="wishlistCount"
+            class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-[#6B1A2A] text-white hidden"
+          >
+            0
+          </span>
+        </div>
+
+        <span class="mt-1 text-black/80 font-medium">Wishlist</span>
+      </button>
 
       <!-- Cart -->
-      <button class="p-2 hover:bg-black/5 rounded-lg relative">
+      <button
+        id="cartBtn"
+        class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          class="w-8 h-8 text-[#6B1A2A]"
+          class="w-7 h-7 text-[#6B1A2A]"
         >
           <path
             stroke-linecap="round"
@@ -192,70 +204,77 @@ function loadNavbar() {
             d="M2.25 3h1.386a1.125 1.125 0 0 1 1.11.843l.383 1.437m0 0L6.75 14.25h10.5l1.621-6.072a1.125 1.125 0 0 0-1.088-1.428H5.13m0 0L4.5 3m2.25 11.25a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m9 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0"
           />
         </svg>
+
+        <span class="mt-1 text-black/80 font-medium">Cart</span>
       </button>
 
-      <!-- Mobile Search Icon -->
-<button id="mobileSearchBtn" class="md:hidden p-2 hover:bg-black/5 rounded-lg">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-[#6B1A2A]">
-    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"/>
-  </svg>
-</button>
+      <!-- User -->
+      <div class="relative hidden md:block">
+        <button
+          data-user="trigger"
+          class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-7 h-7 text-[#6B1A2A]"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"
+            />
+          </svg>
 
+          <span class="mt-1 text-black/80 font-medium">Profile</span>
+        </button>
 
-
-
-<!-- USER DROPDOWN -->
-<div class="relative hidden md:block">
-  <button data-user="trigger" class="p-2 hover:bg-black/5 rounded-lg">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-8 h-8 text-[#6B1A2A]"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"
-      />
-    </svg>
-  </button>
-  <div
-    id="userDropdown"
-    class="absolute right-0 mt-2 w-40 bg-white border border-black/10 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-200 z-[1100]"
-  >
-    <a href="#" class="loginBtn  block px-4 py-2 text-sm hover:bg-black/5">Login/Signup</a>
-
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
+        <!-- Dropdown -->
+        <div
+          id="userDropdown"
+          class="absolute right-0 mt-2 w-40 bg-white border border-black/10 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-200 z-[1100]"
+        >
+          <a href="#" class="loginBtn block px-4 py-2 text-sm hover:bg-black/5">
+            Login/Signup
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Mobile Search Bar (FULL WIDTH) -->
+  <div class="md:hidden px-4 py-4 pb-3">
+    <div class="relative w-full">
+      <input
+        id="mobileSearchInput"
+        type="text"
+        placeholder="Search jewellery..."
+        class="w-full px-4 py-2 pr-10 rounded-full border border-black/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#6B1A2A]/30 text-sm"
+      />
 
-
-  <!-- Mobile Search Bar -->
-<div id="mobileSearchBar" class="md:hidden px-4 py-2 border-t border-black/5 hidden">
-  <div class="relative">
-    <input id="mobileSearchInput" type="text" placeholder="Search jewellery..."
-      class="w-full px-4 py-2 pr-10 rounded-full border border-black/10 bg-white focus:outline-none focus:ring-2 focus:ring-[#6B1A2A]/30 text-sm"/>
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-[#6B1A2A] absolute right-3 top-1/2 -translate-y-1/2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"/>
-    </svg>
+      <!-- icon -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-4 h-4 text-[#6B1A2A] absolute right-3 top-1/2 -translate-y-1/2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"
+        />
+      </svg>
+    </div>
   </div>
-</div>
 </nav>
+
+
 
 <!-- row 2  -->
 <div
@@ -336,46 +355,34 @@ function loadNavbar() {
 
   document.getElementById("navbar-container").innerHTML = navbarHTML;
 
-  const wishlistBtn = document.getElementById("wishlistBtn");
-
-  wishlistBtn?.addEventListener("click", async (e) => {
-    e.preventDefault();
-
+  function handleProtectedRoute(path) {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      await openAuthModal();
+      localStorage.setItem("redirectAfterLogin", path);
+      openAuthModal();
       return;
     }
 
-    window.location.href = "/front/pages/wishlist.html";
-  });
+    window.location.href = path;
+  }
 
+  wishlistBtn.onclick = () =>
+    handleProtectedRoute("/front/pages/wishlist.html");
+  cartBtn.onclick = () => handleProtectedRoute("/front/pages/cart.html");
 
+  await loadWishlistState();
 
   initializeNavbar();
   checkAuthState();
   initSearchPlaceholder();
   initNavbarScroll();
-   setActiveNav();
-   initSearchHandlers();
-   updateWishlistCount();
-
+  setActiveNav();
+  initSearchHandlers();
+  updateWishlistCount();
 }
 
 loadNavbar();
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ─── Mobile Menu
 
@@ -388,39 +395,35 @@ function initializeNavbar() {
   const navOverlay = document.getElementById("navOverlay");
   const drawerClose = document.getElementById("drawerClose");
 
+  const userWrapper = document.querySelector(
+    '[data-user="trigger"]',
+  )?.parentElement;
+  const userDropdown = document.getElementById("userDropdown");
+  let userTimeout;
 
-
-const userWrapper = document.querySelector('[data-user="trigger"]')?.parentElement;
-const userDropdown = document.getElementById("userDropdown");
-let userTimeout;
-
-if (userWrapper && userDropdown) {
-  userWrapper.addEventListener("mouseenter", () => {
-    clearTimeout(userTimeout);
-    userDropdown.style.opacity = "1";
-    userDropdown.style.pointerEvents = "auto";
-  });
-  userWrapper.addEventListener("mouseleave", () => {
-    userTimeout = setTimeout(() => {
-      userDropdown.style.opacity = "0";
-      userDropdown.style.pointerEvents = "none";
-    }, 150);
-  });
-}
-
-
+  if (userWrapper && userDropdown) {
+    userWrapper.addEventListener("mouseenter", () => {
+      clearTimeout(userTimeout);
+      userDropdown.style.opacity = "1";
+      userDropdown.style.pointerEvents = "auto";
+    });
+    userWrapper.addEventListener("mouseleave", () => {
+      userTimeout = setTimeout(() => {
+        userDropdown.style.opacity = "0";
+        userDropdown.style.pointerEvents = "none";
+      }, 150);
+    });
+  }
 
   const mobileSearchBtn = document.getElementById("mobileSearchBtn");
-const mobileSearchBar = document.getElementById("mobileSearchBar");
-const mobileSearchInput = document.getElementById("mobileSearchInput");
+  const mobileSearchBar = document.getElementById("mobileSearchBar");
+  const mobileSearchInput = document.getElementById("mobileSearchInput");
 
-mobileSearchBtn?.addEventListener("click", () => {
-  const isHidden = mobileSearchBar.classList.contains("hidden");
-  mobileSearchBar.classList.toggle("hidden");
-  if (isHidden) mobileSearchInput?.focus();
-});
-
-
+  mobileSearchBtn?.addEventListener("click", () => {
+    const isHidden = mobileSearchBar.classList.contains("hidden");
+    mobileSearchBar.classList.toggle("hidden");
+    if (isHidden) mobileSearchInput?.focus();
+  });
 
   if (!navToggle || !mobileMenu || !navOverlay) {
     console.warn("[Navbar] Missing required DOM elements for mobile menu");
@@ -451,7 +454,9 @@ mobileSearchBtn?.addEventListener("click", () => {
   navToggle.addEventListener("click", toggleMenu);
   drawerClose?.addEventListener("click", closeMenu);
   navOverlay.addEventListener("click", closeMenu);
-  document.getElementById("mobileLoginBtn")?.addEventListener("click", closeMenu); // ← YAHAN
+  document
+    .getElementById("mobileLoginBtn")
+    ?.addEventListener("click", closeMenu); // ← YAHAN
 
   window.addEventListener("resize", () => {
     if (window.innerWidth >= 768 && isOpen) {
@@ -460,7 +465,7 @@ mobileSearchBtn?.addEventListener("click", () => {
   });
 }
 
-   function initNavbarScroll() {
+function initNavbarScroll() {
   const mainNav = document.getElementById("mainNav");
   const categoryNav = document.getElementById("categoryNav");
 
@@ -537,17 +542,12 @@ async function checkAuthState() {
   }
 }
 
-
-
-
-
-
 // ─── Button Binders ──────────────────────────────────────────
 
 function bindLoginButtons() {
   const loginBtns = document.querySelectorAll(".loginBtn");
 
-  loginBtns.forEach(btn => {
+  loginBtns.forEach((btn) => {
     btn.textContent = "Login";
     btn.onclick = async (e) => {
       e.preventDefault();
@@ -559,7 +559,7 @@ function bindLoginButtons() {
 function bindLogoutButtons() {
   const loginBtns = document.querySelectorAll(".loginBtn");
 
-  loginBtns.forEach(btn => {
+  loginBtns.forEach((btn) => {
     btn.textContent = "Logout";
     btn.onclick = (e) => {
       e.preventDefault();
@@ -570,8 +570,6 @@ function bindLogoutButtons() {
 }
 
 // ─── Search Placeholder ──────────────────────────────────────
-
-
 
 function initSearchPlaceholder() {
   const placeholders = [
@@ -594,15 +592,13 @@ function initSearchPlaceholder() {
   }, 4000);
 }
 
-
-
 function setActiveNav() {
   const params = new URLSearchParams(window.location.search);
   const subcategory = params.get("subcategory");
 
   const isProductsPage = window.location.pathname.includes("products.html");
 
-  document.querySelectorAll("[data-nav]").forEach(link => {
+  document.querySelectorAll("[data-nav]").forEach((link) => {
     link.classList.remove("text-[#6B1A2A]");
 
     const underline = link.querySelector("span");
@@ -620,15 +616,6 @@ function setActiveNav() {
     if (all) all.classList.add("text-[#6B1A2A]");
   }
 }
-
-
-
-
-
-
-
-
-
 
 function initSearchHandlers() {
   const desktopInput = document.getElementById("searchInput");
@@ -656,8 +643,6 @@ function initSearchHandlers() {
   handleSearch(mobileInput);
 }
 
-
-
 document.getElementById("searchBtn")?.addEventListener("click", () => {
   const input = document.getElementById("searchInput");
   if (!input) return;
@@ -672,16 +657,12 @@ document.getElementById("searchBtn")?.addEventListener("click", () => {
   window.location.href = `/front/pages/products.html?${params.toString()}`;
 });
 
-
 const params = new URLSearchParams(window.location.search);
 const search = params.get("search");
 
 if (search) {
   document.getElementById("pageTitle").textContent = `Results for "${search}"`;
 }
-
-
-
 
 function syncSearchInput() {
   const params = new URLSearchParams(window.location.search);
@@ -696,8 +677,6 @@ function syncSearchInput() {
   }
 }
 
-
-
 function showEmpty() {
   const search = new URLSearchParams(window.location.search).get("search");
 
@@ -707,9 +686,3 @@ function showEmpty() {
     </p>
   `;
 }
-
-
-
-
-
-
