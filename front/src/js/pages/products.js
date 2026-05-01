@@ -40,7 +40,11 @@ async function loadProducts() {
   return;
 }
 
-    grid.innerHTML = data.products.map(createProductCard).join("");
+   grid.innerHTML = data.products
+  .map(p => createProductCard(p, {
+    showWishlistButton: true
+  }))
+  .join("");
 
 
     // wishlist state

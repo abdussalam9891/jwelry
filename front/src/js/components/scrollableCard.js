@@ -49,20 +49,29 @@ async function fetchProducts(type) {
 }
 
 
- async function renderProducts(products) {
+async function renderProducts(products) {
   if (!products || products.length === 0) {
-    container.innerHTML = "No products found";
+    container.innerHTML = `
+      <p class="text-sm text-black/60 text-center py-6">
+        No products found
+      </p>
+    `;
     return;
   }
 
-  container.innerHTML = products.map(p => `
-   <div class="w-[200px] min-w-[200px] flex-shrink-0 snap-start">
-  ${createProductCard(p)}
-</div>
-  `).join("");
+  const safeProducts = products.filter(p => p && p._id);
 
+  container.innerHTML = safeProducts
+    .map(p => `
+      <div class="w-[200px] min-w-[200px] flex-shrink-0 snap-start">
+        ${createProductCard(p, {
+          showWishlistButton: true
+        })}
+      </div>
+    `)
+    .join("");
 
-   await loadWishlistState();
+      await loadWishlistState();
 }
 
 
