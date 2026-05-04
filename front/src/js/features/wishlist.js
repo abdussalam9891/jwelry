@@ -31,7 +31,7 @@ export function initWishlist() {
       }
 
       // async API (non-blocking)
-      fetch(`${CONFIG.API_BASE}/api/wishlist/${id}`, {
+      fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${id}`, {
         method: "DELETE",
         headers: Auth.authHeader(),
       }).catch(err => {
@@ -67,12 +67,12 @@ export function initWishlist() {
       }
 
       // async API
-      fetch(`${CONFIG.API_BASE}/api/cart/${id}`, {
+      fetch(`${CONFIG.API_BASE}/api/v1/cart/${id}`, {
         method: "POST",
         headers: Auth.authHeader(),
       });
 
-      fetch(`${CONFIG.API_BASE}/api/wishlist/${id}`, {
+      fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${id}`, {
         method: "DELETE",
         headers: Auth.authHeader(),
       }).catch(err => {
@@ -118,7 +118,7 @@ btn.offsetHeight;
 updateWishlistCount(wishlistSet.size);
 
     // async API (non-blocking)
-    fetch(`${CONFIG.API_BASE}/api/wishlist/${id}`, {
+    fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${id}`, {
       method: isSaved ? "DELETE" : "POST",
       headers: Auth.authHeader(),
     })
@@ -152,24 +152,31 @@ export async function loadWishlistState(products = null) {
   try {
     let items = products;
 
+    // 🔥 fetch only if needed
     if (!items) {
-      const res = await fetch(`${CONFIG.API_BASE}/api/wishlist`, {
+      const res = await fetch(`${CONFIG.API_BASE}/api/v1/wishlist`, {
         headers: Auth.authHeader(),
       });
 
-      const data = await res.json();
-      items = Array.isArray(data) ? data : data.items || [];
+      if (!res.ok) throw new Error("Failed to fetch wishlist");
+
+      items = await res.json(); // now always array of products
     }
 
+    // 🔥 reset state
     wishlistSet.clear();
 
-    items.forEach(item => {
-      const id = typeof item === "string" ? item : item._id;
-      if (id) wishlistSet.add(String(id));
+    // 🔥 ONLY product objects now (clean)
+    items.forEach(product => {
+      if (product?._id) {
+        wishlistSet.add(String(product._id));
+      }
     });
 
     applyWishlistUI();
-   updateWishlistCount(wishlistSet.size);
+
+    // 🔥 count from state (no refetch)
+    updateWishlistCount(wishlistSet.size);
 
   } catch (err) {
     console.error("Failed to load wishlist", err);

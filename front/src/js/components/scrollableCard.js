@@ -22,7 +22,7 @@ async function fetchProducts(type) {
   try {
     container.innerHTML = `<div class="text-sm text-gray-500 px-4">Loading products...</div>`;
 
-    let url = "http://localhost:5000/api/products?limit=8";
+    let url = "http://localhost:5000/api/v1/products?limit=8";
 
     if (type === "trending") url += "&tag=trending";
     else if (type === "new") url += "&tag=new";

@@ -1,0 +1,231 @@
+function renderInfo(product) {
+  return `
+    <div class="section-sm container-main space-y-4 md:space-y-6">
+
+      <!-- TITLE -->
+      <div class="space-y-2">
+        <h1 class="text-2xl font-semibold leading-tight">${product.name}</h1>
+
+        <div class="flex items-center gap-2 mt-2 text-sm text-black/70">
+          <!-- Star -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45a1 1 0 00-.364 1.118l1.287 3.96c.3.922-.755 1.688-1.54 1.118l-3.37-2.45a1 1 0 00-1.176 0l-3.37 2.45c-.784.57-1.838-.196-1.539-1.118l1.286-3.96a1 1 0 00-.364-1.118L2.176 9.387c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.96z"/>
+          </svg>
+          <span>4.4 (34 reviews)</span>
+        </div>
+      </div>
+
+      <!-- PRICE -->
+      <div class="text-2xl font-bold flex items-center gap-2">
+        ₹${product.price}
+        ${
+          product.originalPrice
+            ? `<span class="line-through text-black/40 ml-2 text-base">₹${product.originalPrice}</span>`
+            : ""
+        }
+      </div>
+
+      <!-- VARIANT -->
+      <div class="space-y-2">
+        <p class="text-sm font-medium mb-2">Choose Finish</p>
+        <div class="flex gap-3">
+          ${["Gold", "Silver"]
+            .map(
+              (v) => `
+            <button
+              class="variant-btn border px-4 py-2 rounded-lg hover:border-black transition"
+              data-variant="${v}"
+            >
+              ${v}
+            </button>
+          `,
+            )
+            .join("")}
+        </div>
+      </div>
+
+
+
+
+      <div class="border rounded-xl p-4 bg-black/[0.02] space-y-3">
+  <p class="text-sm font-medium">Estimated Delivery</p>
+
+  <div class="flex gap-2">
+    <input
+      type="text"
+      placeholder="Enter pincode"
+      class="flex-1 border px-3 py-2 rounded"
+    />
+    <button class="px-4 bg-black text-white rounded">Check</button>
+  </div>
+
+  <div class="flex gap-6 text-xs text-black/60">
+    <span> 7-day return</span>
+    <span> Warranty</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+      <!-- CTA -->
+      <div class="flex gap-3">
+        <button
+          id="addToCartBtn"
+          class="flex-1 bg-black text-white py-3 rounded-lg font-medium hover:bg-black/90 transition"
+        >
+          ADD TO CART
+        </button>
+
+        <button
+          id="wishlistBtn"
+          class="border px-4 rounded hover:border-black transition"
+        >
+          <!-- Heart -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25z"/>
+          </svg>
+        </button>
+      </div>
+
+
+
+
+
+      <div class="border rounded-xl p-4 bg-black/[0.02]">
+  <p class="font-medium mb-2">Offers</p>
+  <div class="text-sm text-black/70">
+    Extra 10% off above ₹1999
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- DESCRIPTION -->
+      <div class="border-t pt-4">
+        <h3 class="font-semibold mb-1">Description</h3>
+        <p class="text-sm text-black/60 leading-relaxed">
+          ${product.description || "Elegant handcrafted jewelry piece designed for modern style and everyday elegance."}
+        </p>
+      </div>
+
+      <!-- PRODUCT DETAILS -->
+      <div>
+        <h3 class="font-semibold mb-1">Product Details</h3>
+        <ul class="text-sm text-black/60 space-y-1">
+          <li>Material: Premium Quality</li>
+          <li>Finish: High polish</li>
+          <li>Category: Jewelry</li>
+        </ul>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     <div class="border rounded-xl p-4 bg-black/[0.02] space-y-4">
+
+  <!-- DELIVERY -->
+  <div class="flex items-start gap-3">
+    <div class="mt-0.5">
+      <!-- Truck -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M3 7h13v10H3zM16 10h3l2 3v4h-5zM7.5 17.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm9 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-sm font-medium">Free Delivery</p>
+      <p class="text-xs text-black/60">Arrives in 3–5 days</p>
+    </div>
+  </div>
+
+  <!-- RETURN -->
+  <div class="flex items-start gap-3">
+    <div class="mt-0.5">
+      <!-- Return -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M4 4v6h6M20 20v-6h-6M5.5 9A7 7 0 0119 12m-14 0a7 7 0 0013.5 3"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-sm font-medium">Easy Returns</p>
+      <p class="text-xs text-black/60">7-day hassle-free returns</p>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="border-t"></div>
+
+  <!-- WARRANTY -->
+  <div class="flex items-start gap-3">
+    <div class="mt-0.5">
+      <!-- Shield -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-sm font-medium">Lifetime Warranty</p>
+      <p class="text-xs text-black/60">On plating & polish</p>
+    </div>
+  </div>
+
+  <!-- SECURITY -->
+  <div class="flex items-start gap-3">
+    <div class="mt-0.5">
+      <!-- Lock -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M12 11c1.1 0 2 .9 2 2v2h-4v-2c0-1.1.9-2 2-2zm6 0V9a6 6 0 10-12 0v2M5 11h14v10H5z"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-sm font-medium">Secure Checkout</p>
+      <p class="text-xs text-black/60">100% protected payments</p>
+    </div>
+  </div>
+
+</div>
+  `;
+}

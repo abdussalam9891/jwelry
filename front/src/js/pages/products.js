@@ -1,7 +1,7 @@
 import { createProductCard } from "../components/productCard.js";
 import { initWishlist, loadWishlistState  } from "../features/wishlist.js";
 
-const API_URL = "http://localhost:5000/api/products";
+const API_URL = "http://localhost:5000/api/v1/products";
 const grid = document.getElementById("productsGrid");
 const sortSelect = document.getElementById("sortSelect");
 
@@ -25,7 +25,7 @@ async function loadProducts() {
   try {
     const params = new URLSearchParams(window.location.search);
 
-    // 🔥 FIX: use subcategory (your UI uses this)
+    // FIX: use subcategory (your UI uses this)
     if (!params.toString()) {
       params.set("subcategory", "rings");
     }

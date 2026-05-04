@@ -521,7 +521,7 @@ async function checkAuthState() {
   }
 
   try {
-    const res = await fetch(`${CONFIG.API_BASE}/api/auth/me`, {
+    const res = await fetch(`${CONFIG.API_BASE}/api/v1/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 

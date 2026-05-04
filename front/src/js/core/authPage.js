@@ -32,5 +32,5 @@ if (error) {
 }
 
 document.getElementById('google-btn')?.addEventListener('click', () => {
-  window.location.href = 'http://localhost:5000/api/auth/google';
+  window.location.href = 'http://localhost:5000/api/v1/auth/google';
 });

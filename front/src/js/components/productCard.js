@@ -168,7 +168,7 @@ export function createProductCard(product, options = {}) {
       }
 
       <!-- LINK (ONLY NAVIGATION) -->
-      <a href="/front/pages/product.html?slug=${product.slug}" class="block">
+      <a href="/front/pages/productDetails.html?slug=${product.slug}" class="block">
 
         <div class="relative overflow-hidden bg-[#F9F6F2] rounded-md">
 

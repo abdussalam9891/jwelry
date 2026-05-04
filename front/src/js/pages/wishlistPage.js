@@ -37,7 +37,7 @@ async function loadWishlistPage() {
       </div>
     `;
 
-    const res = await fetch(`${CONFIG.API_BASE}/api/wishlist`, {
+    const res = await fetch(`${CONFIG.API_BASE}/api/v1/wishlist`, {
       headers: Auth.authHeader(),
     });
 
