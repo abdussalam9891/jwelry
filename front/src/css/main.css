@@ -93,6 +93,7 @@ html {
 
 
 
+
 /* Hide scrollbar but keep scrolling */
 
 /* Chrome, Safari, Edge */
@@ -117,3 +118,5 @@ html {
 #productContainer:active {
   cursor: grabbing;
 }
+
+ 

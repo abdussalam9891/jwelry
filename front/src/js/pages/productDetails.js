@@ -1,6 +1,7 @@
 import { openAuthModal } from "../components/authModal.js";
 import Auth from "../core/auth.js";
 import { initWishlist, loadWishlistState  } from "../features/wishlist.js";
+import { renderHorizontalSection } from "../components/horizontalProducts.js";
 
 document.addEventListener("DOMContentLoaded", loadProduct);
 
@@ -50,6 +51,34 @@ async function loadProduct() {
 
     // 4. Render reviews
     renderReviews(reviews);
+
+
+    // 🔥 5. Fetch similar products (same subcategory)
+const similarRes = await fetch(
+  `${CONFIG.API_BASE}/api/v1/products?subcategory=${product.subcategory}&limit=10`
+);
+
+const similarData = await similarRes.json();
+
+// 🔥 6. Render similar section
+await renderHorizontalSection({
+  containerId: "similarSection",
+  products: similarData.products || []
+});
+
+
+// 🔥 7. Fetch recommended (trending)
+const recRes = await fetch(
+  `${CONFIG.API_BASE}/api/v1/products?tag=trending&limit=10`
+);
+
+const recData = await recRes.json();
+
+// 🔥 8. Render recommended section
+await renderHorizontalSection({
+  containerId: "recommendSection",
+  products: recData.products || []
+});
 
   } catch (err) {
     console.error(err);
