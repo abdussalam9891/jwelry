@@ -25,30 +25,26 @@ async function loadProducts() {
   try {
     const params = new URLSearchParams(window.location.search);
 
-    // FIX: use subcategory (your UI uses this)
-    if (!params.toString()) {
-      params.set("subcategory", "rings");
-    }
-
     showLoading();
 
     const res = await fetch(`${API_URL}?${params}`);
     const data = await res.json();
 
     if (!data || !Array.isArray(data.products) || data.products.length === 0) {
-  showEmpty();
-  return;
-}
+      showEmpty();
+      return;
+    }
 
-   grid.innerHTML = data.products
-  .map(p => createProductCard(p, {
-    showWishlistButton: true
-  }))
-  .join("");
+    grid.innerHTML = data.products
+      .map(p => createProductCard(p, {
+        showWishlistButton: true
+      }))
+      .join("");
 
+    await loadWishlistState();
 
-    // wishlist state
-     await loadWishlistState();
+    // 🔥 ADD THIS (VERY IMPORTANT)
+    renderPagination(data.page, data.totalPages);
 
   } catch (error) {
     console.error(error);
@@ -78,6 +74,7 @@ document.addEventListener("click", (e) => {
   let changed = false;
 const filterBtn = e.target.closest("[data-filter]");
 const materialBtn = e.target.closest("[data-material]");
+const genderBtn = e.target.closest("[data-gender]");
 
 if (filterBtn) {
   const current = params.get("subcategory");
@@ -91,6 +88,8 @@ if (filterBtn) {
   changed = true;
 }
 
+
+
 if (materialBtn) {
   const current = params.get("category");
 
@@ -103,7 +102,25 @@ if (materialBtn) {
   changed = true;
 }
 
+
+
+
+if (genderBtn) {
+  const current = params.get("gender");
+
+  if (current === genderBtn.dataset.gender) {
+    params.delete("gender");
+  } else {
+    params.set("gender", genderBtn.dataset.gender);
+  }
+
+  changed = true;
+}
+
  if (changed) {
+
+   params.delete("page");
+
   drawer?.classList.add("translate-x-full");
 
   window.scrollTo({ top: 0, behavior: "smooth" }); //  ADD THIS
@@ -167,6 +184,7 @@ function setActiveFilters() {
 
   const subcategory = params.get("subcategory");
   const category = params.get("category");
+  const gender = params.get("gender");
 
   document.querySelectorAll("[data-filter]").forEach(btn => {
     if (btn.dataset.filter === subcategory) {
@@ -179,6 +197,14 @@ function setActiveFilters() {
       btn.classList.add("text-[#6B1A2A]");
     }
   });
+
+
+
+document.querySelectorAll("[data-gender]").forEach(btn => {
+  if (btn.dataset.gender === gender) {
+    btn.classList.add("text-[#6B1A2A]");
+  }
+});
 }
 
 
@@ -198,8 +224,82 @@ function syncSearchInput() {
 
 
 
+function setPageTitle() {
+  const title = document.getElementById("pageTitle");
+  if (!title) return;
+
+  const params = new URLSearchParams(window.location.search);
+
+  const gender = params.get("gender");
+  const subcategory = params.get("subcategory");
+  const tag = params.get("tag");
+
+  if (gender === "her") title.textContent = "Jewellery for Her";
+  else if (gender === "him") title.textContent = "Jewellery for Him";
+  else if (gender === "kids") title.textContent = "Jewellery for Kids";
+  else if (tag === "trending") title.textContent = "Trending Jewellery";
+  else if (tag === "new") title.textContent = "New Arrivals";
+  else if (subcategory) title.textContent = subcategory.toUpperCase();
+  else title.textContent = "Our Collection";
+}
+
+
+
+
+function renderPagination(currentPage, totalPages) {
+  const container = document.getElementById("pagination");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (totalPages <= 1) return;
+
+  const params = new URLSearchParams(window.location.search);
+
+  // Prev
+  if (currentPage > 1) {
+    container.appendChild(createPageBtn("←", currentPage - 1, params));
+  }
+
+  // Pages
+  for (let i = 1; i <= totalPages; i++) {
+    container.appendChild(
+      createPageBtn(i, i, params, i === currentPage)
+    );
+  }
+
+  // Next
+  if (currentPage < totalPages) {
+    container.appendChild(createPageBtn("→", currentPage + 1, params));
+  }
+}
+
+
+function createPageBtn(label, page, params, isActive = false) {
+  const btn = document.createElement("button");
+
+  const newParams = new URLSearchParams(params);
+  newParams.set("page", page);
+
+  btn.textContent = label;
+
+  btn.className = `
+    px-3 py-1 text-sm border
+    ${isActive ? "bg-black text-white" : "bg-white"}
+  `;
+
+  btn.addEventListener("click", () => {
+    window.location.search = newParams.toString();
+  });
+
+  return btn;
+}
+
 
 loadProducts();
 setActiveFilters();
 syncSearchInput();
+setPageTitle();
 initWishlist();
+
+

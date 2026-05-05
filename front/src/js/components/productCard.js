@@ -113,9 +113,15 @@ export function createProductCard(product, options = {}) {
     showMoveToCart = false,
   } = options;
 
-  const img1 =
-    product.images?.[0] || "/front/src/assets/images/placeholder.jpg";
-  const img2 = product.images?.[1] || img1;
+  const BASE = CONFIG.API_BASE;
+
+const img1 = product.images?.[0]
+  ? `${BASE}${product.images[0]}`
+  : "/front/src/assets/images/placeholder.jpg";
+
+const img2 = product.images?.[1]
+  ? `${BASE}${product.images[1]}`
+  : img1;
 
   const hasDiscount =
     product.originalPrice && product.originalPrice > product.price;

@@ -5,6 +5,12 @@ import { renderHorizontalSection } from "../components/horizontalProducts.js";
 
 document.addEventListener("DOMContentLoaded", loadProduct);
 
+
+const getImageUrl = (path) => {
+  if (!path) return "/front/src/assets/images/placeholder.jpg";
+  return `${CONFIG.API_BASE}${path}`;
+};
+
 let selectedVariant = null;
 
 
@@ -100,17 +106,17 @@ function renderProduct(product) {
 
         <!-- LEFT -->
         <div class="md:sticky md:top-24 self-start">
-          <div class="flex flex-col md:flex-row gap-4">
+         <div class="flex flex-col md:flex-row gap-4">
 
-            <!-- thumbnails -->
-            ${renderThumbnails(product.images)}
+  <!-- thumbnails -->
+  ${renderThumbnails(product.images?.map(getImageUrl))}
 
-            <!-- image -->
-            <div class="w-full">
-              ${renderMainImage(product.images?.[0])}
-            </div>
+  <!-- main image -->
+  <div class="w-full">
+    ${renderMainImage(getImageUrl(product.images?.[0]))}
+  </div>
 
-          </div>
+</div>
         </div>
 
         <!-- RIGHT -->

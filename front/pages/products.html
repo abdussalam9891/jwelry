@@ -9,206 +9,285 @@
     <link rel="stylesheet" href="/front/src/css/navbar.css" />
     <link rel="stylesheet" href="../src/css/animations.css" />
     <link rel="stylesheet" href="../src/css/products.css" />
-
   </head>
   <body>
     <div id="navbar-container"></div>
 
-
-
-
-
-
-
-
-<section class="bg-[#F9F6F2] pt-32 pb-24">
-  <div class="container-main">
-
-    <!-- TOP BAR -->
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-
-      <!-- LEFT -->
-      <div>
-        <p class="text-[0.7rem] tracking-[0.35em] uppercase text-black/40 mb-3">
-          Collection
-        </p>
-
-        <h1 id="pageTitle" class="text-[2.2rem] md:text-[2.8rem] font-light leading-tight">
-          Our Collection
-        </h1>
-      </div>
-
-      <!-- RIGHT (SORT) -->
-      <div class="relative w-fit hidden md:block">
-        <select
-          id="sortSelect"
-          class="appearance-none border-b border-black/20 bg-transparent pr-8 py-2 text-sm focus:outline-none focus:border-black transition"
-        >
-          <option value="">Sort</option>
-          <option value="low">Price: Low → High</option>
-          <option value="high">Price: High → Low</option>
-        </select>
-
-        <!-- custom arrow -->
-        <span class="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-black/40">
-          ▼
-        </span>
-      </div>
-
-    </div>
-
-<!-- MOBILE FILTER + SORT -->
-<div class="flex items-center gap-3 md:hidden mb-8">
-
-  <!-- FILTER -->
-  <button
-    id="openFilters"
-    class="flex-1 border border-black/20 py-2 text-sm tracking-wide"
-  >
-    Filters
-  </button>
-
-  <!-- SORT -->
-  <div class="relative flex-1">
-    <select
-      id="sortSelectMobile"
-      class="w-full appearance-none border border-black/20 bg-transparent py-2 px-3 text-sm focus:outline-none"
-    >
-      <option value="">Sort</option>
-      <option value="low">Price: Low → High</option>
-      <option value="high">Price: High → Low</option>
-    </select>
-
-    <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-black/40">
-      ▼
-    </span>
-  </div>
-
-</div>
-
-
-
-
-<!-- OVERLAY -->
-<div id="filterOverlay" class="fixed inset-0 bg-black/30 hidden z-[998]"></div>
-
-<!-- MOBILE FILTER DRAWER -->
-<div
-  id="mobileFilters"
-  class="fixed inset-0 bg-white z-[999] translate-x-full transition-transform duration-300 p-6 overflow-y-auto"
->
-
-<!-- HEADER -->
-<div class="flex items-center justify-between mb-8">
-  <h2 class="text-[1.1rem] font-medium">Filters</h2>
-  <button id="closeFilters" class="text-xl">×</button>
-</div>
-
-<!-- CATEGORY -->
-<div class="mb-10">
-  <p class="text-[0.7rem] tracking-[0.3em] uppercase text-black/40 mb-4">
-    Category
-  </p>
-
-  <ul class="divide-y">
-    <li><button data-filter="rings" class="w-full text-left py-3">Rings</button></li>
-    <li><button data-filter="necklaces" class="w-full text-left py-3">Necklaces</button></li>
-    <li><button data-filter="earrings" class="w-full text-left py-3">Earrings</button></li>
-    <li><button data-filter="bracelets" class="w-full text-left py-3">Bracelets</button></li>
-  </ul>
-</div>
-
-<!-- MATERIAL -->
-<div>
-  <p class="text-[0.7rem] tracking-[0.3em] uppercase text-black/40 mb-4">
-    Material
-  </p>
-
-  <ul class="divide-y">
-    <li><button data-material="gold" class="w-full text-left py-3">Gold</button></li>
-    <li><button data-material="diamond" class="w-full text-left py-3">Diamond</button></li>
-    <li><button data-material="silver" class="w-full text-left py-3">Silver</button></li>
-  </ul>
-</div>
-
-
-
-
-
-
-
-
-
-</div>
-
-    <div class="grid md:grid-cols-[240px_1fr] gap-16">
-
-      <!-- FILTER SIDEBAR -->
-      <aside class="hidden md:block sticky top-28 h-fit">
-
-        <h3 class="text-sm tracking-wide mb-8 text-black/80">
-          Filters
-        </h3>
-
-        <!-- CATEGORY -->
-        <div class="mb-10">
-          <p class="text-[0.7rem] uppercase tracking-[0.3em] text-black/40 mb-4">
-            Category
-          </p>
-
-          <ul class="space-y-3 text-sm">
-            <li><button data-filter="rings" class="filter-btn">Rings</button></li>
-            <li><button data-filter="necklaces" class="filter-btn">Necklaces</button></li>
-            <li><button data-filter="earrings" class="filter-btn">Earrings</button></li>
-            <li><button data-filter="bracelets" class="filter-btn">Bracelets</button></li>
-          </ul>
-        </div>
-
-        <!-- MATERIAL -->
-        <div>
-          <p class="text-[0.7rem] uppercase tracking-[0.3em] text-black/40 mb-4">
-            Material
-          </p>
-
-          <ul class="space-y-3 text-sm">
-            <li><button data-material="gold" class="filter-btn">Gold</button></li>
-            <li><button data-material="diamond" class="filter-btn">Diamond</button></li>
-            <li><button data-material="silver" class="filter-btn">Silver</button></li>
-          </ul>
-        </div>
-
-      </aside>
-
-      <!-- PRODUCTS GRID -->
-      <div>
-
+    <section class="bg-[#F9F6F2] pt-32 pb-24">
+      <div class="container-main">
+        <!-- TOP BAR -->
         <div
-          id="productsGrid"
-          class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12"
+          class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14"
         >
-          <!-- dynamic cards -->
+          <!-- LEFT -->
+          <div>
+            <p
+              class="text-[0.7rem] tracking-[0.35em] uppercase text-black/40 mb-3"
+            >
+              Collection
+            </p>
+
+            <h1
+              id="pageTitle"
+              class="text-[2.2rem] md:text-[2.8rem] font-light leading-tight"
+            >
+              Our Collection
+            </h1>
+          </div>
+
+          <!-- RIGHT (SORT) -->
+          <div class="relative w-fit hidden md:block">
+            <select
+              id="sortSelect"
+              class="appearance-none border-b border-black/20 bg-transparent pr-8 py-2 text-sm focus:outline-none focus:border-black transition"
+            >
+              <option value="">Sort</option>
+              <option value="low">Price: Low → High</option>
+              <option value="high">Price: High → Low</option>
+            </select>
+
+            <!-- custom arrow -->
+            <span
+              class="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-black/40"
+            >
+              ▼
+            </span>
+          </div>
         </div>
 
+        <!-- MOBILE FILTER + SORT -->
+        <div class="flex items-center gap-3 md:hidden mb-8">
+          <!-- FILTER -->
+          <button
+            id="openFilters"
+            class="flex-1 border border-black/20 py-2 text-sm tracking-wide"
+          >
+            Filters
+          </button>
+
+          <!-- SORT -->
+          <div class="relative flex-1">
+            <select
+              id="sortSelectMobile"
+              class="w-full appearance-none border border-black/20 bg-transparent py-2 px-3 text-sm focus:outline-none"
+            >
+              <option value="">Sort</option>
+              <option value="low">Price: Low → High</option>
+              <option value="high">Price: High → Low</option>
+            </select>
+
+            <span
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-black/40"
+            >
+              ▼
+            </span>
+          </div>
+        </div>
+
+        <!-- OVERLAY -->
+        <div
+          id="filterOverlay"
+          class="fixed inset-0 bg-black/30 hidden z-[998]"
+        ></div>
+
+        <!-- MOBILE FILTER DRAWER -->
+        <div
+          id="mobileFilters"
+          class="fixed inset-0 bg-white z-[999] translate-x-full transition-transform duration-300 p-6 overflow-y-auto"
+        >
+          <!-- HEADER -->
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-[1.1rem] font-medium">Filters</h2>
+            <button id="closeFilters" class="text-xl">×</button>
+          </div>
+
+          <!-- CATEGORY -->
+          <div class="mb-10">
+            <p
+              class="text-[0.7rem] tracking-[0.3em] uppercase text-black/40 mb-4"
+            >
+              Category
+            </p>
+
+            <ul class="divide-y">
+              <li>
+                <button data-filter="rings" class="w-full text-left py-3">
+                  Rings
+                </button>
+              </li>
+              <li>
+                <button data-filter="necklaces" class="w-full text-left py-3">
+                  Necklaces
+                </button>
+              </li>
+              <li>
+                <button data-filter="earrings" class="w-full text-left py-3">
+                  Earrings
+                </button>
+              </li>
+              <li>
+                <button data-filter="bracelets" class="w-full text-left py-3">
+                  Bracelets
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- MATERIAL -->
+          <div>
+            <p
+              class="text-[0.7rem] tracking-[0.3em] uppercase text-black/40 mb-4"
+            >
+              Material
+            </p>
+
+            <ul class="divide-y">
+              <li>
+                <button data-material="gold" class="w-full text-left py-3">
+                  Gold
+                </button>
+              </li>
+              <li>
+                <button data-material="diamond" class="w-full text-left py-3">
+                  Diamond
+                </button>
+              </li>
+              <li>
+                <button data-material="silver" class="w-full text-left py-3">
+                  Silver
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- gender  -->
+          <div class="mt-10">
+            <p
+              class="text-[0.7rem] tracking-[0.3em] uppercase text-black/40 mb-4"
+            >
+              Gender
+            </p>
+
+            <ul class="divide-y">
+              <li>
+                <button data-gender="her" class="w-full text-left py-3">
+                  For Her
+                </button>
+              </li>
+              <li>
+                <button data-gender="him" class="w-full text-left py-3">
+                  For Him
+                </button>
+              </li>
+              <li>
+                <button data-gender="kids" class="w-full text-left py-3">
+                  Kids
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-[240px_1fr] gap-16">
+          <!-- FILTER SIDEBAR -->
+          <aside class="hidden md:block sticky top-28 h-fit">
+            <h3 class="text-sm tracking-wide mb-8 text-black/80">Filters</h3>
+
+            <!-- CATEGORY -->
+            <div class="mb-10">
+              <p
+                class="text-[0.7rem] uppercase tracking-[0.3em] text-black/40 mb-4"
+              >
+                Category
+              </p>
+
+              <ul class="space-y-3 text-sm">
+                <li>
+                  <button data-filter="rings" class="filter-btn">Rings</button>
+                </li>
+                <li>
+                  <button data-filter="necklaces" class="filter-btn">
+                    Necklaces
+                  </button>
+                </li>
+                <li>
+                  <button data-filter="earrings" class="filter-btn">
+                    Earrings
+                  </button>
+                </li>
+                <li>
+                  <button data-filter="bracelets" class="filter-btn">
+                    Bracelets
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!-- MATERIAL -->
+            <div>
+              <p
+                class="text-[0.7rem] uppercase tracking-[0.3em] text-black/40 mb-4"
+              >
+                Material
+              </p>
+
+              <ul class="space-y-3 text-sm">
+                <li>
+                  <button data-material="gold" class="filter-btn">Gold</button>
+                </li>
+                <li>
+                  <button data-material="diamond" class="filter-btn">
+                    Diamond
+                  </button>
+                </li>
+                <li>
+                  <button data-material="silver" class="filter-btn">
+                    Silver
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <!--gender-->
+            <div class="mt-10">
+              <p
+                class="text-[0.7rem] uppercase tracking-[0.3em] text-black/40 mb-4"
+              >
+                Gender
+              </p>
+
+              <ul class="space-y-3 text-sm">
+                <li>
+                  <button data-gender="her" class="filter-btn">For Her</button>
+                </li>
+                <li>
+                  <button data-gender="him" class="filter-btn">For Him</button>
+                </li>
+                <li>
+                  <button data-gender="kids" class="filter-btn">Kids</button>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- PRODUCTS GRID -->
+          <div>
+            <div
+              id="productsGrid"
+              class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12"
+            >
+              <!-- dynamic cards -->
+            </div>
+            <div id="pagination" class="flex justify-center gap-2 mt-12"></div>
+          </div>
+        </div>
       </div>
+    </section>
 
-    </div>
+    <!-- footer  -->
+    <div id="footer-container"></div>
 
-  </div>
-</section>
-
-
-
-
-
-
-
-
-
-
-      <!-- footer  -->
-<div id="footer-container"></div>
-
-   <script src="/front/src/js/config.js"></script>
+    <script src="/front/src/js/config.js"></script>
     <script src="/front/src/js/main.js"></script>
     <script type="module" src="/front/src/js/components/navbar.js"></script>
     <script src="/front/src/js/components/footer.js"></script>

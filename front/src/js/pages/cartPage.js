@@ -1,77 +1,177 @@
+import {
+  loadCart,
+  getCartState,
+  changeQuantity,
+  removeItem
+} from "../features/cart.js";
+
 import { createCartItem } from "../components/cartItem.js";
-import Auth from "../core/auth.js";
-import { openAuthModal } from "../components/authModal.js";
 
-document.addEventListener("DOMContentLoaded", loadCart);
+let selectedId = null;
+let isUpdating = false;
 
-async function loadCart() {
-  const grid = document.getElementById("cartGrid");
-  const countText = document.getElementById("cartCountText");
+async function init() {
+  setupModal();
+  setupCartEvents();
+  await loadCart();
+  render();
+}
 
-  if (!grid) {
-    console.warn("cartGrid missing");
+function openModal(id) {
+  selectedId = id;
+  document.getElementById("cartModal").classList.remove("hidden");
+}
+
+function setupModal() {
+  const modal = document.getElementById("cartModal");
+  const confirmBtn = document.getElementById("confirmRemove");
+  const closeBtn = document.getElementById("closeModal");
+
+  if (!modal || !confirmBtn || !closeBtn) {
+    console.warn("Modal elements missing");
     return;
   }
 
-  try {
-    // 🔐 AUTH CHECK
-    if (!Auth.isLoggedIn()) {
-      await openAuthModal();
-
-      if (!Auth.isLoggedIn()) {
-        grid.innerHTML = `<p class="text-sm text-black/60">Please login to view cart</p>`;
-        return;
-      }
+  confirmBtn.onclick = async () => {
+    try {
+      await removeItem(selectedId);
+      render();
+    } catch (err) {
+      console.error(err);
+      alert("Failed to remove item");
+    } finally {
+      modal.classList.add("hidden");
     }
+  };
 
-    // 🔄 LOADING STATE
-    grid.innerHTML = `
-      <div class="text-sm text-black/60 animate-pulse">
-        Loading cart...
+  closeBtn.onclick = () => {
+    modal.classList.add("hidden");
+  };
+
+  // close on outside click
+  modal.addEventListener("click", (e) => {
+    if (e.target.id === "cartModal") {
+      modal.classList.add("hidden");
+    }
+  });
+}
+
+function render() {
+  const data = getCartState();
+  const container = document.getElementById("cartItems");
+  const countText = document.getElementById("cartCountText");
+
+  if (!container) return;
+
+  if (!Array.isArray(data) || !data.length) {
+    container.innerHTML = `
+      <div class="text-center py-16">
+        <p class="text-lg font-medium mb-2">Your cart is empty</p>
+        <a href="/" class="text-[#6B1A2A] underline">Continue shopping</a>
       </div>
     `;
+    if (countText) countText.textContent = "0 items";
+    renderSummary();
+    return;
+  }
 
-    // 📡 FETCH CART
-    const res = await fetch(`${CONFIG.API_BASE}/api/v1/cart`, {
-      headers: Auth.authHeader(),
-    });
+  container.innerHTML = data.map(createCartItem).join("");
 
-    if (!res.ok) {
-      throw new Error(`Cart fetch failed: ${res.status}`);
-    }
+  const totalQty = data.reduce((sum, i) => sum + (i.quantity || 0), 0);
 
-    const data = await res.json();
-    const items = data.items || [];
+  if (countText) {
+    countText.textContent = `${totalQty} item${totalQty > 1 ? "s" : ""}`;
+  }
 
-    // 📭 EMPTY STATE
-    if (!items.length) {
-      grid.innerHTML = `
-        <p class="text-sm text-black/60">
-          Your cart is empty
-        </p>
-      `;
+  renderSummary();
+}
+async function handleCartClick(e) {
+  const inc = e.target.closest(".increase");
+  const dec = e.target.closest(".decrease");
+  const remove = e.target.closest(".remove-btn");
+  const link = e.target.closest(".product-link");
 
-      if (countText) countText.textContent = "0 items";
-      return;
-    }
+  // Navigate
+  if (link) {
+    window.location.href = `/pages/productDetails.html?slug=${link.dataset.slug}`;
+    return;
+  }
 
-    // 🛒 RENDER CART ITEMS (IMPORTANT FIX)
-    grid.innerHTML = items.map(createCartItem).join("");
+  // Remove → modal
+  if (remove) {
+    openModal(remove.dataset.id);
+    return;
+  }
 
-    // 🔢 CORRECT ITEM COUNT (sum of quantities)
-    const totalQty = items.reduce((sum, item) => sum + item.quantity, 0);
+  if (!inc && !dec) return;
 
-    if (countText) {
-      countText.textContent = `${totalQty} item${totalQty > 1 ? "s" : ""}`;
-    }
+  const itemEl = e.target.closest(".cart-item");
 
+  if (itemEl) {
+    itemEl.classList.add("opacity-50", "pointer-events-none");
+  }
+
+  try {
+    if (inc) await changeQuantity(inc.dataset.id, 1);
+    if (dec) await changeQuantity(dec.dataset.id, -1);
+
+    render(); // only after real update
   } catch (err) {
-    console.error("Cart Load Error:", err);
-
-    grid.innerHTML = `
-      <p class="text-sm text-red-500">
-        Failed to load cart
-      </p>
-    `;
+    console.error(err);
+    alert("Update failed. Try again.");
+  } finally {
+    if (itemEl) {
+      itemEl.classList.remove("opacity-50", "pointer-events-none");
+    }
   }
 }
+
+function setupCartEvents() {
+  const container = document.getElementById("cartItems");
+
+  if (!container) {
+    console.warn("cartItems missing");
+    return;
+  }
+
+  container.addEventListener("click", handleCartClick);
+}
+
+function renderSummary() {
+  const data = getCartState();
+  const el = document.getElementById("summaryContent");
+
+  if (!el) return;
+
+  if (!Array.isArray(data)) {
+    console.error("Invalid cart data:", data);
+    el.innerHTML = `<p class="text-red-500 text-sm">Error loading summary</p>`;
+    return;
+  }
+
+  const subtotal = data.reduce((sum, item) => {
+    if (!item || typeof item.price !== "number") return sum;
+    return sum + item.price * item.quantity;
+  }, 0);
+
+  el.innerHTML = `
+    <div class="flex justify-between mb-2 text-sm">
+      <span>Subtotal</span>
+      <span>₹${subtotal}</span>
+    </div>
+
+    <div class="flex justify-between mb-2 text-sm">
+      <span>Shipping</span>
+      <span class="text-green-600">Free</span>
+    </div>
+
+    <hr class="my-2"/>
+
+    <div class="flex justify-between font-semibold">
+      <span>Total</span>
+      <span>₹${subtotal}</span>
+    </div>
+  `;
+}
+
+init();

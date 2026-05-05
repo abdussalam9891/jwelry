@@ -6,44 +6,77 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="/front/src/css/main.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="/front/src/css/animations.css" />
   </head>
 
+  <body>
+
+    <main class="max-w-6xl mx-auto px-4 py-10">
+
+      <!-- HEADER -->
+      <div class="mb-8">
+        <h1 class="text-2xl md:text-3xl font-semibold">
+          My Cart
+          <span id="cartCountText" class="text-black/60 text-lg font-normal ml-2">
+            0 items
+          </span>
+        </h1>
+      </div>
+
+      <!-- GRID -->
+      <section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <!-- LEFT (Scrollable Cart Items) -->
+          <div
+            id="cartItems"
+            class="lg:col-span-2 max-h-[calc(100vh-140px)] overflow-y-auto pr-2"
+          ></div>
+
+          <!-- RIGHT (Sticky Summary) -->
+          <div class="lg:col-span-1">
+            <div class="sticky top-6 bg-white border rounded-xl p-4 shadow-sm">
+
+              <h2 class="text-lg font-semibold mb-4">
+                Order Summary
+              </h2>
+
+              <div id="summaryContent"></div>
+
+              <button class="w-full mt-4 bg-[#6B1A2A] text-white py-2 rounded-lg hover:bg-[#571521] transition">
+  Checkout Securely
+</button>
+
+            </div>
+          </div>
+
+        </div>
+
+      </section>
 
 
 
+      <div id="cartModal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-xl w-80">
 
-<body>
+    <h2 class="font-semibold mb-4">Remove item?</h2>
 
+    <button id="confirmRemove" class="w-full bg-red-500 text-white py-2 rounded mb-2">
+      Remove
+    </button>
 
-<main class="container-main section page-content my-12 py-28">
+    <button id="closeModal" class="w-full border py-2 rounded">
+      Cancel
+    </button>
 
-  <!-- HEADER -->
-  <div class="mb-8">
-    <h1 class="text-2xl md:text-3xl font-semibold">
-      My Cart
-      <span id="cartCountText" class="text-black/60 text-lg font-normal ml-2">
-  0 items
-</span>
-    </h1>
   </div>
+</div>
 
-  <!-- GRID -->
+    </main>
 
-  <div id="cartGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-
-</main>
-
-
-
-
-
-  <script src="/front/src/js/config.js"></script>
-  <script src="/front/src/js/main.js"></script>
-  <script type="module" src="/front/src/js/pages/cartPage.js"></script>
-
-
+    
+    <script type="module" src="/front/src/js/pages/cartPage.js"></script>
 
   </body>
 </html>

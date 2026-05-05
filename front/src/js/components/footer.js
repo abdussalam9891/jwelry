@@ -25,15 +25,15 @@ function loadFooter() {
               Shop
             </h4>
             <ul class="space-y-3 text-sm text-white/70">
-              <li><a href="#" class="hover:text-white transition">Rings</a></li>
+              <li><a href="/front/pages/products.html?subcategory=rings" class="hover:text-white transition">Rings</a></li>
               <li>
-                <a href="#" class="hover:text-white transition">Necklaces</a>
+                <a href="/front/pages/products.html?subcategory=necklaces" class="hover:text-white transition">Necklaces</a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">Earrings</a>
+                <a href="/front/pages/products.html?subcategory=earrings" class="hover:text-white transition">Earrings</a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">Bracelets</a>
+                <a href="/front/pages/products.html?subcategory=bracelets" class="hover:text-white transition">Bracelets</a>
               </li>
             </ul>
           </div>
