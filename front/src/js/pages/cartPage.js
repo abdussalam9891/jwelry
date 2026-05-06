@@ -224,6 +224,10 @@ async function handleCartClick(e) {
       itemEl.classList.remove("opacity-50", "pointer-events-none");
     }
   }
+
+
+
+  
 }
 
 function setupCartEvents() {
