@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/front/src/css/navbar.css" />
     <link rel="stylesheet" href="/front/src/css/animations.css" />
   </head>
-  
+
 
 
 
@@ -33,6 +33,42 @@
   <div id="wishlistGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
 
 </main>
+
+
+<div id="variantModal" class="fixed inset-0 bg-black/40 hidden flex items-center justify-center z-50">
+
+  <div class="bg-white p-5 rounded-lg w-[90%] max-w-md">
+
+    <h2 class="text-lg font-semibold mb-4">Select Options</h2>
+
+    <div id="variantOptions"></div>
+
+      <p id="variantError" class="text-red-500 text-sm hidden">
+  Please select all options
+</p>
+
+    <button
+      id="confirmMoveToCart"
+      class="w-full mt-4 bg-black text-white py-2 rounded"
+    >
+      Move to Cart
+    </button>
+
+  </div>
+
+
+
+
+</div>
+
+
+<div id="toast"
+  class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50">
+</div>
+
+
+
+
 
   <div id="footer-container"></div>
 

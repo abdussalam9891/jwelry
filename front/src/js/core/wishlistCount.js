@@ -10,3 +10,13 @@ export function updateWishlistCount(count) {
     badge.classList.add("hidden");
   }
 }
+
+
+
+
+export function updateWishlistPageCount(count) {
+  const countEl = document.getElementById("wishlistCountText");
+  if (!countEl) return;
+
+  countEl.textContent = `${count} item${count !== 1 ? "s" : ""}`;
+}

@@ -11,7 +11,12 @@ const getImageUrl = (path) => {
   return `${CONFIG.API_BASE}${path}`;
 };
 
-let selectedVariant = null;
+
+
+let selectedMaterial = null;
+let selectedSize = null;
+let selectedVariantId = null;
+
 
 
 async function loadProduct() {
@@ -93,7 +98,68 @@ await renderHorizontalSection({
 }
 
 
+function renderDescription(product) {
+  const desc = product.description;
 
+  // fallback
+  if (!desc || typeof desc === "string") {
+    return `
+      <p class="text-[14px] leading-relaxed text-black/70">
+        ${desc || "Elegant handcrafted jewelry piece designed for modern style and everyday elegance."}
+      </p>
+    `;
+  }
+
+  return `
+    <div class="space-y-5 text-[14px] text-black/70">
+
+      ${desc.short ? `
+        <p class="leading-relaxed text-black/85 text-[15px]">
+          ${desc.short}
+        </p>
+      ` : ""}
+
+      ${desc.design ? `
+        <div class="border-l-2 border-[#6B1A2A]/40 pl-4">
+          <p class="text-[12px] uppercase tracking-wider text-[#6B1A2A] mb-1">
+            The Design
+          </p>
+          <p class="leading-relaxed text-black/75">
+            ${desc.design}
+          </p>
+        </div>
+      ` : ""}
+
+      ${desc.details?.length ? `
+        <div>
+          <p class="text-[12px] uppercase tracking-wider text-[#6B1A2A] mb-2">
+            Product Details
+          </p>
+          <ul class="space-y-2">
+            ${desc.details.map(d => `
+              <li class="flex items-start gap-2 text-[14px]">
+                <span class="text-[#6B1A2A] mt-[3px]">•</span>
+                <span class="text-black/75">${d}</span>
+              </li>
+            `).join("")}
+          </ul>
+        </div>
+      ` : ""}
+
+      ${desc.styling ? `
+        <div class="bg-[#F9F6F2] border border-[#6B1A2A]/10 rounded-md p-4">
+          <p class="text-[12px] uppercase tracking-wider text-[#6B1A2A] mb-1">
+            Styling Tip
+          </p>
+          <p class="text-black/75 leading-relaxed text-[14px]">
+            ${desc.styling}
+          </p>
+        </div>
+      ` : ""}
+
+    </div>
+  `;
+}
 
 
 function renderProduct(product) {
@@ -106,17 +172,15 @@ function renderProduct(product) {
 
         <!-- LEFT -->
         <div class="md:sticky md:top-24 self-start">
-         <div class="flex flex-col md:flex-row gap-4">
+          <div class="flex flex-col md:flex-row gap-4">
 
-  <!-- thumbnails -->
-  ${renderThumbnails(product.images?.map(getImageUrl))}
+            ${renderThumbnails(product.images?.map(getImageUrl))}
 
-  <!-- main image -->
-  <div class="w-full">
-    ${renderMainImage(getImageUrl(product.images?.[0]))}
-  </div>
+            <div class="w-full">
+              ${renderMainImage(getImageUrl(product.images?.[0]))}
+            </div>
 
-</div>
+          </div>
         </div>
 
         <!-- RIGHT -->
@@ -124,7 +188,6 @@ function renderProduct(product) {
 
           ${renderInfo(product)}
 
-          <!-- REVIEWS BELOW INFO -->
           <div class="mt-10">
             <h2 class="text-lg font-semibold mb-2">
               Reviews <span id="reviewCount">(0)</span>
@@ -144,6 +207,22 @@ function renderProduct(product) {
     </div>
   `;
 
+  // 🔥 ADD THIS RIGHT HERE
+  const prices = product.variants?.map(v => v.price) || [];
+
+  if (prices.length) {
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+
+    const priceEl = document.getElementById("productPrice");
+
+    if (priceEl) {
+      priceEl.textContent =
+        min === max ? `₹${min}` : `₹${min} – ₹${max}`;
+    }
+  }
+
+  // 🔥 THEN attach events
   attachEvents(product);
 }
 
@@ -175,6 +254,63 @@ function renderMainImage(img) {
   `;
 }
 
+
+
+  function renderVariantOptions(product) {
+  if (!product.variants || product.variants.length === 0) return "";
+
+  const materials = [...new Set(product.variants.map(v => v.material))];
+  const sizes = [...new Set(product.variants.map(v => v.size).filter(Boolean))];
+
+  return `
+    <div class="space-y-4">
+
+      <!-- MATERIAL -->
+      <div>
+        <p class="text-sm font-medium mb-2">Choose Material</p>
+        <div class="flex flex-wrap gap-2">
+          ${materials.map(m => `
+            <button
+              class="variant-material border px-3 py-2 text-sm rounded-lg"
+              data-material="${m}"
+            >
+              ${m}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+
+      ${
+        sizes.length > 0
+          ? `
+      <!-- SIZE -->
+      <div>
+        <p class="text-sm font-medium mb-2">Select Size</p>
+        <div class="flex flex-wrap gap-2">
+          ${sizes.map(s => `
+            <button
+              class="variant-size border px-3 py-2 text-sm rounded-lg"
+              data-size="${s}"
+            >
+              ${s}
+            </button>
+          `).join("")}
+        </div>
+      </div>
+      `
+          : ""
+      }
+
+    </div>
+  `;
+}
+
+
+
+
+
+
+
 function renderInfo(product) {
   return `
     <div class="w-full space-y-4 sm:space-y-5 md:space-y-6">
@@ -190,34 +326,27 @@ function renderInfo(product) {
         </div>
       </div>
 
-      <!-- PRICE -->
-      <div class="text-lg sm:text-xl md:text-2xl font-bold flex items-center gap-2">
-        ₹${product.price}
-        ${
-          product.originalPrice
-            ? `<span class="line-through text-black/40 text-sm sm:text-base">₹${product.originalPrice}</span>`
-            : ""
-        }
-      </div>
+
+
+
+       <!-- price -->
+    <div class="text-lg sm:text-xl md:text-2xl font-bold flex items-center gap-2">
+
+  <span id="productPrice">₹${product.price}</span>
+
+  ${
+    product.originalPrice
+      ? `<span id="originalPrice" class="line-through text-black/40 text-sm sm:text-base">
+          ₹${product.originalPrice}
+        </span>`
+      : ""
+  }
+
+</div>
 
       <!-- VARIANT -->
       <div>
-        <p class="text-sm font-medium mb-2">Choose Finish</p>
-
-        <div class="flex flex-wrap gap-2">
-          ${["Gold", "Silver"]
-            .map(
-              (v) => `
-            <button
-              class="variant-btn border px-3 py-2 text-sm rounded-lg hover:border-black transition"
-              data-variant="${v}"
-            >
-              ${v}
-            </button>
-          `,
-            )
-            .join("")}
-        </div>
+      ${renderVariantOptions(product)}
       </div>
 
       <!-- DELIVERY -->
@@ -240,10 +369,7 @@ function renderInfo(product) {
           <p id="deliveryResult" class="text-xs text-green-600"></p>
         </div>
 
-        <div class="flex justify-between sm:justify-start sm:gap-6 text-xs text-black/60">
-          <span>7-day return</span>
-          <span>Warranty</span>
-        </div>
+
 
       </div>
 
@@ -280,79 +406,155 @@ function renderInfo(product) {
         </div>
       </div>
 
-      <!-- DESCRIPTION -->
-      <div class="border-t pt-4">
-        <h3 class="font-semibold mb-1 text-sm sm:text-base">Description</h3>
-        <p class="text-sm text-black/60 leading-relaxed">
-          ${
-            product.description ||
-            "Elegant handcrafted jewelry piece designed for modern style and everyday elegance."
-          }
-        </p>
-      </div>
 
-      <!-- DETAILS -->
-      <div>
-        <h3 class="font-semibold mb-1 text-sm sm:text-base">Product Details</h3>
-        <ul class="text-sm text-black/60 space-y-1">
-          <li>Material: Premium Quality</li>
-          <li>Finish: High polish</li>
-          <li>Category: Jewelry</li>
-        </ul>
-      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="border-t pt-6">
+
+  <!-- TITLE -->
+  <h3 class="text-[1rem] sm:text-[1.1rem] font-medium text-black mb-3 tracking-wide">
+    Product Description
+  </h3>
+
+  <!-- CONTENT -->
+  <div class="relative">
+    <div
+      id="descContent"
+      class="text-[0.95rem] sm:text-[1rem] text-black/70 leading-relaxed overflow-hidden max-h-[90px] transition-all duration-300"
+    >
+      ${renderDescription(product)}
+    </div>
+
+    <!-- Fade effect -->
+    <div
+      id="descFade"
+      class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"
+    ></div>
+  </div>
+
+  <!-- TOGGLE -->
+  <button
+    id="toggleDescBtn"
+    class="text-[0.9rem] text-[#6B1A2A] mt-3 font-medium tracking-wide"
+  >
+    Show More
+  </button>
+
+</div>
+
+
+<!-- DETAILS -->
+<div class="pt-5">
+
+  <h3 class="text-[1rem] sm:text-[1.1rem] font-medium text-black mb-3 tracking-wide">
+    Product Details
+  </h3>
+
+  <ul class="space-y-2 text-[0.95rem] text-black/70">
+    <li class="flex justify-between border-b pb-1">
+      <span class="text-black/60">Category</span>
+      <span class="capitalize">${product.category}</span>
+    </li>
+
+    <li class="flex justify-between border-b pb-1">
+      <span class="text-black/60">Type</span>
+      <span class="capitalize">${product.subcategory}</span>
+    </li>
+
+    <li class="flex justify-between border-b pb-1">
+      <span class="text-black/60">Gender</span>
+      <span class="capitalize">${product.gender || "Unisex"}</span>
+    </li>
+  </ul>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
       <!-- TRUST (SVG ICONS) -->
-      <div class="border rounded-xl p-3 sm:p-4 bg-black/[0.02] space-y-4">
+<div class="border border-[#6B1A2A]/10 rounded-2xl p-5 bg-[#F9F6F2] space-y-5">
 
-        <div class="flex items-start gap-3">
-          <!-- Truck -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M3 7h13v10H3zM16 10h3l2 3v4h-5zM7.5 17.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm9 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
-          </svg>
-          <div>
-            <p class="text-sm font-medium">Free Delivery</p>
-            <p class="text-xs text-black/60">Arrives in 3–5 days</p>
-          </div>
-        </div>
+  <!-- ITEM -->
+  <div class="flex items-start gap-4">
+    <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M3 7h13v10H3zM16 10h3l2 3v4h-5zM7.5 17.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm9 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-[0.95rem] font-medium text-black">Free Delivery</p>
+      <p class="text-[0.85rem] text-black/60">Arrives in 3–5 days</p>
+    </div>
+  </div>
 
-        <div class="flex items-start gap-3">
-          <!-- Return -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M4 4v6h6M20 20v-6h-6M5.5 9A7 7 0 0119 12m-14 0a7 7 0 0013.5 3"/>
-          </svg>
-          <div>
-            <p class="text-sm font-medium">Easy Returns</p>
-            <p class="text-xs text-black/60">7-day hassle-free returns</p>
-          </div>
-        </div>
+  <!-- ITEM -->
+  <div class="flex items-start gap-4">
+    <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M4 4v6h6M20 20v-6h-6M5.5 9A7 7 0 0119 12m-14 0a7 7 0 0013.5 3"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-[0.95rem] font-medium text-black">Easy Returns</p>
+      <p class="text-[0.85rem] text-black/60">7-day hassle-free returns</p>
+    </div>
+  </div>
 
-        <div class="flex items-start gap-3">
-          <!-- Shield -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z"/>
-          </svg>
-          <div>
-            <p class="text-sm font-medium">Lifetime Warranty</p>
-            <p class="text-xs text-black/60">On plating & polish</p>
-          </div>
-        </div>
+  <!-- ITEM -->
+  <div class="flex items-start gap-4">
+    <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-[0.95rem] font-medium text-black">Lifetime Warranty</p>
+      <p class="text-[0.85rem] text-black/60">On plating & polish</p>
+    </div>
+  </div>
 
-        <div class="flex items-start gap-3">
-          <!-- Lock -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-              d="M12 11c1.1 0 2 .9 2 2v2h-4v-2c0-1.1.9-2 2-2zm6 0V9a6 6 0 10-12 0v2M5 11h14v10H5z"/>
-          </svg>
-          <div>
-            <p class="text-sm font-medium">Secure Checkout</p>
-            <p class="text-xs text-black/60">100% protected payments</p>
-          </div>
-        </div>
+  <!-- ITEM -->
+  <div class="flex items-start gap-4">
+    <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M12 11c1.1 0 2 .9 2 2v2h-4v-2c0-1.1.9-2 2-2zm6 0V9a6 6 0 10-12 0v2M5 11h14v10H5z"/>
+      </svg>
+    </div>
+    <div>
+      <p class="text-[0.95rem] font-medium text-black">Secure Checkout</p>
+      <p class="text-[0.85rem] text-black/60">100% protected payments</p>
+    </div>
+  </div>
 
-      </div>
+</div>
+
+
+
+
+
 
     </div>
   `;
@@ -360,10 +562,7 @@ function renderInfo(product) {
 
 function attachEvents(product) {
 
-
-
-
-  // IMAGE SWITCH + ACTIVE STATE
+  // IMAGE SWITCH
   const mainImage = document.getElementById("mainProductImage");
 
   document.querySelectorAll("[data-img]").forEach((img) => {
@@ -372,7 +571,6 @@ function attachEvents(product) {
 
       mainImage.src = img.dataset.img;
 
-      // highlight selected
       document
         .querySelectorAll("[data-img]")
         .forEach((i) => i.classList.remove("border-black"));
@@ -381,48 +579,162 @@ function attachEvents(product) {
     });
   });
 
-  //  VARIANT SELECT
-  document.querySelectorAll(".variant-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      selectedVariant = btn.dataset.variant;
 
-      document.querySelectorAll(".variant-btn").forEach((b) => {
-        b.classList.remove("border-black");
-      });
 
-      btn.classList.add("border-black");
-    });
+
+
+ // 🔥 COMMON UI RESET
+function resetButtons(selector) {
+  document.querySelectorAll(selector).forEach(b => {
+    b.classList.remove("bg-[#6B1A2A]", "text-white", "border-[#6B1A2A]");
+    b.classList.add("border-black/20", "text-black/70", "bg-white");
+  });
+}
+
+// 🔥 MATERIAL
+document.querySelectorAll(".variant-material").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    selectedMaterial = btn.dataset.material;
+
+    updateSizeAvailability(product);
+
+    resetButtons(".variant-material");
+
+    btn.classList.add("bg-[#6B1A2A]", "text-white", "border-[#6B1A2A]");
+    btn.classList.remove("border-black/20", "text-black/70", "bg-white");
+
+    // 🔥 validate size with new material
+    const match = product.variants.find(v =>
+      v.material === selectedMaterial &&
+      (selectedSize ? v.size === selectedSize : true)
+    );
+
+    if (!match) {
+      selectedSize = null;
+      resetButtons(".variant-size");
+    }
+
+    updateVariant(product);
+    updateSizeAvailability(product); // 🔥 IMPORTANT
+  });
+});
+
+
+// 🔥 SIZE
+document.querySelectorAll(".variant-size").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    selectedSize = btn.dataset.size;
+
+    resetButtons(".variant-size");
+
+    btn.classList.add("bg-[#6B1A2A]", "text-white", "border-[#6B1A2A]");
+    btn.classList.remove("border-black/20", "text-black/70", "bg-white");
+
+    updateVariant(product);
+  });
+});
+
+
+
+  //show more/less description
+
+  const desc = document.getElementById("descContent");
+const btn = document.getElementById("toggleDescBtn");
+
+if (desc && btn) {
+  let expanded = false;
+
+  btn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    if (expanded) {
+      desc.classList.remove("max-h-[80px]");
+      desc.classList.add("max-h-[500px]");
+      btn.textContent = "Show Less";
+    } else {
+      desc.classList.remove("max-h-[500px]");
+      desc.classList.add("max-h-[80px]");
+      btn.textContent = "Show More";
+    }
   });
 
-  //  ADD TO CART
+  // hide button if not needed
+  setTimeout(() => {
+    if (desc.scrollHeight <= 80) {
+      btn.style.display = "none";
+    }
+  }, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
   const addToCartBtn = document.getElementById("addToCartBtn");
 
-  addToCartBtn?.addEventListener("click", async () => {
-    if (!selectedVariant) {
-      showToast("Please select a variant");
+addToCartBtn?.addEventListener("click", async () => {
+
+  // 🔥 smarter validation
+  if (product.variants.length) {
+
+    const hasSize = product.variants.some(v => v.size);
+    const hasMaterial = product.variants.some(v => v.material);
+
+    if (hasMaterial && !selectedMaterial) {
+      showToast("Please select material");
       return;
     }
 
-    if (!Auth.isLoggedIn()) {
-      await openAuthModal();
-      if (!Auth.isLoggedIn()) return;
+    if (hasSize && !selectedSize) {
+      showToast("Please select size");
+      return;
     }
 
-    try {
-      await fetch(`${CONFIG.API_BASE}/api/v1/cart/${product._id}`, {
-        method: "POST",
-        headers: Auth.authHeader(),
-      });
-
-      showToast("Added to cart");
-    } catch (err) {
-      console.error(err);
-      showToast("Failed to add to cart");
+    if (!selectedVariantId) {
+      showToast("Please select valid combination");
+      return;
     }
-  });
+  }
+
+  if (!Auth.isLoggedIn()) {
+    await openAuthModal();
+    if (!Auth.isLoggedIn()) return;
+  }
+
+  try {
+    await fetch(`${CONFIG.API_BASE}/api/v1/cart/${product._id}`, {
+      method: "POST",
+      headers: {
+        ...Auth.authHeader(),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        variantId: selectedVariantId
+      })
+    });
+
+    showToast("Added to cart");
+
+  } catch (err) {
+    console.error(err);
+    showToast("Failed to add to cart");
+  }
+});
 
 
-  // 📦 PINCODE CHECK
+
+
+  // 📦 PINCODE (unchanged)
   const pincodeInput = document.getElementById("pincodeInput");
   const checkBtn = document.getElementById("checkPincodeBtn");
   const resultEl = document.getElementById("deliveryResult");
@@ -431,7 +743,6 @@ function attachEvents(product) {
     const handleCheck = async () => {
       const pincode = pincodeInput.value.trim();
 
-      // 🛡️ validation
       if (!/^[1-9][0-9]{5}$/.test(pincode)) {
         resultEl.textContent = "Enter a valid 6-digit pincode";
         resultEl.className = "text-xs text-red-500";
@@ -442,9 +753,7 @@ function attachEvents(product) {
       resultEl.className = "text-xs text-black/60";
 
       try {
-        const res = await fetch(
-          `${CONFIG.API_BASE}/api/v1/delivery/${pincode}`
-        );
+        const res = await fetch(`${CONFIG.API_BASE}/api/v1/delivery/${pincode}`);
         const data = await res.json();
 
         if (!data.available) {
@@ -463,15 +772,84 @@ function attachEvents(product) {
       }
     };
 
-    // click
     checkBtn.addEventListener("click", handleCheck);
 
-    // enter key
     pincodeInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") handleCheck();
     });
   }
 }
+
+function updateVariant(product) {
+
+  const variant = product.variants.find(v =>
+    v.material === selectedMaterial &&
+    (v.size ? v.size === selectedSize : true)
+  );
+
+  const priceEl = document.getElementById("productPrice");
+  const originalEl = document.getElementById("originalPrice");
+
+  if (!variant) {
+    selectedVariantId = null;
+    priceEl.textContent = "Select options";
+    if (originalEl) originalEl.textContent = "";
+    return;
+  }
+
+  selectedVariantId = variant._id;
+
+  // ✅ current price
+  priceEl.textContent = `₹${variant.price}`;
+
+  // 🔥 FIX: make original price ALWAYS higher
+  if (originalEl) {
+    const fakeOriginal = variant.price + 2000; // tweak value
+    originalEl.textContent = `₹${fakeOriginal}`;
+  }
+}
+
+
+
+function updateSizeAvailability(product) {
+
+  let firstAvailableSize = null;
+
+  document.querySelectorAll(".variant-size").forEach(btn => {
+    const size = btn.dataset.size;
+
+    const isAvailable = product.variants.some(v =>
+      v.material === selectedMaterial && v.size === size
+    );
+
+    // disable / enable
+    btn.disabled = !isAvailable;
+
+    btn.classList.toggle("opacity-40", !isAvailable);
+    btn.classList.toggle("cursor-not-allowed", !isAvailable);
+
+    // track first available
+    if (isAvailable && !firstAvailableSize) {
+      firstAvailableSize = size;
+    }
+
+    // ❌ remove active if invalid
+    if (!isAvailable && selectedSize === size) {
+      btn.classList.remove("bg-[#6B1A2A]", "text-white");
+      selectedSize = null;
+    }
+  });
+
+  // 🔥 AUTO SELECT (important UX)
+  if (!selectedSize && firstAvailableSize) {
+    selectedSize = firstAvailableSize;
+
+    const btn = document.querySelector(`[data-size="${firstAvailableSize}"]`);
+    btn?.classList.add("bg-[#6B1A2A]", "text-white");
+  }
+}
+
+
 
 
 function renderReviews(reviews) {

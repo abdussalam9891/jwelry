@@ -119,4 +119,24 @@ html {
   cursor: grabbing;
 }
 
- 
+
+
+
+
+
+
+.variant-material,
+.variant-size {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.variant-material.active,
+.variant-size.active {
+  background: black;
+  color: white;
+  border-color: black;
+}
