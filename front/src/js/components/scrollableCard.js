@@ -1,8 +1,10 @@
 import { createProductCard } from "../components/productCard.js";
 import { initWishlist, loadWishlistState } from "../features/wishlist.js";
+import { CONFIG } from "../config.js";
 
 
-
+let url =
+  `${CONFIG.API_BASE}/v1/products?limit=8`;
 const container = document.getElementById("productContainer");
 const tabs = document.querySelectorAll(".tab");
 
@@ -22,7 +24,6 @@ async function fetchProducts(type) {
   try {
     container.innerHTML = `<div class="text-sm text-gray-500 px-4">Loading products...</div>`;
 
-    let url = "http://localhost:5000/api/v1/products?limit=8";
 
     if (type === "trending") url += "&tag=trending";
     else if (type === "new") url += "&tag=new";

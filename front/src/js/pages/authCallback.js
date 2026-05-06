@@ -1,11 +1,9 @@
 import api from "../core/api.js";
-import { CONFIG } from "../config.js";
 
 const status =
   document.getElementById("status");
 
-// 🔥 Handle Google auth callback
-async function handleAuth() {
+async function handleAuthCallback() {
 
   try {
 
@@ -13,7 +11,9 @@ async function handleAuth() {
       await api.get("/v1/auth/me");
 
     if (!res.loggedIn) {
+
       throw new Error("Not logged in");
+
     }
 
     // 🔥 redirect back if needed
@@ -32,35 +32,20 @@ async function handleAuth() {
 
   } catch (err) {
 
-    console.error(err);
+    console.error(
+      "Auth callback failed:",
+      err
+    );
 
     if (status) {
 
       status.textContent =
-        "Sign-in failed. Redirecting...";
+        "Sign-in failed. Please try again.";
 
     }
-
-    setTimeout(() => {
-
-      window.location.replace(
-        "/front/pages/auth.html?error=auth_failed"
-      );
-
-    }, 1500);
 
   }
 
 }
 
-// 🔥 Google button
-document
-  .getElementById("google-btn")
-  ?.addEventListener("click", () => {
-
-    window.location.href =
-      `${CONFIG.API_BASE}/v1/auth/google`;
-
-  });
-
-handleAuth();
+handleAuthCallback();

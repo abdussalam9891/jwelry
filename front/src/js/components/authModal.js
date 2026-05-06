@@ -1,4 +1,4 @@
-// ─── State ───────────────────────────────────────────────────
+import { CONFIG } from "../config.js";
 
 let modal = null;
 let isInitialized = false;
@@ -30,7 +30,7 @@ async function initModal() {
 
     // Google login
     document.getElementById("google-btn")?.addEventListener("click", () => {
-      window.location.href = `${CONFIG.API_BASE}/api/v1/auth/google`;
+      window.location.href = `${CONFIG.API_BASE}/v1/auth/google`;
     });
 
     isInitialized = true;

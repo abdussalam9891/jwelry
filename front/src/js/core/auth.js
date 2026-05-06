@@ -1,44 +1,74 @@
+import api from "../core/api.js";
+
 const Auth = {
-  getToken() {
-    return localStorage.getItem('token');
-  },
 
-  getUser() {
+  // 🔥 Get current authenticated user
+  async getCurrentUser() {
+
     try {
-      return JSON.parse(localStorage.getItem('user'));
+
+      const res =
+        await api.get("/v1/auth/me");
+
+      return res.user;
+
     } catch {
-      localStorage.removeItem('user');
+
       return null;
+
     }
+
   },
 
-  isLoggedIn() {
-    return !!localStorage.getItem('token');
-  },
+  // 🔥 Protect routes
+  async requireAuth() {
 
-  save(token, user) {
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(user));
-  },
+    const user =
+      await this.getCurrentUser();
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = '/pages/auth.html';
-  },
+    if (!user) {
 
-  requireAuth() {
-    if (!this.isLoggedIn()) {
-      window.location.href = '/pages/auth.html';
+      sessionStorage.setItem(
+        "redirectAfterLogin",
+        window.location.pathname
+      );
+
+      window.location.replace(
+        "/front/pages/auth.html"
+      );
+
+      return null;
+
     }
+
+    return user;
+
   },
 
-  authHeader() {
-    return {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${this.getToken()}`,
-    };
+  // 🔥 Logout
+  async logout() {
+
+    try {
+
+      await api.post("/v1/auth/logout");
+
+    } catch (err) {
+
+      console.error(
+        "Logout failed:",
+        err
+      );
+
+    } finally {
+
+      window.location.replace(
+        "/front/index.html"
+      );
+
+    }
+
   },
+
 };
 
 export default Auth;

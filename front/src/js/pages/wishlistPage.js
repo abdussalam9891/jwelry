@@ -3,6 +3,7 @@ import Auth from "../core/auth.js";
 import { openAuthModal } from "../components/authModal.js";
 import { initWishlist, loadWishlistState, openVariantModal  } from "../features/wishlist.js";
 import { updateWishlistPageCount } from "../core/wishlistCount.js";
+import { CONFIG } from "../config.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initWishlist();
@@ -11,29 +12,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 let isLoading = false;
 
- async function loadWishlistPage() {
-  const grid = document.getElementById("wishlistGrid");
-  const countEl = document.getElementById("wishlistCountText");
+async function loadWishlistPage() {
 
-  if (!grid) return; // ❌ no warning needed
+  const grid =
+    document.getElementById(
+      "wishlistGrid"
+    );
+
+  const countEl =
+    document.getElementById(
+      "wishlistCountText"
+    );
+
+  if (!grid) return;
 
   if (isLoading) return;
+
   isLoading = true;
 
   try {
+
     // 🔐 Auth check
-    if (!Auth.isLoggedIn()) {
+    const user =
+      await Auth.getCurrentUser();
+
+    if (!user) {
+
       await openAuthModal();
 
-      if (!Auth.isLoggedIn()) {
-        grid.innerHTML = `
-          <p class="text-sm text-black/60 text-center py-10">
-            Please login to view wishlist
-          </p>
-        `;
-        if (countEl) countEl.textContent = "0 items";
-        return;
-      }
+      return;
+
     }
 
     // 🔄 Loading state
@@ -43,63 +51,98 @@ let isLoading = false;
       </div>
     `;
 
-    const res = await fetch(`${CONFIG.API_BASE}/api/v1/wishlist`, {
-      headers: Auth.authHeader(),
-    });
+    const res = await fetch(
+      `${CONFIG.API_BASE}/v1/wishlist`,
+      {
+        credentials: "include",
+      }
+    );
 
     if (!res.ok) {
-      throw new Error(`Wishlist fetch failed: ${res.status}`);
+
+      throw new Error(
+        `Wishlist fetch failed: ${res.status}`
+      );
+
     }
 
-    const data = await res.json();
+    const data =
+      await res.json();
 
-    const products = Array.isArray(data) ? data : data.items || [];
+    const products =
+      Array.isArray(data)
+        ? data
+        : data.items || [];
 
-    // 🔥 Update count
-    updateWishlistPageCount(products.length);
+    updateWishlistPageCount(
+      products.length
+    );
 
     // ❌ Empty
     if (!products.length) {
+
       grid.innerHTML = `
         <p class="text-sm text-black/60 text-center py-10">
           Your wishlist is empty
         </p>
       `;
+
       return;
+
     }
 
     // ✅ Render
     grid.innerHTML = products
-      .map(p =>
+      .map((p) =>
         createProductCard(p, {
           showWishlistButton: false,
           showRemoveButton: true,
-          showMoveToCart: true
+          showMoveToCart: true,
         })
       )
       .join("");
 
-    // 🔥 BIND EVENTS (scoped + clean)
-    grid.querySelectorAll(".move-to-cart").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+    // 🔥 Bind events
+    grid
+      .querySelectorAll(
+        ".move-to-cart"
+      )
+      .forEach((btn) => {
 
-        const productId = btn.dataset.id;
+        btn.addEventListener(
+          "click",
+          (e) => {
 
-        if (!productId) {
-          console.error("Missing productId on button");
-          return;
-        }
+            e.preventDefault();
+            e.stopPropagation();
 
-        openVariantModal(productId);
+            const productId =
+              btn.dataset.id;
+
+            if (!productId) {
+
+              console.error(
+                "Missing productId"
+              );
+
+              return;
+
+            }
+
+            openVariantModal(
+              productId
+            );
+
+          }
+        );
+
       });
-    });
 
-    // 🔄 Sync wishlist state
+    // 🔄 Sync local UI state
     await loadWishlistState();
 
   } catch (err) {
+
     console.error(err);
 
     grid.innerHTML = `
@@ -108,11 +151,19 @@ let isLoading = false;
       </p>
     `;
 
-    if (countEl) countEl.textContent = "0 items";
+    if (countEl) {
+
+      countEl.textContent =
+        "0 items";
+
+    }
 
   } finally {
+
     isLoading = false;
+
   }
+
 }
 
 

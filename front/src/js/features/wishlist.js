@@ -1,8 +1,14 @@
- // features/wishlist.js
+// features/wishlist.js
 
 import { openAuthModal } from "../components/authModal.js";
 import Auth from "../core/auth.js";
-import { updateWishlistCount, updateWishlistPageCount } from "../core/wishlistCount.js";
+import {
+  updateWishlistCount,
+  updateWishlistPageCount,
+} from "../core/wishlistCount.js";
+import { showToast }
+from "../components/toast.js";
+import { CONFIG } from "../config.js";
 
 let wishlistSet = new Set(); // source of truth
 
@@ -13,8 +19,6 @@ let selectedVariantId = null;
 // INIT (event delegation)
 export function initWishlist() {
   document.addEventListener("click", async (e) => {
-
-
     // REMOVE (wishlist page)
 
     const removeBtn = e.target.closest(".wishlist-remove");
@@ -24,10 +28,10 @@ export function initWishlist() {
       const id = String(removeBtn.dataset.id);
 
       // instant UI update
-   wishlistSet.delete(id);
+      wishlistSet.delete(id);
 
-updateWishlistCount(wishlistSet.size);        // navbar
-updateWishlistPageCount(wishlistSet.size);    // page 🔥 FIX
+      updateWishlistCount(wishlistSet.size); // navbar
+      updateWishlistPageCount(wishlistSet.size); // page 🔥 FIX
 
       removeBtn.closest(".group")?.remove();
 
@@ -37,36 +41,34 @@ updateWishlistPageCount(wishlistSet.size);    // page 🔥 FIX
       }
 
       // async API (non-blocking)
-      fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${id}`, {
+      fetch(`${CONFIG.API_BASE}/v1/wishlist/${id}`, {
         method: "DELETE",
-        headers: Auth.authHeader(),
-      }).catch(err => {
+        credentials: "include",
+      }).catch((err) => {
         console.error(err);
 
         // rollback
         wishlistSet.add(id);
-       updateWishlistCount(wishlistSet.size);
-       updateWishlistPageCount(wishlistSet.size);
+        updateWishlistCount(wishlistSet.size);
+        updateWishlistPageCount(wishlistSet.size);
       });
 
       return;
     }
 
-
-
     // MOVE TO CART
 
     const cartBtn = e.target.closest(".move-to-cart");
-if (cartBtn) {
-  e.preventDefault();
+    if (cartBtn) {
+      e.preventDefault();
 
-  const id = String(cartBtn.dataset.id);
+      const id = String(cartBtn.dataset.id);
 
-  // 🔥 OPEN VARIANT SELECTOR
-  openVariantModal(id);
+      // 🔥 OPEN VARIANT SELECTOR
+      openVariantModal(id);
 
-  return;
-}
+      return;
+    }
     if (cartBtn) {
       e.preventDefault();
 
@@ -85,22 +87,24 @@ if (cartBtn) {
       }
 
       // async API
-      fetch(`${CONFIG.API_BASE}/api/v1/cart/${id}`, {
-        method: "POST",
-        headers: Auth.authHeader(),
-      });
+     fetch(
+  `${CONFIG.API_BASE}/v1/cart/${id}`,
+  {
+    method: "POST",
 
-      fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${id}`, {
+    credentials: "include",
+  }
+);
+
+      fetch(`${CONFIG.API_BASE}/v1/wishlist/${id}`, {
         method: "DELETE",
-        headers: Auth.authHeader(),
-      }).catch(err => {
+        credentials: "include",
+      }).catch((err) => {
         console.error("Move to cart failed", err);
       });
 
       return;
     }
-
-
 
     // WISHLIST TOGGLE
 
@@ -112,11 +116,16 @@ if (cartBtn) {
 
     const id = String(btn.dataset.id);
 
-    // auth check (still awaited, but unavoidable UX-wise)
-    if (!Auth.isLoggedIn()) {
-      await openAuthModal();
-      if (!Auth.isLoggedIn()) return;
-    }
+   const user =
+  await Auth.getCurrentUser();
+
+if (!user) {
+
+  await openAuthModal();
+
+  return;
+
+}
 
     const isSaved = wishlistSet.has(id);
 
@@ -127,25 +136,29 @@ if (cartBtn) {
       wishlistSet.add(id);
     }
 
-  // instant UI
-btn.classList.toggle("active");
+    // instant UI
+    btn.classList.toggle("active");
 
+    btn.offsetHeight;
 
-btn.offsetHeight;
-
-updateWishlistCount(wishlistSet.size);
-updateWishlistPageCount(wishlistSet.size);
+    updateWishlistCount(wishlistSet.size);
+    updateWishlistPageCount(wishlistSet.size);
 
     // async API (non-blocking)
-    fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${id}`, {
-      method: isSaved ? "DELETE" : "POST",
-      headers: Auth.authHeader(),
-    })
-      .then(res => {
-         
-  if (!res.ok) throw new Error("Wishlist API failed");
+   fetch(
+  `${CONFIG.API_BASE}/v1/wishlist/${id}`,
+  {
+    method: isSaved
+      ? "DELETE"
+      : "POST",
+
+    credentials: "include",
+  }
+)
+      .then((res) => {
+        if (!res.ok) throw new Error("Wishlist API failed");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(" rollback firing:", err.message);
 
         // rollback
@@ -156,53 +169,168 @@ updateWishlistPageCount(wishlistSet.size);
           wishlistSet.delete(id);
           btn.classList.remove("active");
         }
-updateWishlistCount(wishlistSet.size);
-updateWishlistPageCount(wishlistSet.size);
+        updateWishlistCount(wishlistSet.size);
+        updateWishlistPageCount(wishlistSet.size);
       });
   });
 }
 
-
-
 // LOAD STATE
 
-export async function loadWishlistState(products = null) {
-  if (!Auth.isLoggedIn()) return;
+export async function loadWishlistState(
+   products = null
+) {
+
+  const user =
+    await Auth.getCurrentUser();
+
+  if (!user) return;
 
   try {
+
     let items = products;
 
     // 🔥 fetch only if needed
     if (!items) {
-      const res = await fetch(`${CONFIG.API_BASE}/api/v1/wishlist`, {
-        headers: Auth.authHeader(),
-      });
 
-      if (!res.ok) throw new Error("Failed to fetch wishlist");
+      const res = await fetch(
+        `${CONFIG.API_BASE}/v1/wishlist`,
+        {
+          credentials: "include",
+        }
+      );
 
-      items = await res.json(); // now always array of products
+      if (!res.ok) {
+
+        throw new Error(
+          "Failed to fetch wishlist"
+        );
+
+      }
+
+      items = await res.json();
+
     }
 
     // 🔥 reset state
     wishlistSet.clear();
 
-    // 🔥 ONLY product objects now (clean)
-    items.forEach(product => {
+    // 🔥 sync local state
+    items.forEach((product) => {
+
       if (product?._id) {
-        wishlistSet.add(String(product._id));
+
+        wishlistSet.add(
+          String(product._id)
+        );
+
       }
+
     });
 
     applyWishlistUI();
 
-    // 🔥 count from state (no refetch)
-    updateWishlistCount(wishlistSet.size);
-    updateWishlistPageCount(wishlistSet.size);
+    // 🔥 update counts
+    updateWishlistCount(
+      wishlistSet.size
+    );
+
+    updateWishlistPageCount(
+      wishlistSet.size
+    );
 
   } catch (err) {
-    console.error("Failed to load wishlist", err);
+
+    console.error(
+      "Failed to load wishlist",
+      err
+    );
+
   }
+
 }
+
+
+
+export async function addToWishlist(
+
+  productId
+) {
+
+  const user =
+    await Auth.getCurrentUser();
+
+  if (!user) {
+
+    await openAuthModal();
+
+    return;
+
+  }
+
+  const id = String(productId);
+
+  // already exists
+  if (wishlistSet.has(id)) {
+
+    return;
+
+  }
+
+  // 🔥 optimistic update
+  wishlistSet.add(id);
+
+  updateWishlistCount(
+    wishlistSet.size
+  );
+
+  updateWishlistPageCount(
+    wishlistSet.size
+  );
+
+  try {
+
+    const res = await fetch(
+      `${CONFIG.API_BASE}/v1/wishlist/${id}`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
+
+    if (!res.ok) {
+
+      throw new Error(
+        "Failed to add wishlist"
+      );
+
+    }
+
+  } catch (err) {
+
+    console.error(err);
+
+    // 🔥 rollback
+    wishlistSet.delete(id);
+
+    updateWishlistCount(
+      wishlistSet.size
+    );
+
+    updateWishlistPageCount(
+      wishlistSet.size
+    );
+
+    throw err;
+
+  }
+
+}
+
+
+
+
+
 
 
 // APPLY UI STATE
@@ -220,8 +348,6 @@ function applyWishlistUI() {
   });
 }
 
-
-
 export async function openVariantModal(productId) {
   const modal = document.getElementById("variantModal");
   const container = document.getElementById("variantOptions");
@@ -236,7 +362,7 @@ export async function openVariantModal(productId) {
   `;
 
   try {
-    const res = await fetch(`${CONFIG.API_BASE}/api/v1/products/${productId}`);
+    const res = await fetch(`${CONFIG.API_BASE}/v1/products/${productId}`);
 
     if (!res.ok) {
       const text = await res.text();
@@ -254,8 +380,10 @@ export async function openVariantModal(productId) {
       return;
     }
 
-    const materials = [...new Set(product.variants.map(v => v.material))];
-    const sizes = [...new Set(product.variants.map(v => v.size).filter(Boolean))];
+    const materials = [...new Set(product.variants.map((v) => v.material))];
+    const sizes = [
+      ...new Set(product.variants.map((v) => v.size).filter(Boolean)),
+    ];
 
     container.innerHTML = `
       <div class="space-y-4">
@@ -263,34 +391,43 @@ export async function openVariantModal(productId) {
         <div>
           <p class="text-sm mb-1">Material</p>
           <div class="flex gap-2 flex-wrap">
-            ${materials.map(m => `
+            ${materials
+              .map(
+                (m) => `
               <button class="variant-material border px-3 py-1 rounded" data-m="${m}">
                 ${m}
               </button>
-            `).join("")}
+            `,
+              )
+              .join("")}
           </div>
         </div>
 
         ${
-          sizes.length ? `
+          sizes.length
+            ? `
           <div>
             <p class="text-sm mb-1">Size</p>
             <div class="flex gap-2 flex-wrap">
-              ${sizes.map(s => `
+              ${sizes
+                .map(
+                  (s) => `
                 <button class="variant-size border px-3 py-1 rounded" data-s="${s}">
                   ${s}
                 </button>
-              `).join("")}
+              `,
+                )
+                .join("")}
             </div>
           </div>
-          ` : ""
+          `
+            : ""
         }
 
       </div>
     `;
 
     attachVariantEvents(product);
-
   } catch (err) {
     console.error(err);
 
@@ -300,16 +437,13 @@ export async function openVariantModal(productId) {
   }
 }
 
-
-
 function updateVariantSelectionUI(selector, activeBtn) {
-  document.querySelectorAll(selector).forEach(btn => {
+  document.querySelectorAll(selector).forEach((btn) => {
     btn.classList.remove("active");
   });
 
   activeBtn.classList.add("active");
 }
-
 
 function closeVariantModal() {
   const modal = document.getElementById("variantModal");
@@ -317,16 +451,13 @@ function closeVariantModal() {
   modal.classList.add("hidden");
   modal.classList.remove("flex");
 
-
   document.body.classList.remove("overflow-hidden");
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("variantModal");
 
   if (!modal) {
-
     return;
   }
 
@@ -336,9 +467,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-
-
 
 function attachVariantEvents(product) {
   let selectedMaterial = null;
@@ -352,7 +480,7 @@ function attachVariantEvents(product) {
   if (errorEl) errorEl.classList.add("hidden");
 
   // 🔴 MATERIAL CLICK
-  document.querySelectorAll(".variant-material").forEach(btn => {
+  document.querySelectorAll(".variant-material").forEach((btn) => {
     btn.onclick = () => {
       selectedMaterial = btn.dataset.m;
 
@@ -361,7 +489,7 @@ function attachVariantEvents(product) {
       selectedVariantId = updateVariantMatch(
         product,
         selectedMaterial,
-        selectedSize
+        selectedSize,
       );
 
       if (errorEl) errorEl.classList.add("hidden");
@@ -369,7 +497,7 @@ function attachVariantEvents(product) {
   });
 
   // 🔴 SIZE CLICK
-  document.querySelectorAll(".variant-size").forEach(btn => {
+  document.querySelectorAll(".variant-size").forEach((btn) => {
     btn.onclick = () => {
       selectedSize = btn.dataset.s;
 
@@ -378,7 +506,7 @@ function attachVariantEvents(product) {
       selectedVariantId = updateVariantMatch(
         product,
         selectedMaterial,
-        selectedSize
+        selectedSize,
       );
 
       if (errorEl) errorEl.classList.add("hidden");
@@ -404,19 +532,22 @@ function attachVariantEvents(product) {
         confirmBtn.classList.add("opacity-50", "cursor-not-allowed");
 
         // 🔥 1. ADD TO CART
-        const cartRes = await fetch(
-          `${CONFIG.API_BASE}/api/v1/cart/${product._id}`,
-          {
-            method: "POST",
-            headers: {
-              ...Auth.authHeader(),
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              variantId: selectedVariantId
-            })
-          }
-        );
+      const cartRes = await fetch(
+  `${CONFIG.API_BASE}/v1/cart/${product._id}`,
+  {
+    method: "POST",
+
+    credentials: "include",
+
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({
+      variantId: selectedVariantId,
+    }),
+  },
+);
 
         if (!cartRes.ok) {
           const text = await cartRes.text();
@@ -425,10 +556,14 @@ function attachVariantEvents(product) {
         }
 
         // 🔥 2. REMOVE FROM WISHLIST
-        await fetch(`${CONFIG.API_BASE}/api/v1/wishlist/${product._id}`, {
-          method: "DELETE",
-          headers: Auth.authHeader()
-        });
+      await fetch(
+  `${CONFIG.API_BASE}/v1/wishlist/${product._id}`,
+  {
+    method: "DELETE",
+
+    credentials: "include",
+  }
+);
 
         // 🔥 UX FIRST (instant feedback)
         closeVariantModal();
@@ -437,32 +572,24 @@ function attachVariantEvents(product) {
         // 🔄 Refresh wishlist (clean state)
 
         // 🔥 update local state
-wishlistSet.delete(String(product._id));
+        wishlistSet.delete(String(product._id));
 
-updateWishlistCount(wishlistSet.size);
-updateWishlistPageCount(wishlistSet.size);
+        updateWishlistCount(wishlistSet.size);
+        updateWishlistPageCount(wishlistSet.size);
 
-// 🔥 remove card instantly
-document
-  .querySelector(`[data-product-id="${product._id}"]`)
-  ?.remove();
+        // 🔥 remove card instantly
+        document.querySelector(`[data-product-id="${product._id}"]`)?.remove();
 
-// 🔥 empty state
-const grid = document.getElementById("wishlistGrid");
+        // 🔥 empty state
+        const grid = document.getElementById("wishlistGrid");
 
-if (grid && !grid.children.length) {
-  grid.innerHTML = `
+        if (grid && !grid.children.length) {
+          grid.innerHTML = `
     <p class="text-sm text-black/60 text-center py-10">
       Your wishlist is empty
     </p>
   `;
-}
-
-
-
-
-
-
+        }
       } catch (err) {
         console.error("ERROR:", err);
         showToast("Something went wrong");
@@ -475,17 +602,13 @@ if (grid && !grid.children.length) {
   }
 }
 
-
-
-
 function updateVariantMatch(product, material, size) {
   if (!material) return null;
 
-  const variant = product.variants.find(v => {
+  const variant = product.variants.find((v) => {
     const materialMatch = v.material === material;
 
-    const sizeMatch =
-      !v.size || !size || v.size === size;
+    const sizeMatch = !v.size || !size || v.size === size;
 
     return materialMatch && sizeMatch;
   });
@@ -494,14 +617,3 @@ function updateVariantMatch(product, material, size) {
 }
 
 
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.classList.remove("hidden");
-
-  setTimeout(() => {
-    toast.classList.add("hidden");
-  }, 2000);
-}

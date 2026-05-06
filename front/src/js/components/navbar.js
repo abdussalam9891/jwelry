@@ -1,6 +1,10 @@
 import { openAuthModal } from "../components/authModal.js";
+import api from "../core/api.js";
+import { getCurrentUser, logout } from "../core/authState.js";
 import { updateWishlistCount } from "../core/wishlistCount.js";
 import { loadWishlistState } from "../features/wishlist.js";
+import { CONFIG } from "../config.js";
+
 
 let placeholderInterval;
 
@@ -355,23 +359,45 @@ async function loadNavbar() {
 
   document.getElementById("navbar-container").innerHTML = navbarHTML;
 
-  function handleProtectedRoute(path) {
-    const token = localStorage.getItem("token");
+  const wishlistBtn =
+  document.getElementById("wishlistBtn");
 
-    if (!token) {
-      localStorage.setItem("redirectAfterLogin", path);
-      openAuthModal();
-      return;
-    }
+const cartBtn =
+  document.getElementById("cartBtn");
+
+ async function handleProtectedRoute(path) {
+
+  try {
+
+    await api.get("/v1/auth/me");
 
     window.location.href = path;
+
+  } catch {
+
+    sessionStorage.setItem(
+      "redirectAfterLogin",
+      path
+    );
+
+    await openAuthModal();
+
   }
+
+}
 
   wishlistBtn.onclick = () =>
     handleProtectedRoute("/front/pages/wishlist.html");
   cartBtn.onclick = () => handleProtectedRoute("/front/pages/cart.html");
 
+ const user =
+  await getCurrentUser();
+
+if (user) {
+
   await loadWishlistState();
+
+}
 
   initializeNavbar();
   checkAuthState();
@@ -509,35 +535,16 @@ function initNavbarScroll() {
   window.addEventListener("scroll", handleScroll, { passive: true });
 }
 
-// authstatte
 async function checkAuthState() {
-  const token = localStorage.getItem("token");
   const wishlistBtn = document.getElementById("wishlistBtn");
 
-  if (!token) {
-    wishlistBtn?.classList.remove("hidden"); // optional UX decision
-    bindLoginButtons();
-    return;
-  }
+  wishlistBtn?.classList.remove("hidden");
 
-  try {
-    const res = await fetch(`${CONFIG.API_BASE}/api/v1/auth/me`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  const user = await getCurrentUser();
 
-    const data = await res.json();
-
-    if (res.ok && data.loggedIn) {
-      wishlistBtn?.classList.remove("hidden");
-      bindLogoutButtons();
-    } else {
-      localStorage.removeItem("token");
-      wishlistBtn?.classList.remove("hidden"); // don't hide
-      bindLoginButtons();
-    }
-  } catch (err) {
-    console.error("[Navbar] Auth check failed:", err);
-    wishlistBtn?.classList.remove("hidden"); // don't punish UI
+  if (user) {
+    bindLogoutButtons();
+  } else {
     bindLoginButtons();
   }
 }
@@ -561,10 +568,14 @@ function bindLogoutButtons() {
 
   loginBtns.forEach((btn) => {
     btn.textContent = "Logout";
-    btn.onclick = (e) => {
+
+    btn.onclick = async (e) => {
       e.preventDefault();
-      localStorage.removeItem("token");
-      window.location.reload();
+
+      btn.textContent = "Logging out...";
+      btn.disabled = true;
+
+      await logout();
     };
   });
 }

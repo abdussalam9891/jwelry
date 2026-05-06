@@ -1,7 +1,9 @@
 import { createProductCard } from "../components/productCard.js";
 import { initWishlist, loadWishlistState  } from "../features/wishlist.js";
+import { CONFIG } from "../config.js";
 
-const API_URL = "http://localhost:5000/api/v1/products";
+const API_URL =
+  `${CONFIG.API_BASE}/v1/products`;
 const grid = document.getElementById("productsGrid");
 const sortSelect = document.getElementById("sortSelect");
 

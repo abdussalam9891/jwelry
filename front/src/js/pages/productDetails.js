@@ -2,13 +2,14 @@ import { openAuthModal } from "../components/authModal.js";
 import Auth from "../core/auth.js";
 import { initWishlist, loadWishlistState  } from "../features/wishlist.js";
 import { renderHorizontalSection } from "../components/horizontalProducts.js";
+import { CONFIG } from "../config.js";
 
 document.addEventListener("DOMContentLoaded", loadProduct);
 
 
 const getImageUrl = (path) => {
-  if (!path) return "/front/src/assets/images/placeholder.jpg";
-  return `${CONFIG.API_BASE}${path}`;
+  if (!path) return "/src/assets/images/placeholder.jpg";
+  return `${CONFIG.ASSET_BASE}${path}`;
 };
 
 
@@ -34,7 +35,7 @@ async function loadProduct() {
     container.innerHTML = "Loading product...";
 
     // 1. Fetch product
-    const res = await fetch(`${CONFIG.API_BASE}/api/v1/products/slug/${slug}`);
+    const res = await fetch(`${CONFIG.API_BASE}/v1/products/slug/${slug}`);
     if (!res.ok) throw new Error("Product fetch failed");
 
     const product = await res.json();
@@ -53,7 +54,7 @@ async function loadProduct() {
 
     // 3. Fetch reviews
     const reviewsRes = await fetch(
-      `${CONFIG.API_BASE}/api/v1/reviews/${product._id}`
+      `${CONFIG.API_BASE}/v1/reviews/${product._id}`
     );
 
     if (!reviewsRes.ok) throw new Error("Reviews fetch failed");
@@ -66,7 +67,7 @@ async function loadProduct() {
 
     // 🔥 5. Fetch similar products (same subcategory)
 const similarRes = await fetch(
-  `${CONFIG.API_BASE}/api/v1/products?subcategory=${product.subcategory}&limit=10`
+  `${CONFIG.API_BASE}/v1/products?subcategory=${product.subcategory}&limit=10`
 );
 
 const similarData = await similarRes.json();
@@ -80,7 +81,7 @@ await renderHorizontalSection({
 
 // 🔥 7. Fetch recommended (trending)
 const recRes = await fetch(
-  `${CONFIG.API_BASE}/api/v1/products?tag=trending&limit=10`
+  `${CONFIG.API_BASE}/v1/products?tag=trending&limit=10`
 );
 
 const recData = await recRes.json();
@@ -591,6 +592,7 @@ function resetButtons(selector) {
   });
 }
 
+
 // 🔥 MATERIAL
 document.querySelectorAll(".variant-material").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -706,29 +708,53 @@ addToCartBtn?.addEventListener("click", async () => {
     }
   }
 
-  if (!Auth.isLoggedIn()) {
-    await openAuthModal();
-    if (!Auth.isLoggedIn()) return;
-  }
 
-  try {
-    await fetch(`${CONFIG.API_BASE}/api/v1/cart/${product._id}`, {
+
+
+  const user =
+  await Auth.getCurrentUser();
+
+if (!user) {
+
+  await openAuthModal();
+
+  return;
+
+}
+
+try {
+
+  await fetch(
+    `${CONFIG.API_BASE}/v1/cart/${product._id}`,
+    {
       method: "POST",
+
+      credentials: "include",
+
       headers: {
-        ...Auth.authHeader(),
         "Content-Type": "application/json"
       },
+
       body: JSON.stringify({
         variantId: selectedVariantId
       })
-    });
 
-    showToast("Added to cart");
+    }
+  );
 
-  } catch (err) {
-    console.error(err);
-    showToast("Failed to add to cart");
-  }
+  showToast("Added to cart");
+
+} catch (err) {
+
+  console.error(err);
+
+  showToast("Failed to add to cart");
+
+}
+
+
+
+
 });
 
 
@@ -753,7 +779,7 @@ addToCartBtn?.addEventListener("click", async () => {
       resultEl.className = "text-xs text-black/60";
 
       try {
-        const res = await fetch(`${CONFIG.API_BASE}/api/v1/delivery/${pincode}`);
+        const res = await fetch(`${CONFIG.API_BASE}/v1/delivery/${pincode}`);
         const data = await res.json();
 
         if (!data.available) {

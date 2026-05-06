@@ -11,6 +11,89 @@
 
   <body>
 
+
+ <header class="sticky top-0 z-40 bg-white border-b border-black/5 backdrop-blur">
+
+  <div class="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between">
+
+    <!-- LEFT -->
+    <div class="flex items-center gap-6">
+
+      <!-- LOGO -->
+      <a
+        href="/front/index.html"
+        class="flex items-center shrink-0"
+      >
+        <img
+          src="/front/src/assets/icon/logo.png"
+          alt="Logo"
+          class="h-10 w-auto object-contain"
+        />
+      </a>
+
+      <!-- CONTINUE SHOPPING -->
+      <a
+        href="/front/index.html"
+        class="hidden sm:flex items-center gap-2 text-sm text-black/90 hover:text-[#6B1A2A] transition"
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.8"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+          />
+        </svg>
+
+        <span>Continue Shopping</span>
+
+      </a>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="flex items-center gap-5">
+
+      <!-- WISHLIST -->
+      <a
+        href="/front/pages/wishlist.html"
+        class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.8"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.247.99-4 2.437-.753-1.446-2.26-2.437-4-2.437-2.485 0-4.5 2.015-4.5 4.5 0 7.22 8.5 12 8.5 12s8.5-4.78 8.5-12z"
+          />
+        </svg>
+
+        <span class="hidden sm:inline">
+          Wishlist
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
     <main class="max-w-6xl mx-auto px-4 py-10">
 
       <!-- HEADER -->
@@ -30,26 +113,24 @@
 
           <!-- LEFT (Scrollable Cart Items) -->
           <div
-            id="cartItems"
-            class="lg:col-span-2 max-h-[calc(100vh-140px)] overflow-y-auto pr-2"
-          ></div>
+  id="cartItems"
+  class="lg:col-span-2 space-y-4"
+></div>
 
           <!-- RIGHT (Sticky Summary) -->
-          <div class="lg:col-span-1">
-            <div class="sticky top-6 bg-white border rounded-xl p-4 shadow-sm">
+        <div class="lg:col-span-1 ">
 
-              <h2 class="text-lg font-semibold mb-4">
-                Order Summary
-              </h2>
+  <div class="sticky top-24 bg-white border border-black/5 rounded-2xl p-5 shadow-sm">
 
-              <div id="summaryContent"></div>
+    <h2 class="text-[1.35rem] font-semibold mb-5">
+      Order Summary
+    </h2>
 
-              <button class="w-full mt-4 bg-[#6B1A2A] text-white py-2 rounded-lg hover:bg-[#571521] transition">
-  Checkout Securely
-</button>
+    <div id="summaryContent"></div>
 
-            </div>
-          </div>
+  </div>
+
+</div>
 
         </div>
 
@@ -73,9 +154,14 @@
   </div>
 </div>
 
+<div
+  id="toast"
+  class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50">
+</div>
+
     </main>
 
-    
+   
     <script type="module" src="/front/src/js/pages/cartPage.js"></script>
 
   </body>

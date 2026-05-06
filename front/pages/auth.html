@@ -1,9 +1,28 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signing you in...</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        background: #fff;
+      }
+      .status {
+        font-size: 1rem;
+        color: #555;
+      }
+    </style>
   </head>
-  <body>
-    <script type="module" src="/front/src/js/components/authCallback.js"></script>
+   <body>
+    <p class="status" id="status">Signing you in...</p>
+    <script type="module" src="/front/src/js/pages/authCallback.js"></script>
+    
   </body>
 </html>
