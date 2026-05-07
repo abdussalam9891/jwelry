@@ -10,97 +10,84 @@
   </head>
 
   <body>
-
-
- <header class="sticky top-0 z-40 bg-white border-b border-black/5 backdrop-blur">
-
-  <div class="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between">
-
-    <!-- LEFT -->
-    <div class="flex items-center gap-6">
-
-      <!-- LOGO -->
-      <a
-        href="/front/index.html"
-        class="flex items-center shrink-0"
+    <header
+      class="sticky top-0 z-40 bg-white border-b border-black/5 backdrop-blur"
+    >
+      <div
+        class="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between"
       >
-        <img
-          src="/front/src/assets/icon/logo.png"
-          alt="Logo"
-          class="h-10 w-auto object-contain"
-        />
-      </a>
+        <!-- LEFT -->
+        <div class="flex items-center gap-6">
+          <!-- LOGO -->
+          <a href="/front/index.html" class="flex items-center shrink-0">
+            <img
+              src="/front/src/assets/icon/logo.png"
+              alt="Logo"
+              class="h-10 w-auto object-contain"
+            />
+          </a>
 
-      <!-- CONTINUE SHOPPING -->
-      <a
-        href="/front/index.html"
-        class="hidden sm:flex items-center gap-2 text-sm text-black/90 hover:text-[#6B1A2A] transition"
-      >
+          <!-- CONTINUE SHOPPING -->
+          <a
+            href="/front/index.html"
+            class="hidden sm:flex items-center gap-2 text-sm text-black/90 hover:text-[#6B1A2A] transition"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+              />
+            </svg>
 
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.8"
-          stroke="currentColor"
-          class="w-4 h-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-          />
-        </svg>
+            <span>Continue Shopping</span>
+          </a>
+        </div>
 
-        <span>Continue Shopping</span>
+        <!-- RIGHT -->
+        <div class="flex items-center gap-5">
+          <!-- WISHLIST -->
+          <a
+            href="/front/pages/wishlist.html"
+            class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.8"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.247.99-4 2.437-.753-1.446-2.26-2.437-4-2.437-2.485 0-4.5 2.015-4.5 4.5 0 7.22 8.5 12 8.5 12s8.5-4.78 8.5-12z"
+              />
+            </svg>
 
-      </a>
-
-    </div>
-
-    <!-- RIGHT -->
-    <div class="flex items-center gap-5">
-
-      <!-- WISHLIST -->
-      <a
-        href="/front/pages/wishlist.html"
-        class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
-      >
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.8"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.247.99-4 2.437-.753-1.446-2.26-2.437-4-2.437-2.485 0-4.5 2.015-4.5 4.5 0 7.22 8.5 12 8.5 12s8.5-4.78 8.5-12z"
-          />
-        </svg>
-
-        <span class="hidden sm:inline">
-          Wishlist
-        </span>
-
-      </a>
-
-    </div>
-
-  </div>
-
-</header>
+            <span class="hidden sm:inline"> Wishlist </span>
+          </a>
+        </div>
+      </div>
+    </header>
 
     <main class="max-w-6xl mx-auto px-4 py-10">
-
       <!-- HEADER -->
       <div class="mb-8">
         <h1 class="text-2xl md:text-3xl font-semibold">
           My Cart
-          <span id="cartCountText" class="text-black/60 text-lg font-normal ml-2">
+          <span
+            id="cartCountText"
+            class="text-black/60 text-lg font-normal ml-2"
+          >
             0 items
           </span>
         </h1>
@@ -108,61 +95,56 @@
 
       <!-- GRID -->
       <section>
-
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
           <!-- LEFT (Scrollable Cart Items) -->
-          <div
-  id="cartItems"
-  class="lg:col-span-2 space-y-4"
-></div>
+          <div id="cartItems" class="lg:col-span-2 space-y-4"></div>
 
           <!-- RIGHT (Sticky Summary) -->
-        <div class="lg:col-span-1 ">
+          <div
+  id="summaryWrapper"
+  class="lg:col-span-1"
+>
+            <div
+              class="sticky top-24 bg-white border border-black/5 rounded-2xl p-5 shadow-sm"
+            >
+              <h2 class="text-[1.35rem] font-semibold mb-5">Order Summary</h2>
 
-  <div class="sticky top-24 bg-white border border-black/5 rounded-2xl p-5 shadow-sm">
-
-    <h2 class="text-[1.35rem] font-semibold mb-5">
-      Order Summary
-    </h2>
-
-    <div id="summaryContent"></div>
-
-  </div>
-
-</div>
-
+              <div id="summaryContent"></div>
+            </div>
+          </div>
         </div>
-
       </section>
 
+      <div
+        id="cartModal"
+        class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      >
+        <div class="bg-white p-6 rounded-xl w-80">
+          <h2 class="font-semibold mb-4">Remove item?</h2>
 
+          <button
+            id="confirmRemove"
+            class="w-full bg-red-500 text-white py-2 rounded mb-2"
+          >
+            Remove
+          </button>
 
-      <div id="cartModal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-  <div class="bg-white p-6 rounded-xl w-80">
+          <button id="closeModal" class="w-full border py-2 rounded">
+            Cancel
+          </button>
+        </div>
+      </div>
 
-    <h2 class="font-semibold mb-4">Remove item?</h2>
-
-    <button id="confirmRemove" class="w-full bg-red-500 text-white py-2 rounded mb-2">
-      Remove
-    </button>
-
-    <button id="closeModal" class="w-full border py-2 rounded">
-      Cancel
-    </button>
-
-  </div>
-</div>
-
-<div
-  id="toast"
-  class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50">
-</div>
-
+      <div
+        id="toast"
+        class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50"
+      ></div>
     </main>
 
-   
-    <script type="module" src="/front/src/js/pages/cartPage.js"></script>
+    <script type="module">
+      import { initCartPage } from "/front/src/js/pages/cartPage.js";
 
+      initCartPage();
+    </script>
   </body>
 </html>

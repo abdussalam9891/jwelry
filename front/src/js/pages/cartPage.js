@@ -77,7 +77,16 @@ function render() {
 
     container.innerHTML = `
 
-      <div class="flex flex-col items-center justify-center py-24">
+      <div
+    class="
+      min-h-[65vh]
+      flex
+      flex-col
+      items-center
+      justify-center
+      text-center
+    "
+  >
 
         <!-- ICON -->
       <div class="mb-5">
@@ -124,9 +133,20 @@ function render() {
       countText.textContent = "0 items";
     }
 
-    renderSummary();
+   document
+  .getElementById(
+    "summaryWrapper"
+  )
+  ?.classList.add("hidden");
 
-    return;
+return;
+
+
+document
+  .getElementById(
+    "summaryWrapper"
+  )
+  ?.classList.remove("hidden");
   }
 
   // 🔥 RENDER ITEMS
@@ -227,7 +247,7 @@ async function handleCartClick(e) {
 
 
 
-  
+
 }
 
 function setupCartEvents() {
@@ -241,7 +261,9 @@ function setupCartEvents() {
   container.addEventListener("click", handleCartClick);
 }
 
-function renderSummary() {
+export function renderSummary({
+  showCheckoutButton = true,
+} = {}) {
 
   const data = getCartState();
 
@@ -479,14 +501,41 @@ function renderSummary() {
 
 
 
-    <!-- CTA -->
-    <button
-      class="w-full h-12 rounded-xl bg-[#6B1A2A] text-white font-medium hover:opacity-90 transition"
-    >
-      Checkout Securely
-    </button>
+${
+  showCheckoutButton
+    ? `
+
+      <!-- CTA -->
+      <a
+        href="/front/pages/checkout.html"
+        class="block w-full"
+      >
+        <button
+          class="
+            w-full
+            h-12
+            rounded-xl
+            bg-[#6B1A2A]
+            text-white
+            font-medium
+            hover:opacity-90
+            transition
+          "
+        >
+          Checkout Securely
+        </button>
+      </a>
+
+    `
+    : ""
+}
 
   `;
 }
 
-init();
+export async function initCartPage() {
+  setupModal();
+  setupCartEvents();
+  await loadCart();
+  render();
+}
