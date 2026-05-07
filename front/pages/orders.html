@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link
+    href="/front/src/css/main.css"
+    rel="stylesheet"
+  />
+
+  <title>My Orders</title>
+
+</head>
+
+<body class="bg-[#FAFAFA] text-[#111]">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-white border-b border-black/5">
+
+    <div
+      class="
+        max-w-6xl
+        mx-auto
+        h-16
+        px-4
+        flex
+        items-center
+        justify-between
+      "
+    >
+
+      <!-- LEFT -->
+      <div class="flex items-center gap-5">
+
+        <!-- LOGO -->
+        <a
+          href="/front/index.html"
+          class="shrink-0"
+        >
+
+          <img
+            src="/front/src/assets/icon/logo.png"
+            alt="Gemora"
+            class="h-10 w-auto"
+          />
+
+        </a>
+
+        <!-- BACK -->
+        <a
+          href="/front/index.html"
+          class="
+            hidden
+            sm:flex
+            items-center
+            gap-2
+            text-sm
+            text-black/70
+            hover:text-[#6B1A2A]
+            transition
+          "
+        >
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.8"
+            stroke="currentColor"
+            class="w-4 h-4"
+          >
+
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+            />
+
+          </svg>
+
+          <span>
+            Continue Shopping
+          </span>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- MAIN -->
+  <main
+    class="
+      max-w-5xl
+      mx-auto
+      px-4
+      py-10
+    "
+  >
+
+    <!-- TITLE -->
+    <div class="mb-8">
+
+      <h1
+        class="
+          text-3xl
+          font-semibold
+          tracking-tight
+        "
+      >
+        My Orders
+      </h1>
+
+      <p
+        class="
+          text-sm
+          text-black/50
+          mt-2
+        "
+      >
+        Track and manage your recent purchases
+      </p>
+
+    </div>
+
+<div id="ordersContainer"></div>
+
+
+
+  </main>
+ <script type="module" src="/front/src/js/pages/ordersPage.js"></script>
+</body>
+</html>

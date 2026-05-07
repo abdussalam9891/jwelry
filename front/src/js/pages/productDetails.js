@@ -65,28 +65,28 @@ async function loadProduct() {
     renderReviews(reviews);
 
 
-    // 🔥 5. Fetch similar products (same subcategory)
+    //  5. Fetch similar products (same subcategory)
 const similarRes = await fetch(
   `${CONFIG.API_BASE}/v1/products?subcategory=${product.subcategory}&limit=10`
 );
 
 const similarData = await similarRes.json();
 
-// 🔥 6. Render similar section
+//  6. Render similar section
 await renderHorizontalSection({
   containerId: "similarSection",
   products: similarData.products || []
 });
 
 
-// 🔥 7. Fetch recommended (trending)
+//  7. Fetch recommended (trending)
 const recRes = await fetch(
   `${CONFIG.API_BASE}/v1/products?tag=trending&limit=10`
 );
 
 const recData = await recRes.json();
 
-// 🔥 8. Render recommended section
+//  8. Render recommended section
 await renderHorizontalSection({
   containerId: "recommendSection",
   products: recData.products || []
@@ -208,7 +208,7 @@ function renderProduct(product) {
     </div>
   `;
 
-  // 🔥 ADD THIS RIGHT HERE
+  //  ADD THIS RIGHT HERE
   const prices = product.variants?.map(v => v.price) || [];
 
   if (prices.length) {
@@ -223,7 +223,7 @@ function renderProduct(product) {
     }
   }
 
-  // 🔥 THEN attach events
+  //  THEN attach events
   attachEvents(product);
 }
 
@@ -367,7 +367,7 @@ function renderInfo(product) {
           <button id="checkPincodeBtn" class="w-full sm:w-auto px-4 py-2 bg-black text-white rounded">
             Check
           </button>
-          <p id="deliveryResult" class="text-xs text-green-600"></p>
+          <p id="deliveryResult" class="text-xs text-[#6B1A2A]"></p>
         </div>
 
 
@@ -584,7 +584,7 @@ function attachEvents(product) {
 
 
 
- // 🔥 COMMON UI RESET
+ //  COMMON UI RESET
 function resetButtons(selector) {
   document.querySelectorAll(selector).forEach(b => {
     b.classList.remove("bg-[#6B1A2A]", "text-white", "border-[#6B1A2A]");
@@ -593,7 +593,7 @@ function resetButtons(selector) {
 }
 
 
-// 🔥 MATERIAL
+// MATERIAL
 document.querySelectorAll(".variant-material").forEach(btn => {
   btn.addEventListener("click", () => {
 
@@ -789,7 +789,7 @@ try {
         }
 
         resultEl.textContent = `Delivery by ${data.estimatedDate}`;
-        resultEl.className = "text-xs text-green-600";
+        resultEl.className = "text-xs text-[#6B1A2A]";
 
       } catch (err) {
         console.error(err);

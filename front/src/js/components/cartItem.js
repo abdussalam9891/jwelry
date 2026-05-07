@@ -100,7 +100,7 @@ export function createCartItem(item) {
           ${
             savings
               ? `
-            <span class="text-xs text-green-600 font-medium">
+            <span class="text-xs text-[#6B1A2A] font-medium">
               Save ₹${savings.toLocaleString()}
             </span>
           `
@@ -112,9 +112,9 @@ export function createCartItem(item) {
         <!-- DELIVERY -->
         <div class="flex items-center gap-2 mt-2">
 
-          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          <span class="w-2 h-2 rounded-full bg-[#8D6E63]"></span>
 
-          <p class="text-xs text-green-700">
+          <p class="text-xs text-[#7A5C61]">
             Delivery in 3–5 business days
           </p>
 

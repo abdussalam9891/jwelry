@@ -338,7 +338,7 @@ export function renderSummary({
         Shipping
       </span>
 
-      <span class="text-green-600 font-medium">
+      <span class="text-[#6B1A2A] font-medium">
         Free
       </span>
 
@@ -354,7 +354,7 @@ export function renderSummary({
           You Saved
         </span>
 
-        <span class="text-green-600 font-semibold">
+        <span class="text-[#6B1A2A] font-semibold">
           − ₹${savings.toLocaleString()}
         </span>
 
@@ -394,7 +394,7 @@ export function renderSummary({
       <div class="flex items-start gap-2">
 
         <div
-          class="w-2 h-2 rounded-full bg-green-500 mt-1.5"
+          class="w-2 h-2 rounded-full bg-[#8D6E63] mt-1.5"
         ></div>
 
         <div>
