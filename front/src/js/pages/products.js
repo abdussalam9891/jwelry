@@ -14,9 +14,7 @@ function showLoading() {
   grid.innerHTML = `<p class="col-span-full text-sm text-black/60">Loading products...</p>`;
 }
 
-function showEmpty() {
-  grid.innerHTML = `<p class="col-span-full text-sm text-black/60">No products found</p>`;
-}
+ 
 
 function showError() {
   grid.innerHTML = `<p class="col-span-full text-sm text-red-500">Something went wrong</p>`;
@@ -224,25 +222,104 @@ function syncSearchInput() {
 }
 
 
+// showempty
+function showEmpty() {
+  const search = new URLSearchParams(window.location.search).get("search");
+
+  grid.innerHTML = `
+    <p class="col-span-full text-sm text-black/60 text-center">
+      ${search ? `No results for "${search}"` : "No products found"}
+    </p>
+  `;
+}
 
 
-function setPageTitle() {
-  const title = document.getElementById("pageTitle");
-  if (!title) return;
 
-  const params = new URLSearchParams(window.location.search);
 
-  const gender = params.get("gender");
-  const subcategory = params.get("subcategory");
-  const tag = params.get("tag");
 
-  if (gender === "her") title.textContent = "Jewellery for Her";
-  else if (gender === "him") title.textContent = "Jewellery for Him";
-  else if (gender === "kids") title.textContent = "Jewellery for Kids";
-  else if (tag === "trending") title.textContent = "Trending Jewellery";
-  else if (tag === "new") title.textContent = "New Arrivals";
-  else if (subcategory) title.textContent = subcategory.toUpperCase();
-  else title.textContent = "Our Collection";
+export function setPageTitle() {
+
+  const pageTitle =
+    document.getElementById(
+      "pageTitle"
+    );
+
+  if (!pageTitle) return;
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const search =
+    params.get("search");
+
+  const gender =
+    params.get("gender");
+
+  const subcategory =
+    params.get("subcategory");
+
+  const tag =
+    params.get("tag");
+
+  // 🔥 search gets highest priority
+  if (search) {
+
+    pageTitle.textContent =
+      `Results for "${search}"`;
+
+  }
+
+  else if (gender === "her") {
+
+    pageTitle.textContent =
+      "Jewellery for Her";
+
+  }
+
+  else if (gender === "him") {
+
+    pageTitle.textContent =
+      "Jewellery for Him";
+
+  }
+
+  else if (gender === "kids") {
+
+    pageTitle.textContent =
+      "Jewellery for Kids";
+
+  }
+
+  else if (tag === "trending") {
+
+    pageTitle.textContent =
+      "Trending Jewellery";
+
+  }
+
+  else if (tag === "new") {
+
+    pageTitle.textContent =
+      "New Arrivals";
+
+  }
+
+  else if (subcategory) {
+
+    pageTitle.textContent =
+      subcategory.toUpperCase();
+
+  }
+
+  else {
+
+    pageTitle.textContent =
+      "Our Collection";
+
+  }
+
 }
 
 
@@ -303,5 +380,6 @@ setActiveFilters();
 syncSearchInput();
 setPageTitle();
 initWishlist();
+showEmpty();
 
 
