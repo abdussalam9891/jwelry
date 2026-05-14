@@ -5,9 +5,9 @@ export function createCartItem(item) {
 
   const name = item.name || "Product";
 
-  const image = item.image
-    ? `${CONFIG.ASSET_BASE}${item.image}`
-    : "https://via.placeholder.com/150?text=No+Image";
+ const image =
+  item.image ||
+  "https://via.placeholder.com/150?text=No+Image";
 
   const price = item.price ?? 0;
 

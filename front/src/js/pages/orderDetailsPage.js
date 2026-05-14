@@ -171,10 +171,8 @@ function renderOrder(order) {
   itemsContainer.innerHTML =
     order.items.map(item => {
 
-      const image =
-        item.image
-          ? `${CONFIG.ASSET_BASE}${item.image}`
-          : "";
+     const image =
+  item.image || "";
 
       return `
 

@@ -8,11 +8,9 @@ export function createOrderCard(order) {
     order.items?.[0];
 
   // fallback image
-  const image =
-  firstItem?.image
-    ? `${CONFIG.ASSET_BASE}${firstItem.image}`
-    : "https://via.placeholder.com/300x300?text=Gemora";
-
+const image =
+  firstItem?.image ||
+  "https://via.placeholder.com/150?text=No+Image";
   // product title
   const title =
     firstItem?.name ||

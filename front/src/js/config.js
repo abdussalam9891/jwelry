@@ -10,9 +10,5 @@ export const CONFIG = {
     ? "http://localhost:5000/api"
     : "https://your-production-api.com/api",
 
-  // 🔥 Static assets/images
-  ASSET_BASE: isLocalHost
-    ? "http://localhost:5000"
-    : "https://your-production-api.com",
-
+  
 };

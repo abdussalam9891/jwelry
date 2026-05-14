@@ -7,10 +7,7 @@ import { CONFIG } from "../config.js";
 document.addEventListener("DOMContentLoaded", loadProduct);
 
 
-const getImageUrl = (path) => {
-  if (!path) return "/src/assets/images/placeholder.jpg";
-  return `${CONFIG.ASSET_BASE}${path}`;
-};
+
 
 
 
@@ -175,10 +172,10 @@ function renderProduct(product) {
         <div class="md:sticky md:top-24 self-start">
           <div class="flex flex-col md:flex-row gap-4">
 
-            ${renderThumbnails(product.images?.map(getImageUrl))}
+            ${renderThumbnails(product.images?.map( (img) => img.url))}
 
             <div class="w-full">
-              ${renderMainImage(getImageUrl(product.images?.[0]))}
+             ${renderMainImage(product.images?.[0]?.url)}
             </div>
 
           </div>

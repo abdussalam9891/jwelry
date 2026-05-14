@@ -8,19 +8,20 @@ export function createProductCard(product, options = {}) {
     showMoveToCart = false,
   } = options;
 
-  const BASE = CONFIG.ASSET_BASE;
+  
 
 
 
 
 
-  const img1 = product.images?.[0]
-    ? `${BASE}${product.images[0]}`
-    : "/front/src/assets/images/placeholder.webp"
+  const img1 =
+  product.images?.[0]?.url ||
 
-  const img2 = product.images?.[1]
-    ? `${BASE}${product.images[1]}`
-    : img1;
+  "/front/src/assets/images/placeholder.webp";
+
+  const img2 =
+  product.images?.[1]?.url ||
+  img1;
 
   const hasDiscount =
     product.originalPrice && product.originalPrice > product.price;
