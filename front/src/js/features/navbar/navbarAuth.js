@@ -11,34 +11,48 @@ import {
 }
 from "../../components/authModal.js";
 
+import { updateDropdownUser } from "./navbarUser.js";
 
 
 export async function checkAuthState() {
-
-  const wishlistBtn =
-    document.getElementById(
-      "wishlistBtn"
-    );
-
-  wishlistBtn?.classList.remove(
-    "hidden"
-  );
-
   const user =
     await getCurrentUser();
 
+  const loggedInContent =
+    document.getElementById(
+      "loggedInContent"
+    );
+
+  const loggedOutContent =
+    document.getElementById(
+      "loggedOutContent"
+    );
+
   if (user) {
+    loggedInContent?.classList.remove(
+      "hidden"
+    );
+
+    loggedOutContent?.classList.add(
+      "hidden"
+    );
+
+    // inject backend user data
+    updateDropdownUser(user);
 
     bindLogoutButtons();
-
   } else {
+    loggedOutContent?.classList.remove(
+      "hidden"
+    );
+
+    loggedInContent?.classList.add(
+      "hidden"
+    );
 
     bindLoginButtons();
-
   }
-
 }
-
 
 
 function bindLoginButtons() {
@@ -69,33 +83,21 @@ function bindLoginButtons() {
 
 
 function bindLogoutButtons() {
+  const logoutBtn =
+    document.getElementById("logoutBtn");
 
-  const loginBtns =
-    document.querySelectorAll(
-      ".loginBtn"
-    );
+  if (!logoutBtn) return;
 
-  loginBtns.forEach((btn) => {
+  logoutBtn.onclick = async (e) => {
+    e.preventDefault();
 
-    btn.textContent =
-      "Logout";
+    logoutBtn.textContent =
+      "Logging out...";
 
-    btn.onclick =
-      async (e) => {
+    logoutBtn.disabled = true;
 
-        e.preventDefault();
-
-        btn.textContent =
-          "Logging out...";
-
-        btn.disabled = true;
-
-        await logout();
-
-      };
-
-  });
-
+    await logout();
+  };
 }
 
 
@@ -125,3 +127,8 @@ export async function handleProtectedRoute(
   }
 
 }
+
+
+
+
+

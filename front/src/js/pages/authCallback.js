@@ -16,7 +16,7 @@ async function handleAuthCallback() {
 
     }
 
-    // 🔥 redirect back if needed
+    //  redirect back if needed
     const redirect =
       sessionStorage.getItem(
         "redirectAfterLogin"

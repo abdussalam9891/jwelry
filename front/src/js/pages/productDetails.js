@@ -62,9 +62,9 @@ async function loadProduct() {
     renderReviews(reviews);
 
 
-    //  5. Fetch similar products (same subcategory)
+    //  5. Fetch similar products (same category)
 const similarRes = await fetch(
-  `${CONFIG.API_BASE}/v1/products?subcategory=${product.subcategory}&limit=10`
+  `${CONFIG.API_BASE}/v1/products?category=${product.category}&limit=10`
 );
 
 const similarData = await similarRes.json();
@@ -465,13 +465,27 @@ function renderInfo(product) {
     </li>
 
     <li class="flex justify-between border-b pb-1">
-      <span class="text-black/60">Type</span>
-      <span class="capitalize">${product.subcategory}</span>
-    </li>
+  <span class="text-black/60">
+    Material
+  </span>
+  <span class="capitalize">
+    ${
+      selectedMaterial ||
+      product.variants?.[0]
+        ?.material ||
+      "-"
+    }
+  </span>
+</li>
 
     <li class="flex justify-between border-b pb-1">
       <span class="text-black/60">Gender</span>
-      <span class="capitalize">${product.gender || "Unisex"}</span>
+      <span class="capitalize">
+  ${
+    product.targetAudience ||
+    "unisex"
+  }
+</span>
     </li>
   </ul>
 

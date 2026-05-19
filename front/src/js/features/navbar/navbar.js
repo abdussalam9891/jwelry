@@ -1,68 +1,56 @@
 import {
   createNavbar
-}
-from "../../components/navbar/navbar.js";
+} from "../../components/navbar/navbar.js";
 
 import {
-  getCurrentUser
-}
-from "../../core/authState.js";
+  getCurrentUser,
+  logout
+} from "../../core/authState.js";
 
 import {
   updateWishlistCount
-}
-from "../../core/wishlistCount.js";
+} from "../../core/wishlistCount.js";
 
 import {
   loadWishlistState
-}
-from "../wishlist.js";
+} from "../wishlist.js";
 
 import {
   setActiveNav
-}
-from "./navbarActive.js";
+} from "./navbarActive.js";
 
 import {
   checkAuthState,
   handleProtectedRoute
-}
-from "./navbarAuth.js";
+} from "./navbarAuth.js";
 
 import {
   initUserDropdown
-}
-from "./navbarDropdown.js";
+} from "./navbarDropdown.js";
 
 import {
   initializeNavbar
-}
-from "./navbarMobile.js";
+} from "./navbarMobile.js";
 
 import {
   initNavbarScroll
-}
-from "./navbarScroll.js";
+} from "./navbarScroll.js";
 
 import {
   initSearchPlaceholder,
   initSearchHandlers
-}
-from "./navbarSearch.js";
-
-
-
-
-
+} from "./navbarSearch.js";
 
 export async function loadNavbar() {
+  // GET USER FIRST
+  const user =
+    await getCurrentUser();
 
-   
-
+  // PASS USER TO NAVBAR
   document.getElementById(
     "navbar-container"
   ).innerHTML =
-    createNavbar();
+    createNavbar(user);
 
   const wishlistBtn =
     document.getElementById(
@@ -84,29 +72,30 @@ export async function loadNavbar() {
       "/front/pages/cart.html"
     );
 
-  const user =
-    await getCurrentUser();
-
   if (user) {
-
     await loadWishlistState();
-
   }
 
   initializeNavbar();
-
   initUserDropdown();
-
   await checkAuthState();
 
   initSearchPlaceholder();
-
   initNavbarScroll();
-
   setActiveNav();
-
   initSearchHandlers();
-
   updateWishlistCount();
 
+  // MOBILE LOGOUT
+  document
+    .getElementById(
+      "mobileLogoutBtn"
+    )
+    ?.addEventListener(
+      "click",
+      async () => {
+        await logout();
+        window.location.reload();
+      }
+    );
 }

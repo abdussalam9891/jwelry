@@ -2,10 +2,11 @@ import { createMobileDrawer } from "./mobileDrawer.js";
 import { createMainNavbar } from "./mainNavbar.js";
 import { createCategoryNav } from "./categoryNav.js";
 
-export function createNavbar() {
-
+export function createNavbar(
+  user = null
+) {
   return `
-    ${createMobileDrawer()}
+    ${createMobileDrawer(user)}
     ${createMainNavbar()}
     ${createCategoryNav()}
   `;

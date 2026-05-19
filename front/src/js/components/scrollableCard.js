@@ -27,7 +27,7 @@ async function fetchProducts(type) {
 
     if (type === "trending") url += "&tag=trending";
     else if (type === "new") url += "&tag=new";
-    else url += `&subcategory=${type}`;
+    else url += `&category=${type}`;
 
     const res = await fetch(url);
     const data = await res.json();

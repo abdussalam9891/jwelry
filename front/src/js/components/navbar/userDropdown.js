@@ -1,21 +1,20 @@
 export function createUserDropdown() {
-
   return `
-
 <div
   id="userDropdown"
   class="
     absolute
     right-0
     mt-3
-    w-72
+    w-80
     bg-white
+    rounded-3xl
     border
     border-black/5
-    rounded-3xl
-    shadow-2xl
+    shadow-[0_18px_50px_rgba(0,0,0,0.08)]
     opacity-0
     pointer-events-none
+    translate-y-2
     transition-all
     duration-200
     z-[1100]
@@ -23,82 +22,78 @@ export function createUserDropdown() {
   "
 >
 
-  <!-- LOGGED IN CONTENT -->
+  <!-- LOGGED IN -->
   <div id="loggedInContent" class="hidden">
 
-    <!-- USER -->
-    <div
-      class="
-        p-5
-        border-b
-        border-black/5
-      "
-    >
+    <!-- USER HEADER -->
+    <div class="px-5 pt-5 pb-4 border-b border-black/5">
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-4">
 
         <!-- AVATAR -->
         <div
           class="
-            w-12
-            h-12
+            w-14
+            h-14
             rounded-full
             overflow-hidden
             bg-[#F6EEF0]
+            flex
+            items-center
+            justify-center
+            text-[#6B1A2A]
+            font-semibold
+            text-lg
             shrink-0
           "
         >
-
           <img
             id="dropdownAvatar"
             src=""
-            alt="User"
-            class="
-              w-full
-              h-full
-              object-cover
-            "
+            alt=""
+            class="w-full h-full object-cover hidden"
           />
 
+         <span id="avatarFallback">U</span>
         </div>
 
         <!-- INFO -->
-        <div class="min-w-0">
+        <div class="min-w-0 flex-1">
+       <p
+  id="dropdownName"
+  class="font-semibold text-[15px] text-black truncate"
+>
+  --
+</p>
 
-          <p
-            id="dropdownName"
-            class="
-              font-semibold
-              truncate
-            "
-          >
-            --
-          </p>
+        <p
+  id="dropdownEmail"
+  class="text-sm text-black/45 truncate mt-0.5"
+>
+  --
+</p>
 
-          <p
-            id="dropdownEmail"
-            class="
-              text-sm
-              text-black/45
-              truncate
-              mt-0.5
-            "
-          >
-            --
-          </p>
-
+         <a
+  href="/front/pages/profile.html"
+  class="
+    mt-2
+    inline-block
+    text-xs
+    font-medium
+    text-[#6B1A2A]
+    hover:underline
+  "
+>
+  View Profile
+</a>
         </div>
-
       </div>
-
     </div>
 
-
-
-    <!-- LINKS -->
+    <!-- MENU -->
     <div class="p-2">
 
-      <!-- ORDERS -->
+      <!-- Orders -->
       <a
         href="/front/pages/orders.html"
         class="
@@ -108,35 +103,28 @@ export function createUserDropdown() {
           px-4
           py-3
           rounded-2xl
-          hover:bg-[#FAFAFA]
+          hover:bg-[#F8F8F8]
           transition
         "
       >
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.8"
-          stroke="currentColor"
-          class="w-5 h-5 text-black/60"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M20.25 7.5v10.125c0 .621-.504 1.125-1.125 1.125H4.875A1.125 1.125 0 0 1 3.75 17.625V7.5m16.5 0-2.28-2.28a1.125 1.125 0 0 0-.795-.33H6.825c-.298 0-.584.118-.795.33L3.75 7.5"
-          />
-        </svg>
-
-        <span class="text-sm">
-          My Orders
-        </span>
-
+       <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.8"
+  stroke="currentColor"
+  class="w-5 h-5 text-black/60 shrink-0"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M21 8.25V6.108c0-1.135-.845-2.098-1.98-2.193a48.424 48.424 0 0 0-14.04 0C3.845 4.01 3 4.973 3 6.108V8.25m18 0v10.638c0 1.135-.845 2.098-1.98 2.193a48.37 48.37 0 0 1-14.04 0A2.186 2.186 0 0 1 3 18.888V8.25m18 0a48.67 48.67 0 0 0-18 0"
+  />
+</svg>
+        <span class="text-sm font-medium">Orders</span>
       </a>
 
-
-
-      <!-- WISHLIST -->
+      <!-- Wishlist -->
       <a
         href="/front/pages/wishlist.html"
         class="
@@ -146,80 +134,106 @@ export function createUserDropdown() {
           px-4
           py-3
           rounded-2xl
-          hover:bg-[#FAFAFA]
+          hover:bg-[#F8F8F8]
           transition
         "
       >
-
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.8"
-          stroke="currentColor"
-          class="w-5 h-5 text-black/60"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.247.99-4 2.437-.753-1.446-2.26-2.437-4-2.437-2.485 0-4.5 2.015-4.5 4.5 0 7.22 8.5 12 8.5 12s8.5-4.78 8.5-12z"
-          />
-        </svg>
-
-        <span class="text-sm">
-          Wishlist
-        </span>
-
+       <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.8"
+  stroke="currentColor"
+  class="w-5 h-5 text-black/60 shrink-0"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M21.435 6.582a5.94 5.94 0 0 0-8.388 0L12 7.63l-1.046-1.048a5.94 5.94 0 1 0-8.4 8.396l1.048 1.047L12 21.35l8.398-5.325 1.047-1.047a5.94 5.94 0 0 0-.01-8.396Z"
+  />
+</svg>
+        <span class="text-sm font-medium">Wishlist</span>
       </a>
+
+
+
+       <!-- cart -->
+      <a
+        href="/front/pages/wishlist.html"
+        class="
+          flex
+          items-center
+          gap-3
+          px-4
+          py-3
+          rounded-2xl
+          hover:bg-[#F8F8F8]
+          transition
+        "
+      >
+   <svg
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
+  viewBox="0 0 24 24"
+  stroke-width="1.8"
+  stroke="currentColor"
+  class="w-5 h-5 text-black/60 shrink-0"
+>
+  <path
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M2.25 3h1.5l1.5 9h11.25l1.5-6.75H6.375M9 19.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm10.5 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+  />
+</svg>
+
+<span class="text-sm font-medium">
+  Cart
+</span>
+      </a>
+
+
+
 
     </div>
 
-
-
     <!-- FOOTER -->
-    <div
-      class="
-        p-3
-        border-t
-        border-black/5
-      "
-    >
-
+    <div class="border-t border-black/5 px-4 py-3">
       <button
         id="logoutBtn"
         class="
           w-full
-          h-11
-          rounded-2xl
-          bg-[#6B1A2A]
-          text-white
           text-sm
           font-medium
-          hover:opacity-90
+          py-2.5
+          rounded-xl
+          text-[#6B1A2A]
+          hover:bg-[#F9F3F4]
           transition
         "
       >
         Logout
       </button>
-
     </div>
-
   </div>
 
-
-
   <!-- LOGGED OUT -->
-  <div
-    id="loggedOutContent"
-    class="p-4"
-  >
+  <div id="loggedOutContent" class="p-5">
+    <p class="text-sm font-medium text-black">
+      Welcome
+    </p>
+
+    <p class="text-xs text-black/50 mt-1">
+      Login to access orders, wishlist & profile
+    </p>
 
     <a
-      href="/front/pages/auth.html"
+      href="#"
       class="
+        loginBtn
+        mt-4
         w-full
         h-11
-        rounded-2xl
+        rounded-xl
         bg-[#6B1A2A]
         text-white
         text-sm
@@ -233,11 +247,8 @@ export function createUserDropdown() {
     >
       Login / Signup
     </a>
-
   </div>
 
 </div>
-
-  `;
-
+`;
 }

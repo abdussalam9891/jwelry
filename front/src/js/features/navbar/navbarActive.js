@@ -5,8 +5,8 @@ export function setActiveNav() {
       window.location.search
     );
 
-  const subcategory =
-    params.get("subcategory");
+  const category =
+    params.get("category");
 
   const isProductsPage =
     window.location.pathname.includes(
@@ -32,7 +32,7 @@ export function setActiveNav() {
 
       if (
         isProductsPage &&
-        link.dataset.nav === subcategory
+        link.dataset.nav === category
       ) {
 
         link.classList.add(
@@ -52,7 +52,7 @@ export function setActiveNav() {
 
   if (
     isProductsPage &&
-    !subcategory
+    !category
   ) {
 
     const all =

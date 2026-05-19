@@ -63,17 +63,57 @@
             ><img src="/front/src/assets/icon/indianFlag.jpg" class="w-5 h-5"
           /></span>
           <input
-            type="text"
+           id="phoneInput"
+             type="tel"
+  inputmode="numeric"
+  maxlength="10"
+  pattern="[0-9]{10}"
             placeholder="Enter mobile number"
             class="flex-1 px-3 py-3 outline-none text-sm"
           />
         </div>
 
         <button
+          id="requestOtpBtn"
           class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg mt-4 shadow-md hover:shadow-lg hover:bg-[#4A1019] transition-all duration-200"
         >
           Request OTP
         </button>
+
+        <div
+  id="otpSection"
+  class="hidden mt-4"
+>
+  <input
+    id="otpInput"
+   type="tel" inputmode="numeric" maxlength="6"
+    placeholder="Enter OTP"
+    class="
+      w-full
+      border
+      border-gray-200
+      rounded-lg
+      px-4
+      py-3
+      text-sm
+      outline-none
+    "
+  />
+
+  <button
+    id="verifyOtpBtn"
+    class="
+      w-full
+      mt-4
+      bg-[#6B1A2A]
+      text-white
+      py-3
+      rounded-lg
+    "
+  >
+    Verify OTP
+  </button>
+</div>
 
         <p class="text-xs text-gray-400 mt-6">
           By continuing, you agree to our
@@ -84,5 +124,9 @@
         </p>
       </div>
     </div>
+
+    <div id="toast"
+  class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50">
+</div>
   </div>
 

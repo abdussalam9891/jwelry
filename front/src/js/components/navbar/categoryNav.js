@@ -5,7 +5,7 @@ export function createCategoryNav() {
   const linksHTML = navLinks.map(link => {
 
     const href = link.slug
-      ? `/front/pages/products.html?subcategory=${link.slug}`
+      ? `/front/pages/products.html?category=${link.slug}`
       : "/front/pages/products.html";
 
     return `
