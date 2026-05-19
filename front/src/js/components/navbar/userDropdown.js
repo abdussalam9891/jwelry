@@ -159,7 +159,7 @@ export function createUserDropdown() {
 
        <!-- cart -->
       <a
-        href="/front/pages/wishlist.html"
+        href="/front/pages/cart.html"
         class="
           flex
           items-center
