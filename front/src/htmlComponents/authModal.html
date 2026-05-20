@@ -1,132 +1,276 @@
 <div
   id="authModal"
-  class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+  class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm z-[9999] items-center justify-center p-4"
 >
-    <!-- MODAL BOX -->
+  <div
+    class="relative w-full max-w-[900px] overflow-hidden rounded-2xl border border-[#EADBC8] bg-[#FDF6EC] shadow-[0_20px_60px_rgba(0,0,0,0.15)] flex flex-col md:flex-row"
+  >
+    <!-- LEFT -->
     <div
-      class="bg-[#FDF6EC] w-full max-w-[850px] rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] flex flex-col md:flex-row overflow-hidden border border-[#EADBC8] relative"
+      class="hidden md:flex w-1/2 bg-gradient-to-br from-[#FDF6EC] to-[#F3E8DC] items-center justify-center flex-col gap-6 p-10"
     >
-      <!-- LEFT (Promo) — desktop only -->
-
-     <div class="w-full md:w-1/2 hidden md:flex flex-col items-center justify-center bg-gradient-to-br from-[#FDF6EC] to-[#F3E8DC] gap-6">
-
-  <div class="w-[120px] h-[120px] rounded-full border border-[#EADBC8] flex items-center justify-center">
-    <svg class="w-8 h-8 text-[#6B1A2A]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
-    </svg>
-  </div>
-
-  <p class="text-sm text-[#6B1A2A]/70 tracking-wide">
-    Sign in to save your wishlist
-  </p>
-
-</div>
-
-
-
-
-      <!-- RIGHT (Login) -->
-      <div class="w-full md:w-1/2 p-6 md:p-8 bg-white rounded-2xl">
-        <!-- Close -->
-        <button
-          id="closeModal"
-          class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition"
+      <div
+        class="w-[120px] h-[120px] rounded-full border border-[#EADBC8] flex items-center justify-center"
+      >
+        <svg
+          class="w-8 h-8 text-[#6B1A2A]"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          viewBox="0 0 24 24"
         >
-          ✕
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+          />
+        </svg>
+      </div>
+
+      <h2 class="text-3xl font-semibold text-[#6B1A2A]">
+        Welcome to Gemora
+      </h2>
+
+      <p class="text-sm text-[#6B1A2A]/70 text-center max-w-[260px]">
+        Login or create an account to save wishlist, orders and enjoy exclusive
+        Gemora perks.
+      </p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="w-full md:w-1/2 bg-white p-6 md:p-8 relative">
+      <!-- CLOSE -->
+      <button
+        id="closeModal"
+        class="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center"
+      >
+        ✕
+      </button>
+
+      <h3 class="text-2xl font-semibold text-[#6B1A2A] mb-2">
+        Welcome Back
+      </h3>
+
+      <p class="text-sm text-gray-500 mb-6">
+        Continue to your Gemora account
+      </p>
+
+      <!-- GOOGLE -->
+      <button
+        id="google-btn"
+        class="w-full border border-gray-200 rounded-lg py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition"
+      >
+        <img
+          src="/front/src/assets/icon/google.svg"
+          class="w-5 h-5"
+        />
+        <span class="text-sm font-medium">Continue with Google</span>
+      </button>
+
+      <!-- OR -->
+      <div class="flex items-center gap-3 my-6">
+        <div class="h-px flex-1 bg-gray-200"></div>
+        <span class="text-xs text-gray-400">or</span>
+        <div class="h-px flex-1 bg-gray-200"></div>
+      </div>
+
+      <!-- TABS -->
+      <div
+        class="grid grid-cols-3 rounded-xl bg-[#F8F3EE] p-1 mb-6"
+      >
+        <button
+          id="otpTab"
+          class="auth-tab active-tab py-2 rounded-lg text-sm font-medium"
+        >
+          OTP
         </button>
 
-        <h3 class="text-xl font-semibold text-[#6B1A2A] mb-2">
-          Welcome to Gemora!
-        </h3>
-        <p class="text-sm text-gray-500 mb-6">
-          Login/Signup to get exclusive Gemora privileges
-        </p>
-
         <button
-          id="google-btn"
-          class="w-full border border-gray-200 rounded-lg py-3 flex items-center justify-center gap-3 bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-200"
+          id="loginTab"
+          class="auth-tab py-2 rounded-lg text-sm font-medium"
         >
-          <img src="/front/src/assets/icon/google.svg" class="w-5 h-5" />
-          <span class="font-medium text-sm">Continue with Google</span>
+          Login
         </button>
 
-        <div class="flex items-center gap-2 my-6">
-          <div class="flex-1 h-px bg-gray-200"></div>
-          <span class="text-xs text-gray-400">or</span>
-          <div class="flex-1 h-px bg-gray-200"></div>
-        </div>
-
-        <div
-          class="flex border border-gray-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-[#6B1A2A]/20"
+        <button
+          id="registerTab"
+          class="auth-tab py-2 rounded-lg text-sm font-medium"
         >
-          <span class="px-3 flex items-center text-sm"
-            ><img src="/front/src/assets/icon/indianFlag.jpg" class="w-5 h-5"
-          /></span>
+          Register
+        </button>
+      </div>
+
+      <!-- OTP FORM -->
+      <div id="otpForm" class="auth-form">
+        <input
+          id="phoneInput"
+          type="tel"
+          placeholder="Enter mobile number"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
+        />
+
+        <div id="otpSection" class="hidden">
           <input
-           id="phoneInput"
-             type="tel"
-  inputmode="numeric"
-  maxlength="10"
-  pattern="[0-9]{10}"
-            placeholder="Enter mobile number"
-            class="flex-1 px-3 py-3 outline-none text-sm"
+            id="otpInput"
+            type="tel"
+            placeholder="Enter OTP"
+            class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
           />
         </div>
 
         <button
           id="requestOtpBtn"
-          class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg mt-4 shadow-md hover:shadow-lg hover:bg-[#4A1019] transition-all duration-200"
+           type="button"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg"
         >
           Request OTP
         </button>
 
-        <div
-  id="otpSection"
-  class="hidden mt-4"
->
+        <button
+          id="verifyOtpBtn"
+           type="button"
+          class="hidden w-full mt-4 bg-[#6B1A2A] text-white py-3 rounded-lg"
+        >
+          Verify OTP
+        </button>
+      </div>
+
+     <!-- LOGIN FORM -->
+      <div id="loginForm" class="auth-form hidden">
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="Enter email"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
+        />
+
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Enter password"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-3"
+        />
+
+        <button
+          id="loginBtn"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg"
+        >
+          Login
+        </button>
+
+        <button
+          id="forgotPasswordBtn"
+          class="text-sm text-[#6B1A2A] mt-4"
+        >
+          Forgot Password?
+        </button>
+      </div>
+
+      <!-- REGISTER FORM -->
+      <div id="registerForm" class="auth-form hidden">
+        <input
+          id="registerName"
+          type="text"
+          placeholder="Full name"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
+        />
+
+        <input
+          id="registerEmail"
+          type="email"
+          placeholder="Email address"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
+        />
+
+        <input
+          id="registerPassword"
+          type="password"
+          placeholder="Password"
+          class="w-full border border-gray-200 rounded-lg px-7 py-5 text-sm outline-none mb-4"
+        />
+
+        <input
+          id="confirmPassword"
+          type="password"
+          placeholder="Confirm password"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
+        />
+
+        <button
+          id="registerBtn"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg"
+        >
+          Create Account
+        </button>
+      </div>
+
+      <!-- verify email otp  -->
+      <div id="emailOtpForm" class="hidden mt-4">
   <input
-    id="otpInput"
-   type="tel" inputmode="numeric" maxlength="6"
-    placeholder="Enter OTP"
-    class="
-      w-full
-      border
-      border-gray-200
-      rounded-lg
-      px-4
-      py-3
-      text-sm
-      outline-none
-    "
+    id="emailOtpInput"
+    type="tel"
+    inputmode="numeric"
+    maxlength="6"
+    placeholder="Enter email OTP"
+    class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none"
   />
 
   <button
-    id="verifyOtpBtn"
-    class="
-      w-full
-      mt-4
-      bg-[#6B1A2A]
-      text-white
-      py-3
-      rounded-lg
-    "
+    id="verifyEmailOtpBtn"
+    type="button"
+    class="w-full mt-4 bg-[#6B1A2A] text-white py-3 rounded-lg"
   >
-    Verify OTP
+    Verify Email
+  </button>
+
+  <button
+    id="backToRegisterBtn"
+    type="button"
+    class="w-full mt-3 text-sm text-[#6B1A2A]"
+  >
+    Back to Register
   </button>
 </div>
 
-        <p class="text-xs text-gray-400 mt-6">
-          By continuing, you agree to our
-          <span class="underline cursor-pointer text-[#6B1A2A]">Terms</span> &
-          <span class="underline cursor-pointer text-[#6B1A2A]"
-            >Privacy Policy</span
-          >
-        </p>
-      </div>
-    </div>
+      <!-- FORGOT PASSWORD -->
+      <div id="forgotForm" class="hidden">
+        <input
+          id="forgotEmail"
+          type="email"
+          placeholder="Enter email"
+          class="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm outline-none mb-4"
+        />
 
-    <div id="toast"
-  class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50">
-</div>
+        <button
+          id="resetBtn"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-lg"
+        >
+          Send Reset Link
+        </button>
+
+        <button
+          id="backToLoginBtn"
+          class="mt-4 text-sm text-[#6B1A2A]"
+        >
+          Back to Login
+        </button>
+      </div>
+
+      <!-- TERMS -->
+      <p class="text-xs text-gray-400 mt-6">
+        By continuing, you agree to our
+        <span class="underline text-[#6B1A2A] cursor-pointer">
+          Terms
+        </span>
+        &
+        <span class="underline text-[#6B1A2A] cursor-pointer">
+          Privacy Policy
+        </span>
+      </p>
+    </div>
   </div>
 
+  <div
+  id="toast"
+  class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-[10001]"
+></div>
+
+</div>
