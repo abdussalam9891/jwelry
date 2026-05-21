@@ -63,4 +63,8 @@ document
 
   });
 
-handleAuth();
+if (
+  window.location.pathname.includes("auth.html")
+) {
+  handleAuth();
+}

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Create Account | Gemora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="min-h-screen bg-[#F9F6F2] overflow-hidden">
+    <!-- glow -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div
+        class="absolute top-[-120px] left-[-80px] w-[320px] h-[320px] rounded-full bg-[#6B1A2A]/10 blur-3xl"
+      ></div>
+
+      <div
+        class="absolute bottom-[-120px] right-[-80px] w-[320px] h-[320px] rounded-full bg-[#D4AF37]/10 blur-3xl"
+      ></div>
+    </div>
+
+    <main
+      class="relative z-10 min-h-screen flex items-center justify-center px-6"
+    >
+      <div
+        class="w-full max-w-[430px] bg-white/85 backdrop-blur-xl border border-black/5 shadow-[0_20px_80px_rgba(0,0,0,0.08)] rounded-[32px] px-8 py-10"
+      >
+        <!-- logo -->
+        <img
+          src="/front/src/assets/icon/logo.png"
+          alt="Gemora"
+          class="w-[110px] mx-auto mb-7"
+        />
+
+        <h1
+          class="text-[1.5rem] font-semibold text-center text-[#1A1A1A]"
+        >
+          Create Account
+        </h1>
+
+        <p
+          class="mt-2 text-sm text-black/55 text-center mb-6"
+        >
+          Join Gemora and start shopping.
+        </p>
+
+        <!-- form -->
+        <form
+          id="registerForm"
+          class="space-y-4"
+        >
+          <input
+            id="registerName"
+            type="text"
+            required
+minlength="2"
+maxlength="50"
+            placeholder="Full name"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
+          />
+
+          <input
+            id="registerEmail"
+            type="email"
+            required
+autocomplete="email"
+            placeholder="Email address"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
+          />
+
+          <!-- password -->
+          <div class="relative">
+            <input
+              id="registerPassword"
+              required
+minlength="6"
+autocomplete="new-password"
+              type="password"
+              placeholder="Password"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
+            />
+
+           <button
+  type="button"
+  class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
+  data-target="registerPassword"
+>
+  <svg
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M2.458 12C3.732 7.943 7.523 5 12 5
+         c4.477 0 8.268 2.943 9.542 7
+         -1.274 4.057-5.065 7-9.542 7
+         -4.477 0-8.268-2.943-9.542-7z"
+    />
+    <circle
+      cx="12"
+      cy="12"
+      r="3"
+    />
+  </svg>
+</button>
+          </div>
+
+          <!-- confirm -->
+          <div class="relative">
+            <input
+              id="confirmPassword"
+              required
+minlength="6"
+autocomplete="new-password"
+              type="password"
+              placeholder="Confirm password"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
+            />
+
+           <button
+  type="button"
+  class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
+  data-target="confirmPassword"
+>
+  <svg
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M2.458 12C3.732 7.943 7.523 5 12 5
+         c4.477 0 8.268 2.943 9.542 7
+         -1.274 4.057-5.065 7-9.542 7
+         -4.477 0-8.268-2.943-9.542-7z"
+    />
+    <circle
+      cx="12"
+      cy="12"
+      r="3"
+    />
+  </svg>
+</button>
+          </div>
+
+          <button
+            id="registerBtn"
+            type="submit"
+            class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+          >
+            Create Account
+          </button>
+        </form>
+
+        <!-- google -->
+        <button
+          id="google-btn"
+          class="mt-5 w-full border border-gray-200 rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition"
+        >
+          <img
+            src="/front/src/assets/icon/google.svg"
+            class="w-5 h-5"
+          />
+          <span class="text-sm font-medium">
+            Continue with Google
+          </span>
+        </button>
+
+        <!-- footer -->
+        <p
+          class="text-sm text-center mt-6 text-gray-500"
+        >
+          Already have an account?
+          <a
+            href="/front/pages/login.html"
+            class="text-[#6B1A2A] font-medium hover:underline ml-1"
+          >
+            Sign In
+          </a>
+        </p>
+      </div>
+    </main>
+
+    <!-- VERIFY EMAIL OTP MODAL -->
+    <div
+      id="verifyModal"
+      class="fixed inset-0 hidden bg-black/40 flex items-center justify-center p-4 z-50"
+    >
+      <div
+        class="bg-white rounded-2xl p-6 w-full max-w-[380px]"
+      >
+        <h2
+          class="text-lg font-semibold mb-4"
+        >
+          Verify Email
+        </h2>
+
+        <input
+          id="emailOtpInput"
+          inputmode="numeric"
+pattern="[0-9]{6}"
+maxlength="6"
+required
+          type="tel"
+
+          placeholder="Enter OTP"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
+        />
+
+        <button
+          id="verifyEmailOtpBtn"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl"
+        >
+          Verify Email
+        </button>
+
+        <button
+          id="backToRegisterBtn"
+          class="w-full mt-3 text-sm text-[#6B1A2A]"
+        >
+          Back
+        </button>
+      </div>
+    </div>
+
+    <!-- toast -->
+    <div
+      id="toast"
+      class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[9999]"
+    ></div>
+
+    <script
+      type="module"
+      src="/front/src/js/pages/register.js"
+    ></script>
+  </body>
+</html>

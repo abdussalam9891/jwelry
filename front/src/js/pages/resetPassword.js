@@ -47,7 +47,8 @@ if (!token) {
 
   setTimeout(() => {
     window.location.href =
-      "/";
+      "/front/index.html"
+;
   }, 1500);
 }
 
@@ -111,7 +112,8 @@ form?.addEventListener(
       /* redirect */
       setTimeout(() => {
         window.location.href =
-          "/";
+          "/front/index.html"
+;
       }, 1500);
     } catch (err) {
       console.error(err);

@@ -14,5 +14,5 @@ export function showToast(message) {
 
   toastTimeout = setTimeout(() => {
     toast.classList.add("hidden");
-  }, 2000);
+  }, 3500);
 }

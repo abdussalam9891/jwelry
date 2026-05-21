@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Login | Gemora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="min-h-screen bg-[#F9F6F2] overflow-hidden">
+
+    
+
+
+    <!-- glow -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div
+        class="absolute top-[-120px] left-[-80px] w-[320px] h-[320px] rounded-full bg-[#6B1A2A]/10 blur-3xl"
+      ></div>
+
+      <div
+        class="absolute bottom-[-120px] right-[-80px] w-[320px] h-[320px] rounded-full bg-[#D4AF37]/10 blur-3xl"
+      ></div>
+    </div>
+
+    <main
+      class="relative z-10 min-h-screen flex items-center justify-center px-6"
+    >
+      <div
+        class="w-full max-w-[430px] bg-white/85 backdrop-blur-xl border border-black/5 shadow-[0_20px_80px_rgba(0,0,0,0.08)] rounded-[32px] px-8 py-10 relative"
+      >
+        <!-- logo -->
+        <img
+          src="/front/src/assets/icon/logo.png"
+          alt="Gemora"
+          class="w-[110px] mx-auto mb-7"
+        />
+
+        <!-- heading -->
+        <h1
+          class="text-[1.5rem] font-semibold text-center text-[#1A1A1A]"
+        >
+          Welcome Back
+        </h1>
+
+        <p
+          class="mt-2 text-sm text-black/55 text-center mb-6"
+        >
+          Sign in to continue to Gemora.
+        </p>
+
+        <!-- form -->
+        <form
+          id="loginForm"
+          class="space-y-4"
+        >
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="Email address"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
+          />
+
+          <!-- password -->
+          <div class="relative">
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Password"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
+            />
+
+            <button
+  type="button"
+  class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
+  data-target="loginPassword"
+>
+  <svg
+    class="w-5 h-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M2.458 12C3.732 7.943 7.523 5 12 5
+         c4.477 0 8.268 2.943 9.542 7
+         -1.274 4.057-5.065 7-9.542 7
+         -4.477 0-8.268-2.943-9.542-7z"
+    />
+    <circle
+      cx="12"
+      cy="12"
+      r="3"
+    />
+  </svg>
+</button>
+          </div>
+
+          <button
+            id="loginBtn"
+            type="submit"
+            class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+          >
+            Login
+          </button>
+        </form>
+
+        <!-- helpers -->
+        <div
+          class="flex justify-between text-sm mt-4"
+        >
+          <button
+            id="openOtpModal"
+            type="button"
+            class="text-[#6B1A2A] hover:underline"
+          >
+            Quick Login (OTP)
+          </button>
+
+          <button
+            id="openForgotModal"
+            type="button"
+            class="text-[#6B1A2A] hover:underline"
+          >
+            Forgot Password?
+          </button>
+        </div>
+
+        <!-- google -->
+        <button
+          id="google-btn"
+          class="mt-5 w-full border border-gray-200 rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition"
+        >
+          <img
+            src="/front/src/assets/icon/google.svg"
+            class="w-5 h-5"
+          />
+          <span class="text-sm font-medium">
+            Continue with Google
+          </span>
+        </button>
+
+        <!-- footer -->
+        <p
+          class="text-sm text-center mt-6 text-gray-500"
+        >
+          Don’t have an account?
+          <a
+            href="/front/pages/register.html"
+            class="text-[#6B1A2A] font-medium hover:underline ml-1"
+          >
+            Sign Up
+          </a>
+        </p>
+      </div>
+    </main>
+
+   <div
+  id="otpModal"
+  class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+>
+  <div
+    class="bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+  >
+    <h2 class="text-xl font-semibold text-[#111] mb-1">
+      Quick Login
+    </h2>
+
+    <p class="text-sm text-gray-500 mb-5">
+      Sign in with OTP
+    </p>
+
+    <!-- PHONE -->
+    <input
+      id="phoneInput"
+      type="tel"
+      placeholder="Enter mobile number"
+      class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
+    />
+
+    <!-- OTP -->
+    <div
+      id="otpSection"
+      class="hidden"
+    >
+      <input
+        id="otpInput"
+        type="tel"
+        maxlength="6"
+        placeholder="Enter 6-digit OTP"
+        class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
+      />
+    </div>
+
+    <!-- REQUEST -->
+    <button
+      id="requestOtpBtn"
+      class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+    >
+      Request OTP
+    </button>
+
+    <!-- VERIFY -->
+    <button
+      id="verifyOtpBtn"
+      class="hidden w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+    >
+      Verify OTP
+    </button>
+
+    <!-- TIMER / RESEND -->
+    <div class="text-center mt-4">
+      <button
+        id="resendOtpBtn"
+        class="hidden text-sm text-[#6B1A2A] font-medium hover:underline"
+      >
+        Resend OTP
+      </button>
+
+      <p
+        id="otpTimer"
+        class="hidden text-sm text-gray-500"
+      >
+        Resend OTP in 2:00
+      </p>
+    </div>
+
+    <!-- CLOSE -->
+    <button
+      id="closeOtpModal"
+      class="mt-5 text-sm text-gray-500 hover:text-[#6B1A2A] w-full"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+ <!-- FORGOT PASSWORD MODAL -->
+<div
+  id="forgotModal"
+  class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+>
+  <div
+    class="bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+  >
+    <!-- heading -->
+    <h2 class="text-xl font-semibold text-[#111] mb-1">
+      Reset Password
+    </h2>
+
+    <p class="text-sm text-gray-500 mb-5">
+      Enter your email and we’ll send a secure reset link.
+    </p>
+
+    <!-- email -->
+    <input
+      id="forgotEmail"
+      type="email"
+      placeholder="Enter email address"
+      class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A] transition mb-4"
+    />
+
+    <!-- primary CTA -->
+    <button
+      id="resetBtn"
+      class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium hover:opacity-95 transition"
+    >
+      Send Reset Link
+    </button>
+
+    <!-- secondary nav -->
+    <button
+      id="closeForgotModal"
+      class="mt-5 w-full text-sm text-gray-500 hover:text-[#6B1A2A] transition"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+    <!-- toast -->
+    <div
+      id="toast"
+      class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[9999]"
+    ></div>
+
+
+
+
+    <script
+      type="module"
+      src="/front/src/js/pages/login.js"
+    ></script>
+  </body>
+</html>

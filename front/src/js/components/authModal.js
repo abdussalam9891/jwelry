@@ -3,10 +3,6 @@ import { showToast } from "../components/toast.js";
 import {
   requestOtp,
   verifyOtp,
-  login,
-  register,
-  verifyEmailOtp,
-  forgotPassword,
 } from "../services/authService.js";
 
 let modal = null;
@@ -29,55 +25,81 @@ async function initModal() {
     }
 
     const html = await res.text();
+
     document.body.insertAdjacentHTML(
       "beforeend",
       html
     );
 
     modal =
-      document.getElementById("authModal");
-
-    const closeBtn =
       document.getElementById(
-        "closeModal"
+        "authModal"
       );
 
-    if (!modal)
+    if (!modal) {
       throw new Error(
         "authModal not found"
       );
+    }
 
     /* close */
-    closeBtn?.addEventListener(
-      "click",
-      closeAuthModal
-    );
+    document
+      .getElementById(
+        "closeModal"
+      )
+      ?.addEventListener(
+        "click",
+        closeAuthModal
+      );
 
     modal.addEventListener(
       "click",
       (e) => {
-        if (e.target === modal)
+        if (e.target === modal) {
           closeAuthModal();
+        }
       }
     );
 
     /* google */
     document
-      .getElementById("google-btn")
+      .getElementById(
+        "google-btn"
+      )
       ?.addEventListener(
         "click",
         () => {
-          window.location.href = `${CONFIG.API_BASE}/v1/auth/google`;
+          window.location.href =
+            `${CONFIG.API_BASE}/v1/auth/google`;
         }
       );
 
-    initTabs();
+    /* auth pages */
+    document
+      .getElementById(
+        "goToLoginBtn"
+      )
+      ?.addEventListener(
+        "click",
+        () => {
+          window.location.href =
+            "/front/pages/login.html";
+        }
+      );
+
+    document
+      .getElementById(
+        "goToRegisterBtn"
+      )
+      ?.addEventListener(
+        "click",
+        () => {
+          window.location.href =
+            "/front/pages/register.html";
+        }
+      );
+
     initOtpAuth();
-    initLoginAuth();
-    initRegisterAuth();
-    initEmailOtpVerify();
-    initForgotPassword();
-    
 
     isInitialized = true;
   } catch (err) {
@@ -88,130 +110,7 @@ async function initModal() {
   }
 }
 
-/* ---------------- TABS ---------------- */
-
-function initTabs() {
-  document
-    .getElementById("otpTab")
-    ?.addEventListener(
-      "click",
-      () => switchTab("otp")
-    );
-
-  document
-    .getElementById("loginTab")
-    ?.addEventListener(
-      "click",
-      () => switchTab("login")
-    );
-
-  document
-    .getElementById("registerTab")
-    ?.addEventListener(
-      "click",
-      () => switchTab("register")
-    );
-
-  document
-    .getElementById(
-      "forgotPasswordBtn"
-    )
-    ?.addEventListener(
-      "click",
-      showForgotForm
-    );
-
-  document
-    .getElementById(
-      "backToLoginBtn"
-    )
-    ?.addEventListener(
-      "click",
-      backToLogin
-    );
-}
-
-function switchTab(tab) {
-  const forms = {
-    otp: "otpForm",
-    login: "loginForm",
-    register: "registerForm",
-  };
-
-  const tabs = {
-    otp: "otpTab",
-    login: "loginTab",
-    register: "registerTab",
-  };
-
-  /* hide forgot form */
-  document
-    .getElementById("forgotForm")
-    ?.classList.add("hidden");
-
-  /* hide all */
-  Object.values(forms).forEach(
-    (id) =>
-      document
-        .getElementById(id)
-        ?.classList.add("hidden")
-  );
-
-  /* reset tab style */
-  Object.values(tabs).forEach(
-    (id) => {
-      const btn =
-        document.getElementById(
-          id
-        );
-
-      btn?.classList.remove(
-        "bg-white",
-        "shadow-sm",
-        "text-[#6B1A2A]"
-      );
-    }
-  );
-
-  /* show selected */
-  document
-    .getElementById(
-      forms[tab]
-    )
-    ?.classList.remove("hidden");
-
-  document
-    .getElementById(
-      tabs[tab]
-    )
-    ?.classList.add(
-      "bg-white",
-      "shadow-sm",
-      "text-[#6B1A2A]"
-    );
-}
-
-function showForgotForm() {
-  document
-    .getElementById("loginForm")
-    ?.classList.add("hidden");
-
-  document
-    .getElementById("forgotForm")
-    ?.classList.remove("hidden");
-}
-
-function backToLogin() {
-  document
-    .getElementById("forgotForm")
-    ?.classList.add("hidden");
-
-  document
-    .getElementById("loginForm")
-    ?.classList.remove("hidden");
-}
-
-/* ---------------- OTP ---------------- */
+/* ---------------- OTP AUTH ---------------- */
 
 function initOtpAuth() {
   const phoneInput =
@@ -259,11 +158,13 @@ function initOtpAuth() {
     }
   );
 
-  requestOtpBtn.addEventListener("click",  async () => {
-
+  /* request OTP */
+  requestOtpBtn?.addEventListener(
+    "click",
+    async () => {
       try {
         const phone =
-          phoneInput.value.trim();
+          phoneInput?.value.trim();
 
         if (
           !/^[6-9]\d{9}$/.test(
@@ -280,13 +181,15 @@ function initOtpAuth() {
         requestOtpBtn.textContent =
           "Sending OTP...";
 
-        await requestOtp(phone);
+        await requestOtp(
+          phone
+        );
 
-        otpSection.classList.remove(
+        otpSection?.classList.remove(
           "hidden"
         );
 
-        verifyOtpBtn.classList.remove(
+        verifyOtpBtn?.classList.remove(
           "hidden"
         );
 
@@ -294,36 +197,40 @@ function initOtpAuth() {
           "hidden"
         );
 
-        otpInput.focus();
+        otpInput?.focus();
 
-        showToast("OTP sent");
+        showToast(
+          "OTP sent"
+        );
       } catch (err) {
         showToast(
-          err?.response?.data
-            ?.message ||
+          err?.message ||
             "Failed to send OTP"
         );
       } finally {
         requestOtpBtn.disabled =
           false;
-
         requestOtpBtn.textContent =
           "Request OTP";
       }
     }
-)
+  );
 
-  verifyOtpBtn.onclick =
+  /* verify OTP */
+  verifyOtpBtn?.addEventListener(
+    "click",
     async () => {
       try {
         const phone =
-          phoneInput.value.trim();
+          phoneInput?.value.trim();
 
         const otp =
-          otpInput.value.trim();
+          otpInput?.value.trim();
 
         if (
-          !/^\d{6}$/.test(otp)
+          !/^\d{6}$/.test(
+            otp
+          )
         ) {
           return showToast(
             "Enter valid OTP"
@@ -332,7 +239,6 @@ function initOtpAuth() {
 
         verifyOtpBtn.disabled =
           true;
-
         verifyOtpBtn.textContent =
           "Verifying...";
 
@@ -349,314 +255,17 @@ function initOtpAuth() {
         window.location.reload();
       } catch (err) {
         showToast(
-          err?.response?.data
-            ?.message ||
+          err?.message ||
             "Invalid OTP"
         );
       } finally {
         verifyOtpBtn.disabled =
           false;
-
         verifyOtpBtn.textContent =
           "Verify OTP";
       }
-    };
-
-
-}
-
-/* ---------------- LOGIN ---------------- */
-
-function initLoginAuth() {
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-  loginBtn.onclick =
-    async () => {
-      try {
-        const email =
-          document
-            .getElementById(
-              "loginEmail"
-            )
-            .value.trim();
-
-        const password =
-          document
-            .getElementById(
-              "loginPassword"
-            )
-            .value.trim();
-
-        if (
-          !email ||
-          !password
-        ) {
-          return showToast(
-            "Email and password required"
-          );
-        }
-
-        loginBtn.disabled = true;
-        loginBtn.textContent =
-          "Logging in...";
-
-        await login(
-          email,
-          password
-        );
-
-        showToast(
-          "Login successful"
-        );
-
-        closeAuthModal();
-        window.location.reload();
-      } catch (err) {
-        showToast(
-          err?.response?.data
-            ?.message ||
-            "Login failed"
-        );
-      } finally {
-        loginBtn.disabled = false;
-        loginBtn.textContent =
-          "Login";
-      }
-    };
-}
-
-/* ---------------- REGISTER ---------------- */
-
-function initRegisterAuth() {
-  const registerBtn =
-    document.getElementById(
-      "registerBtn"
-    );
-
-  registerBtn.onclick =
-    async () => {
-      try {
-        const name =
-          document
-            .getElementById(
-              "registerName"
-            )
-            .value.trim();
-
-        const email =
-          document
-            .getElementById(
-              "registerEmail"
-            )
-            .value.trim();
-
-        const password =
-          document
-            .getElementById(
-              "registerPassword"
-            )
-            .value.trim();
-
-        const confirm =
-          document
-            .getElementById(
-              "confirmPassword"
-            )
-            .value.trim();
-
-        if (
-          !name ||
-          !email ||
-          !password
-        ) {
-          return showToast(
-            "All fields required"
-          );
-        }
-
-        if (
-          password !== confirm
-        ) {
-          return showToast(
-            "Passwords do not match"
-          );
-        }
-
-        registerBtn.disabled =
-          true;
-
-        registerBtn.textContent =
-          "Creating...";
-
-        await register(
-          name,
-          email,
-          password
-        );
-
-        showToast(
-          "Account created"
-        );
-
-        document
-  .getElementById("registerForm")
-  ?.classList.add("hidden");
-
-document
-  .getElementById("emailOtpForm")
-  ?.classList.remove("hidden");
-
-window.pendingVerifyEmail = email;
-
-showToast("OTP sent to email");
-      } catch (err) {
-        showToast(
-          err?.response?.data
-            ?.message ||
-            "Register failed"
-        );
-      } finally {
-        registerBtn.disabled =
-          false;
-
-        registerBtn.textContent =
-          "Create Account";
-      }
-    };
-}
-
-
-// view password while entering
-function setupPasswordToggle(
-  inputId,
-  btnId
-) {
-  const input =
-    document.getElementById(
-      inputId
-    );
-
-  const btn =
-    document.getElementById(
-      btnId
-    );
-
-  if (!input || !btn) return;
-
-  btn.addEventListener(
-    "click",
-    () => {
-      input.type =
-        input.type === "password"
-          ? "text"
-          : "password";
     }
   );
-}
-
-
-function initEmailOtpVerify() {
-  const btn =
-    document.getElementById(
-      "verifyEmailOtpBtn"
-    );
-
-  const input =
-    document.getElementById(
-      "emailOtpInput"
-    );
-
-  btn?.addEventListener(
-    "click",
-    async () => {
-      try {
-        const otp =
-          input.value.trim();
-
-        if (!/^\d{6}$/.test(otp)) {
-          return showToast(
-            "Enter valid OTP"
-          );
-        }
-
-        await verifyEmailOtp(
-          window.pendingVerifyEmail,
-          otp
-        );
-
-        showToast(
-          "Email verified"
-        );
-
-        closeAuthModal();
-        window.location.reload();
-      } catch (err) {
-        showToast(
-          err?.response?.data
-            ?.message ||
-            "Verification failed"
-        );
-      }
-    }
-  );
-}
-
-
-
-/* ---------------- FORGOT ---------------- */
-
-function initForgotPassword() {
-  const resetBtn =
-    document.getElementById(
-      "resetBtn"
-    );
-
-  resetBtn.onclick =
-    async () => {
-      try {
-        const email =
-          document
-            .getElementById(
-              "forgotEmail"
-            )
-            .value.trim();
-
-        if (!email) {
-          return showToast(
-            "Email required"
-          );
-        }
-
-        resetBtn.disabled =
-          true;
-
-        resetBtn.textContent =
-          "Sending...";
-
-        await forgotPassword(
-          email
-        );
-
-        showToast(
-          "Reset link sent"
-        );
-      } catch (err) {
-        showToast(
-          err?.response?.data
-            ?.message ||
-            "Failed"
-        );
-      } finally {
-        resetBtn.disabled =
-          false;
-
-        resetBtn.textContent =
-          "Send Reset Link";
-      }
-    };
 }
 
 /* ---------------- PUBLIC ---------------- */
@@ -668,9 +277,12 @@ export async function openAuthModal() {
     "hidden"
   );
 
-  modal?.classList.add("flex");
+  modal?.classList.add(
+    "flex"
+  );
 
-  switchTab("otp");
+  document.body.style.overflow =
+    "hidden";
 }
 
 function closeAuthModal() {
@@ -681,4 +293,7 @@ function closeAuthModal() {
   modal?.classList.remove(
     "flex"
   );
+
+  document.body.style.overflow =
+    "";
 }
