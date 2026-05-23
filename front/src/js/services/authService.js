@@ -8,26 +8,7 @@ export async function getMe() {
 
 /* ---------------- OTP AUTH ---------------- */
 
-export async function requestOtp(phone) {
-  return await api.post(
-    "/v1/auth/request-otp",
-    { phone }
-  );
-}
-
-export async function verifyOtp(
-  phone,
-  otp
-) {
-  return await api.post(
-    "/v1/auth/verify-otp",
-    {
-      phone,
-      otp,
-    }
-  );
-}
-
+ 
 /* ---------------- EMAIL LOGIN ---------------- */
 
 export async function login(

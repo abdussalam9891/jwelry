@@ -7,7 +7,6 @@ import {
 } from "../components/toast.js";
 
 /* ---------------- ELEMENTS ---------------- */
-
 const form =
   document.getElementById(
     "resetPasswordForm"
@@ -29,7 +28,6 @@ const resetBtn =
   );
 
 /* ---------------- TOKEN ---------------- */
-
 const params =
   new URLSearchParams(
     window.location.search
@@ -40,6 +38,7 @@ const token =
 
 /* ---------------- GUARD ---------------- */
 
+
 if (!token) {
   showToast(
     "Invalid reset link"
@@ -47,12 +46,16 @@ if (!token) {
 
   setTimeout(() => {
     window.location.href =
-      "/front/index.html"
-;
+      "/front/pages/login.html";
   }, 1500);
+
+  throw new Error(
+    "Missing reset token"
+  );
 }
 
 /* ---------------- SUBMIT ---------------- */
+
 
 form?.addEventListener(
   "submit",
@@ -66,7 +69,6 @@ form?.addEventListener(
       const confirmPassword =
         confirmPasswordInput.value.trim();
 
-      /* validation */
       if (
         !password ||
         !confirmPassword
@@ -99,7 +101,6 @@ form?.addEventListener(
       resetBtn.textContent =
         "Resetting...";
 
-      /* API */
       await resetPassword(
         token,
         password
@@ -109,11 +110,9 @@ form?.addEventListener(
         "Password reset successful"
       );
 
-      /* redirect */
       setTimeout(() => {
         window.location.href =
-          "/front/index.html"
-;
+          "/front/pages/login.html";
       }, 1500);
     } catch (err) {
       console.error(err);
@@ -121,6 +120,7 @@ form?.addEventListener(
       showToast(
         err?.response?.data
           ?.message ||
+          err.message ||
           "Reset failed"
       );
     } finally {
@@ -132,3 +132,33 @@ form?.addEventListener(
     }
   }
 );
+
+/* ---------------- TOGGLE ---------------- */
+
+function initPasswordToggle() {
+  document
+    .querySelectorAll(
+      ".toggle-password"
+    )
+    .forEach((btn) => {
+      btn.addEventListener(
+        "click",
+        () => {
+          const input =
+            document.getElementById(
+              btn.dataset.target
+            );
+
+          if (!input) return;
+
+          input.type =
+            input.type ===
+            "password"
+              ? "text"
+              : "password";
+        }
+      );
+    });
+}
+
+initPasswordToggle();

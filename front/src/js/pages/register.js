@@ -5,6 +5,33 @@ import {
   verifyEmailOtp,
 } from "../services/authService.js";
 
+
+
+// back to home
+function initBackButton() {
+  const btn =
+    document.getElementById(
+      "backBtn"
+    );
+
+  if (!btn) return;
+
+  btn.onclick = () => {
+    window.location.href = "/front/index.html";
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* ---------------- TOAST ---------------- */
 function showToast(message) {
   const toast =
@@ -19,6 +46,11 @@ function showToast(message) {
     toast.classList.add("hidden");
   }, 2500);
 }
+
+
+
+
+
 
 /* ---------------- PASSWORD TOGGLE ---------------- */
 function initPasswordToggle() {
@@ -268,6 +300,7 @@ function initVerifyModal() {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+    initBackButton();
     initPasswordToggle();
     initGoogleAuth();
     initRegister();

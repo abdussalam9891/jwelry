@@ -1,9 +1,11 @@
 import { CONFIG } from "../config.js";
 import { showToast } from "../components/toast.js";
+ 
 import {
-  requestOtp,
-  verifyOtp,
-} from "../services/authService.js";
+  auth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "../core/firebaseOtp.js";
 
 let modal = null;
 let isInitialized = false;
@@ -41,6 +43,42 @@ async function initModal() {
         "authModal not found"
       );
     }
+
+
+
+
+    if (
+  !document.getElementById(
+    "recaptcha-container"
+  )
+) {
+  const div =
+    document.createElement(
+      "div"
+    );
+
+  div.id =
+    "recaptcha-container";
+
+  document.body.appendChild(
+    div
+  );
+}
+
+
+if (
+  !window.recaptchaVerifier
+) {
+  window.recaptchaVerifier =
+    new RecaptchaVerifier(
+      auth,
+      "recaptcha-container",
+      {
+        size: "invisible",
+      }
+    );
+}
+
 
     /* close */
     document
@@ -163,9 +201,10 @@ function initOtpAuth() {
     "click",
     async () => {
       try {
-        const phone =
-          phoneInput?.value.trim();
-
+       const phone =
+  phoneInput?.value
+    .trim()
+    .replace(/\D/g, "");
         if (
           !/^[6-9]\d{9}$/.test(
             phone
@@ -176,14 +215,24 @@ function initOtpAuth() {
           );
         }
 
+
+
+
+
         requestOtpBtn.disabled =
           true;
         requestOtpBtn.textContent =
           "Sending OTP...";
 
-        await requestOtp(
-          phone
-        );
+       const confirmationResult =
+  await signInWithPhoneNumber(
+    auth,
+    `+91${phone}`,
+    window.recaptchaVerifier
+  );
+
+window.confirmationResult =
+  confirmationResult;
 
         otpSection?.classList.remove(
           "hidden"
@@ -216,56 +265,92 @@ function initOtpAuth() {
     }
   );
 
+
+
   /* verify OTP */
-  verifyOtpBtn?.addEventListener(
-    "click",
-    async () => {
-      try {
-        const phone =
-          phoneInput?.value.trim();
+ verifyOtpBtn?.addEventListener(
+  "click",
+  async () => {
+    try {
+      const otp =
+        otpInput?.value.trim();
 
-        const otp =
-          otpInput?.value.trim();
-
-        if (
-          !/^\d{6}$/.test(
-            otp
-          )
-        ) {
-          return showToast(
-            "Enter valid OTP"
-          );
-        }
-
-        verifyOtpBtn.disabled =
-          true;
-        verifyOtpBtn.textContent =
-          "Verifying...";
-
-        await verifyOtp(
-          phone,
+      if (
+        !/^\d{6}$/.test(
           otp
+        )
+      ) {
+        return showToast(
+          "Enter valid OTP"
         );
-
-        showToast(
-          "Login successful"
-        );
-
-        closeAuthModal();
-        window.location.reload();
-      } catch (err) {
-        showToast(
-          err?.message ||
-            "Invalid OTP"
-        );
-      } finally {
-        verifyOtpBtn.disabled =
-          false;
-        verifyOtpBtn.textContent =
-          "Verify OTP";
       }
+
+      verifyOtpBtn.disabled =
+        true;
+      verifyOtpBtn.textContent =
+        "Verifying...";
+
+      // verify via Firebase
+      const result =
+        await window
+          .confirmationResult
+          .confirm(otp);
+
+      const user =
+        result.user;
+
+      // create backend session
+      const res =
+        await fetch(
+          `${CONFIG.API_BASE}/v1/auth/firebase-login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+            credentials:
+              "include",
+            body: JSON.stringify({
+              phone:
+                user.phoneNumber,
+            }),
+          }
+        );
+
+      const data =
+        await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.message ||
+            "Login failed"
+        );
+      }
+
+      showToast(
+        "Login successful"
+      );
+
+      closeAuthModal();
+      window.location.reload();
+    } catch (err) {
+      console.error(
+        err
+      );
+
+      showToast(
+        err?.message ||
+          "Invalid OTP"
+      );
+    } finally {
+      verifyOtpBtn.disabled =
+        false;
+      verifyOtpBtn.textContent =
+        "Verify OTP";
     }
-  );
+  }
+);
 }
 
 /* ---------------- PUBLIC ---------------- */
@@ -297,3 +382,9 @@ function closeAuthModal() {
   document.body.style.overflow =
     "";
 }
+
+
+
+
+
+

@@ -1,12 +1,11 @@
 
 import { CONFIG } from "../config.js";
+import { login, forgotPassword } from "../services/authService.js";
+import { auth } from "../core/firebaseOtp.js";
 import {
-  login,
-  requestOtp,
-  verifyOtp,
-  forgotPassword,
-} from "../services/authService.js";
-
+  signInWithPhoneNumber,
+  RecaptchaVerifier,
+} from "../core/firebaseOtp.js";
 
 /* ---------------- TOAST ---------------- */
 function showToast(message) {
@@ -22,6 +21,24 @@ function showToast(message) {
     toast.classList.add("hidden");
   }, 2500);
 }
+
+
+
+
+function initBackButton() {
+  const btn =
+    document.getElementById(
+      "backBtn"
+    );
+
+  if (!btn) return;
+
+  btn.onclick = () => {
+    window.location.href = "/front/index.html";
+  };
+}
+
+
 
 /* ---------------- PASSWORD TOGGLE ---------------- */
 function initPasswordToggle() {
@@ -165,7 +182,7 @@ function initOtpModal() {
 }
 
 let otpCountdown;
-let timeLeft = 120;
+let timeLeft = 60;
 
 function startOtpTimer() {
   const timer =
@@ -179,7 +196,7 @@ function startOtpTimer() {
   timer.classList.remove("hidden");
   resendBtn.classList.add("hidden");
 
-  timeLeft = 120;
+  timeLeft = 60;
 
   clearInterval(otpCountdown);
 
@@ -234,28 +251,51 @@ function initOtpAuth() {
       "otpSection"
     );
 
+  const phoneInput =
+    document.getElementById(
+      "phoneInput"
+    );
+
+  const otpInput =
+    document.getElementById(
+      "otpInput"
+    );
+
   async function sendOtp() {
     const phone =
-      document
-        .getElementById(
-          "phoneInput"
-        )
-        .value.trim();
+      phoneInput.value
+        .trim()
+        .replace(/\D/g, "");
 
-    if (!/^[6-9]\d{9}$/.test(phone)) {
+    if (
+      !/^[6-9]\d{9}$/.test(
+        phone
+      )
+    ) {
       return showToast(
         "Enter valid mobile number"
       );
     }
 
     try {
-      requestBtn.disabled = true;
+      requestBtn.disabled =
+        true;
       requestBtn.textContent =
         "Sending...";
 
-      await requestOtp(phone);
+      const confirmationResult =
+        await signInWithPhoneNumber(
+          auth,
+          `+91${phone}`,
+          window.recaptchaVerifier
+        );
 
-      showToast("OTP sent");
+      window.confirmationResult =
+        confirmationResult;
+
+      showToast(
+        "OTP sent"
+      );
 
       otpSection.classList.remove(
         "hidden"
@@ -270,69 +310,110 @@ function initOtpAuth() {
       );
 
       startOtpTimer();
+      otpInput.focus();
     } catch (err) {
+      console.error(err);
+
       showToast(
         err?.message ||
           "OTP request failed"
       );
     } finally {
-      requestBtn.disabled = false;
+      requestBtn.disabled =
+        false;
       requestBtn.textContent =
         "Request OTP";
     }
   }
 
-  requestBtn.onclick = sendOtp;
-  resendBtn.onclick = sendOtp;
+  requestBtn.onclick =
+    sendOtp;
+
+  resendBtn.onclick =
+    sendOtp;
 
   verifyBtn.onclick =
     async () => {
-      const phone =
-        document
-          .getElementById(
-            "phoneInput"
-          )
-          .value.trim();
-
       const otp =
-        document
-          .getElementById(
-            "otpInput"
-          )
-          .value.trim();
+        otpInput.value.trim();
 
-      if (!/^\d{6}$/.test(otp)) {
+      if (
+        !/^\d{6}$/.test(otp)
+      ) {
         return showToast(
           "Enter valid 6-digit OTP"
         );
       }
 
       try {
-        verifyBtn.disabled = true;
+        verifyBtn.disabled =
+          true;
         verifyBtn.textContent =
           "Verifying...";
 
-        await verifyOtp(
-          phone,
-          otp
-        );
+        // Firebase verify
+        const result =
+          await window
+            .confirmationResult
+            .confirm(otp);
+
+        const user =
+          result.user;
+
+        // backend session
+        const res =
+          await fetch(
+            `${CONFIG.API_BASE}/v1/auth/firebase-login`,
+            {
+              method:
+                "POST",
+              headers: {
+                "Content-Type":
+                  "application/json",
+              },
+              credentials:
+                "include",
+              body:
+                JSON.stringify(
+                  {
+                    phone:
+                      user.phoneNumber,
+                  }
+                ),
+            }
+          );
+
+        const data =
+          await res.json();
+
+        if (!res.ok) {
+          throw new Error(
+            data.message ||
+              "Login failed"
+          );
+        }
 
         showToast(
           "Login successful"
         );
 
-        setTimeout(() => {
-          window.location.href =
-            "/front/index.html"
-;
-        }, 700);
+        setTimeout(
+          () => {
+            window.location.href =
+              "/front/index.html";
+          },
+          700
+        );
       } catch (err) {
+        console.error(err);
+
         showToast(
           err?.message ||
             "OTP verification failed"
         );
       } finally {
-        verifyBtn.disabled = false;
+        verifyBtn.disabled =
+          false;
         verifyBtn.textContent =
           "Verify OTP";
       }
@@ -422,6 +503,33 @@ if (!/^\S+@\S+\.\S+$/.test(email)) {
 document.addEventListener(
   "DOMContentLoaded",
   () => {
+    if (
+      !document.getElementById(
+        "recaptcha-container"
+      )
+    ) {
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.id =
+        "recaptcha-container";
+
+      document.body.appendChild(
+        div
+      );
+    }
+
+    window.recaptchaVerifier =
+      new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "invisible",
+        }
+      );
+    initBackButton();
     initPasswordToggle();
     initLogin();
     initGoogleAuth();
