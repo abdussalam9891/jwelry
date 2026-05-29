@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Authenticating...</title>
 
@@ -14,10 +11,8 @@
   </head>
 
   <body class="min-h-screen bg-[#F9F6F2] overflow-hidden">
-
     <!-- background glow -->
     <div class="absolute inset-0 overflow-hidden">
-
       <div
         class="absolute top-[-120px] left-[-80px] w-[320px] h-[320px] rounded-full bg-[#6B1A2A]/10 blur-3xl"
       ></div>
@@ -25,28 +20,24 @@
       <div
         class="absolute bottom-[-120px] right-[-80px] w-[320px] h-[320px] rounded-full bg-[#D4AF37]/10 blur-3xl"
       ></div>
-
     </div>
 
     <!-- center content -->
     <main
       class="relative z-10 min-h-screen flex items-center justify-center px-6"
     >
-
       <div
         class="w-full max-w-[420px] bg-white/80 backdrop-blur-xl border border-black/5 shadow-[0_20px_80px_rgba(0,0,0,0.08)] rounded-[32px] px-10 py-12 flex flex-col items-center"
       >
-
         <!-- logo -->
         <img
-          src="/front/src/assets/icon/logo.png"
+          src="/src/assets/icon/logo.png"
           alt="Brand Logo"
           class="w-[110px] object-contain mb-8"
         />
 
         <!-- spinner -->
         <div class="relative w-16 h-16 mb-7">
-
           <div
             class="absolute inset-0 rounded-full border-[3px] border-[#6B1A2A]/10"
           ></div>
@@ -54,7 +45,6 @@
           <div
             class="absolute inset-0 rounded-full border-[3px] border-transparent border-t-[#6B1A2A] animate-spin"
           ></div>
-
         </div>
 
         <!-- heading -->
@@ -76,15 +66,9 @@
         <div
           class="mt-8 w-full h-[1px] bg-gradient-to-r from-transparent via-black/10 to-transparent"
         ></div>
-
       </div>
-
     </main>
 
-    <script
-      type="module"
-      src="/front/src/js/pages/authCallback.js"
-    ></script>
-
+    <script type="module" src="/src/js/pages/authCallback.js"></script>
   </body>
 </html>

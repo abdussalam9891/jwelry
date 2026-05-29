@@ -1,76 +1,37 @@
-import {
-  createNavbar
-} from "../../components/navbar/navbar.js";
+import { createNavbar } from "../../components/navbar/navbar.js";
 
-import {
-  getCurrentUser,
-  logout
-} from "../../core/authState.js";
+import { getCurrentUser, logout } from "../../core/authState.js";
 
-import {
-  updateWishlistCount
-} from "../../core/wishlistCount.js";
+import { updateWishlistCount } from "../../core/wishlistCount.js";
 
-import {
-  loadWishlistState
-} from "../wishlist.js";
+import { loadWishlistState } from "../wishlist.js";
 
-import {
-  setActiveNav
-} from "./navbarActive.js";
+import { setActiveNav } from "./navbarActive.js";
 
-import {
-  checkAuthState,
-  handleProtectedRoute
-} from "./navbarAuth.js";
+import { checkAuthState, handleProtectedRoute } from "./navbarAuth.js";
 
-import {
-  initUserDropdown
-} from "./navbarDropdown.js";
+import { initUserDropdown } from "./navbarDropdown.js";
 
-import {
-  initializeNavbar
-} from "./navbarMobile.js";
+import { initializeNavbar } from "./navbarMobile.js";
 
-import {
-  initNavbarScroll
-} from "./navbarScroll.js";
+import { initNavbarScroll } from "./navbarScroll.js";
 
-import {
-  initSearchPlaceholder,
-  initSearchHandlers
-} from "./navbarSearch.js";
+import { initSearchHandlers, initSearchPlaceholder } from "./navbarSearch.js";
 
 export async function loadNavbar() {
   // GET USER FIRST
-  const user =
-    await getCurrentUser();
+  const user = await getCurrentUser();
 
   // PASS USER TO NAVBAR
-  document.getElementById(
-    "navbar-container"
-  ).innerHTML =
-    createNavbar(user);
+  document.getElementById("navbar-container").innerHTML = createNavbar(user);
 
-  const wishlistBtn =
-    document.getElementById(
-      "wishlistBtn"
-    );
+  const wishlistBtn = document.getElementById("wishlistBtn");
 
-  const cartBtn =
-    document.getElementById(
-      "cartBtn"
-    );
+  const cartBtn = document.getElementById("cartBtn");
 
-  wishlistBtn.onclick = () =>
-    handleProtectedRoute(
-      "/front/pages/wishlist.html"
-    );
+  wishlistBtn.onclick = () => handleProtectedRoute("/pages/wishlist.html");
 
-  cartBtn.onclick = () =>
-    handleProtectedRoute(
-      "/front/pages/cart.html"
-    );
+  cartBtn.onclick = () => handleProtectedRoute("/pages/cart.html");
 
   if (user) {
     await loadWishlistState();
@@ -88,14 +49,9 @@ export async function loadNavbar() {
 
   // MOBILE LOGOUT
   document
-    .getElementById(
-      "mobileLogoutBtn"
-    )
-    ?.addEventListener(
-      "click",
-      async () => {
-        await logout();
-        window.location.reload();
-      }
-    );
+    .getElementById("mobileLogoutBtn")
+    ?.addEventListener("click", async () => {
+      await logout();
+      window.location.reload();
+    });
 }

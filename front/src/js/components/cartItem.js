@@ -1,13 +1,7 @@
- import { CONFIG } from "../config.js";
-
-
 export function createCartItem(item) {
-
   const name = item.name || "Product";
 
- const image =
-  item.image ||
-  "https://via.placeholder.com/150?text=No+Image";
+  const image = item.image || "https://via.placeholder.com/150?text=No+Image";
 
   const price = item.price ?? 0;
 
@@ -19,16 +13,12 @@ export function createCartItem(item) {
 
   const slug = item.slug || "";
 
-  const material =
-    item.variantDetails?.material || "";
+  const material = item.variantDetails?.material || "";
 
-  const size =
-    item.variantDetails?.size || "";
+  const size = item.variantDetails?.size || "";
 
   const savings =
-    originalPrice && originalPrice > price
-      ? originalPrice - price
-      : 0;
+    originalPrice && originalPrice > price ? originalPrice - price : 0;
 
   return `
 
@@ -46,7 +36,7 @@ export function createCartItem(item) {
 
       <!-- IMAGE -->
       <a
-        href="/front/pages/productDetails.html?slug=${slug}"
+        href="/pages/productDetails.html?slug=${slug}"
         class="shrink-0 block"
       >
         <img
@@ -60,7 +50,7 @@ export function createCartItem(item) {
 
         <!-- TITLE -->
         <a
-          href="/front/pages/productDetails.html?slug=${slug}"
+          href="/pages/productDetails.html?slug=${slug}"
           class="block"
         >
           <h3 class="text-[15px] font-medium leading-snug line-clamp-2 pr-10 hover:text-black/70 transition">

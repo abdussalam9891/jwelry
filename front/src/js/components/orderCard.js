@@ -1,63 +1,36 @@
-import { CONFIG } from "../config.js";
-
-
 export function createOrderCard(order) {
-
   // first item preview
-  const firstItem =
-    order.items?.[0];
+  const firstItem = order.items?.[0];
 
   // fallback image
-const image =
-  firstItem?.image ||
-  "https://via.placeholder.com/150?text=No+Image";
+  const image =
+    firstItem?.image || "https://via.placeholder.com/150?text=No+Image";
   // product title
-  const title =
-    firstItem?.name ||
-    "Jewellery Item";
+  const title = firstItem?.name || "Jewellery Item";
 
   // item count
   const totalItems =
-    order.items?.reduce(
-      (sum, item) =>
-        sum + item.quantity,
-      0
-    ) || 0;
+    order.items?.reduce((sum, item) => sum + item.quantity, 0) || 0;
 
   // short order id
-  const shortId =
-    order._id
-      ?.slice(-8)
-      ?.toUpperCase();
+  const shortId = order._id?.slice(-8)?.toUpperCase();
 
   // formatted date
-  const formattedDate =
-    new Date(
-      order.createdAt
-    ).toLocaleDateString(
-      "en-IN",
-      {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }
-    );
+  const formattedDate = new Date(order.createdAt).toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
   // order status
   const status =
-  order.orderStatus
-    ?.charAt(0)
-    .toUpperCase() +
-
-  order.orderStatus
-    ?.slice(1)
-    .toLowerCase()
-  || "Confirmed";
+    order.orderStatus?.charAt(0).toUpperCase() +
+      order.orderStatus?.slice(1).toLowerCase() || "Confirmed";
 
   return `
 
     <a
-      href="/front/pages/orderDetails.html?id=${order._id}"
+      href="/pages/orderDetails.html?id=${order._id}"
      class="
   block
   bg-white

@@ -1,6 +1,3 @@
-import { CONFIG } from "../config.js";
-
-
 export function createProductCard(product, options = {}) {
   const {
     showWishlistButton = true,
@@ -8,27 +5,17 @@ export function createProductCard(product, options = {}) {
     showMoveToCart = false,
   } = options;
 
-  
-
-
-
-
-
   const img1 =
-  product.images?.[0]?.url ||
+    product.images?.[0]?.url || "/src/assets/images/placeholder.webp";
 
-  "/front/src/assets/images/placeholder.webp";
-
-  const img2 =
-  product.images?.[1]?.url ||
-  img1;
+  const img2 = product.images?.[1]?.url || img1;
 
   const hasDiscount =
     product.originalPrice && product.originalPrice > product.price;
 
   const discountPercent = hasDiscount
     ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
       )
     : null;
 
@@ -65,14 +52,14 @@ export function createProductCard(product, options = {}) {
           : ""
       }
 
-      <a href="/front/pages/productDetails.html?slug=${product.slug}" class="block">
+      <a href="/pages/productDetails.html?slug=${product.slug}" class="block">
 
         <div class="relative overflow-hidden bg-[#F9F6F2] rounded-md">
 
           <!-- IMAGE -->
           <img
             src="${img1}"
-            onerror="this.onerror=null;this.src='/front/src/assets/images/placeholder.jpg';"
+            onerror="this.onerror=null;this.src='/src/assets/images/placeholder.jpg';"
             class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:opacity-0"
             loading="lazy"
           />
@@ -80,7 +67,7 @@ export function createProductCard(product, options = {}) {
           <!-- HOVER IMAGE -->
           <img
             src="${img2}"
-            onerror="this.onerror=null;this.src='/front/src/assets/images/placeholder.jpg';"
+            onerror="this.onerror=null;this.src='/src/assets/images/placeholder.jpg';"
             class="w-full aspect-[4/5] object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
             loading="lazy"
           />

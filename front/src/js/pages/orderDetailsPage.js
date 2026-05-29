@@ -1,48 +1,24 @@
-import {
-  getOrderById
-} from "../services/orderService.js";
-
-import {
-  CONFIG
-} from "../config.js";
-
-
+import { getOrderById } from "../services/orderService.js";
 
 async function initOrderDetailsPage() {
-
   //  get order id from url
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+  const params = new URLSearchParams(window.location.search);
 
-  const orderId =
-    params.get("id");
+  const orderId = params.get("id");
 
   // ❌ no id
   if (!orderId) {
-
-    window.location.href =
-      "/front/pages/orders.html";
+    window.location.href = "/pages/orders.html";
 
     return;
-
   }
 
   try {
-
     //  fetch order
-    const data =
-      await getOrderById(
-        orderId
-      );
+    const data = await getOrderById(orderId);
 
-    renderOrder(
-      data.order
-    );
-
+    renderOrder(data.order);
   } catch (err) {
-
     console.error(err);
 
     document.body.innerHTML = `
@@ -81,7 +57,7 @@ async function initOrderDetailsPage() {
         </p>
 
         <a
-          href="/front/pages/orders.html"
+          href="/pages/orders.html"
           class="
             h-11
             px-6
@@ -102,82 +78,44 @@ async function initOrderDetailsPage() {
 
     `;
   }
-
 }
 
-
-
-
-
 function renderOrder(order) {
-
   //  formatted date
-  const formattedDate =
-    new Date(
-      order.createdAt
-    ).toLocaleDateString(
-      "en-IN",
-      {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      }
-    );
+  const formattedDate = new Date(order.createdAt).toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
   //  status
   const status =
-    order.orderStatus
-      ?.charAt(0)
-      .toUpperCase() +
-
-    order.orderStatus
-      ?.slice(1)
-      .toLowerCase();
+    order.orderStatus?.charAt(0).toUpperCase() +
+    order.orderStatus?.slice(1).toLowerCase();
 
   //  item count
-  const totalItems =
-    order.items.reduce(
-      (sum, item) =>
-        sum + item.quantity,
-      0
-    );
-
-
+  const totalItems = order.items.reduce((sum, item) => sum + item.quantity, 0);
 
   //  top info
-  document.getElementById(
-    "orderDate"
-  ).textContent =
+  document.getElementById("orderDate").textContent =
     `Placed on ${formattedDate}`;
 
-  document.getElementById(
-    "orderStatus"
-  ).textContent =
-    status;
+  document.getElementById("orderStatus").textContent = status;
 
-  document.getElementById(
-    "itemCount"
-  ).textContent =
+  document.getElementById("itemCount").textContent =
     `${totalItems} item${totalItems > 1 ? "s" : ""}`;
 
-
-
   //  render items
-  const itemsContainer =
-    document.getElementById(
-      "orderItemsContainer"
-    );
+  const itemsContainer = document.getElementById("orderItemsContainer");
 
-  itemsContainer.innerHTML =
-    order.items.map(item => {
-
-     const image =
-  item.image || "";
+  itemsContainer.innerHTML = order.items
+    .map((item) => {
+      const image = item.image || "";
 
       return `
 
         <a
-  href="/front/pages/productDetails.html?slug=${item.slug}"
+  href="/pages/productDetails.html?slug=${item.slug}"
   class="
     flex
     items-center
@@ -251,27 +189,19 @@ function renderOrder(order) {
               font-semibold
             "
           >
-            ₹${(
-              item.price *
-              item.quantity
-            ).toLocaleString()}
+            ₹${(item.price * item.quantity).toLocaleString()}
           </div>
 
         </a>
 
       `;
-
-    }).join("");
-
-
+    })
+    .join("");
 
   //  shipping address
-  const address =
-    order.shippingAddress;
+  const address = order.shippingAddress;
 
-  document.getElementById(
-    "shippingAddress"
-  ).innerHTML = `
+  document.getElementById("shippingAddress").innerHTML = `
 
     <p class="font-medium text-black mb-1">
       ${address.fullName}
@@ -298,33 +228,19 @@ function renderOrder(order) {
 
   `;
 
-
-
   //  payment summary
-  document.getElementById(
-    "subtotalPrice"
-  ).textContent =
+  document.getElementById("subtotalPrice").textContent =
     `₹${order.itemsPrice.toLocaleString()}`;
 
-  document.getElementById(
-    "shippingPrice"
-  ).textContent =
+  document.getElementById("shippingPrice").textContent =
     order.shippingPrice > 0
       ? `₹${order.shippingPrice.toLocaleString()}`
       : "Free";
 
-  document.getElementById(
-    "totalPrice"
-  ).textContent =
+  document.getElementById("totalPrice").textContent =
     `₹${order.totalPrice.toLocaleString()}`;
 
-  document.getElementById(
-    "paymentMethod"
-  ).textContent =
-    order.paymentMethod;
-
+  document.getElementById("paymentMethod").textContent = order.paymentMethod;
 }
-
-
 
 initOrderDetailsPage();

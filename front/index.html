@@ -8,7 +8,7 @@
     <link href="src/css/main.css" rel="stylesheet" />
     <link rel="stylesheet" href="src/css/navbar.css" />
     <link rel="stylesheet" href="src/css/animations.css" />
-    <link rel="stylesheet" href="src/css/homePage.css">
+    <link rel="stylesheet" href="src/css/homePage.css" />
   </head>
   <body>
     <div id="navbar-container"></div>
@@ -19,7 +19,7 @@
     >
       <!-- Background Image -->
       <img
-        src="/front/src/assets/images/heronew.jpg"
+        src="/src/assets/images/heronew.jpg"
         alt="Luxury Jewelry"
         class="absolute inset-0 w-full h-full object-cover object-right"
       />
@@ -51,7 +51,7 @@
 
             <!-- CTA -->
             <a
-             href="./pages/products.html"
+              href="./pages/products.html"
               class="inline-block px-6 py-3 rounded-sm border border-[#6B1A2A] text-[#6B1A2A] text-[0.95rem] font-semibold tracking-wide hover:bg-[#6B1A2A] hover:text-white transition-all duration-300"
             >
               Shop Collection
@@ -83,7 +83,7 @@
             <a href="./pages/products.html?category=rings" class="block group">
               <div class="overflow-hidden mb-5">
                 <img
-                  src="/front/src/assets/images/ring.webp"
+                  src="/src/assets/images/ring.webp"
                   class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
                 />
               </div>
@@ -97,10 +97,13 @@
 
           <!-- Necklaces -->
           <div class="text-center">
-           <a href="./pages/products.html?category=necklaces" class="block group">
+            <a
+              href="./pages/products.html?category=necklaces"
+              class="block group"
+            >
               <div class="overflow-hidden mb-5">
                 <img
-                  src="/front/src/assets/images/necklace.webp"
+                  src="/src/assets/images/necklace.webp"
                   class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
                 />
               </div>
@@ -114,10 +117,13 @@
 
           <!-- Earrings -->
           <div class="text-center">
-            <a href="./pages/products.html?category=earrings" class="block group">
+            <a
+              href="./pages/products.html?category=earrings"
+              class="block group"
+            >
               <div class="overflow-hidden mb-5">
                 <img
-                  src="/front/src/assets/images/earrings.webp"
+                  src="/src/assets/images/earrings.webp"
                   class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
                 />
               </div>
@@ -131,10 +137,13 @@
 
           <!-- Bracelets -->
           <div class="text-center">
-           <a href="./pages/products.html?category=bracelets" class="block group">
+            <a
+              href="./pages/products.html?category=bracelets"
+              class="block group"
+            >
               <div class="overflow-hidden mb-5">
                 <img
-                  src="/front/src/assets/images/bracelets.webp"
+                  src="/src/assets/images/bracelets.webp"
                   class="w-full h-[300px] md:h-[340px] object-cover transition duration-500 ease-out group-hover:scale-105"
                 />
               </div>
@@ -155,7 +164,7 @@
     >
       <!-- Background Image -->
       <img
-        src="/front/src/assets/images/sacredBond.jpg"
+        src="/src/assets/images/sacredBond.jpg"
         class="absolute inset-0 w-full h-full object-cover opacity-65 scale-105"
       />
 
@@ -192,7 +201,7 @@
           <!-- Image -->
           <div>
             <img
-              src="/front/src/assets/images/gemoraCollection.png"
+              src="/src/assets/images/gemoraCollection.png"
               alt="Gemora Craftsmanship"
               class="w-full aspect-[4/3] md:h-[420px] md:aspect-auto object-cover object-center"
             />
@@ -209,7 +218,9 @@
             </h2>
 
             <!-- Description -->
-            <p class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8">
+            <p
+              class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8"
+            >
               At Gemora, every piece carries the essence of timeless Indian
               craftsmanship blended with contemporary elegance. From festive
               celebrations to everyday moments, our jewellery is created to be a
@@ -219,7 +230,7 @@
 
             <!-- CTA -->
             <a
-             href="./pages/products.html?category=necklaces"
+              href="./pages/products.html?category=necklaces"
               class="inline-block px-6 py-3 rounded-sm border border-[#6B1A2A] text-[#6B1A2A] text-sm font-semibold tracking-wide hover:bg-[#6B1A2A] hover:text-white transition-all duration-300"
             >
               Discover More
@@ -229,39 +240,41 @@
       </div>
     </section>
 
-
     <!-- scrollable product (category tab etc)  -->
 
-<section class="section-sm bg-[#F9F6F2]/80 py-14">
-  <div class="max-w-7xl mx-auto">
+    <section class="section-sm bg-[#F9F6F2]/80 py-14">
+      <div class="max-w-7xl mx-auto">
+        <!-- Heading -->
+        <div class="px-4 mb-4">
+          <h2 class="text-lg font-semibold">Shop by Style</h2>
+        </div>
 
-    <!-- Heading -->
-    <div class="px-4 mb-4">
-      <h2 class="text-lg font-semibold">Shop by Style</h2>
-    </div>
+        <!-- Tabs -->
+        <div
+          class="tabs flex gap-6 px-4 border-b overflow-x-auto scroll-smooth"
+        >
+          <button class="tab active pb-2" data-type="trending">Trending</button>
+          <button class="tab pb-2" data-type="new">New</button>
+          <button class="tab pb-2" data-type="rings">Rings</button>
+          <button class="tab pb-2" data-type="earrings">Earrings</button>
+        </div>
 
-    <!-- Tabs -->
-    <div class="tabs flex gap-6 px-4 border-b overflow-x-auto scroll-smooth">
-      <button class="tab active pb-2" data-type="trending">Trending</button>
-      <button class="tab pb-2" data-type="new">New</button>
-      <button class="tab pb-2" data-type="rings">Rings</button>
-      <button class="tab pb-2" data-type="earrings">Earrings</button>
-    </div>
+        <!-- Horizontal Scroll -->
+        <div class="relative">
+          <div
+            id="productContainer"
+            class="flex gap-6 overflow-x-auto px-4 py-6 scroll-smooth snap-x no-scrollbar"
+          ></div>
 
-    <!-- Horizontal Scroll -->
-    <div class="relative">
-      <div id="productContainer"
-           class="flex gap-6 overflow-x-auto px-4 py-6 scroll-smooth snap-x no-scrollbar">
+          <!-- Right fade hint -->
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-white"
+          ></div>
+        </div>
       </div>
+    </section>
 
-      <!-- Right fade hint -->
-      <div class="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-white"></div>
-    </div>
-
-  </div>
-</section>
-
- <!-- right scrollable left sticky  -->
+    <!-- right scrollable left sticky  -->
     <section class="bg-[#F9F6F2] py-14">
       <div class="container-main">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
@@ -333,54 +346,56 @@
       </div>
     </section>
 
-
-
     <!-- video section  -->
 
-   <section class="relative w-full h-[75vh] min-h-[520px] overflow-hidden py-14">
-
-  <!-- VIDEO -->
-  <video
-    autoplay
-    muted
-    loop
-    playsinline
-    class="absolute inset-0 w-full h-full object-cover"
-  >
-    <source src="/front/src/assets/images/video.webm" type="video/mp4" />
-  </video>
-
-  <!-- OVERLAY -->
-  <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
-
-  <!-- CONTENT -->
-  <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
-
-    <div class="max-w-xl">
-
-      <!-- Label -->
-      <p class="text-[0.8rem] tracking-[0.3em] uppercase text-white/70 mb-4">
-        Crafted in Motion
-      </p>
-
-      <!-- Heading -->
-      <h2 class="text-white text-[2.2rem] md:text-[3rem] font-light leading-tight mb-6">
-        Designed to Shine With You
-      </h2>
-
-      <!-- CTA -->
-      <a
-        href="./pages/products.html?category=earrings"
-        class="inline-block px-6 py-3 border border-white text-white text-[0.95rem] tracking-wide hover:bg-white hover:text-black transition-all duration-300"
+    <section
+      class="relative w-full h-[75vh] min-h-[520px] overflow-hidden py-14"
+    >
+      <!-- VIDEO -->
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover"
       >
-        Explore Collection
-      </a>
+        <source src="/src/assets/images/video.webm" type="video/mp4" />
+      </video>
 
-    </div>
+      <!-- OVERLAY -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"
+      ></div>
 
-  </div>
+      <!-- CONTENT -->
+      <div
+        class="relative z-10 h-full flex items-center justify-center text-center px-6"
+      >
+        <div class="max-w-xl">
+          <!-- Label -->
+          <p
+            class="text-[0.8rem] tracking-[0.3em] uppercase text-white/70 mb-4"
+          >
+            Crafted in Motion
+          </p>
 
-</section>
+          <!-- Heading -->
+          <h2
+            class="text-white text-[2.2rem] md:text-[3rem] font-light leading-tight mb-6"
+          >
+            Designed to Shine With You
+          </h2>
+
+          <!-- CTA -->
+          <a
+            href="./pages/products.html?category=earrings"
+            class="inline-block px-6 py-3 border border-white text-white text-[0.95rem] tracking-wide hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Explore Collection
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- shop by gender  -->
     <section class="section-sm py-14 bg-[#F9F6F2]">
@@ -396,7 +411,7 @@
         <!-- Grid -->
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Card -->
-         <a href="./pages/products.html?gender=her" class="group block">
+          <a href="./pages/products.html?gender=her" class="group block">
             <div class="relative overflow-hidden rounded-xl">
               <!-- Image -->
               <img
@@ -415,7 +430,7 @@
           </a>
 
           <!-- Card -->
-         <a href="./pages/products.html?gender=him" class="group block">
+          <a href="./pages/products.html?gender=him" class="group block">
             <div class="relative overflow-hidden rounded-xl">
               <img
                 src="src/assets/images/men.jpg"
@@ -451,15 +466,13 @@
       </div>
     </section>
 
-
-
     <!-- Consultation Section -->
     <section
       class="section-sm container-main relative py-14 overflow-hidden reveal"
     >
       <!-- Background Image -->
       <img
-        src="/front/src/assets/images/pexels-sejio402-34372559.jpg"
+        src="/src/assets/images/pexels-sejio402-34372559.jpg"
         class="absolute inset-0 w-full h-full object-cover"
       />
 
@@ -478,7 +491,9 @@
           Book a Private Consultation
         </h2>
 
-        <p class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8">
+        <p
+          class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8"
+        >
           Connect with our jewellery experts for a personalised experience.
           Discover pieces crafted for your story — whether for celebrations or
           everyday elegance.
@@ -638,7 +653,9 @@
               <circle cx="12" cy="12" r="9"></circle>
             </svg>
 
-            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
               10+ Years Legacy
             </p>
           </div>
@@ -657,7 +674,9 @@
               <path d="M12 3l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V7l7-4z"></path>
             </svg>
 
-            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
               Certified Jewellery
             </p>
           </div>
@@ -677,7 +696,9 @@
               <path d="M7 8l-4 4 4 4"></path>
             </svg>
 
-            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
               Easy Returns
             </p>
           </div>
@@ -696,7 +717,9 @@
               <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"></path>
             </svg>
 
-            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
               Lifetime Warranty
             </p>
           </div>
@@ -716,7 +739,9 @@
               <path d="M16 10h4l2 3v4h-6z"></path>
             </svg>
 
-            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
               Free Shipping
             </p>
           </div>
@@ -736,7 +761,9 @@
               <path d="M12 17v4"></path>
             </svg>
 
-            <p class="text-[0.95rem] text-black/70 transition group-hover:text-black">
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
               24/7 Support
             </p>
           </div>
@@ -744,41 +771,12 @@
       </div>
     </section>
 
+    <!-- footer  -->
+    <div id="footer-container"></div>
 
+    <script type="module" src="/src/js/main.js"></script>
 
-  <!-- footer  -->
-<div id="footer-container"></div>
-
-
-
-
-
-
-
-
-    <script type="module" src="/front/src/js/main.js"></script>
-
-
-   <script type="module" src="src/js/components/scrollableCard.js"></script>
+    <script type="module" src="src/js/components/scrollableCard.js"></script>
     <script src="src/js/components/footer.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,30 +1,20 @@
-import { getMyOrders }
-from "../services/orderService.js";
+import { getMyOrders } from "../services/orderService.js";
 
-import { createOrderCard }
-from "../components/orderCard.js";
+import { createOrderCard } from "../components/orderCard.js";
 
 async function initOrdersPage() {
-
-  const container =
-    document.getElementById(
-      "ordersContainer"
-    );
+  const container = document.getElementById("ordersContainer");
 
   if (!container) return;
 
   try {
+    const data = await getMyOrders();
 
-    const data =
-      await getMyOrders();
-
-    const orders =
-      data.orders || [];
+    const orders = data.orders || [];
 
     //  EMPTY
     if (!orders.length) {
-
-     container.innerHTML = `
+      container.innerHTML = `
 
   <div
     class="
@@ -109,7 +99,7 @@ async function initOrdersPage() {
 
     <!-- CTA -->
     <a
-      href="/front/index.html"
+      href="/index.html"
       class="
         h-12
         px-7
@@ -132,17 +122,11 @@ async function initOrdersPage() {
 
 `;
       return;
-
     }
 
     // 🔥 render orders
-    container.innerHTML =
-      orders
-        .map(createOrderCard)
-        .join("");
-
+    container.innerHTML = orders.map(createOrderCard).join("");
   } catch (err) {
-
     console.error(err);
 
     container.innerHTML = `
@@ -151,7 +135,6 @@ async function initOrdersPage() {
       </p>
     `;
   }
-
 }
 
 initOrdersPage();

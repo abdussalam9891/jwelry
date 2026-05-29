@@ -6,10 +6,8 @@ import {
 } from "../features/cart.js";
 
 import { createCartItem } from "../components/cartItem.js";
+import { showToast } from "../components/toast.js";
 import { addToWishlist } from "../features/wishlist.js";
-import { showToast }
-from "../components/toast.js";
-import { CONFIG } from "../config.js";
 
 let selectedId = null;
 let isUpdating = false;
@@ -61,20 +59,16 @@ function setupModal() {
 }
 
 function render() {
-
   const data = getCartState();
 
-  const container =
-    document.getElementById("cartItems");
+  const container = document.getElementById("cartItems");
 
-  const countText =
-    document.getElementById("cartCountText");
+  const countText = document.getElementById("cartCountText");
 
   if (!container) return;
 
   // 🔥 EMPTY CART
   if (!Array.isArray(data) || !data.length) {
-
     container.innerHTML = `
 
       <div
@@ -120,7 +114,7 @@ function render() {
 
         <!-- CTA -->
         <a
-          href="/front/pages/products.html"
+          href="/pages/products.html"
           class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#6B1A2A] text-white text-sm hover:opacity-90 transition"
         >
           Continue Shopping
@@ -133,41 +127,24 @@ function render() {
       countText.textContent = "0 items";
     }
 
-   document
-  .getElementById(
-    "summaryWrapper"
-  )
-  ?.classList.add("hidden");
+    document.getElementById("summaryWrapper")?.classList.add("hidden");
 
-return;
+    return;
 
-
-document
-  .getElementById(
-    "summaryWrapper"
-  )
-  ?.classList.remove("hidden");
+    document.getElementById("summaryWrapper")?.classList.remove("hidden");
   }
 
   // 🔥 RENDER ITEMS
-  container.innerHTML =
-    data.map(createCartItem).join("");
+  container.innerHTML = data.map(createCartItem).join("");
 
-  const totalQty = data.reduce(
-    (sum, i) => sum + (i.quantity || 0),
-    0
-  );
+  const totalQty = data.reduce((sum, i) => sum + (i.quantity || 0), 0);
 
   if (countText) {
-
-    countText.textContent =
-      `${totalQty} item${totalQty > 1 ? "s" : ""}`;
+    countText.textContent = `${totalQty} item${totalQty > 1 ? "s" : ""}`;
   }
 
   renderSummary();
 }
-
-
 
 async function handleCartClick(e) {
   const qtyBtn = e.target.closest(".qty-btn");
@@ -177,7 +154,7 @@ async function handleCartClick(e) {
 
   // 🔥 Navigate
   if (link) {
-    window.location.href = `/front/pages/productDetails.html?slug=${link.dataset.slug}`;
+    window.location.href = `/pages/productDetails.html?slug=${link.dataset.slug}`;
     return;
   }
 
@@ -244,10 +221,6 @@ async function handleCartClick(e) {
       itemEl.classList.remove("opacity-50", "pointer-events-none");
     }
   }
-
-
-
-
 }
 
 function setupCartEvents() {
@@ -261,19 +234,14 @@ function setupCartEvents() {
   container.addEventListener("click", handleCartClick);
 }
 
-export function renderSummary({
-  showCheckoutButton = true,
-} = {}) {
-
+export function renderSummary({ showCheckoutButton = true } = {}) {
   const data = getCartState();
 
-  const el =
-    document.getElementById("summaryContent");
+  const el = document.getElementById("summaryContent");
 
   if (!el) return;
 
   if (!Array.isArray(data)) {
-
     el.innerHTML = `
       <p class="text-sm text-red-500">
         Failed to load summary
@@ -285,37 +253,24 @@ export function renderSummary({
 
   // 🔥 CALCULATIONS
   const subtotal = data.reduce((sum, item) => {
-
     if (!item || typeof item.price !== "number") {
       return sum;
     }
 
-    return sum + (item.price * item.quantity);
-
+    return sum + item.price * item.quantity;
   }, 0);
 
   const originalTotal = data.reduce((sum, item) => {
-
-    if (
-      !item ||
-      typeof item.originalPrice !== "number"
-    ) {
+    if (!item || typeof item.originalPrice !== "number") {
       return sum;
     }
 
-    return sum + (
-      item.originalPrice * item.quantity
-    );
-
+    return sum + item.originalPrice * item.quantity;
   }, 0);
 
-  const savings =
-    Math.max(originalTotal - subtotal, 0);
+  const savings = Math.max(originalTotal - subtotal, 0);
 
-  const totalItems = data.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+  const totalItems = data.reduce((sum, item) => sum + item.quantity, 0);
 
   // 🔥 UI
   el.innerHTML = `
@@ -507,7 +462,7 @@ ${
 
       <!-- CTA -->
       <a
-        href="/front/pages/checkout.html"
+        href="/pages/checkout.html"
         class="block w-full"
       >
         <button

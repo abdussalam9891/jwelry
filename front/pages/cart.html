@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/front/src/css/main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/front/src/css/animations.css" />
+    <link href="/src/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/css/animations.css" />
   </head>
 
   <body>
@@ -19,9 +19,9 @@
         <!-- LEFT -->
         <div class="flex items-center gap-6">
           <!-- LOGO -->
-          <a href="/front/index.html" class="flex items-center shrink-0">
+          <a href="/index.html" class="flex items-center shrink-0">
             <img
-              src="/front/src/assets/icon/logo.png"
+              src="/src/assets/icon/logo.png"
               alt="Logo"
               class="h-10 w-auto object-contain"
             />
@@ -29,7 +29,7 @@
 
           <!-- CONTINUE SHOPPING -->
           <a
-            href="/front/index.html"
+            href="/index.html"
             class="hidden sm:flex items-center gap-2 text-sm text-black/90 hover:text-[#6B1A2A] transition"
           >
             <svg
@@ -55,7 +55,7 @@
         <div class="flex items-center gap-5">
           <!-- WISHLIST -->
           <a
-            href="/front/pages/wishlist.html"
+            href="/pages/wishlist.html"
             class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
           >
             <svg
@@ -100,10 +100,7 @@
           <div id="cartItems" class="lg:col-span-2 space-y-4"></div>
 
           <!-- RIGHT (Sticky Summary) -->
-          <div
-  id="summaryWrapper"
-  class="lg:col-span-1"
->
+          <div id="summaryWrapper" class="lg:col-span-1">
             <div
               class="sticky top-24 bg-white border border-black/5 rounded-2xl p-5 shadow-sm"
             >
@@ -142,7 +139,7 @@
     </main>
 
     <script type="module">
-      import { initCartPage } from "/front/src/js/pages/cartPage.js";
+      import { initCartPage } from "/src/js/pages/cartPage.js";
 
       initCartPage();
     </script>

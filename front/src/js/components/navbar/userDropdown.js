@@ -74,7 +74,7 @@ export function createUserDropdown() {
 </p>
 
          <a
-  href="/front/pages/profile.html"
+  href="/pages/profile.html"
   class="
     mt-2
     inline-block
@@ -95,7 +95,7 @@ export function createUserDropdown() {
 
       <!-- Orders -->
       <a
-        href="/front/pages/orders.html"
+        href="/pages/orders.html"
         class="
           flex
           items-center
@@ -126,7 +126,7 @@ export function createUserDropdown() {
 
       <!-- Wishlist -->
       <a
-        href="/front/pages/wishlist.html"
+        href="/pages/wishlist.html"
         class="
           flex
           items-center
@@ -159,7 +159,7 @@ export function createUserDropdown() {
 
        <!-- cart -->
       <a
-        href="/front/pages/cart.html"
+        href="/pages/cart.html"
         class="
           flex
           items-center

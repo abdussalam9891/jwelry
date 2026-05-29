@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Account | Gemora</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
@@ -28,62 +25,51 @@
       <div
         class="w-full max-w-[430px] bg-white/85 backdrop-blur-xl border border-black/5 shadow-[0_20px_80px_rgba(0,0,0,0.08)] rounded-[32px] px-8 py-8"
       >
+        <button
+          id="backBtn"
+          class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-gray-200 text-sm text-gray-600 hover:bg-[#fdf6f7] hover:text-[#7a1c2e] hover:border-[#7a1c2e] transition-all duration-200 mb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
 
-
-
-                   <button
-  id="backBtn"
-  class="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-gray-200 text-sm text-gray-600 hover:bg-[#fdf6f7] hover:text-[#7a1c2e] hover:border-[#7a1c2e] transition-all duration-200 mb-2"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="w-4 h-4"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    stroke-width="2"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M15 19l-7-7 7-7"
-    />
-  </svg>
-
-  <span>Back to Store</span>
-</button>
-
+          <span>Back to Store</span>
+        </button>
 
         <!-- logo -->
         <img
-          src="/front/src/assets/icon/logo.png"
+          src="/src/assets/icon/logo.png"
           alt="Gemora"
           class="w-[110px] mx-auto"
         />
 
-        <h1
-          class="text-[1.5rem] font-semibold text-center text-[#1A1A1A]"
-        >
+        <h1 class="text-[1.5rem] font-semibold text-center text-[#1A1A1A]">
           Create Account
         </h1>
 
-        <p
-          class="mt-2 text-sm text-black/55 text-center mb-4"
-        >
+        <p class="mt-2 text-sm text-black/55 text-center mb-4">
           Join Gemora and start shopping.
         </p>
 
         <!-- form -->
-        <form
-          id="registerForm"
-          class="space-y-4"
-        >
+        <form id="registerForm" class="space-y-4">
           <input
             id="registerName"
             type="text"
             required
-minlength="2"
-maxlength="50"
+            minlength="2"
+            maxlength="50"
             placeholder="Full name"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
           />
@@ -92,7 +78,7 @@ maxlength="50"
             id="registerEmail"
             type="email"
             required
-autocomplete="email"
+            autocomplete="email"
             placeholder="Email address"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
           />
@@ -102,40 +88,36 @@ autocomplete="email"
             <input
               id="registerPassword"
               required
-minlength="6"
-autocomplete="new-password"
+              minlength="6"
+              autocomplete="new-password"
               type="password"
               placeholder="Password"
               class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
             />
 
-           <button
-  type="button"
-  class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
-  data-target="registerPassword"
->
-  <svg
-    class="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
-    viewBox="0 0 24 24"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M2.458 12C3.732 7.943 7.523 5 12 5
+            <button
+              type="button"
+              class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
+              data-target="registerPassword"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5
          c4.477 0 8.268 2.943 9.542 7
          -1.274 4.057-5.065 7-9.542 7
          -4.477 0-8.268-2.943-9.542-7z"
-    />
-    <circle
-      cx="12"
-      cy="12"
-      r="3"
-    />
-  </svg>
-</button>
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
           </div>
 
           <!-- confirm -->
@@ -143,40 +125,36 @@ autocomplete="new-password"
             <input
               id="confirmPassword"
               required
-minlength="6"
-autocomplete="new-password"
+              minlength="6"
+              autocomplete="new-password"
               type="password"
               placeholder="Confirm password"
               class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
             />
 
-           <button
-  type="button"
-  class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
-  data-target="confirmPassword"
->
-  <svg
-    class="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
-    viewBox="0 0 24 24"
-  >
-    <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      d="M2.458 12C3.732 7.943 7.523 5 12 5
+            <button
+              type="button"
+              class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
+              data-target="confirmPassword"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5
          c4.477 0 8.268 2.943 9.542 7
          -1.274 4.057-5.065 7-9.542 7
          -4.477 0-8.268-2.943-9.542-7z"
-    />
-    <circle
-      cx="12"
-      cy="12"
-      r="3"
-    />
-  </svg>
-</button>
+                />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
           </div>
 
           <button
@@ -193,22 +171,15 @@ autocomplete="new-password"
           id="google-btn"
           class="mt-5 w-full border border-gray-200 rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition"
         >
-          <img
-            src="/front/src/assets/icon/google.svg"
-            class="w-5 h-5"
-          />
-          <span class="text-sm font-medium">
-            Continue with Google
-          </span>
+          <img src="/src/assets/icon/google.svg" class="w-5 h-5" />
+          <span class="text-sm font-medium"> Continue with Google </span>
         </button>
 
         <!-- footer -->
-        <p
-          class="text-sm text-center mt-6 text-gray-500"
-        >
+        <p class="text-sm text-center mt-6 text-gray-500">
           Already have an account?
           <a
-            href="/front/pages/login.html"
+            href="/pages/login.html"
             class="text-[#6B1A2A] font-medium hover:underline ml-1"
           >
             Sign In
@@ -222,23 +193,16 @@ autocomplete="new-password"
       id="verifyModal"
       class="fixed inset-0 hidden bg-black/40 flex items-center justify-center p-4 z-50"
     >
-      <div
-        class="bg-white rounded-2xl p-6 w-full max-w-[380px]"
-      >
-        <h2
-          class="text-lg font-semibold mb-4"
-        >
-          Verify Email
-        </h2>
+      <div class="bg-white rounded-2xl p-6 w-full max-w-[380px]">
+        <h2 class="text-lg font-semibold mb-4">Verify Email</h2>
 
         <input
           id="emailOtpInput"
           inputmode="numeric"
-pattern="[0-9]{6}"
-maxlength="6"
-required
+          pattern="[0-9]{6}"
+          maxlength="6"
+          required
           type="tel"
-
           placeholder="Enter OTP"
           class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
         />
@@ -265,9 +229,6 @@ required
       class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[9999]"
     ></div>
 
-    <script
-      type="module"
-      src="/front/src/js/pages/register.js"
-    ></script>
+    <script type="module" src="/src/js/pages/register.js"></script>
   </body>
 </html>

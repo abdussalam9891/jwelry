@@ -1,7 +1,3 @@
-
-
-
-
 let placeholderInterval;
 export function initSearchPlaceholder() {
   const placeholders = [
@@ -24,10 +20,6 @@ export function initSearchPlaceholder() {
   }, 4000);
 }
 
-
-
-
-
 export function initSearchHandlers() {
   const desktopInput = document.getElementById("searchInput");
   const mobileInput = document.getElementById("mobileSearchInput");
@@ -45,7 +37,7 @@ export function initSearchHandlers() {
           params.delete("search");
         }
 
-        window.location.href = `/front/pages/products.html?${params.toString()}`;
+        window.location.href = `/pages/products.html?${params.toString()}`;
       }
     });
   }
@@ -53,9 +45,6 @@ export function initSearchHandlers() {
   handleSearch(desktopInput);
   handleSearch(mobileInput);
 }
-
-
-
 
 function syncSearchInput() {
   const params = new URLSearchParams(window.location.search);
@@ -70,129 +59,54 @@ function syncSearchInput() {
   }
 }
 
-
-
 export function initMobileSearch() {
+  const mobileSearchBtn = document.getElementById("mobileSearchBtn");
 
-  const mobileSearchBtn =
-    document.getElementById(
-      "mobileSearchBtn"
-    );
+  const mobileSearchBar = document.getElementById("mobileSearchBar");
 
-  const mobileSearchBar =
-    document.getElementById(
-      "mobileSearchBar"
-    );
+  const mobileSearchInput = document.getElementById("mobileSearchInput");
 
-  const mobileSearchInput =
-    document.getElementById(
-      "mobileSearchInput"
-    );
+  if (!mobileSearchBtn || !mobileSearchBar) return;
 
-  if (
-    !mobileSearchBtn ||
-    !mobileSearchBar
-  ) return;
+  mobileSearchBtn.addEventListener("click", () => {
+    const isHidden = mobileSearchBar.classList.contains("hidden");
 
-  mobileSearchBtn.addEventListener(
-    "click",
-    () => {
+    mobileSearchBar.classList.toggle("hidden");
 
-      const isHidden =
-        mobileSearchBar.classList.contains(
-          "hidden"
-        );
-
-      mobileSearchBar.classList.toggle(
-        "hidden"
-      );
-
-      if (isHidden) {
-
-        mobileSearchInput?.focus();
-
-      }
-
+    if (isHidden) {
+      mobileSearchInput?.focus();
     }
-  );
-
+  });
 }
-
-
-
 
 export function initSearchButton() {
+  const searchBtn = document.getElementById("searchBtn");
 
-  const searchBtn =
-    document.getElementById(
-      "searchBtn"
-    );
+  const input = document.getElementById("searchInput");
 
-  const input =
-    document.getElementById(
-      "searchInput"
-    );
+  if (!searchBtn || !input) return;
 
-  if (
-    !searchBtn ||
-    !input
-  ) return;
+  searchBtn.addEventListener("click", () => {
+    const value = input.value.trim();
 
-  searchBtn.addEventListener(
-    "click",
-    () => {
+    const params = new URLSearchParams(window.location.search);
 
-      const value =
-        input.value.trim();
-
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
-
-      if (value) {
-
-        params.set(
-          "search",
-          value
-        );
-
-      }
-
-      window.location.href =
-        `/front/pages/products.html?${params.toString()}`;
-
+    if (value) {
+      params.set("search", value);
     }
-  );
 
+    window.location.href = `/pages/products.html?${params.toString()}`;
+  });
 }
 
-
-
-
 function performSearch(value) {
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
+  const params = new URLSearchParams(window.location.search);
 
   if (value) {
-
-    params.set(
-      "search",
-      value
-    );
-
+    params.set("search", value);
   } else {
-
-    params.delete(
-      "search"
-    );
-
+    params.delete("search");
   }
 
-  window.location.href =
-    `/front/pages/products.html?${params.toString()}`;
-
+  window.location.href = `/pages/products.html?${params.toString()}`;
 }

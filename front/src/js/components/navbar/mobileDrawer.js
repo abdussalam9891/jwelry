@@ -1,13 +1,11 @@
 import { navLinks } from "./navLinks.js";
 
-export function createMobileDrawer(
-  user = null
-) {
+export function createMobileDrawer(user = null) {
   const linksHTML = navLinks
     .map((link) => {
       const href = link.slug
-        ? `/front/pages/products.html?category=${link.slug}`
-        : "/front/pages/products.html";
+        ? `/pages/products.html?category=${link.slug}`
+        : "/pages/products.html";
 
       return `
         <a
@@ -86,8 +84,8 @@ export function createMobileDrawer(
     `
     : "";
 
-const accountLinks = user
-  ? `
+  const accountLinks = user
+    ? `
     <div
       class="
         mt-5
@@ -101,7 +99,7 @@ const accountLinks = user
 
       <!-- PROFILE -->
      <a
-  href="/front/pages/profile.html"
+  href="/pages/profile.html"
   class="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white transition-all duration-200"
 >
   <div class="flex items-center gap-3">
@@ -115,7 +113,7 @@ const accountLinks = user
 
       <!-- ORDERS -->
       <a
-  href="/front/pages/orders.html"
+  href="/pages/orders.html"
   class="
     flex
     items-center
@@ -181,7 +179,7 @@ const accountLinks = user
 
       <!-- WISHLIST -->
      <a
-  href="/front/pages/wishlist.html"
+  href="/pages/wishlist.html"
   class="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white transition-all duration-200"
 >
   <div class="flex items-center gap-3">
@@ -194,7 +192,7 @@ const accountLinks = user
 </a>
       <!-- CART -->
      <a
-  href="/front/pages/cart.html"
+  href="/pages/cart.html"
   class="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white transition-all duration-200"
 >
   <div class="flex items-center gap-3">
@@ -208,10 +206,10 @@ const accountLinks = user
 
     </div>
   `
-  : "";
+    : "";
 
   const authSection = !user
-  ? `
+    ? `
     <div
       class="
         mt-auto
@@ -242,10 +240,10 @@ const accountLinks = user
       </a>
     </div>
   `
-  : "";
+    : "";
 
- const logoutSection = user
-  ? `
+  const logoutSection = user
+    ? `
     <div
       class="
         mt-auto
@@ -275,7 +273,7 @@ const accountLinks = user
       </button>
     </div>
   `
-  : "";
+    : "";
 
   return `
     <div

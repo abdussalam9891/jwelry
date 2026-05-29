@@ -2,7 +2,6 @@ import { createSearchBar } from "./searchBar.js";
 import { createUserDropdown } from "./userDropdown.js";
 
 export function createMainNavbar() {
-
   return `
     <nav
       id="mainNav"
@@ -27,9 +26,9 @@ export function createMainNavbar() {
           </button>
 
           <!-- Logo -->
-          <a href="/front/index.html" class="flex-shrink-0">
+          <a href="/index.html" class="flex-shrink-0">
             <img
-              src="/front/src/assets/icon/logo.png"
+              src="/src/assets/icon/logo.png"
               class="h-16 w-auto object-contain"
             />
           </a>

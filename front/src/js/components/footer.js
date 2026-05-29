@@ -1,4 +1,3 @@
-
 function loadFooter() {
   const footerHTML = `
       <footer class="bg-[#5A1E2A] text-white pt-20 pb-10  ">
@@ -25,15 +24,15 @@ function loadFooter() {
               Shop
             </h4>
             <ul class="space-y-3 text-sm text-white/70">
-              <li><a href="/front/pages/products.html?category=rings" class="hover:text-white transition">Rings</a></li>
+              <li><a href="/pages/products.html?category=rings" class="hover:text-white transition">Rings</a></li>
               <li>
-                <a href="/front/pages/products.html?category=necklaces" class="hover:text-white transition">Necklaces</a>
+                <a href="/pages/products.html?category=necklaces" class="hover:text-white transition">Necklaces</a>
               </li>
               <li>
-                <a href="/front/pages/products.html?category=earrings" class="hover:text-white transition">Earrings</a>
+                <a href="/pages/products.html?category=earrings" class="hover:text-white transition">Earrings</a>
               </li>
               <li>
-                <a href="/front/pages/products.html?category=bracelets" class="hover:text-white transition">Bracelets</a>
+                <a href="/pages/products.html?category=bracelets" class="hover:text-white transition">Bracelets</a>
               </li>
             </ul>
           </div>
@@ -45,10 +44,10 @@ function loadFooter() {
             </h4>
             <ul class="space-y-3 text-sm text-white/70">
               <li>
-                <a href="/front/pages/about.html" class="hover:text-white transition">About Us</a>
+                <a href="/pages/about.html" class="hover:text-white transition">About Us</a>
               </li>
               <li>
-                <a href="/front/pages/contact.html" class="hover:text-white transition">Contact</a>
+                <a href="/pages/contact.html" class="hover:text-white transition">Contact</a>
               </li>
               <li>
                 <a href="#" class="hover:text-white transition">Shipping</a>
@@ -96,8 +95,8 @@ function loadFooter() {
           <p>© 2026 Gemora. All rights reserved.</p>
 
           <div class="flex gap-6">
-            <a href="/front/pages/privacy.html" class="hover:text-white transition">Privacy Policy</a>
-            <a href="/front/pages/termsAndConditions.html" class="hover:text-white transition">Terms & Conditions</a>
+            <a href="/pages/privacy.html" class="hover:text-white transition">Privacy Policy</a>
+            <a href="/pages/termsAndConditions.html" class="hover:text-white transition">Terms & Conditions</a>
           </div>
         </div>
       </div>
@@ -105,13 +104,6 @@ function loadFooter() {
   `;
 
   document.getElementById("footer-container").innerHTML = footerHTML;
-
-
-
-
-
-
-
 }
 
 loadFooter();

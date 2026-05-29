@@ -1,13 +1,11 @@
 import { createAddressCard } from "../components/addressCard.js";
 import { showToast } from "../components/toast.js";
 import { createAddress, getAddresses } from "../features/address.js";
-import { loadCart } from "../features/cart.js";
+import { getCartState, loadCart } from "../features/cart.js";
 import { createOrder } from "../features/order.js";
 import { renderSummary } from "./cartPage.js";
-import { getCartState } from "../features/cart.js";
 
 async function initCheckout() {
-
   setupAddressModal();
 
   setupAddressForm();
@@ -15,17 +13,13 @@ async function initCheckout() {
   // load cart first
   await loadCart();
 
-  const cart =
-    getCartState();
+  const cart = getCartState();
 
   // redirect if empty
   if (!cart.length) {
-
-    window.location.href =
-      "/front/pages/cart.html";
+    window.location.href = "/pages/cart.html";
 
     return;
-
   }
 
   // render summary
@@ -38,7 +32,6 @@ async function initCheckout() {
 
   // setup order logic LAST
   setupPlaceOrder();
-
 }
 
 async function renderAddresses() {
@@ -241,7 +234,7 @@ function setupPlaceOrder() {
 
       // 🔥 redirect
       setTimeout(() => {
-        window.location.href = `/front/pages/orderSuccess.html?id=${data.order._id}`;
+        window.location.href = `/pages/orderSuccess.html?id=${data.order._id}`;
       }, 1000);
     } catch (err) {
       console.error(err);
