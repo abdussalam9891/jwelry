@@ -5,10 +5,10 @@ const isLocalHost =
 
 export const CONFIG = {
 
-  // 🔥 API routes
+  // API routes
   API_BASE: isLocalHost
     ? "http://localhost:5000/api"
-    : "https://your-production-api.com/api",
+    : "https://jwelry-backend.onrender.com/api",
 
-  
+
 };
