@@ -2,7 +2,12 @@ import { openAuthModal } from "../components/authModal.js";
 import Auth from "../core/auth.js";
 import { initWishlist, loadWishlistState  } from "../features/wishlist.js";
 import { renderHorizontalSection } from "../components/horizontalProducts.js";
-import { CONFIG } from "../config.js";
+import {
+getProductBySlug,
+getProductReviews,
+getSimilarProducts,
+getTrendingProducts,
+} from "../services/productService.js";
 
 document.addEventListener("DOMContentLoaded", loadProduct);
 
@@ -17,83 +22,126 @@ let selectedVariantId = null;
 
 
 
+
+
 async function loadProduct() {
-  const container = document.getElementById("productContainer");
-  if (!container) return;
 
-  const slug = new URLSearchParams(window.location.search).get("slug");
-
-  if (!slug) {
-    container.innerHTML = "Product not found";
-    return;
-  }
-
-  try {
-    container.innerHTML = "Loading product...";
-
-    // 1. Fetch product
-    const res = await fetch(`${CONFIG.API_BASE}/v1/products/slug/${slug}`);
-    if (!res.ok) throw new Error("Product fetch failed");
-
-    const product = await res.json();
-
-    // 2. Render UI
-    renderProduct(product);
-
-    // ❌ REMOVE this (wishlist already handled globally)
-    // attachEvents(product);
-
-    // ✅ INIT GLOBAL WISHLIST SYSTEM
-    initWishlist();
-
-    // ✅ LOAD STATE + APPLY UI
-    await loadWishlistState();
-
-    // 3. Fetch reviews
-    const reviewsRes = await fetch(
-      `${CONFIG.API_BASE}/v1/reviews/${product._id}`
-    );
-
-    if (!reviewsRes.ok) throw new Error("Reviews fetch failed");
-
-    const reviews = await reviewsRes.json();
-
-    // 4. Render reviews
-    renderReviews(reviews);
-
-
-    //  5. Fetch similar products (same category)
-const similarRes = await fetch(
-  `${CONFIG.API_BASE}/v1/products?category=${product.category}&limit=10`
+const container =
+document.getElementById(
+"productContainer"
 );
 
-const similarData = await similarRes.json();
+if (!container) return;
 
-//  6. Render similar section
-await renderHorizontalSection({
-  containerId: "similarSection",
-  products: similarData.products || []
-});
+const slug =
+new URLSearchParams(
+window.location.search
+).get("slug");
+
+if (!slug) {
 
 
-//  7. Fetch recommended (trending)
-const recRes = await fetch(
-  `${CONFIG.API_BASE}/v1/products?tag=trending&limit=10`
-);
+container.innerHTML =
+  "Product not found";
 
-const recData = await recRes.json();
+return;
 
-//  8. Render recommended section
-await renderHorizontalSection({
-  containerId: "recommendSection",
-  products: recData.products || []
-});
 
-  } catch (err) {
-    console.error(err);
-    container.innerHTML = "Failed to load product";
-  }
 }
+
+try {
+
+
+container.innerHTML =
+  "Loading product...";
+
+// PRODUCT FIRST
+
+const product =
+  await getProductBySlug(
+    slug
+  );
+
+renderProduct(product);
+
+initWishlist();
+
+await loadWishlistState();
+
+// FETCH EVERYTHING ELSE IN PARALLEL
+
+const [
+  reviewData,
+  similarData,
+  recData,
+] = await Promise.all([
+
+  getProductReviews(
+    product._id
+  ),
+
+  getSimilarProducts(
+    product.category
+  ),
+
+  getTrendingProducts(),
+
+]);
+
+// REVIEWS
+
+renderReviews(
+  reviewData
+);
+
+renderPagination(
+  reviewData,
+  product._id
+);
+// SIMILAR PRODUCTS
+
+await renderHorizontalSection({
+
+  containerId:
+    "similarSection",
+
+  products:
+    similarData.products || [],
+
+});
+
+// RECOMMENDED PRODUCTS
+
+await renderHorizontalSection({
+
+  containerId:
+    "recommendSection",
+
+  products:
+    recData.products || [],
+
+});
+
+
+} catch (err) {
+
+
+console.error(
+  "LOAD PRODUCT ERROR:",
+  err
+);
+
+container.innerHTML = `
+  <div class="text-center py-10">
+    Failed to load product
+  </div>
+`;
+
+
+}
+
+}
+
 
 
 function renderDescription(product) {
@@ -320,7 +368,7 @@ function renderInfo(product) {
         </h1>
 
         <div class="flex items-center gap-2 text-xs sm:text-sm text-black/70">
-           <span>4.4 (34 reviews)</span>
+
         </div>
       </div>
 
@@ -493,6 +541,129 @@ function renderInfo(product) {
 
 
 
+
+
+
+
+
+<!-- REVIEWS -->
+
+<div class="border-t pt-6">
+
+  <div
+    class="flex items-center justify-between mb-4"
+  >
+
+    <div>
+
+      <h3
+        class="
+        text-[1rem]
+        sm:text-[1.1rem]
+        font-medium
+        text-black
+        "
+      >
+        Customer Reviews
+      </h3>
+
+      <div
+        class="
+        flex
+        items-center
+        gap-2
+        mt-2
+        "
+      >
+
+        <span
+          id="avgRating"
+          class="
+          text-2xl
+          font-bold
+          "
+        >
+          0.0
+        </span>
+
+        <span
+          id="reviewCount"
+          class="
+          text-sm
+          text-black/60
+          "
+        >
+          (0)
+        </span>
+
+      </div>
+
+    </div>
+
+    <select
+      id="reviewSort"
+      class="
+      border
+      rounded-lg
+      px-3
+      py-2
+      text-sm
+      "
+    >
+
+      <option value="latest">
+        Latest
+      </option>
+
+      <option value="highest">
+        Highest Rating
+      </option>
+
+      <option value="lowest">
+        Lowest Rating
+      </option>
+
+    </select>
+
+  </div>
+
+  <div
+    id="ratingBreakdown"
+    class="
+    space-y-2
+    mb-5
+    "
+  ></div>
+
+  <div
+    id="reviewsContainer"
+    class="
+    space-y-4
+    "
+  >
+
+    <div
+      class="
+      text-sm
+      text-black/50
+      "
+    >
+      Loading reviews...
+    </div>
+
+  </div>
+
+  <div
+    id="reviewsPagination"
+    class="
+    flex
+    justify-center
+    gap-2
+    mt-5
+    "
+  ></div>
+
+</div>
 
 
 
@@ -771,7 +942,7 @@ try {
 
 
 
-  // 📦 PINCODE (unchanged)
+  // PINCODE (unchanged)
   const pincodeInput = document.getElementById("pincodeInput");
   const checkBtn = document.getElementById("checkPincodeBtn");
   const resultEl = document.getElementById("deliveryResult");
@@ -888,83 +1059,299 @@ function updateSizeAvailability(product) {
 
 
 
+function renderReviews(reviewData) {
 
-function renderReviews(reviews) {
-  const container = document.getElementById("reviewsContainer");
-  const avgEl = document.getElementById("avgRating");
-  const countEl = document.getElementById("reviewCount");
+const {
+  reviews = [],
+  averageRating = 0,
+  numReviews = 0,
+  ratingBreakdown = {},
+} = reviewData;
 
-  // 🛡️ Guard: DOM check
-  if (!container || !avgEl || !countEl) return;
 
-  // 🛡️ Guard: Validate input
-  if (!Array.isArray(reviews)) {
-    console.error("Invalid reviews data:", reviews);
-    container.innerHTML = `<p class="text-red-500">Failed to load reviews</p>`;
-    avgEl.textContent = "--";
-    countEl.textContent = "(0)";
-    return;
-  }
+const reviewSort =
+  document.getElementById(
+    "reviewSort"
+  );
 
-  // 🛡️ Empty state
-  if (reviews.length === 0) {
-    container.innerHTML = `
-      <div class="text-gray-500 text-sm py-4">
-        No reviews yet. Be the first to review this product.
-      </div>
-    `;
-    avgEl.textContent = "0.0";
-    countEl.textContent = "(0)";
-    return;
-  }
+if (reviewSort) {
 
-  // 🧠 Calculate average
-  const total = reviews.reduce((sum, r) => {
-    const rating = typeof r.rating === "number" ? r.rating : 0;
-    return sum + rating;
-  }, 0);
+  reviewSort.addEventListener(
+    "change",
+    async (e) => {
 
-  const avg = (total / reviews.length).toFixed(1);
+      try {
 
-  avgEl.textContent = avg;
-  countEl.textContent = `(${reviews.length})`;
+        const reviewData =
+          await getProductReviews(
+            product._id,
+            1,
+            e.target.value
+          );
 
-  // 🔥 Limit reviews (avoid UI overload)
-  const limitedReviews = reviews.slice(0, 5);
+        renderReviews(
+          reviewData
+        );
 
-  // 🎯 Render reviews
-  container.innerHTML = limitedReviews
-    .map((r) => {
-      const name = r.user?.name || "Anonymous";
-      const rating = r.rating ?? 0;
-      const comment = r.comment || "No comment provided";
+        renderPagination(
+          reviewData,
+          product._id
+        );
 
-      return `
-        <div class="border rounded-lg p-4 bg-white shadow-sm">
+      } catch (error) {
 
-          <div class="flex justify-between items-center mb-2">
-            <span class="font-medium text-sm">${name}</span>
-            ${renderStars(rating)}
+        console.error(error);
+
+      }
+
+    }
+  );
+
+}
+
+
+
+
+const container =
+document.getElementById(
+"reviewsContainer"
+);
+
+const avgEl =
+document.getElementById(
+"avgRating"
+);
+
+const countEl =
+document.getElementById(
+"reviewCount"
+);
+
+if (
+!container ||
+!avgEl ||
+!countEl
+) {
+return;
+}
+
+const {
+reviews = [],
+averageRating = 0,
+numReviews = 0,
+} = reviewData;
+
+avgEl.textContent =
+Number(
+averageRating
+).toFixed(1);
+
+countEl.textContent =
+`(${numReviews})`;
+
+
+
+const breakdownEl =
+  document.getElementById(
+    "ratingBreakdown"
+  );
+
+if (breakdownEl) {
+
+  breakdownEl.innerHTML =
+    [5,4,3,2,1]
+      .map(star => {
+
+        const count =
+          ratingBreakdown[
+            star
+          ] || 0;
+
+        const percentage =
+          numReviews
+            ? (
+                count /
+                numReviews
+              ) * 100
+            : 0;
+
+        return `
+          <div class="flex items-center gap-2">
+
+            <span class="w-6 text-sm">
+              ${star}★
+            </span>
+
+            <div
+              class="
+              flex-1
+              h-2
+              bg-gray-200
+              rounded
+              "
+            >
+
+              <div
+                class="
+                h-2
+                rounded
+                bg-[#6B1A2A]
+                "
+                style="
+                width:${percentage}%
+                "
+              ></div>
+
+            </div>
+
+            <span
+              class="
+              text-xs
+              w-6
+              text-right
+              "
+            >
+              ${count}
+            </span>
+
+          </div>
+        `;
+      })
+      .join("");
+
+}
+
+
+if (!reviews.length) {
+
+container.innerHTML = `
+  <div class="text-gray-500 text-sm py-4">
+    No reviews yet. Be the first to review this product.
+  </div>
+`;
+
+
+
+
+
+return;
+
+
+}
+
+container.innerHTML =
+reviews
+.map((r) => {
+
+
+    const name =
+      r.userName ||
+      "Anonymous";
+
+    const rating =
+      r.rating || 0;
+
+    const comment =
+      r.comment ||
+      "No comment provided";
+
+    return `
+      <div class="border rounded-lg p-4 bg-white shadow-sm">
+
+        <div class="flex justify-between items-center mb-2">
+
+          <div>
+
+            <span class="font-medium text-sm">
+              ${name}
+            </span>
+
+            ${
+              r.verifiedPurchase
+                ? `
+                  <span
+                    class="
+                    ml-2
+                    text-[10px]
+                    bg-green-100
+                    text-green-700
+                    px-2
+                    py-1
+                    rounded-full
+                  "
+                  >
+                    Verified Purchase
+                  </span>
+                `
+                : ""
+            }
+
           </div>
 
-          <p class="text-sm text-black/70 leading-relaxed">
-            ${comment}
-          </p>
+          ${renderStars(
+            rating
+          )}
 
         </div>
-      `;
-    })
-    .join("");
 
-  // ➕ Optional: Show more button (basic)
-  if (reviews.length > 5) {
-    container.innerHTML += `
-      <button class="text-sm text-black/60 mt-2 underline">
-        View all reviews
-      </button>
+        <p
+          class="
+          text-sm
+          text-black/70
+          leading-relaxed
+          "
+        >
+          ${comment}
+        </p>
+
+        ${
+          r.images?.length
+            ? `
+              <div class="flex gap-2 mt-3 flex-wrap">
+
+                ${r.images
+                  .map(
+                    (img) => `
+                      <img
+                        src="${img.url}"
+                        class="
+                        w-16
+                        h-16
+                        object-cover
+                        rounded
+                        border
+                        "
+                      />
+                    `
+                  )
+                  .join("")}
+
+              </div>
+            `
+            : ""
+        }
+
+        <div
+          class="
+          mt-3
+          text-xs
+          text-black/50
+          "
+        >
+          ${new Date(
+            r.createdAt
+          ).toLocaleDateString()}
+        </div>
+
+      </div>
     `;
-  }
+
+  })
+  .join("");
+
+
 }
+
 
 
 function renderStars(rating) {
@@ -989,6 +1376,147 @@ function renderStars(rating) {
 }
 
 
+function renderPagination(
+  reviewData,
+  productId
+) {
+
+  const container =
+    document.getElementById(
+      "reviewsPagination"
+    );
+
+  if (!container) return;
+
+  const {
+    page = 1,
+    totalPages = 1,
+  } = reviewData;
+
+  if (totalPages <= 1) {
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+  container.innerHTML = `
+
+    <button
+      id="prevReviewPage"
+      class="
+      border
+      px-3
+      py-2
+      rounded
+      "
+      ${
+        page === 1
+          ? "disabled"
+          : ""
+      }
+    >
+      Prev
+    </button>
+
+    <span
+      class="
+      px-3
+      py-2
+      "
+    >
+      ${page}
+      /
+      ${totalPages}
+    </span>
+
+    <button
+      id="nextReviewPage"
+      class="
+      border
+      px-3
+      py-2
+      rounded
+      "
+      ${
+        page === totalPages
+          ? "disabled"
+          : ""
+      }
+    >
+      Next
+    </button>
+
+  `;
+
+  document
+    .getElementById(
+      "prevReviewPage"
+    )
+    ?.addEventListener(
+      "click",
+      () =>
+        loadReviewPage(
+          productId,
+          page - 1
+        )
+    );
+
+  document
+    .getElementById(
+      "nextReviewPage"
+    )
+    ?.addEventListener(
+      "click",
+      () =>
+        loadReviewPage(
+          productId,
+          page + 1
+        )
+    );
+
+}
+
+
+
+
+async function loadReviewPage(
+  productId,
+  page
+) {
+
+  try {
+
+    const sort =
+      document.getElementById(
+        "reviewSort"
+      )?.value ||
+      "latest";
+
+    const reviewData =
+      await getProductReviews(
+        productId,
+        page,
+        sort
+      );
+
+    renderReviews(
+      reviewData
+    );
+
+    renderPagination(
+      reviewData,
+      productId
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+  }
+
+}
 
 
 
