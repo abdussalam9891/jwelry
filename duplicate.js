@@ -238,7 +238,7 @@ function renderProduct(product) {
 
           ${renderInfo(product)}
 
-
+          
 
         </div>
 
@@ -383,12 +383,6 @@ function renderInfo(product) {
   }
 
 </div>
-
-<!-- STOCK -->
-<div
-  id="stockStatus"
-  class="text-sm text-green-600"
-></div>
 
       <!-- VARIANT -->
       <div>
@@ -788,7 +782,7 @@ document.querySelectorAll(".variant-material").forEach(btn => {
     btn.classList.add("bg-[#6B1A2A]", "text-white", "border-[#6B1A2A]");
     btn.classList.remove("border-black/20", "text-black/70", "bg-white");
 
-    //  validate size with new material
+    // 🔥 validate size with new material
     const match = product.variants.find(v =>
       v.material === selectedMaterial &&
       (selectedSize ? v.size === selectedSize : true)
@@ -1017,17 +1011,6 @@ document
             )
         );
 
-
-        console.log(
-  "Rating value:",
-  document.getElementById("reviewRating").value
-);
-
-for (const [key, value] of formData.entries()) {
-  console.log(key, value);
-}
-
-
         await createReview(
           product._id,
           formData
@@ -1141,8 +1124,6 @@ function updateVariant(product) {
 
   if (stockEl) {
 
-
-
     if (variant.stock === 0) {
 
       stockEl.textContent =
@@ -1168,17 +1149,19 @@ function updateVariant(product) {
 
     else {
 
-    stockEl.textContent = "";
+      stockEl.textContent =
+        "In Stock";
+
+      stockEl.className =
+        "text-sm text-green-600";
 
     }
 
   }
 
-  // aDD TO CART
+  // ADD TO CART
 
   if (addToCartBtn) {
-
-
 
     if (variant.stock === 0) {
 
@@ -1308,8 +1291,6 @@ const {
   reviews = [],
   averageRating = 0,
   numReviews = 0,
-
-
   ratingBreakdown = {},
 } = reviewData;
 
@@ -1380,6 +1361,11 @@ if (
 return;
 }
 
+const {
+reviews = [],
+averageRating = 0,
+numReviews = 0,
+} = reviewData;
 
 avgEl.textContent =
 Number(

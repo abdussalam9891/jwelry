@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
-  
+
   const headingObserver = new IntersectionObserver((entries) => {
 
     entries.forEach(entry => {

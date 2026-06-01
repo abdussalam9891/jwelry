@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="/src/css/main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/src/css/animations.css" />
+    <link href="../src/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/css/animations.css" />
   </head>
 
   <body>
@@ -19,9 +19,9 @@
         <!-- LEFT -->
         <div class="flex items-center gap-6">
           <!-- LOGO -->
-          <a href="/index.html" class="flex items-center shrink-0">
+          <a href="../index.html" class="flex items-center shrink-0">
             <img
-              src="/src/assets/icon/logo.png"
+              src="../src/assets/icon/logo.png"
               alt="Logo"
               class="h-10 w-auto object-contain"
             />
@@ -29,7 +29,7 @@
 
           <!-- CONTINUE SHOPPING -->
           <a
-            href="/index.html"
+            href="../index.html"
             class="hidden sm:flex items-center gap-2 text-sm text-black/90 hover:text-[#6B1A2A] transition"
           >
             <svg
@@ -55,7 +55,7 @@
         <div class="flex items-center gap-5">
           <!-- WISHLIST -->
           <a
-            href="/pages/wishlist.html"
+            href="./wishlist.html"
             class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
           >
             <svg
@@ -139,7 +139,7 @@
     </main>
 
     <script type="module">
-      import { initCartPage } from "/src/js/pages/cartPage.js";
+      import { initCartPage } from "../src/js/pages/cartPage.js";
 
       initCartPage();
     </script>
