@@ -1,7 +1,7 @@
 import api from "../core/api.js";
 
 const Auth = {
-  // 🔥 Get current authenticated user
+  // Get current authenticated user
   async getCurrentUser() {
     try {
       const res = await api.get("/v1/auth/me");
@@ -12,7 +12,7 @@ const Auth = {
     }
   },
 
-  // 🔥 Protect routes
+  // Protect routes
   async requireAuth() {
     const user = await this.getCurrentUser();
 
@@ -27,7 +27,7 @@ const Auth = {
     return user;
   },
 
-  // 🔥 Logout
+  // Logout
   async logout() {
     try {
       await api.post("/v1/auth/logout");

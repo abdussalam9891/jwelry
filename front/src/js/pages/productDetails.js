@@ -5,6 +5,8 @@ import { renderHorizontalSection } from "../components/horizontalProducts.js";
 import {
 getProductBySlug,
 createReview,
+updateReview,
+deleteReview,
 getProductReviews,
 getSimilarProducts,
 getTrendingProducts,
@@ -23,6 +25,14 @@ document.addEventListener("DOMContentLoaded", loadProduct);
 let selectedMaterial = null;
 let selectedSize = null;
 let selectedVariantId = null;
+let currentUser = null;
+ let editingReviewId = null;
+  let reviewToDelete = null;
+let currentProductId = null;
+
+
+
+
 
 
 
@@ -65,6 +75,10 @@ const product =
   await getProductBySlug(
     slug
   );
+  currentUser =
+  await Auth.getCurrentUser();
+  currentProductId = product._id;
+  
 
 renderProduct(product);
 
@@ -81,7 +95,7 @@ const [
 ] = await Promise.all([
 
   getProductReviews(
-    product._id
+   currentProductId
   ),
 
   getSimilarProducts(
@@ -95,12 +109,12 @@ const [
 // REVIEWS
 
 renderReviews(
-  reviewData
+  reviewData,currentUser
 );
 
 renderPagination(
   reviewData,
-  product._id
+  currentProductId
 );
 // SIMILAR PRODUCTS
 
@@ -1028,10 +1042,21 @@ for (const [key, value] of formData.entries()) {
 }
 
 
-        await createReview(
-          product._id,
-          formData
-        );
+       if (editingReviewId) {
+
+  await updateReview(
+    editingReviewId,
+    formData
+  );
+
+} else {
+
+  await createReview(
+   currentProductId,
+    formData
+  );
+
+}
 
         showToast(
           "Review submitted"
@@ -1302,7 +1327,9 @@ function updateSizeAvailability(
 
 
 
-function renderReviews(reviewData) {
+function renderReviews(reviewData, currentUser) {
+
+
 
 const {
   reviews = [],
@@ -1313,6 +1340,15 @@ const {
   ratingBreakdown = {},
 } = reviewData;
 
+console.log("REVIEWS:", reviews);
+
+console.log(
+  reviews.map(r => ({
+    id: r._id,
+    user: r.user,
+    isOwner: r.isOwner
+  }))
+);
 
 const reviewSort =
   document.getElementById(
@@ -1329,18 +1365,18 @@ if (reviewSort) {
 
         const reviewData =
           await getProductReviews(
-            product._id,
+            currentProductId,
             1,
             e.target.value
           );
 
         renderReviews(
-          reviewData
+          reviewData,currentUser
         );
 
         renderPagination(
           reviewData,
-          product._id
+          currentProductId,
         );
 
       } catch (error) {
@@ -1571,17 +1607,45 @@ reviews
             : ""
         }
 
-        <div
-          class="
-          mt-3
-          text-xs
-          text-black/50
-          "
+     <div
+  class="
+  mt-3
+  text-xs
+  text-black/50
+  "
+>
+  ${new Date(
+    r.createdAt
+  ).toLocaleDateString()}
+</div>
+
+${
+  currentUser &&
+  String(r.user) ===
+    String(currentUser.id)
+    ? `
+      <div class="mt-2 flex gap-3">
+
+        <button
+          class="edit-review-btn
+          text-sm text-blue-600 font-medium"
+          data-id="${r._id}"
         >
-          ${new Date(
-            r.createdAt
-          ).toLocaleDateString()}
-        </div>
+          Edit
+        </button>
+
+        <button
+          class="delete-review-btn
+          text-sm text-red-600 font-medium"
+          data-id="${r._id}"
+        >
+          Delete
+        </button>
+
+      </div>
+    `
+    : ""
+}
 
       </div>
     `;
@@ -1589,6 +1653,172 @@ reviews
   })
   .join("");
 
+
+
+
+  document
+  .querySelectorAll(
+    ".delete-review-btn"
+  )
+  .forEach((btn) => {
+
+    btn.addEventListener(
+      "click",
+      () => {
+
+        reviewToDelete =
+          btn.dataset.id;
+
+        document
+          .getElementById(
+            "deleteReviewModal"
+          )
+          .classList.remove(
+            "hidden"
+          );
+
+      }
+    );
+
+  });
+
+
+
+
+  document
+  .getElementById(
+    "cancelDeleteReview"
+  )
+  ?.addEventListener(
+    "click",
+    () => {
+
+      reviewToDelete = null;
+
+      document
+        .getElementById(
+          "deleteReviewModal"
+        )
+        .classList.add(
+          "hidden"
+        );
+
+    }
+  );
+
+
+
+
+  document
+  .getElementById(
+    "confirmDeleteReview"
+  )
+  ?.addEventListener(
+    "click",
+    async () => {
+
+      if (!reviewToDelete)
+        return;
+
+      try {
+
+        await deleteReview(
+          reviewToDelete
+        );
+
+        document
+          .getElementById(
+            "deleteReviewModal"
+          )
+          .classList.add(
+            "hidden"
+          );
+
+
+
+
+
+
+
+       await loadReviewPage(
+  currentProductId,
+  1
+);
+
+showToast(
+  "Review deleted"
+);
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+      }
+
+    }
+  );
+
+
+
+
+
+  document
+  .querySelectorAll(
+    ".edit-review-btn"
+  )
+  .forEach((btn) => {
+
+    btn.addEventListener(
+      "click",
+      () => {
+
+        const review =
+          reviews.find(
+            (r) =>
+              r._id ===
+              btn.dataset.id
+          );
+
+        if (!review)
+          return;
+
+        editingReviewId =
+          review._id;
+
+        document.getElementById(
+          "reviewRating"
+        ).value =
+          review.rating;
+
+        document.getElementById(
+          "reviewComment"
+        ).value =
+          review.comment;
+
+        document.querySelector(
+          "#reviewModal h3"
+        ).textContent =
+          "Edit Review";
+
+        document.getElementById(
+          "submitReviewBtn"
+        ).textContent =
+          "Update Review";
+
+        document
+          .getElementById(
+            "reviewModal"
+          )
+          .classList.remove(
+            "hidden"
+          );
+
+      }
+    );
+
+  });
 
 }
 
@@ -1742,7 +1972,7 @@ async function loadReviewPage(
       );
 
     renderReviews(
-      reviewData
+      reviewData,currentUser
     );
 
     renderPagination(

@@ -29,6 +29,30 @@ export async function createReview(
   );
 }
 
+
+
+export async function updateReview(
+  reviewId,
+  formData
+) {
+  return api.patch(
+    `/v1/reviews/${reviewId}`,
+    formData
+  );
+}
+
+export async function deleteReview(
+  reviewId
+) {
+  return api.delete(
+    `/v1/reviews/${reviewId}`
+  );
+}
+
+
+
+
+
 export async function getSimilarProducts(
 category
 ) {
