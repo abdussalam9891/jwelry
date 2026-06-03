@@ -54,27 +54,40 @@
         <!-- RIGHT -->
         <div class="flex items-center gap-5">
           <!-- WISHLIST -->
-          <a
-            href="./wishlist.html"
-            class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.8"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M21 8.25c0-2.485-2.015-4.5-4.5-4.5-1.74 0-3.247.99-4 2.437-.753-1.446-2.26-2.437-4-2.437-2.485 0-4.5 2.015-4.5 4.5 0 7.22 8.5 12 8.5 12s8.5-4.78 8.5-12z"
-              />
-            </svg>
+       <a
+  href="./wishlist.html"
+  class="flex items-center gap-2 text-sm text-black/60 hover:text-[#6B1A2A] transition"
+>
 
-            <span class="hidden sm:inline"> Wishlist </span>
-          </a>
+  <div class="relative">
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="w-8 h-8 text-[#6B1A2A]"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25Z"
+      />
+    </svg>
+
+    <span
+      id="wishlistCount"
+      class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-[#6B1A2A] text-white hidden"
+    >
+      0
+    </span>
+
+  </div>
+
+  <span>Wishlist</span>
+
+</a>
         </div>
       </div>
     </header>

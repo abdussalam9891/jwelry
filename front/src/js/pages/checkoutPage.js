@@ -3,6 +3,7 @@ import { showToast } from "../components/toast.js";
 import { createAddress, getAddresses } from "../features/address.js";
 import { getCartState, loadCart } from "../features/cart.js";
 import { createOrder } from "../features/order.js";
+import { loadWishlistState } from "../features/wishlist.js";
 import { renderSummary } from "./cartPage.js";
 
 async function initCheckout() {
@@ -12,6 +13,7 @@ async function initCheckout() {
 
   // load cart first
   await loadCart();
+  await loadWishlistState();
 
   const cart = getCartState();
 

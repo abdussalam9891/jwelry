@@ -32,7 +32,7 @@ async function loadWishlistPage() {
 
   try {
 
-    // 🔐 Auth check
+    // Auth check
     const user =
       await Auth.getCurrentUser();
 
@@ -44,7 +44,7 @@ async function loadWishlistPage() {
 
     }
 
-    // 🔄 Loading state
+    // Loading state
     grid.innerHTML = `
       <div class="text-sm text-black/60 animate-pulse text-center py-10">
         Loading wishlist...
@@ -78,7 +78,7 @@ async function loadWishlistPage() {
       products.length
     );
 
-    // ❌ Empty
+    // Empty
     if (!products.length) {
 
       grid.innerHTML = `
@@ -91,7 +91,7 @@ async function loadWishlistPage() {
 
     }
 
-    // ✅ Render
+    //  Render
     grid.innerHTML = products
       .map((p) =>
         createProductCard(p, {
@@ -102,7 +102,7 @@ async function loadWishlistPage() {
       )
       .join("");
 
-    // 🔥 Bind events
+    // Bind events
     grid
       .querySelectorAll(
         ".move-to-cart"
@@ -138,7 +138,7 @@ async function loadWishlistPage() {
 
       });
 
-    // 🔄 Sync local UI state
+    // Sync local UI state
     await loadWishlistState();
 
   } catch (err) {

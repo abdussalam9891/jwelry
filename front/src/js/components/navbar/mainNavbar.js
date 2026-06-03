@@ -91,6 +91,8 @@ export function createMainNavbar() {
             class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
           >
 
+          <div class="relative">
+
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -105,6 +107,15 @@ export function createMainNavbar() {
                 d="M2.25 3h1.386a1.125 1.125 0 0 1 1.11.843l.383 1.437m0 0L6.75 14.25h10.5l1.621-6.072a1.125 1.125 0 0 0-1.088-1.428H5.13m0 0L4.5 3m2.25 11.25a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m9 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0"
               />
             </svg>
+
+             <span
+    id="cartCount"
+   class="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-[#6B1A2A] text-white hidden"
+  >
+    0
+  </span>
+
+            </div>
 
             <span class="mt-1 text-black/80 font-medium">
               Cart

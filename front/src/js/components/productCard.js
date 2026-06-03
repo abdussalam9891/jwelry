@@ -44,7 +44,7 @@ export function createProductCard(product, options = {}) {
           class="wishlist-btn absolute top-2 right-2 z-20 w-8 h-8 flex items-center justify-center rounded-full backdrop-blur transition"
           data-id="${productId}"
         >
-          <svg class="w-5 h-5 transition duration-200" viewBox="0 0 24 24" stroke-width="1.8">
+          <svg class="w-6 h-6 transition duration-200" viewBox="0 0 24 24" stroke-width="1.8">
             <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/>
           </svg>
         </button>

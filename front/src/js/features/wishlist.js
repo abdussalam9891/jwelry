@@ -31,7 +31,7 @@ export function initWishlist() {
       wishlistSet.delete(id);
 
       updateWishlistCount(wishlistSet.size); // navbar
-      updateWishlistPageCount(wishlistSet.size); // page 🔥 FIX
+      updateWishlistPageCount(wishlistSet.size); // page FIX
 
       removeBtn.closest(".group")?.remove();
 
@@ -64,7 +64,7 @@ export function initWishlist() {
 
       const id = String(cartBtn.dataset.id);
 
-      // 🔥 OPEN VARIANT SELECTOR
+      // OPEN VARIANT SELECTOR
       openVariantModal(id);
 
       return;
@@ -190,7 +190,7 @@ export async function loadWishlistState(
 
     let items = products;
 
-    // 🔥 fetch only if needed
+    //  fetch only if needed
     if (!items) {
 
       const res = await fetch(
@@ -212,10 +212,10 @@ export async function loadWishlistState(
 
     }
 
-    // 🔥 reset state
+    //  reset state
     wishlistSet.clear();
 
-    // 🔥 sync local state
+    //  sync local state
     items.forEach((product) => {
 
       if (product?._id) {
@@ -230,7 +230,7 @@ export async function loadWishlistState(
 
     applyWishlistUI();
 
-    // 🔥 update counts
+    //  update counts
     updateWishlistCount(
       wishlistSet.size
     );
@@ -277,7 +277,7 @@ export async function addToWishlist(
 
   }
 
-  // 🔥 optimistic update
+  // optimistic update
   wishlistSet.add(id);
 
   updateWishlistCount(
@@ -310,7 +310,7 @@ export async function addToWishlist(
 
     console.error(err);
 
-    // 🔥 rollback
+    // rollback
     wishlistSet.delete(id);
 
     updateWishlistCount(
@@ -356,7 +356,7 @@ export async function openVariantModal(productId) {
   modal.classList.add("flex");
   document.body.classList.add("overflow-hidden");
 
-  // 🔥 loading state
+  //  loading state
   container.innerHTML = `
     <p class="text-sm text-black/60">Loading options...</p>
   `;
@@ -476,10 +476,10 @@ function attachVariantEvents(product) {
   const errorEl = document.getElementById("variantError");
   const confirmBtn = document.getElementById("confirmMoveToCart");
 
-  // 🔴 Reset error
+  //  Reset error
   if (errorEl) errorEl.classList.add("hidden");
 
-  // 🔴 MATERIAL CLICK
+  //  MATERIAL CLICK
   document.querySelectorAll(".variant-material").forEach((btn) => {
     btn.onclick = () => {
       selectedMaterial = btn.dataset.m;
@@ -496,7 +496,7 @@ function attachVariantEvents(product) {
     };
   });
 
-  // 🔴 SIZE CLICK
+  //  SIZE CLICK
   document.querySelectorAll(".variant-size").forEach((btn) => {
     btn.onclick = () => {
       selectedSize = btn.dataset.s;
@@ -513,13 +513,13 @@ function attachVariantEvents(product) {
     };
   });
 
-  // 🔴 CONFIRM BUTTON
+  //  CONFIRM BUTTON
   if (confirmBtn) {
     confirmBtn.onclick = null;
 
     confirmBtn.onclick = async () => {
       try {
-        // 🔴 VALIDATION
+        //  VALIDATION
         if (!selectedVariantId) {
           errorEl?.classList.remove("hidden");
           return;
@@ -527,11 +527,11 @@ function attachVariantEvents(product) {
 
         errorEl?.classList.add("hidden");
 
-        // 🔒 prevent spam clicks
+        //  prevent spam clicks
         confirmBtn.disabled = true;
         confirmBtn.classList.add("opacity-50", "cursor-not-allowed");
 
-        // 🔥 1. ADD TO CART
+        // ADD TO CART
       const cartRes = await fetch(
   `${CONFIG.API_BASE}/v1/cart/${product._id}`,
   {
@@ -555,7 +555,7 @@ function attachVariantEvents(product) {
           throw new Error("Add to cart failed");
         }
 
-        // 🔥 2. REMOVE FROM WISHLIST
+        // REMOVE FROM WISHLIST
       await fetch(
   `${CONFIG.API_BASE}/v1/wishlist/${product._id}`,
   {
@@ -565,22 +565,22 @@ function attachVariantEvents(product) {
   }
 );
 
-        // 🔥 UX FIRST (instant feedback)
+        // UX FIRST (instant feedback)
         closeVariantModal();
         showToast("Added to cart");
 
-        // 🔄 Refresh wishlist (clean state)
+        // Refresh wishlist (clean state)
 
-        // 🔥 update local state
+        // update local state
         wishlistSet.delete(String(product._id));
 
         updateWishlistCount(wishlistSet.size);
         updateWishlistPageCount(wishlistSet.size);
 
-        // 🔥 remove card instantly
+        // remove card instantly
         document.querySelector(`[data-product-id="${product._id}"]`)?.remove();
 
-        // 🔥 empty state
+        // empty state
         const grid = document.getElementById("wishlistGrid");
 
         if (grid && !grid.children.length) {
@@ -594,7 +594,7 @@ function attachVariantEvents(product) {
         console.error("ERROR:", err);
         showToast("Something went wrong");
       } finally {
-        // 🔓 re-enable button
+        // re-enable button
         confirmBtn.disabled = false;
         confirmBtn.classList.remove("opacity-50", "cursor-not-allowed");
       }

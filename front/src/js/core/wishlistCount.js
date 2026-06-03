@@ -1,6 +1,10 @@
-// core/wishlistCount.js
+ 
+
+
 export function updateWishlistCount(count) {
+
   const badge = document.getElementById("wishlistCount");
+
   if (!badge) return;
 
   if (count > 0) {
@@ -10,8 +14,6 @@ export function updateWishlistCount(count) {
     badge.classList.add("hidden");
   }
 }
-
-
 
 
 export function updateWishlistPageCount(count) {

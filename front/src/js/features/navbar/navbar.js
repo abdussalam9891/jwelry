@@ -1,8 +1,9 @@
 import { createNavbar } from "../../components/navbar/navbar.js";
 
 import { getCurrentUser, logout } from "../../core/authState.js";
+import { loadCart } from "../cart.js";
 
-import { updateWishlistCount } from "../../core/wishlistCount.js";
+
 
 import { loadWishlistState } from "../wishlist.js";
 
@@ -35,6 +36,7 @@ export async function loadNavbar() {
 
   if (user) {
     await loadWishlistState();
+    await loadCart();
   }
 
   initializeNavbar();
@@ -45,7 +47,7 @@ export async function loadNavbar() {
   initNavbarScroll();
   setActiveNav();
   initSearchHandlers();
-  updateWishlistCount();
+
 
   // MOBILE LOGOUT
   document

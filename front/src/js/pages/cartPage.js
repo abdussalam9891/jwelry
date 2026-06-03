@@ -8,6 +8,7 @@ import {
 import { createCartItem } from "../components/cartItem.js";
 import { showToast } from "../components/toast.js";
 import { addToWishlist } from "../features/wishlist.js";
+import { loadWishlistState } from "../features/wishlist.js";
 
 let selectedId = null;
 let isUpdating = false;
@@ -16,6 +17,7 @@ async function init() {
   setupModal();
   setupCartEvents();
   await loadCart();
+  await loadWishlistState();
   render();
 }
 
@@ -67,7 +69,7 @@ function render() {
 
   if (!container) return;
 
-  // 🔥 EMPTY CART
+  // EMPTY CART
   if (!Array.isArray(data) || !data.length) {
     container.innerHTML = `
 
@@ -152,19 +154,19 @@ async function handleCartClick(e) {
   const wishlistBtn = e.target.closest(".move-to-wishlist");
   const link = e.target.closest(".product-link");
 
-  // 🔥 Navigate
+  // Navigate
   if (link) {
     window.location.href = `/pages/productDetails.html?slug=${link.dataset.slug}`;
     return;
   }
 
-  // 🔥 Remove item
+  // Remove item
   if (removeBtn) {
     openModal(removeBtn.dataset.id);
     return;
   }
 
-  // 🔥 Move to wishlist
+  // Move to wishlist
   if (wishlistBtn) {
     try {
       const itemId = wishlistBtn.dataset.id;
@@ -173,13 +175,13 @@ async function handleCartClick(e) {
 
       if (!item) return;
 
-      // 🔥 add product to wishlist
+      // add product to wishlist
       await addToWishlist(item.productId);
 
-      // 🔥 remove from cart
+      // remove from cart
       await removeItem(itemId);
 
-      // 🔥 refresh UI
+      // refresh UI
       render();
 
       showToast("Moved to wishlist");
@@ -191,7 +193,7 @@ async function handleCartClick(e) {
     return;
   }
 
-  // 🔥 Quantity update
+  // Quantity update
   if (!qtyBtn) return;
 
   const type = qtyBtn.dataset.type;
@@ -251,7 +253,7 @@ export function renderSummary({ showCheckoutButton = true } = {}) {
     return;
   }
 
-  // 🔥 CALCULATIONS
+  // CALCULATIONS
   const subtotal = data.reduce((sum, item) => {
     if (!item || typeof item.price !== "number") {
       return sum;
@@ -272,7 +274,7 @@ export function renderSummary({ showCheckoutButton = true } = {}) {
 
   const totalItems = data.reduce((sum, item) => sum + item.quantity, 0);
 
-  // 🔥 UI
+  // UI
   el.innerHTML = `
 
     <!-- ITEMS -->
@@ -492,5 +494,6 @@ export async function initCartPage() {
   setupModal();
   setupCartEvents();
   await loadCart();
+   await loadWishlistState();
   render();
 }
