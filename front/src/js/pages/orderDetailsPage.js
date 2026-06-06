@@ -81,6 +81,14 @@ async function initOrderDetailsPage() {
 }
 
 function renderOrder(order) {
+
+
+  console.log(order);
+console.log(order.coupon);
+
+
+
+
   //  formatted date
   const formattedDate = new Date(order.createdAt).toLocaleDateString("en-IN", {
     day: "2-digit",
@@ -99,6 +107,113 @@ function renderOrder(order) {
   //  top info
   document.getElementById("orderDate").textContent =
     `Placed on ${formattedDate}`;
+
+
+    document.getElementById(
+  "orderNumber"
+).textContent =
+  order.orderNumber;
+
+
+
+
+
+
+if (
+  order.coupon &&
+  order.coupon.discountAmount > 0
+) {
+
+  document.getElementById(
+    "couponBadge"
+  ).innerHTML = `
+    <div
+      class="
+        mt-4
+
+        rounded-2xl
+
+        border
+        border-green-200
+
+        bg-green-50
+
+        px-5
+        py-4
+      "
+    >
+
+      <p
+        class="
+          text-xs
+          uppercase
+          tracking-wide
+          text-green-600
+        "
+      >
+        Coupon Applied
+      </p>
+
+      <div
+        class="
+          mt-2
+
+          flex
+          items-center
+          justify-between
+          gap-6
+        "
+      >
+        <div>
+
+          <p
+            class="
+              font-semibold
+              text-green-800
+            "
+          >
+            ${order.coupon.code}
+          </p>
+
+          <p
+            class="
+              text-sm
+              text-green-700
+            "
+          >
+            Discount successfully applied
+          </p>
+
+        </div>
+
+        <div
+          class="
+            text-right
+          "
+        >
+          <p
+            class="
+              text-xs
+              text-green-600
+            "
+          >
+            Savings
+          </p>
+
+          <p
+            class="
+              text-lg
+              font-bold
+              text-green-700
+            "
+          >
+            ₹${order.coupon.discountAmount.toLocaleString()}
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+}
 
   document.getElementById("orderStatus").textContent = status;
 
@@ -232,15 +347,80 @@ function renderOrder(order) {
   document.getElementById("subtotalPrice").textContent =
     `₹${order.itemsPrice.toLocaleString()}`;
 
+if (
+  order.coupon &&
+  order.coupon.discountAmount > 0
+) {
+
+  document
+    .getElementById(
+      "couponRow"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+  document.getElementById(
+    "couponCode"
+  ).innerHTML = `
+    <span
+      class="
+        inline-flex
+        items-center
+
+        rounded-full
+
+        bg-green-100
+
+        px-3
+        py-1
+
+        text-xs
+        font-medium
+
+        text-green-700
+      "
+    >
+      ${order.coupon.code}
+    </span>
+  `;
+
+  document.getElementById(
+    "couponDiscount"
+  ).textContent =
+    `-₹${order.coupon.discountAmount.toLocaleString()}`;
+}
+
   document.getElementById("shippingPrice").textContent =
     order.shippingPrice > 0
       ? `₹${order.shippingPrice.toLocaleString()}`
       : "Free";
 
-  document.getElementById("totalPrice").textContent =
-    `₹${order.totalPrice.toLocaleString()}`;
+ document.getElementById(
+  "totalPrice"
+).textContent =
+  `₹${order.totalPrice.toLocaleString()}`;
 
-  document.getElementById("paymentMethod").textContent = order.paymentMethod;
+/* SAVINGS */
+
+if (
+  order.coupon &&
+  order.coupon.discountAmount > 0
+) {
+
+  document.getElementById(
+    "totalSavings"
+  ).textContent =
+    `You saved ₹${order.coupon.discountAmount.toLocaleString()}`;
+
+}
+
+document.getElementById(
+  "paymentMethod"
+).textContent =
+  order.paymentMethod;
+
+
 }
 
 initOrderDetailsPage();

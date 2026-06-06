@@ -50,10 +50,13 @@ function loadFooter() {
                 <a href="/pages/contact.html" class="hover:text-white transition">Contact</a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">Shipping</a>
+                <a href="/pages/shipping.html" class="hover:text-white transition">Shipping</a>
               </li>
               <li>
-                <a href="#" class="hover:text-white transition">Returns</a>
+                <a href="/pages/returns.html" class="hover:text-white transition">Returns</a>
+              </li>
+               <li>
+                <a href="/pages/warranty.html" class="hover:text-white transition">Warranty</a>
               </li>
             </ul>
           </div>

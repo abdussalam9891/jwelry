@@ -199,7 +199,7 @@ function setupPlaceOrder() {
 
   btn.addEventListener("click", async () => {
     try {
-      // 🔥 selected address
+      // selected address
       const selectedAddress = document.querySelector(
         'input[name="selectedAddress"]:checked',
       );
@@ -212,24 +212,58 @@ function setupPlaceOrder() {
         return;
       }
 
-      // 🔥 selected payment
+      // selected payment
       const selectedPayment = document.querySelector(
         'input[name="payment"]:checked',
       );
 
       const paymentMethod = selectedPayment?.value || "COD";
 
-      // 🔥 disable button
+      // disable button
       btn.disabled = true;
 
       btn.textContent = "Placing Order...";
 
-      // 🔥 create order
-      const data = await createOrder({
-        addressId: selectedAddress.value,
 
-        paymentMethod,
-      });
+
+
+
+
+const appliedCoupon =
+  JSON.parse(
+    localStorage.getItem(
+      "appliedCoupon"
+    )
+  );
+
+
+
+      console.log(
+  "Applied Coupon:",
+  appliedCoupon
+);
+
+console.log(
+  "Coupon Code:",
+  appliedCoupon?.coupon?.code
+);
+
+
+      // create order
+    const data = await createOrder({
+  addressId:
+    selectedAddress.value,
+
+  paymentMethod,
+
+  couponCode:
+    appliedCoupon?.coupon
+      ?.code,
+});
+
+localStorage.removeItem(
+  "appliedCoupon"
+);
 
       // 🔥 success
       showToast("Order placed successfully");
