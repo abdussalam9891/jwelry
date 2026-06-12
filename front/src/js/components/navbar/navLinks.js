@@ -1,9 +1,5 @@
 export const navLinks = [
-  {
-    label: "All Jewellery",
-    slug: "",
-    nav: "all jewellery"
-  },
+  
   {
     label: "Rings",
     slug: "rings",

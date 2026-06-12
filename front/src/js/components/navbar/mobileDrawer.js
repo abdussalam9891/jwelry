@@ -1,4 +1,5 @@
 import { navLinks } from "./navLinks.js";
+import { collections } from "./collections.js";
 
 export function createMobileDrawer(user = null) {
   const linksHTML = navLinks
@@ -27,6 +28,29 @@ export function createMobileDrawer(user = null) {
       `;
     })
     .join("");
+
+   const collectionLinks = collections
+  .map(
+    (collection) => `
+      <a
+        href="/pages/collection.html?slug=${collection.slug}"
+        class="
+          py-3
+          px-2
+          text-[#1A1A1A]
+          text-[15px]
+          font-medium
+          border-b
+          border-black/5
+          hover:text-[#6B1A2A]
+          transition-colors
+        "
+      >
+        ${collection.name}
+      </a>
+    `
+  )
+  .join("");
 
   const userSection = user
     ? `
@@ -323,9 +347,36 @@ export function createMobileDrawer(user = null) {
       ${userSection}
       ${accountLinks}
 
-      <nav class="flex flex-col gap-0 mt-5">
-        ${linksHTML}
-      </nav>
+     <nav class="flex flex-col gap-0 mt-5">
+
+  ${linksHTML}
+
+  <div class="mt-6">
+    <p
+      class="
+        px-2
+        mb-3
+        text-[11px]
+        uppercase
+        tracking-[0.25em]
+        text-black/40
+      "
+    >
+      Collections
+    </p>
+
+    <div
+      class="
+        flex
+        flex-col
+        gap-2
+      "
+    >
+      ${collectionLinks}
+    </div>
+  </div>
+
+</nav>
 
       ${logoutSection}
       ${authSection}

@@ -124,7 +124,7 @@ async function initOrdersPage() {
       return;
     }
 
-    // 🔥 render orders
+    //   render orders
     container.innerHTML = orders.map(createOrderCard).join("");
   } catch (err) {
     console.error(err);

@@ -1,5 +1,22 @@
 import api from "../core/api.js";
 
+
+
+
+
+export async function getProducts(
+  params = {}
+) {
+  const query =
+    new URLSearchParams(
+      params
+    ).toString();
+
+  return api.get(
+    `/v1/products?${query}`
+  );
+}
+
 export async function getProductBySlug(
 slug
 ) {

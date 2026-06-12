@@ -12,7 +12,7 @@
 
 //       method,
 
-//       // 🔥 send HttpOnly cookies
+//       //   send HttpOnly cookies
 //       credentials: "include",
 
 //       headers: {
@@ -31,7 +31,7 @@
 //       config
 //     );
 
-//     // 🔥 Handle API errors
+//     //   Handle API errors
 //     if (!res.ok) {
 
 //       let errorMsg =
@@ -57,14 +57,14 @@
 
 //     }
 
-//     // 🔥 No content
+//     //   No content
 //     if (res.status === 204) {
 
 //       return null;
 
 //     }
 
-//     // 🔥 Parse JSON safely
+//     //   Parse JSON safely
 //     try {
 
 //       return await res.json();
@@ -129,37 +129,11 @@
 
 // export default api;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { CONFIG } from "../config.js";
 
 const api = {
-
-  async request(
-    method,
-    endpoint,
-    data = null
-  ) {
-
-    const isFormData =
-      data instanceof FormData;
+  async request(method, endpoint, data = null) {
+    const isFormData = data instanceof FormData;
 
     const config = {
       method,
@@ -169,128 +143,71 @@ const api = {
     };
 
     if (data) {
-
       if (isFormData) {
-
         // IMPORTANT:
         // Don't set Content-Type manually
         // Browser will set multipart/form-data boundary
         config.body = data;
-
       } else {
-
         config.headers = {
-          "Content-Type":
-            "application/json",
+          "Content-Type": "application/json",
         };
 
-        config.body =
-          JSON.stringify(data);
-
+        config.body = JSON.stringify(data);
       }
-
     }
 
-    const res = await fetch(
-      `${CONFIG.API_BASE}${endpoint}`,
-      config
-    );
+    const res = await fetch(`${CONFIG.API_BASE}${endpoint}`, config);
 
     // Handle API errors
     if (!res.ok) {
-
-      let errorMsg =
-        "Something went wrong";
+      let errorMsg = "Something went wrong";
 
       try {
+        const err = await res.json();
 
-        const err =
-          await res.json();
-
-        errorMsg =
-          err.message ||
-          errorMsg;
-
+        errorMsg = err.message || errorMsg;
       } catch {}
 
-      const error =
-        new Error(errorMsg);
+      const error = new Error(errorMsg);
 
-      error.status =
-        res.status;
+      error.status = res.status;
 
       throw error;
-
     }
 
     // No content
     if (res.status === 204) {
-
       return null;
-
     }
 
     // Parse JSON safely
     try {
-
       return await res.json();
-
     } catch {
-
       return null;
-
     }
-
   },
 
   get(endpoint) {
-
-    return api.request(
-      "GET",
-      endpoint
-    );
-
+    return api.request("GET", endpoint);
   },
 
   post(endpoint, data) {
-
-    return api.request(
-      "POST",
-      endpoint,
-      data
-    );
-
+    return api.request("POST", endpoint, data);
   },
 
   put(endpoint, data) {
-
-    return api.request(
-      "PUT",
-      endpoint,
-      data
-    );
-
+    return api.request("PUT", endpoint, data);
   },
 
   patch(endpoint, data) {
-
-    return api.request(
-      "PATCH",
-      endpoint,
-      data
-    );
-
+    return api.request("PATCH", endpoint, data);
   },
 
   delete(endpoint) {
-
-    return api.request(
-      "DELETE",
-      endpoint
-    );
-
+    return api.request("DELETE", endpoint);
   },
-
 };
 
 export default api;

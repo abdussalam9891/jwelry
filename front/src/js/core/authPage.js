@@ -3,7 +3,7 @@ import api from "../core/api.js";
 
 const status = document.getElementById("status");
 
-// 🔥 Handle Google auth callback
+//   Handle Google auth callback
 async function handleAuth() {
   try {
     const res = await api.get("/v1/auth/me");
@@ -12,7 +12,7 @@ async function handleAuth() {
       throw new Error("Not logged in");
     }
 
-    // 🔥 redirect back if needed
+    //   redirect back if needed
     const redirect = sessionStorage.getItem("redirectAfterLogin");
 
     sessionStorage.removeItem("redirectAfterLogin");
@@ -31,7 +31,7 @@ async function handleAuth() {
   }
 }
 
-// 🔥 Google button
+//   Google button
 document.getElementById("google-btn")?.addEventListener("click", () => {
   window.location.href = `${CONFIG.API_BASE}/v1/auth/google`;
 });
