@@ -171,7 +171,7 @@ export function createCategoryNav() {
         </a>
 
         <a
-          href="/pages/products.html?category=necklaces"
+          href="/pages/products.html?category=neckwears"
           class="
             group
             p-4
@@ -193,7 +193,7 @@ export function createCategoryNav() {
           >
 
           <p class="font-medium">
-            Necklaces
+            Neckwears
           </p>
         </a>
 

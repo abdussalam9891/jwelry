@@ -4,7 +4,7 @@ export function initSearchPlaceholder() {
     "Search for diamond jewellery",
     "Search for gold rings",
     "Search for earrings",
-    "Search for necklaces",
+    "Search for Neckwears",
   ];
 
   const input = document.getElementById("searchInput");

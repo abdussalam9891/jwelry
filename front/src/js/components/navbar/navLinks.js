@@ -1,14 +1,14 @@
 export const navLinks = [
-  
+
   {
     label: "Rings",
     slug: "rings",
     nav: "rings"
   },
   {
-    label: "Necklaces",
-    slug: "necklaces",
-    nav: "necklaces"
+    label: "Neckwears",
+    slug: "neckwears",
+    nav: "neckwears"
   },
   {
     label: "Earrings",

@@ -1,5 +1,7 @@
 
-
+import {
+  getTestimonials,
+} from "../js/services/reviewService.js";
 
 import { loadNavbar }
 from "./features/navbar/navbar.js";
@@ -13,6 +15,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
+async function loadTestimonials() {
+  try {
+    const reviews =
+      await getTestimonials();
+
+    renderTestimonials(
+      reviews
+    );
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 
 

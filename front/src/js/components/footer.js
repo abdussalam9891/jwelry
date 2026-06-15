@@ -26,7 +26,7 @@ function loadFooter() {
             <ul class="space-y-3 text-sm text-white/70">
               <li><a href="/pages/products.html?category=rings" class="hover:text-white transition">Rings</a></li>
               <li>
-                <a href="/pages/products.html?category=necklaces" class="hover:text-white transition">Necklaces</a>
+                <a href="/pages/products.html?category=neckwears" class="hover:text-white transition">Neckwears</a>
               </li>
               <li>
                 <a href="/pages/products.html?category=earrings" class="hover:text-white transition">Earrings</a>
