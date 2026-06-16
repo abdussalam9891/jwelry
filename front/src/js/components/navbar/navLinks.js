@@ -1,23 +1,30 @@
-export const navLinks = [
+// export const navLinks = [
+//   {
+//     label: "Rings",
+//     slug: "rings",
+//     nav: "rings"
+//   },
 
-  {
-    label: "Rings",
-    slug: "rings",
-    nav: "rings"
-  },
-  {
-    label: "Neckwears",
-    slug: "neckwears",
-    nav: "neckwears"
-  },
-  {
-    label: "Earrings",
-    slug: "earrings",
-    nav: "earrings"
-  },
-  {
-    label: "Bracelets",
-    slug: "bracelets",
-    nav: "bracelets"
-  }
-];
+//   {
+//     label: "Earrings",
+//     slug: "earrings",
+//     nav: "earrings"
+//   },
+
+//   {
+//     label: "Neckwears",
+//     slug: "neckwears",
+//     nav: "neckwears"
+//   },
+
+//   {
+//     label: "Bracelets",
+//     slug: "bracelets",
+//     nav: "bracelets"
+//   },
+
+//   {
+//     label: "More",
+//     nav: "more"
+//   }
+// ];

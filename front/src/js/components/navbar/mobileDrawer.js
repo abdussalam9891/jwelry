@@ -1,56 +1,292 @@
-import { navLinks } from "./navLinks.js";
-import { collections } from "./collections.js";
+import {
+  jewelleryNavigation,
+  collections,
+  moreCategories,
+} from "./navbarNavigation.js";
 
 export function createMobileDrawer(user = null) {
-  const linksHTML = navLinks
-    .map((link) => {
-      const href = link.slug
-        ? `/pages/products.html?category=${link.slug}`
-        : "/pages/products.html";
 
-      return `
-        <a
-          href="${href}"
-          class="
-            py-3
-            px-2
-            text-[#1A1A1A]
-            text-[15px]
-            font-medium
-            border-b
-            border-black/5
-            hover:text-[#6B1A2A]
-            transition-colors
-          "
-        >
-          ${link.label}
-        </a>
-      `;
-    })
-    .join("");
-
-   const collectionLinks = collections
+  
+const linksHTML = jewelleryNavigation
   .map(
-    (collection) => `
-      <a
-        href="/pages/collection.html?slug=${collection.slug}"
+    (category) => `
+
+      <details
         class="
-          py-3
-          px-2
-          text-[#1A1A1A]
-          text-[15px]
-          font-medium
           border-b
           border-black/5
-          hover:text-[#6B1A2A]
-          transition-colors
+          group
         "
       >
-        ${collection.name}
-      </a>
+
+
+        <summary
+          class="
+            list-none
+            flex
+            items-center
+            justify-between
+            py-4
+            px-2
+            cursor-pointer
+            text-[15px]
+            font-medium
+            text-[#1A1A1A]
+          "
+        >
+
+
+
+
+
+          <span>${category.label}</span>
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="
+              w-4
+              h-4
+              transition-transform
+              duration-300
+              group-open:rotate-180
+            "
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+
+        </summary>
+
+        <div
+          class="
+            pb-3
+            pl-4
+            flex
+            flex-col
+            gap-1
+          "
+        >
+
+          ${category.productTypes
+            .map(
+              (type) => `
+                <a
+                  href="/pages/products.html?category=${category.category}&productType=${type.value}"
+                  class="
+                    py-2
+                    text-[14px]
+                    text-black/65
+                    hover:text-[#6B1A2A]
+                  "
+                >
+                  ${type.label}
+                </a>
+              `
+            )
+            .join("")}
+
+          <a
+            href="/pages/products.html?category=${category.category}"
+            class="
+              mt-2
+              pt-3
+              border-t
+              border-black/5
+              text-[#6B1A2A]
+              text-sm
+              font-medium
+            "
+          >
+            View All ${category.label}
+          </a>
+
+        </div>
+
+      </details>
     `
   )
   .join("");
+
+
+
+ const moreCategoriesHTML = `
+  <details
+    class="
+      border
+      border-black/5
+      rounded-2xl
+      bg-white
+      mt-4
+      overflow-hidden
+      group
+    "
+  >
+
+    <summary
+      class="
+        list-none
+        flex
+        items-center
+        justify-between
+        py-4
+        px-4
+        cursor-pointer
+        text-[15px]
+        font-medium
+        text-[#1A1A1A]
+      "
+    >
+
+      <span>More Categories</span>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="
+          w-4
+          h-4
+          transition-transform
+          duration-300
+          group-open:rotate-180
+        "
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+
+    </summary>
+
+    <div
+      class="
+        flex
+        flex-col
+        pb-3
+      "
+    >
+
+      ${moreCategories
+        .map(
+          (category) => `
+            <a
+              href="/pages/products.html?category=${category.slug}"
+              class="
+                px-4
+                py-3
+                text-[14px]
+                text-black/70
+                hover:text-[#6B1A2A]
+                transition-colors
+              "
+            >
+              ${category.label}
+            </a>
+          `
+        )
+        .join("")}
+
+    </div>
+
+  </details>
+`;
+
+ const collectionLinks = `
+  <details
+    class="
+      border
+      border-black/5
+      rounded-2xl
+      bg-white
+      mt-4
+      overflow-hidden
+      group
+    "
+  >
+
+    <summary
+      class="
+        list-none
+        flex
+        items-center
+        justify-between
+        py-4
+        px-4
+        cursor-pointer
+        text-[15px]
+        font-medium
+        text-[#1A1A1A]
+      "
+    >
+
+      <span>Collections</span>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="
+          w-4
+          h-4
+          transition-transform
+          duration-300
+          group-open:rotate-180
+        "
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        />
+      </svg>
+
+    </summary>
+
+    <div
+      class="
+        flex
+        flex-col
+        pb-3
+      "
+    >
+
+      ${collections
+        .map(
+          (collection) => `
+            <a
+              href="/pages/collection.html?slug=${collection.slug}"
+              class="
+                px-4
+                py-3
+                text-[14px]
+                text-black/70
+                hover:text-[#6B1A2A]
+                transition-colors
+              "
+            >
+              ${collection.name}
+            </a>
+          `
+        )
+        .join("")}
+
+    </div>
+
+  </details>
+`;
 
   const userSection = user
     ? `
@@ -350,6 +586,23 @@ export function createMobileDrawer(user = null) {
      <nav class="flex flex-col gap-0 mt-5">
 
   ${linksHTML}
+
+<div class="mt-4">
+  <p
+    class="
+      px-2
+      mb-2
+      text-[11px]
+      uppercase
+      tracking-[0.25em]
+      text-black/40
+    "
+  >
+    More Categories
+  </p>
+
+  ${moreCategoriesHTML}
+</div>
 
   <div class="mt-6">
     <p
