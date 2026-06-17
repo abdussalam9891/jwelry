@@ -9,6 +9,8 @@ import {
 
 import {
   initFilterEvents,
+  initDropdownEvents,
+  syncFiltersFromURL,
 } from "../features/products/filterEvents.js";
 
 import {
@@ -26,36 +28,58 @@ import {
 import {
   setPageTitle,
 } from "../features/products/pageTitle.js";
+import {
+  renderCollectionHeader,
+  renderCollectionBanner,
+} from "../features/products/collectionHeader.js";
+import {
+  renderFilterBar,
+} from "../features/products/filterBar.js";
+
+import { renderFilterDropdowns }
+from "../features/products/renderFilters.js";
+
+
 
 async function initProductsPage() {
   try {
 
-    // FILTER UI
-    renderAllFilters();
+    document.getElementById("collectionHeader").innerHTML =
+      renderCollectionHeader();
 
-    // FILTER EVENTS
-    initFilterEvents();
+      document.getElementById(
+  "collectionBanner"
+).innerHTML =
+  renderCollectionBanner();
 
-    // MOBILE DRAWER
-    initMobileFilters();
+    document.getElementById("filterBar").innerHTML =
+      renderFilterBar();
 
-    // SORTING
-    initSort();
+      document.getElementById(
+  "filterDropdowns"
+).innerHTML =
+  renderFilterDropdowns();
 
-    // PAGE TITLE
+   renderAllFilters();
+
+syncFiltersFromURL();
+
+initFilterEvents();
+
+initMobileFilters();
+
+initDropdownEvents();
+
+initSort();
+
     setPageTitle();
 
-    // PRODUCTS
     await loadProducts();
 
-    // WISHLIST
     initWishlist();
 
   } catch (error) {
-    console.error(
-      "[ProductsPage]",
-      error
-    );
+    console.error("[ProductsPage]", error);
   }
 }
 
