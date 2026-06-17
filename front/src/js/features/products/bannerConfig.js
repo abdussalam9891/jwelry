@@ -3,7 +3,8 @@ export const collectionBannerConfig = {
     image:
       "/src/assets/images/ringNav.webp",
 
-
+    mobileTitle:
+      "Rings",
 
     title:
       "Jewellery That Marks Every Occasion",
@@ -16,6 +17,8 @@ export const collectionBannerConfig = {
     image:
       "/src/assets/images/earringNav.webp",
 
+    mobileTitle:
+      "Earrings",
 
     title:
       "Elegant Details That Shine",
@@ -28,7 +31,8 @@ export const collectionBannerConfig = {
     image:
       "/src/assets/images/necklaceNav.webp",
 
-
+    mobileTitle:
+      "Neckwear",
 
     title:
       "Crafted To Frame Every Look",
@@ -41,7 +45,8 @@ export const collectionBannerConfig = {
     image:
       "/src/assets/images/bangleNav.jpg",
 
-
+    mobileTitle:
+      "Bracelets",
 
     title:
       "Designed For Everyday Luxury",
@@ -54,7 +59,8 @@ export const collectionBannerConfig = {
     image:
       "/src/assets/images/vintage.jpg",
 
-
+    mobileTitle:
+      "Jewellery",
 
     title:
       "Jewellery That Becomes Part Of Your Story",

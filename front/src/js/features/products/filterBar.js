@@ -100,20 +100,23 @@ const defaultBtn = `
 
   return `
     <div
-      class="
-        flex
-        items-center
-        justify-between
-        gap-4
+  class="
+    flex
+    flex-wrap
 
-        py-2
+    items-center
+    justify-between
 
-        border-y
-        border-black/8
+    gap-3
 
-        bg-white
-      "
-    >
+    py-3
+
+    border-y
+    border-black/8
+
+    bg-white
+  "
+>
 
       <div
         class="
@@ -266,13 +269,16 @@ const defaultBtn = `
 
       </div>
 
-      <div
-        class="
-          flex
-          items-center
-          gap-5
-        "
-      >
+     <div
+  class="
+    flex
+    items-center
+
+    ml-auto
+
+    md:ml-0
+  "
+>
  <button
   id="clearFilters"
   class="
@@ -281,9 +287,9 @@ const defaultBtn = `
     text-sm
     font-medium
 
-    text-black/45
+    text-[#6B1A2A]
 
-    hover:text-[#6B1A2A]
+hover:text-[#6B1A2A]
 
     transition-all
     duration-300

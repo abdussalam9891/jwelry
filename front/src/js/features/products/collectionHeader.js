@@ -69,16 +69,7 @@ export function renderCollectionHeader() {
           "
         >
 
-          <p
-            class="
-              text-[11px]
-              uppercase
-              tracking-[0.25em]
-              text-black/35
-            "
-          >
-            Products
-          </p>
+           
 
           <p
             id="productCount"
@@ -202,17 +193,7 @@ export function renderCollectionBanner() {
         "
       >
 
-        <p
-          class="
-            uppercase
-            tracking-[0.35em]
-            text-[11px]
-            text-white/80
-            mb-4
-          "
-        >
-          ${banner.eyebrow}
-        </p>
+
 
         <h2
           class="
@@ -227,19 +208,11 @@ export function renderCollectionBanner() {
           ${banner.title}
         </h2>
 
-        <p
-          class="
-            max-w-xl
-            text-lg
-            text-white/85
-            leading-relaxed
-          "
-        >
-          ${banner.description}
-        </p>
+
 
       </div>
 
     </div>
   `;
 }
+
