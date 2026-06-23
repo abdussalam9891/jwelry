@@ -5,7 +5,7 @@ export function createMainNavbar() {
   return `
     <nav
       id="mainNav"
-      class="fixed top-0 left-0 right-0 z-[1000] bg-[#F9F6F2] transition-transform duration-300"
+      class="fixed top-10 left-0 right-0 z-[1000] bg-[#F9F6F2] transition-transform duration-300"
     >
 
       <div

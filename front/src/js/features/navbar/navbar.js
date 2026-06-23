@@ -3,8 +3,6 @@ import { createNavbar } from "../../components/navbar/navbar.js";
 import { getCurrentUser, logout } from "../../core/authState.js";
 import { loadCart } from "../cart.js";
 
-
-
 import { loadWishlistState } from "../wishlist.js";
 
 import { setActiveNav } from "./navbarActive.js";
@@ -17,7 +15,14 @@ import { initializeNavbar } from "./navbarMobile.js";
 
 import { initNavbarScroll } from "./navbarScroll.js";
 
-import { initSearchHandlers, initSearchPlaceholder,  initSearchButton,initSearchSuggestions} from "./navbarSearch.js";
+import {
+  initSearchButton,
+  initSearchHandlers,
+  initSearchPlaceholder,
+  initSearchSuggestions,
+} from "./navbarSearch.js";
+import { initAnnouncementBar }
+from "./navbarAnnouncement.js";
 
 export async function loadNavbar() {
   // GET USER FIRST
@@ -49,7 +54,7 @@ export async function loadNavbar() {
   initSearchHandlers();
   initSearchButton();
   initSearchSuggestions();
-
+  initAnnouncementBar();
 
   // MOBILE LOGOUT
   document
