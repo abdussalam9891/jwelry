@@ -17,7 +17,7 @@ import { initializeNavbar } from "./navbarMobile.js";
 
 import { initNavbarScroll } from "./navbarScroll.js";
 
-import { initSearchHandlers, initSearchPlaceholder,  initSearchButton,} from "./navbarSearch.js";
+import { initSearchHandlers, initSearchPlaceholder,  initSearchButton,initSearchSuggestions} from "./navbarSearch.js";
 
 export async function loadNavbar() {
   // GET USER FIRST
@@ -48,6 +48,7 @@ export async function loadNavbar() {
   setActiveNav();
   initSearchHandlers();
   initSearchButton();
+  initSearchSuggestions();
 
 
   // MOBILE LOGOUT

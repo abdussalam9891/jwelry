@@ -1,3 +1,9 @@
+import {
+  getSearchSuggestions,
+} from "../../services/productService.js";
+
+
+
 let placeholderInterval;
 export function initSearchPlaceholder() {
   const placeholders = [
@@ -85,4 +91,73 @@ function performSearch(value) {
   }
 
   window.location.href = `/pages/products.html?${params.toString()}`;
+}
+
+
+
+export function initSearchSuggestions() {
+  document
+    .querySelectorAll("[data-search-input]")
+    .forEach((input) => {
+      const dropdown =
+        document.getElementById(
+          `${input.id}-suggestions`
+        );
+
+      input.addEventListener(
+        "input",
+        async (e) => {
+          const value =
+            e.target.value.trim();
+
+          if (value.length < 2) {
+            dropdown?.classList.add(
+              "hidden"
+            );
+            return;
+          }
+
+         const suggestions =
+  await getSearchSuggestions(
+    value
+  );
+
+        
+
+          dropdown.innerHTML =
+            suggestions
+              .map(
+                (item) => `
+                <div
+                  class="p-3 hover:bg-gray-100 cursor-pointer"
+                  data-name="${item.name}"
+                >
+                  ${item.name}
+                </div>
+              `
+              )
+              .join("");
+
+          dropdown.classList.remove(
+            "hidden"
+          );
+        }
+      );
+
+      dropdown?.addEventListener(
+        "click",
+        (e) => {
+          const item =
+            e.target.closest(
+              "[data-name]"
+            );
+
+          if (!item) return;
+
+          performSearch(
+            item.dataset.name
+          );
+        }
+      );
+    });
 }

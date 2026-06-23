@@ -25,6 +25,18 @@ return api.get(
 );
 }
 
+export async function getSearchSuggestions(
+  query
+) {
+  return api.get(
+    `/v1/products/search-suggestions?q=${encodeURIComponent(
+      query
+    )}`
+  );
+}
+
+
+
 export async function getProductReviews(
 productId,
 page = 1,
