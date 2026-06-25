@@ -136,20 +136,29 @@
                 </div>
               </label>
 
-              <!-- RAZORPAY -->
-              <label
-                class="flex items-center justify-between border rounded-xl px-4 py-4 opacity-50 cursor-not-allowed"
-              >
-                <div class="flex items-center gap-3">
-                  <input type="radio" disabled />
+           <label
+  class="flex items-center justify-between border rounded-xl px-4 py-4 cursor-pointer hover:border-[#6B1A2A] transition"
+>
+  <div class="flex items-center gap-3">
 
-                  <div>
-                    <p class="font-medium">Razorpay</p>
+    <input
+      type="radio"
+      name="payment"
+      value="RAZORPAY"
+    />
 
-                    <p class="text-xs text-black/50">Coming soon</p>
-                  </div>
-                </div>
-              </label>
+    <div>
+      <p class="font-medium">
+        Razorpay
+      </p>
+
+      <p class="text-xs text-black/50">
+        UPI, Cards, NetBanking & Wallets
+      </p>
+    </div>
+
+  </div>
+</label>
             </div>
           </div>
         </div>
@@ -402,6 +411,8 @@
       ></div>
     </main>
 
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script type="module">
       import "../src/js/pages/checkoutPage.js";
     </script>
