@@ -25,6 +25,7 @@
     min-h-[80vh]
     overflow-hidden
     mt-24
+    py-28
   "
 >
 
@@ -201,59 +202,40 @@
 
 
 
-  
+
 </div>
 
 </section>
 
   <!-- PRODUCTS -->
 
-  <section class="py-24">
+<section id="productsSection" class="py-24">
+  <div class="container-main">
 
-    <div class="container-main">
+   <div
+  class="flex items-center justify-between mb-12"
+>
 
-      <div
-        class="flex justify-between items-center mb-12"
-      >
+  <h2
+    id="productsHeading"
+    class="text-3xl font-light"
+  ></h2>
 
-        <h2
-          class="text-3xl font-light"
-          id="productsHeading"
-        >
-        </h2>
+  <div id="sortContainer"></div>
 
-        <select
-          id="sortSelect"
-          class="border-b border-black/20 bg-transparent"
-        >
-          <option value="">
-            Sort By
-          </option>
+</div>
 
-          <option value="price_asc">
-            Price Low → High
-          </option>
+    <div
+      id="productsGrid"
+      class="grid grid-cols-2 lg:grid-cols-4 gap-8"
+    ></div>
 
-          <option value="price_desc">
-            Price High → Low
-          </option>
-
-          <option value="newest">
-            Newest
-          </option>
-
-        </select>
-
-      </div>
-
-      <div
-        id="productsGrid"
-        class="grid grid-cols-2 lg:grid-cols-4 gap-8"
-      ></div>
-
+    <div class="mt-16">
+      <div id="pagination"></div>
     </div>
 
-  </section>
+  </div>
+</section>
 
 </main>
 

@@ -1,4 +1,4 @@
- 
+
 export function initSort() {
   const desktopSort =
     document.getElementById(
@@ -103,3 +103,17 @@ function syncSortSelect(
   }
 }
 
+
+export function renderSort() {
+  return `
+    <select
+      id="sortSelect"
+      class="border border-black/10 rounded-md px-4 py-2 text-sm bg-white"
+    >
+      <option value="">Sort By</option>
+      <option value="newest">Newest</option>
+      <option value="low">Price: Low to High</option>
+      <option value="high">Price: High to Low</option>
+    </select>
+  `;
+}

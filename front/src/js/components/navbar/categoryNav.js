@@ -31,34 +31,36 @@ export function createCategoryNav() {
     return `
       <li class="relative group">
 
-        <a
-          href="/pages/products.html?category=${category.category}"
-          data-nav="${category.category}"
-          class="
-            text-[#1A1A1A]
-            text-[0.95rem]
-            font-medium
-            relative
-            hover:text-[#6B1A2A]
-            transition-colors
-          "
-        >
-          ${category.label}
+      <a
+  href="/pages/products.html?category=${category.category}"
+  data-nav="${category.category}"
+  class="
+    text-[#6B1A2A]
+    text-[0.95rem]
+    font-medium
+    relative
+    transition-colors
+    hover:text-[#6B1A2A]
+    active-nav
+  "
+>
+  ${category.label}
 
-          <span
-            class="
-              absolute
-              bottom-[-4px]
-              left-0
-              w-0
-              h-0.5
-              bg-[#6B1A2A]
-              group-hover:w-full
-              transition-all
-              duration-300
-            "
-          ></span>
-        </a>
+  <span
+    class="
+      absolute
+      bottom-[-4px]
+      left-0
+      w-0
+      h-0.5
+      bg-[#6B1A2A]
+      group-hover:w-full
+      transition-all
+      duration-300
+      nav-underline
+    "
+  ></span>
+</a>
 
         <div
           class="

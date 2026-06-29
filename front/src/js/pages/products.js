@@ -19,6 +19,7 @@ import {
 
 import {
   initSort,
+  renderSort,
 } from "../features/products/sort.js";
 
 import {

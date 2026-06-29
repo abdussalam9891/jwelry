@@ -6,7 +6,7 @@ import {
 
 export function createMobileDrawer(user = null) {
 
-  
+
 const linksHTML = jewelleryNavigation
   .map(
     (category) => `
@@ -554,24 +554,24 @@ const linksHTML = jewelleryNavigation
     <div
       id="mobileMenu"
       class="
-        fixed
-        top-0
-        right-0
-        z-[999]
-        w-full
-        max-w-[320px]
-        h-[100dvh]
-        bg-[#F9F6F2]
-        translate-x-full
-        transition-transform
-        duration-300
-        flex
-        flex-col
-        overflow-y-auto
-        px-5
-        pt-5
-        pb-6
-      "
+  fixed
+  top-0
+  left-0
+  z-[11001]
+  w-full
+  max-w-[320px]
+  h-[100dvh]
+  bg-[#F9F6F2]
+  -translate-x-full
+  transition-transform
+  duration-300
+  flex
+  flex-col
+  overflow-y-auto
+  px-5
+  pt-5
+  pb-6
+"
     >
       <button
         id="drawerClose"

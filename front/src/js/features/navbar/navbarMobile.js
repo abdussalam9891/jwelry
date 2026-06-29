@@ -5,11 +5,16 @@ export function initializeNavbar() {
   const mainNav =
     document.getElementById("mainNav");
 
+
+
   const navToggle =
     document.getElementById("navToggle");
 
   const mobileMenu =
     document.getElementById("mobileMenu");
+
+    const announcementBar =
+  document.getElementById("announcementBar");
 
   const navOverlay =
     document.getElementById("navOverlay");
@@ -33,8 +38,14 @@ export function initializeNavbar() {
 
   function openMenu() {
 
+
+    mainNav.style.transform = "translateY(-100%)";
+
+announcementBar.style.transform =
+  "translateY(-100%)";
+
     mobileMenu.classList.remove(
-      "translate-x-full"
+      "-translate-x-full"
     );
 
     navOverlay.classList.remove(
@@ -55,8 +66,14 @@ export function initializeNavbar() {
 
   function closeMenu() {
 
+
+    mainNav.style.transform = "translateY(0)";
+
+announcementBar.style.transform =
+  "translateY(0)";
+
     mobileMenu.classList.add(
-      "translate-x-full"
+      "-translate-x-full"
     );
 
     navOverlay.classList.add(

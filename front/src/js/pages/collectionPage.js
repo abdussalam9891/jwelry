@@ -1,152 +1,103 @@
-import { getProducts } from "../services/productService.js";
+import {
+  loadProducts,
+} from "../features/products/loadProducts.js";
 
-const slug =
-  new URLSearchParams(
-    location.search
-  ).get("slug");
+import {
+  renderSort,
+  initSort,
+} from "../features/products/sort.js";
+
+import {
+  initWishlist,
+} from "../features/wishlist.js";
+
+const slug = new URLSearchParams(location.search).get("slug");
 
 const collectionConfig = {
   bridal: {
     title: "Bridal Collection",
-
-    image:
-      "/src/assets/images/bridal.jpg",
-
+    image: "/src/assets/images/bridal.jpg",
     description:
       "Timeless pieces crafted for life's most beautiful moments.",
   },
 
   luxury: {
     title: "Luxury Collection",
-
-    image:
-      "/src/assets/images/luxury.jpg",
-
+    image: "/src/assets/images/luxury.jpg",
     description:
       "Statement jewellery designed to stand out.",
   },
 
   minimal: {
     title: "Minimal Collection",
-
-    image:
-      "/src/assets/images/minimal.jpg",
-
+    image: "/src/assets/images/minimal.jpg",
     description:
       "Elegant simplicity for everyday wear.",
   },
 
   wedding: {
     title: "Wedding Collection",
-
-    image:
-      "/src/assets/images/wedding.jpg",
-
+    image: "/src/assets/images/wedding.jpg",
     description:
       "Celebrate forever with handcrafted wedding jewellery.",
   },
 
   engagement: {
     title: "Engagement Collection",
-
-    image:
-      "/src/assets/images/engagement.jpg",
-
+    image: "/src/assets/images/engagement.jpg",
     description:
       "Made for unforgettable proposals.",
   },
-
-  
 };
 
-async function loadCollection() {
-  const config =
-    collectionConfig[slug];
+async function initCollectionPage() {
+  try {
+    const config = collectionConfig[slug];
 
-  if (!config) return;
+    if (!config) return;
 
-  document.getElementById(
-    "heroTitle"
-  ).textContent =
-    config.title;
+    // Hero
+    document.getElementById("heroTitle").textContent =
+      config.title;
 
-  document.getElementById(
-    "heroDescription"
-  ).textContent =
-    config.description;
+    document.getElementById("heroDescription").textContent =
+      config.description;
 
-  document.getElementById(
-    "heroImage"
-  ).src =
-    config.image;
+    document.getElementById("heroImage").src =
+      config.image;
 
-  document.getElementById(
-    "productsHeading"
-  ).textContent =
-    config.title;
+    document.getElementById("productsHeading").textContent =
+      config.title;
 
-  const data =
-    await getProducts({
-      subcategory: slug,
-      limit: 50,
-    });
+    // Lock collection in URL
+    const url = new URL(window.location);
 
-  renderProducts(
-    data.products
-  );
+    url.searchParams.set("subcategory", slug);
+
+    if (!url.searchParams.has("page")) {
+      url.searchParams.set("page", "1");
+    }
+
+    history.replaceState({}, "", url);
+
+ document.getElementById(
+  "sortContainer"
+).innerHTML = renderSort();
+
+initSort();
+
+    // Products + Pagination
+    await loadProducts();
+
+    // Wishlist
+    initWishlist();
+
+  } catch (error) {
+    console.error("[CollectionPage]", error);
+  }
 }
 
-function renderProducts(
-  products
-) {
-  const grid =
-    document.getElementById(
-      "productsGrid"
-    );
-
-  grid.innerHTML =
-    products
-      .map(
-        (product) => `
-      <a
-        href="/pages/productDetails.html?slug=${product.slug}"
-        class="group"
-      >
-
-        <div
-          class="bg-[#F9F6F2] aspect-square overflow-hidden"
-        >
-
-          <img
-            src="${product.images?.[0]?.url}"
-            class="
-              w-full
-              h-full
-              object-cover
-              group-hover:scale-105
-              transition
-              duration-500
-            "
-          />
-
-        </div>
-
-        <h3
-          class="mt-4 text-sm"
-        >
-          ${product.name}
-        </h3>
-
-        <p
-          class="mt-2 text-black/70"
-        >
-          ₹${product.price.toLocaleString()}
-        </p>
-
-      </a>
-    `
-      )
-      .join("");
-}
-
-loadCollection();
+document.addEventListener(
+  "DOMContentLoaded",
+  initCollectionPage
+);

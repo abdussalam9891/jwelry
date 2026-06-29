@@ -2,6 +2,10 @@
 import {
   collectionBannerConfig,
 } from "./bannerConfig.js";
+import {
+  renderSort,
+
+} from "../../features/products/sort.js";
 
 export function renderCollectionHeader() {
   return `
@@ -69,7 +73,7 @@ export function renderCollectionHeader() {
           "
         >
 
-           
+
 
           <p
             id="productCount"
@@ -84,51 +88,7 @@ export function renderCollectionHeader() {
 
         </div>
 
-        <select
-          id="sortSelect"
-          class="
-  h-14
-
-  min-w-[240px]
-
-  px-6
-
-  rounded-full
-
-  border
-  border-black/10
-
-  bg-white
-
-  text-sm
-  font-medium
-
-  text-black/75
-
-  outline-none
-
-  hover:border-[#6B1A2A]
-
-  transition-all
-  duration-300
-"        >
-          <option value="">
-            Sort By
-          </option>
-
-          <option value="newest">
-            Newest Arrivals
-          </option>
-
-          <option value="low">
-            Price: Low to High
-          </option>
-
-          <option value="high">
-            Price: High to Low
-          </option>
-        </select>
-
+       ${renderSort()}
       </div>
 
     </div>
