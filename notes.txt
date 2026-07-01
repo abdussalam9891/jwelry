@@ -1,0 +1,105 @@
+{payment_id: "pay_T7iZakBHZKqP8I", redirect: true, type: "redirect",…}
+payment_id
+:
+"pay_T7iZakBHZKqP8I"
+redirect
+:
+true
+request
+:
+{url: "https://api.razorpay.com/v1/payments/T7iZakBHZKqP8I/authenticate", method: "POST",…}
+type
+:
+"redirect"
+version
+:
+1
+
+
+
+
+
+
+
+
+
+
+
+{
+    "payment_id": "pay_T7iZakBHZKqP8I",
+    "redirect": true,
+    "type": "redirect",
+    "request": {
+        "url": "https:\/\/api.razorpay.com\/v1\/payments\/T7iZakBHZKqP8I\/authenticate",
+        "method": "POST",
+        "task_id": "40ca68eb684e1fb9af515bf31e6dbc7e"
+    },
+    "version": 1
+}
+
+
+
+
+
+
+https://api.razorpay.com/v1/standard_checkout/payments/create/ajax?key_id=rzp_test_T5pg1S7nsvR4H4&session_token=619594D28D1FCC6AA3144F99BE888A6167203EAAB9E2E3AE4559F47541E8545CE929CCAA49CF80A2C834234A9AEB710E28AC93462EFB4C440643ED85E1DBECEC05F4BC7F72590933DAB70CCE9DB863CA9F9F64C900AF9207C141868907ECEA22927AA0C667151393
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+13.201.153.136:443
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-origin
+*
+cache-control
+max-age=0, must-revalidate, no-store, nocache, private
+connection
+keep-alive
+content-length
+233
+content-type
+application/json
+date
+Tue, 30 Jun 2026 04:54:25 GMT
+expires
+Fri, 01 Jan 1990 00:00:00 GMT
+pragma
+no-cache
+strict-transport-security
+max-age=315360000; includeSubDomains
+uber-trace-id
+00000000000000002d6da681dd7d40f9:34035ad447c54e2e:0000000000000000:1
+vary
+Origin
+via
+rws
+via
+rws
+x-frame-options
+SAMEORIGIN
+x-pam
+0
+x-xss-protection
+0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://api.razorpay.com/v1/gateway/mocksharp/payment?key_id=rzp_test_T5pg1S7nsvR4H4

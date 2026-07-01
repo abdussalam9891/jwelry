@@ -1,336 +1,1298 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
 
-    <link href="../src/css/main.css" rel="stylesheet" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-    <title>My Orders</title>
-  </head>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <body class="bg-[#FAFAFA] text-[#111]">
-    <!-- HEADER -->
-    <header class="sticky top-0 z-40 bg-white border-b border-black/5">
-      <div
-        class="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between"
-      >
-        <!-- LEFT -->
-        <div class="flex items-center gap-5">
-          <!-- LOGO -->
-          <a href="/index.html" class="shrink-0">
-            <img
-              src="../src/assets/icon/logo.png"
-              alt="Gemora"
-              class="h-10 w-auto"
-            />
-          </a>
+  <link
+    href="../src/css/main.css"
+    rel="stylesheet"
+  />
 
-          <!-- BACK -->
-          <a
-            href="../index.html"
-            class="hidden sm:flex items-center gap-2 text-sm text-black/70 hover:text-[#6B1A2A] transition"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.8"
-              stroke="currentColor"
-              class="w-4 h-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-              />
-            </svg>
+  <title>Order Details • Gemora</title>
 
-            <span> Continue Shopping </span>
-          </a>
-        </div>
-      </div>
-    </header>
+</head>
 
-    <!-- MAIN -->
-    <main class="max-w-6xl mx-auto px-4 py-10">
-      <!-- PAGE TITLE -->
-      <div class="flex flex-col gap-3 mb-8">
-        <p class="text-sm text-black/45">Order Details</p>
+<body class="bg-[#FAFAFA] text-[#111827]">
 
-        <div
-          class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-        >
-          <!-- LEFT -->
-          <div>
-            <h1 class="text-3xl font-semibold tracking-tight">Order Summary</h1>
+<!-- ========================= -->
 
-            <p id="orderDate" class="text-sm text-black/50 mt-2">--</p>
-            <p
-              id="orderNumber"
-              class="mt-1 text-sm font-medium text-[#6B1A2A]"
-            ></p>
+<!-- HEADER -->
 
-            <div id="couponBadge" class="mt-3"></div>
-          </div>
+<!-- ========================= -->
 
-          <!-- STATUS -->
-          <div
-            id="orderStatus"
-            class="w-fit px-4 py-2 rounded-full bg-[#F8EEF1] border border-[#E8D7DC] text-[#6B1A2A] text-sm font-semibold"
-          >
-            Confirmed
-          </div>
-        </div>
-      </div>
+<header
+  class="
+    sticky
+    top-0
+    z-50
+    border-b
+    border-black/5
+    bg-white/95
+    backdrop-blur
+  "
+>
 
-      <!-- GRID -->
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6">
-        <!-- LEFT -->
-        <div class="space-y-6">
-          <!-- ITEMS -->
-          <section class="bg-white border border-black/5 rounded-3xl p-6">
-            <div class="flex items-center justify-between mb-6">
-              <h2 class="text-xl font-semibold">Ordered Items</h2>
+<div
+class="
+max-w-7xl
+mx-auto
+h-16
+px-5
 
-              <p id="itemCount" class="text-sm text-black/45">--</p>
-            </div>
+flex
+items-center
+justify-between
+"
+>
 
-            <!-- ITEMS CONTAINER -->
-            <div id="orderItemsContainer" class="space-y-5"></div>
-          </section>
+<div
+class="
+flex
+items-center
+gap-6
+"
+>
 
-          <!-- SHIPPING -->
-          <section class="bg-white border border-black/5 rounded-3xl p-6">
-            <h2 class="text-xl font-semibold mb-5">Shipping Address</h2>
+<a href="/index.html">
 
-            <div
-              id="shippingAddress"
-              class="text-sm leading-7 text-black/70"
-            ></div>
-          </section>
-        </div>
+<img
+src="../src/assets/icon/logo.png"
+alt="Gemora"
+class="h-10"
+/>
 
-        <!-- RIGHT -->
-        <div class="space-y-6">
-          <!-- PRICE SUMMARY -->
-          <section
-            class="bg-white border border-black/5 rounded-3xl p-6 sticky top-24"
-          >
-           <h2 class="text-xl font-semibold mb-6">
-  Payment Summary
+</a>
+
+<a
+href="/pages/orders.html"
+class="
+inline-flex
+items-center
+gap-2
+
+text-sm
+
+font-medium
+
+text-black/60
+
+hover:text-[#6B1A2A]
+
+transition
+"
+>
+
+<svg
+xmlns="http://www.w3.org/2000/svg"
+fill="none"
+viewBox="0 0 24 24"
+stroke-width="1.8"
+stroke="currentColor"
+class="w-5 h-5"
+>
+
+<path
+stroke-linecap="round"
+stroke-linejoin="round"
+d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+/>
+
+</svg>
+
+Back to Orders
+
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ========================= -->
+
+<!-- MAIN -->
+
+<!-- ========================= -->
+
+<main
+class="
+max-w-7xl
+
+mx-auto
+
+px-5
+
+py-10
+"
+>
+
+<!-- ========================= -->
+
+<!-- HERO -->
+
+<!-- ========================= -->
+
+<section
+class="
+rounded-[32px]
+
+bg-white
+
+border
+
+border-black/5
+
+shadow-sm
+
+p-8
+"
+>
+
+<div
+class="
+flex
+
+flex-col
+
+xl:flex-row
+
+xl:items-start
+
+xl:justify-between
+
+gap-8
+"
+>
+
+<div>
+
+<p
+class="
+uppercase
+
+tracking-[0.3em]
+
+text-xs
+
+text-[#6B1A2A]/70
+
+font-semibold
+"
+>
+
+ORDER DETAILS
+
+</p>
+
+<h1
+class="
+mt-3
+
+text-4xl
+
+font-semibold
+
+tracking-tight
+"
+>
+
+Order Summary
+
+</h1>
+
+<p
+id="orderNumber"
+class="
+mt-6
+
+text-lg
+
+font-semibold
+
+text-[#6B1A2A]
+"
+>
+
+Loading...
+
+</p>
+
+<p
+id="orderDate"
+class="
+mt-2
+
+text-black/50
+"
+>
+
+</p>
+
+</div>
+
+<div
+class="
+flex
+
+flex-col
+
+items-start
+
+xl:items-end
+
+gap-4
+"
+>
+
+<div
+id="orderStatus"
+class="
+inline-flex
+
+items-center
+
+rounded-full
+
+border
+
+border-[#E9D7DC]
+
+bg-[#F9EFF2]
+
+px-5
+
+py-2
+
+text-sm
+
+font-semibold
+
+text-[#6B1A2A]
+"
+>
+
+Confirmed
+
+</div>
+
+<button
+id="copyOrderBtn"
+class="
+inline-flex
+
+items-center
+
+gap-2
+
+rounded-xl
+
+border
+
+border-black/10
+
+px-4
+
+py-2
+
+text-sm
+
+font-medium
+
+text-[#6B1A2A]
+
+hover:bg-[#F8EEF1]
+
+transition
+"
+>
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+
+<!-- INVOICE -->
+
+<!-- ========================= -->
+
+<section
+id="invoiceCard"
+class="
+hidden
+
+mt-8
+
+rounded-[30px]
+
+border
+
+border-[#E8D7DC]
+
+bg-gradient-to-r
+
+from-[#FFF9FA]
+
+to-[#FFFDFB]
+
+p-8
+"
+>
+
+<div
+class="
+flex
+
+flex-col
+
+lg:flex-row
+
+lg:items-center
+
+lg:justify-between
+
+gap-8
+"
+>
+
+<div>
+
+<div
+class="
+inline-flex
+
+items-center
+
+gap-2
+
+rounded-full
+
+bg-[#F8EEF1]
+
+px-4
+
+py-1.5
+
+text-xs
+
+font-semibold
+
+text-[#6B1A2A]
+"
+>
+
+ Invoice Available
+
+</div>
+
+<h2
+class="
+mt-5
+
+text-2xl
+
+font-semibold
+"
+>
+
+Tax Invoice
+
 </h2>
 
-<div class="space-y-4">
+<p
+id="invoiceNumber"
+class="
+mt-3
 
-  <!-- SUBTOTAL -->
+font-medium
+
+text-black/70
+"
+>
+
+</p>
+
+<p
+id="invoiceGenerated"
+class="
+mt-2
+
+text-sm
+
+text-black/45
+"
+>
+
+</p>
+
+</div>
+
+<a
+id="downloadInvoiceBtn"
+target="_blank"
+rel="noopener noreferrer"
+class="
+inline-flex
+
+h-12
+
+items-center
+
+justify-center
+
+rounded-2xl
+
+bg-[#6B1A2A]
+
+px-8
+
+text-white
+
+font-medium
+
+transition
+
+hover:opacity-90
+"
+>
+
+Download Invoice
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+
+<!-- ORDER TIMELINE -->
+
+<!-- ========================= -->
+
+<section
+class="
+mt-8
+
+rounded-[30px]
+
+border
+
+border-black/5
+
+bg-white
+
+p-8
+"
+>
+
+<div
+class="
+flex
+
+items-center
+
+justify-between
+"
+>
+
+<h2
+class="
+text-xl
+
+font-semibold
+"
+>
+
+Order Progress
+
+</h2>
+
+<p
+class="
+text-sm
+
+text-black/40
+"
+>
+
+Track your order journey
+
+</p>
+
+</div>
+
+<div
+id="orderTimeline"
+class="
+mt-10
+
+grid
+
+grid-cols-2
+
+md:grid-cols-4
+
+gap-6
+"
+>
+
+<!-- injected by JS -->
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+
+<!-- CONTENT GRID -->
+
+<!-- ========================= -->
+
+<div
+class="
+mt-8
+
+grid
+
+grid-cols-1
+
+xl:grid-cols-[1fr_380px]
+
+gap-8
+"
+>
+
+<!-- ========================= -->
+
+<!-- LEFT COLUMN -->
+
+<!-- ========================= -->
+
+<div class="space-y-8">
+
+
+
+  <!-- ====================================================== -->
+<!-- ORDERED ITEMS -->
+<!-- ====================================================== -->
+
+<section
+  class="
+    rounded-[30px]
+    border
+    border-black/5
+    bg-white
+    shadow-sm
+    overflow-hidden
+  "
+>
 
   <div
     class="
       flex
       items-center
       justify-between
-      text-sm
+
+      px-8
+      py-6
+
+      border-b
+      border-black/5
     "
   >
-    <span class="text-black/55">
-      Subtotal
-    </span>
 
-    <span
-      id="subtotalPrice"
-      class="font-medium"
-    >
-      --
-    </span>
-  </div>
-
-  <!-- COUPON -->
-
-  <div
-    id="couponRow"
-    class="
-      hidden
-
-      flex
-      items-center
-      justify-between
-
-      rounded-2xl
-
-      border
-      border-green-200
-
-      bg-green-50
-
-      px-4
-      py-3
-    "
-  >
     <div>
-      <p
+
+      <h2
         class="
-          text-xs
-          uppercase
-          tracking-wide
-          text-green-600
+          text-2xl
+          font-semibold
         "
       >
-        Coupon Applied
-      </p>
+        Ordered Items
+      </h2>
 
       <p
-        id="couponCode"
         class="
           mt-1
           text-sm
-          font-semibold
-          text-green-700
+          text-black/45
         "
-      ></p>
+      >
+        Products included in this order
+      </p>
+
     </div>
 
-    <span
-      id="couponDiscount"
+    <div
+      id="itemCount"
       class="
-        text-base
-        font-bold
-        text-green-700
+        text-sm
+        font-medium
+        text-black/50
       "
-    ></span>
+    >
+      --
+    </div>
+
   </div>
 
-  <!-- SHIPPING -->
+  <div
+    id="orderItemsContainer"
+    class="
+      divide-y
+      divide-black/5
+    "
+  >
+
+  </div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- SHIPPING ADDRESS -->
+<!-- ====================================================== -->
+
+<section
+  class="
+    rounded-[30px]
+    border
+    border-black/5
+    bg-white
+    shadow-sm
+    p-8
+  "
+>
 
   <div
     class="
       flex
       items-center
-      justify-between
-      text-sm
+      gap-3
     "
   >
-    <span class="text-black/55">
-      Shipping
-    </span>
 
-    <span
-      id="shippingPrice"
-      class="font-medium"
-    >
-      Free
-    </span>
-  </div>
-
-  <!-- DIVIDER -->
-
-  <div
-    class="
-      border-t
-      border-black/10
-    "
-  ></div>
-
-  <!-- TOTAL -->
-
-  <div
-    class="
-      rounded-2xl
-
-      bg-[#FAFAFA]
-
-      p-4
-    "
-  >
     <div
       class="
+        w-12
+        h-12
+
+        rounded-2xl
+
+        bg-[#F8EEF1]
+
         flex
         items-center
-        justify-between
+        justify-center
+
+        text-xl
       "
     >
-      <span
+      📍
+    </div>
+
+    <div>
+
+      <h2
         class="
-          text-base
+          text-2xl
           font-semibold
         "
       >
-        Total Paid
-      </span>
+        Shipping Address
+      </h2>
 
-      <span
-        id="totalPrice"
+      <p
         class="
-          text-2xl
-          font-bold
-          tracking-tight
+          text-sm
+          text-black/45
         "
       >
-        --
-      </span>
+        Delivery destination
+      </p>
+
     </div>
 
-    <p
-      id="totalSavings"
-      class="
-        mt-2
-        text-sm
-        font-medium
-        text-green-600
-      "
-    ></p>
   </div>
 
-</div>
+  <div
+    id="shippingAddress"
+    class="
+      mt-8
 
-<!-- PAYMENT -->
+      text-[15px]
+
+      leading-8
+
+      text-black/70
+    "
+  >
+
+  </div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- COUPON -->
+<!-- ====================================================== -->
 
 <div
-  class="
-    mt-6
-
-    rounded-2xl
-
-    border
-    border-black/5
-
-    bg-[#FAFAFA]
-
-    p-4
-  "
+  id="couponBadge"
 >
-  <p
-    class="
-      text-xs
-      uppercase
-      tracking-wide
-      text-black/40
-    "
-  >
-    Payment Method
-  </p>
 
-  <p
-    id="paymentMethod"
-    class="
-      mt-2
-      text-sm
-      font-semibold
-    "
-  >
-    --
-  </p>
 </div>
-          </section>
-        </div>
 
+</div>
 
-      </div>
-    </main>
+<!-- ====================================================== -->
+<!-- RIGHT COLUMN -->
+<!-- ====================================================== -->
 
-    <script type="module" src="../src/js/pages/orderDetailsPage.js"></script>
-  </body>
+<div>
+
+<div
+class="
+sticky
+top-24
+
+space-y-6
+"
+
+>
+
+<!-- ====================================================== -->
+<!-- PAYMENT SUMMARY -->
+<!-- ====================================================== -->
+
+<section
+class="
+rounded-[30px]
+
+border
+
+border-black/5
+
+bg-white
+
+shadow-sm
+
+overflow-hidden
+"
+>
+
+<div
+class="
+px-8
+py-6
+
+border-b
+
+border-black/5
+"
+>
+
+<h2
+class="
+text-2xl
+
+font-semibold
+"
+>
+
+Payment Summary
+
+</h2>
+
+<p
+class="
+mt-1
+
+text-sm
+
+text-black/45
+"
+>
+
+Order payment breakdown
+
+</p>
+
+</div>
+
+<div
+class="
+p-8
+
+space-y-5
+"
+>
+
+<div
+class="
+flex
+
+justify-between
+
+text-sm
+"
+>
+
+<span class="text-black/50">
+
+Subtotal
+
+</span>
+
+<span
+id="subtotalPrice"
+class="font-semibold"
+>
+
+--
+
+</span>
+
+</div>
+
+<div
+id="couponRow"
+class="hidden"
+>
+
+<div
+class="
+rounded-2xl
+
+bg-green-50
+
+border
+
+border-green-200
+
+p-4
+"
+>
+
+<div
+class="
+flex
+
+items-center
+
+justify-between
+"
+>
+
+<div>
+
+<p
+class="
+text-xs
+
+uppercase
+
+tracking-wide
+
+text-green-600
+"
+>
+
+Coupon
+
+</p>
+
+<p
+id="couponCode"
+class="
+mt-1
+
+font-semibold
+
+text-green-700
+"
+>
+
+</p>
+
+</div>
+
+<div
+id="couponDiscount"
+class="
+font-bold
+
+text-green-700
+"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div
+class="
+flex
+
+justify-between
+
+text-sm
+"
+>
+
+<span class="text-black/50">
+
+Shipping
+
+</span>
+
+<span
+id="shippingPrice"
+class="font-semibold"
+>
+
+Free
+
+</span>
+
+</div>
+
+<hr class="border-black/10">
+
+<div
+class="
+rounded-2xl
+
+bg-[#FAFAFA]
+
+p-5
+"
+>
+
+<div
+class="
+flex
+
+justify-between
+
+items-center
+"
+>
+
+<div>
+
+<p
+class="
+text-sm
+
+text-black/50
+"
+>
+
+Total Paid
+
+</p>
+
+<h3
+id="totalPrice"
+class="
+mt-1
+
+text-3xl
+
+font-bold
+
+tracking-tight
+"
+>
+
+--
+
+</h3>
+
+</div>
+
+</div>
+
+<p
+id="totalSavings"
+class="
+mt-4
+
+text-sm
+
+font-medium
+
+text-green-600
+"
+>
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- PAYMENT INFO -->
+<!-- ====================================================== -->
+
+<section
+class="
+rounded-[30px]
+
+border
+
+border-black/5
+
+bg-white
+
+shadow-sm
+
+p-8
+"
+>
+
+<h2
+class="
+text-xl
+
+font-semibold
+"
+>
+
+Payment
+
+</h2>
+
+<div
+class="
+mt-6
+
+space-y-6
+"
+>
+
+<div>
+
+<p
+class="
+text-xs
+
+uppercase
+
+tracking-wide
+
+text-black/40
+"
+>
+
+Method
+
+</p>
+
+<p
+id="paymentMethod"
+class="
+mt-2
+
+font-semibold
+"
+>
+
+--
+
+</p>
+
+</div>
+
+<div>
+
+<p
+class="
+text-xs
+
+uppercase
+
+tracking-wide
+
+text-black/40
+"
+>
+
+Payment Status
+
+</p>
+
+<div
+id="paymentStatus"
+class="
+mt-3
+
+inline-flex
+
+rounded-full
+
+bg-amber-50
+
+border
+
+border-amber-200
+
+px-4
+
+py-2
+
+text-sm
+
+font-semibold
+
+text-amber-700
+"
+>
+
+Pending
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- QUICK ACTIONS -->
+<!-- ====================================================== -->
+
+<section
+class="
+rounded-[30px]
+
+border
+
+border-black/5
+
+bg-white
+
+shadow-sm
+
+p-8
+"
+>
+
+<h2
+class="
+text-xl
+
+font-semibold
+"
+>
+
+Quick Actions
+
+</h2>
+
+<div
+class="
+mt-6
+
+space-y-3
+"
+>
+
+<a
+href="/pages/orders.html"
+class="
+flex
+
+items-center
+
+justify-center
+
+h-12
+
+rounded-2xl
+
+border
+
+border-black/10
+
+hover:bg-[#FAFAFA]
+
+transition
+"
+>
+
+Back to Orders
+
+</a>
+
+<a
+href="/index.html"
+class="
+flex
+
+items-center
+
+justify-center
+
+h-12
+
+rounded-2xl
+
+bg-[#6B1A2A]
+
+text-white
+
+font-medium
+
+hover:opacity-90
+
+transition
+"
+>
+
+Continue Shopping
+
+</a>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+<script
+type="module"
+src="../src/js/pages/orderDetailsPage.js"
+></script>
+
+</body>
+
 </html>
