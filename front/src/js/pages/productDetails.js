@@ -12,6 +12,10 @@ import {
   getTrendingProducts,
   updateReview,
 } from "../services/productService.js";
+import {
+  renderDeliveryChecker,
+  initDeliveryChecker,
+} from "../components/deliveryChecker.js";
 
 document.addEventListener("DOMContentLoaded", loadProduct);
 
@@ -46,6 +50,7 @@ async function loadProduct() {
     currentProductId = product._id;
 
     renderProduct(product);
+    initDeliveryChecker();
 
     initWishlist();
 
@@ -401,7 +406,9 @@ function renderInfo(product) {
 
 
 
-
+  <div>
+      ${renderDeliveryChecker()}
+      </div>
 
 
 
@@ -755,6 +762,7 @@ function attachEvents(product) {
 
       updateVariant(product);
       updateSizeAvailability(product); //   IMPORTANT
+      initDeliveryChecker();
     });
   });
 
