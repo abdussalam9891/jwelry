@@ -206,6 +206,7 @@ export function createOrderCard(order) {
             viewBox="0 0 24 24"
             stroke-width="1.8"
             stroke="currentColor"
+             aria-hidden="true"
             class="
               w-5
               h-5

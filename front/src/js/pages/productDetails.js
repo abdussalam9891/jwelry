@@ -385,7 +385,7 @@ function renderInfo(product) {
   class="wishlist-btn border px-4 rounded"
 >
           <!-- Heart -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black/70" fill="none" viewBox="0 0 24 24" stroke="currentColor"  aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
               d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25z"/>
           </svg>
@@ -646,7 +646,7 @@ function renderInfo(product) {
   <!-- ITEM -->
   <div class="flex items-start gap-4">
     <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"  aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           d="M3 7h13v10H3zM16 10h3l2 3v4h-5zM7.5 17.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm9 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
       </svg>
@@ -660,7 +660,7 @@ function renderInfo(product) {
   <!-- ITEM -->
   <div class="flex items-start gap-4">
     <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"  aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           d="M4 4v6h6M20 20v-6h-6M5.5 9A7 7 0 0119 12m-14 0a7 7 0 0013.5 3"/>
       </svg>
@@ -674,7 +674,7 @@ function renderInfo(product) {
   <!-- ITEM -->
   <div class="flex items-start gap-4">
     <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"  aria-hidden="true"   >
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           d="M12 3l7 4v5c0 5-3.5 9-7 9s-7-4-7-9V7l7-4z"/>
       </svg>
@@ -688,7 +688,7 @@ function renderInfo(product) {
   <!-- ITEM -->
   <div class="flex items-start gap-4">
     <div class="bg-white border border-[#6B1A2A]/10 p-2 rounded-lg">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-[#6B1A2A]" fill="none" viewBox="0 0 24 24" stroke="currentColor"  aria-hidden="true" >
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
           d="M12 11c1.1 0 2 .9 2 2v2h-4v-2c0-1.1.9-2 2-2zm6 0V9a6 6 0 10-12 0v2M5 11h14v10H5z"/>
       </svg>
@@ -1343,6 +1343,7 @@ function renderStars(rating) {
           class="w-4 h-4 ${i <= rating ? "text-yellow-500" : "text-gray-300"}"
           fill="currentColor"
           viewBox="0 0 20 20"
+           aria-hidden="true"
         >
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.96a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45a1 1 0 00-.364 1.118l1.287 3.96c.3.922-.755 1.688-1.54 1.118l-3.37-2.45a1 1 0 00-1.176 0l-3.37 2.45c-.784.57-1.838-.196-1.539-1.118l1.286-3.96a1 1 0 00-.364-1.118L2.176 9.387c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.96z"/>
         </svg>

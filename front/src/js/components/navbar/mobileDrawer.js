@@ -53,6 +53,7 @@ const linksHTML = jewelleryNavigation
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+             aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -158,6 +159,7 @@ const linksHTML = jewelleryNavigation
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+         aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -244,6 +246,7 @@ const linksHTML = jewelleryNavigation
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+         aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -363,7 +366,7 @@ const linksHTML = jewelleryNavigation
   class="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white transition-all duration-200"
 >
   <div class="flex items-center gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-[#6B1A2A] shrink-0">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"  aria-hidden="true" stroke="currentColor" class="w-5 h-5 text-[#6B1A2A] shrink-0">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a8.25 8.25 0 0 1 15 0"/>
     </svg>
     <span class="text-[15px] font-medium text-[#1A1A1A]">Profile</span>
@@ -400,6 +403,7 @@ const linksHTML = jewelleryNavigation
       viewBox="0 0 24 24"
       stroke-width="1.8"
       stroke="currentColor"
+       aria-hidden="true"
       class="
         w-5
         h-5
@@ -443,7 +447,7 @@ const linksHTML = jewelleryNavigation
   class="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white transition-all duration-200"
 >
   <div class="flex items-center gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-[#6B1A2A] shrink-0">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"  aria-hidden="true" stroke="currentColor" class="w-5 h-5 text-[#6B1A2A] shrink-0">
       <path stroke-linecap="round" stroke-linejoin="round" d="M21.435 6.582a5.94 5.94 0 0 0-8.388 0L12 7.629l-1.047-1.047a5.94 5.94 0 1 0-8.388 8.388L12 21.75l9.435-9.03a5.94 5.94 0 0 0 0-8.388Z"/>
     </svg>
     <span class="text-[15px] font-medium text-[#1A1A1A]">Wishlist</span>
@@ -456,7 +460,7 @@ const linksHTML = jewelleryNavigation
   class="flex items-center justify-between px-3 py-3 rounded-xl hover:bg-white transition-all duration-200"
 >
   <div class="flex items-center gap-3">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5 text-[#6B1A2A] shrink-0">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"  aria-hidden="true" stroke="currentColor" class="w-5 h-5 text-[#6B1A2A] shrink-0">
       <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386a1.125 1.125 0 0 1 1.11.843l.383 1.437m0 0L6.75 14.25h10.5l1.621-6.072a1.125 1.125 0 0 0-1.088-1.428H5.13m0 0L4.5 3m2.25 11.25a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m9 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0"/>
     </svg>
     <span class="text-[15px] font-medium text-[#1A1A1A]">Cart</span>

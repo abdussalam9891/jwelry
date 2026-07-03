@@ -1,15 +1,136 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="en">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="./src/css/main.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./src/css/navbar.css" />
-    <link rel="stylesheet" href="./src/css/animations.css" />
-    <link rel="stylesheet" href="./src/css/homePage.css" />
-  </head>
+ <head>
+  <!-- Character Encoding -->
+  <meta charset="UTF-8" />
+
+  <!-- Responsive -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <!-- Primary SEO -->
+  <title>Gemora | Premium Jewellery Store</title>
+
+  <meta
+    name="description"
+    content="Discover handcrafted premium jewellery including rings, necklaces, earrings and bracelets. Timeless elegance crafted for every occasion."
+  />
+
+  <meta
+    name="keywords"
+    content="Gemora, jewellery, rings, necklaces, earrings, bracelets, premium jewellery, diamond jewellery, gold jewellery"
+  />
+
+  <meta
+    name="author"
+    content="Gemora"
+  />
+
+  <meta
+    name="robots"
+    content="index, follow"
+  />
+
+  <!-- Theme -->
+  <meta
+    name="theme-color"
+    content="#6B1A2A"
+  />
+
+  <!-- Canonical -->
+  <link
+    rel="canonical"
+    href="https://gemora-jwelry.vercel.app/"
+  />
+
+  <!-- Open Graph -->
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <meta
+    property="og:title"
+    content="Gemora | Premium Jewellery Store"
+  />
+
+  <meta
+    property="og:description"
+    content="Discover handcrafted premium jewellery for every occasion."
+  />
+
+  <meta
+    property="og:image"
+    content="https://gemora-jwelry.vercel.app/src/assets/images/hero.webp"
+  />
+
+  <meta
+    property="og:url"
+    content="https://gemora-jwelry.vercel.app/"
+  />
+
+  <!-- Twitter -->
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content="Gemora | Premium Jewellery Store"
+  />
+
+  <meta
+    name="twitter:description"
+    content="Discover handcrafted premium jewellery for every occasion."
+  />
+
+  <meta
+    name="twitter:image"
+    content="https://gemora-jwelry.vercel.app/src/assets/images/hero.webp"
+  />
+
+  <!-- Performance -->
+  <link
+    rel="preconnect"
+    href="https://res.cloudinary.com"
+  />
+
+  <!-- Favicon -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="./src/assets/icon/logo.png"
+  />
+
+  <!-- Tailwind CDN (Replace later with compiled CSS) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Styles -->
+  <link
+    rel="stylesheet"
+    href="./src/css/main.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./src/css/navbar.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./src/css/animations.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="./src/css/homePage.css"
+  />
+</head>
+
   <body>
     <div id="navbar-container"></div>
 
@@ -18,11 +139,13 @@
       class="page-content relative h-[70svh] sm:h-[75vh] min-h-[500px] sm:min-h-[600px] max-h-[850px] overflow-hidden mt-24"
     >
       <!-- IMAGE -->
-      <img
-        src="./src/assets/images/heronew.jpg"
-        alt="Gemora Jewellery"
-        class="absolute inset-0 w-full h-full object-cover"
-      />
+     <img
+  src="./src/assets/images/heronew.webp"
+  alt="Gemora Premium Jewellery Collection"
+  class="absolute inset-0 w-full h-full object-cover"
+  fetchpriority="high"
+  decoding="async"
+/>
 
       <!-- OVERLAY -->
       <div
@@ -152,7 +275,6 @@
 
 
 
-       <!-- Category -->
 <!-- Category -->
 <section class="section-sm bg-[#F9F6F2]/80 py-10 md:py-12 lg:py-14">
   <div class="container-main">
@@ -206,10 +328,12 @@
           <!-- Image -->
           <div>
             <img
-              src="./src/assets/images/gemoraCollection.png"
-              alt="Gemora Craftsmanship"
-              class="w-full aspect-[4/3] md:h-[420px] md:aspect-auto object-cover object-center"
-            />
+  src="./src/assets/images/gemoraCollection.png"
+  alt="Gemora Craftsmanship"
+  class="w-full aspect-[4/3] md:h-[420px] md:aspect-auto object-cover object-center"
+  loading="lazy"
+  decoding="async"
+/>
           </div>
 
           <!-- Content -->
@@ -546,6 +670,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-5 h-5 text-[#6B1A2A]"
       >
         <path
@@ -603,6 +728,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-5 h-5 text-[#6B1A2A]"
       >
         <path
@@ -660,6 +786,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-5 h-5 text-[#6B1A2A]"
       >
         <path
@@ -717,6 +844,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-5 h-5 text-[#6B1A2A]"
       >
         <path
@@ -978,6 +1106,7 @@
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
+               aria-hidden="true"
               viewBox="0 0 24 24"
             >
               <path d="M12 8v4l3 3"></path>
@@ -998,9 +1127,11 @@
             <svg
               class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
               fill="none"
+
               stroke="currentColor"
               stroke-width="1.5"
               viewBox="0 0 24 24"
+               aria-hidden="true"
             >
               <path d="M12 3l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V7l7-4z"></path>
             </svg>
@@ -1022,6 +1153,7 @@
               stroke="currentColor"
               stroke-width="1.5"
               viewBox="0 0 24 24"
+               aria-hidden="true"
             >
               <path d="M3 12h18"></path>
               <path d="M7 8l-4 4 4 4"></path>
@@ -1044,6 +1176,7 @@
               stroke="currentColor"
               stroke-width="1.5"
               viewBox="0 0 24 24"
+               aria-hidden="true"
             >
               <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"></path>
             </svg>
@@ -1065,6 +1198,7 @@
               stroke="currentColor"
               stroke-width="1.5"
               viewBox="0 0 24 24"
+               aria-hidden="true"
             >
               <path d="M3 7h13v10H3z"></path>
               <path d="M16 10h4l2 3v4h-6z"></path>
@@ -1087,6 +1221,7 @@
               stroke="currentColor"
               stroke-width="1.5"
               viewBox="0 0 24 24"
+               aria-hidden="true"
             >
               <path d="M18 10c0 4-3 7-6 7s-6-3-6-7 3-7 6-7 6 3 6 7z"></path>
               <path d="M12 17v4"></path>

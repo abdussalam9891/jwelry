@@ -97,6 +97,7 @@ function render() {
     viewBox="0 0 24 24"
     stroke-width="1.5"
     stroke="currentColor"
+     aria-hidden="true"
     class="w-16 h-16 text-black/20"
   >
     <path
@@ -618,6 +619,7 @@ ${
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-4 h-4 text-black/50"
       >
         <path
@@ -668,6 +670,7 @@ ${
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-4 h-4 text-black/50"
       >
         <path
@@ -719,6 +722,7 @@ ${
         viewBox="0 0 24 24"
         stroke-width="1.8"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-4 h-4"
       >
         <path
@@ -772,6 +776,7 @@ ${
       viewBox="0 0 24 24"
       stroke-width="1.8"
       stroke="currentColor"
+       aria-hidden="true"
       class="w-5 h-5 mt-0.5 text-[#6B1A2A]"
     >
       <path

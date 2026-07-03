@@ -365,6 +365,7 @@ function renderUser(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
+         aria-hidden="true"
         class="w-4 h-4"
       >
         <path
@@ -398,6 +399,7 @@ function renderUser(
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-4 h-4"
       >
         <path
@@ -432,6 +434,7 @@ function renderUser(
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
+         aria-hidden="true"
         class="w-4 h-4"
       >
         <path
@@ -465,6 +468,7 @@ function renderUser(
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
+         aria-hidden="true"
         class="w-4 h-4"
       >
         <path

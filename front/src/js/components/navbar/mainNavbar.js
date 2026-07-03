@@ -19,6 +19,9 @@ export function createMainNavbar() {
           <button
             id="navToggle"
             class="md:hidden p-2 flex flex-col gap-1.5"
+            aria-label="Open navigation menu"
+
+  aria-controls="mobileMenu"
           >
             <span class="block w-5 h-0.5 bg-[#6B1A2A]"></span>
             <span class="block w-5 h-0.5 bg-[#6B1A2A]"></span>
@@ -26,10 +29,12 @@ export function createMainNavbar() {
           </button>
 
           <!-- Logo -->
-          <a href="/index.html" class="flex-shrink-0">
+          <a href="/index.html" aria-label="Go to Gemora home" class="flex-shrink-0">
             <img
               src="/src/assets/icon/logo.png"
               class="h-16 w-auto object-contain"
+              alt="Gemora Logo"
+              decoding="async"
             />
           </a>
 
@@ -50,6 +55,7 @@ export function createMainNavbar() {
           <!-- Wishlist -->
           <button
             id="wishlistBtn"
+            aria-label="View wishlist"
             class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg relative"
           >
 
@@ -61,6 +67,7 @@ export function createMainNavbar() {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
+                 aria-hidden="true"
                 class="w-7 h-7 text-[#6B1A2A]"
               >
                 <path
@@ -88,6 +95,7 @@ export function createMainNavbar() {
           <!-- Cart -->
           <button
             id="cartBtn"
+            aria-label="Open shopping cart"
             class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
           >
 
@@ -99,6 +107,7 @@ export function createMainNavbar() {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
+               aria-hidden="true"
               class="w-7 h-7 text-[#6B1A2A]"
             >
               <path
@@ -128,6 +137,7 @@ export function createMainNavbar() {
 
             <button
               data-user="trigger"
+              aria-label="Open profile menu"
               class="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
             >
 
@@ -137,6 +147,7 @@ export function createMainNavbar() {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
+                 aria-hidden="true"
                 class="w-7 h-7 text-[#6B1A2A]"
               >
                 <path

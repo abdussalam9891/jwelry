@@ -603,6 +603,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4"
 >
 <path
@@ -634,6 +635,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="2"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4"
 >
 <path
@@ -813,6 +815,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="2.5"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-6 h-6"
 >
 <path
@@ -883,6 +886,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-6 h-6"
 >
 <path
@@ -906,6 +910,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-6 h-6"
 >
 <path
@@ -929,6 +934,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-6 h-6"
 >
 <path
@@ -952,6 +958,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-6 h-6"
 >
 <path
@@ -1217,6 +1224,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4"
 >
 
@@ -1264,6 +1272,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4"
 >
 
@@ -1434,6 +1443,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-5 h-5"
 >
 <path
@@ -1535,6 +1545,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-5 h-5"
 >
 <path
@@ -1638,6 +1649,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="1.8"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-5 h-5"
 >
 <path
@@ -1937,6 +1949,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="2"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4">
 <path
 stroke-linecap="round"
@@ -1959,6 +1972,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="2"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4">
 <path
 stroke-linecap="round"
@@ -1985,6 +1999,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="2"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4">
 <path
 stroke-linecap="round"
@@ -2007,6 +2022,7 @@ fill="none"
 viewBox="0 0 24 24"
 stroke-width="2"
 stroke="currentColor"
+ aria-hidden="true"
 class="w-4 h-4">
 <path
 stroke-linecap="round"

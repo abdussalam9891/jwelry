@@ -113,6 +113,7 @@ export function createUserDropdown() {
   viewBox="0 0 24 24"
   stroke-width="1.8"
   stroke="currentColor"
+   aria-hidden="true"
   class="w-5 h-5 text-black/60 shrink-0"
 >
   <path
@@ -144,6 +145,7 @@ export function createUserDropdown() {
   viewBox="0 0 24 24"
   stroke-width="1.8"
   stroke="currentColor"
+   aria-hidden="true"
   class="w-5 h-5 text-black/60 shrink-0"
 >
   <path
@@ -177,6 +179,7 @@ export function createUserDropdown() {
   viewBox="0 0 24 24"
   stroke-width="1.8"
   stroke="currentColor"
+   aria-hidden="true"
   class="w-5 h-5 text-black/60 shrink-0"
 >
   <path

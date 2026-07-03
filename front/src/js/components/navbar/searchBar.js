@@ -44,6 +44,7 @@ export function createSearchBar(
       <button
         type="button"
         data-search-btn
+        aria-label="Search products"
         class="
           absolute
           right-3
@@ -58,6 +59,7 @@ export function createSearchBar(
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
+           aria-hidden="true"
           class="${
             mobile ? "w-4 h-4" : "w-5 h-5"
           } text-[#6B1A2A]"

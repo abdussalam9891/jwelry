@@ -118,6 +118,7 @@ export function renderDeliveryChecker() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 stroke-width="1.8"
+                 aria-hidden="true"
               >
                 <path
                   stroke-linecap="round"
@@ -395,6 +396,7 @@ function showLoading() {
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
+         aria-hidden="true"
       >
         <circle
           cx="12"
@@ -457,6 +459,7 @@ function showError(message) {
           viewBox="0 0 24 24"
           stroke="currentColor"
           stroke-width="2"
+           aria-hidden="true"
         >
           <path
             stroke-linecap="round"
