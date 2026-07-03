@@ -444,10 +444,24 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
             </a>
 
             <a
-              href="/pages/products.html?price=5000"
+              href="/pages/products.html?maxPrice=5000"
               class="hover:text-[#6B1A2A]"
             >
               Under ₹5,000
+            </a>
+
+              <a
+              href="/pages/products.html?maxPrice=10000"
+              class="hover:text-[#6B1A2A]"
+            >
+              Under ₹10,000
+            </a>
+
+              <a
+              href="/pages/products.html?maxPrice=2000"
+              class="hover:text-[#6B1A2A]"
+            >
+              Under ₹2,000
             </a>
 
           </div>

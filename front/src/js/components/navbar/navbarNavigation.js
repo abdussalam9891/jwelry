@@ -192,63 +192,81 @@ export const jewelleryNavigation = [
 export const moreCategories = [
   {
     label: "Bangles",
-    slug: "bangles",
+    category: "bangles",
     image: "/src/assets/images/bangleNav.jpg",
   },
 
   {
     label: "Anklets",
-    slug: "anklets",
+    category: "anklets",
     image: "/src/assets/images/ankletNav.jpg",
   },
 
   {
     label: "Nose Jewellery",
-    slug: "nose-jewellery",
+    category: "nose-jewellery",
     image: "/src/assets/images/noseNav.jpg",
   },
 
   {
     label: "Jewellery Sets",
-    slug: "sets",
+    category: "sets",
     image: "/src/assets/images/setNav.jpg",
   },
 ];
 
 export const collections = [
   {
-    name: "Bridal",
     slug: "bridal",
+    name: "Bridal",
+    title: "Bridal Collection",
     image: "/src/assets/images/bridal.jpg",
+    description:
+      "Timeless pieces crafted for life's most beautiful moments.",
   },
 
   {
-    name: "Luxury",
     slug: "luxury",
+    name: "Luxury",
+    title: "Luxury Collection",
     image: "/src/assets/images/luxury.jpg",
+    description:
+      "Statement jewellery designed to stand out.",
   },
 
   {
-    name: "Minimal",
     slug: "minimal",
+    name: "Minimal",
+    title: "Minimal Collection",
     image: "/src/assets/images/minimal.jpg",
+    description:
+      "Elegant simplicity for everyday wear.",
   },
 
   {
-    name: "Traditional",
     slug: "traditional",
+    name: "Traditional",
+    title: "Traditional Collection",
     image: "/src/assets/images/traditional.jpg",
+    description:
+      "Classic designs inspired by timeless heritage.",
   },
 
   {
-    name: "Modern",
     slug: "modern",
+    name: "Modern",
+    title: "Modern Collection",
     image: "/src/assets/images/modern.jpg",
+    description:
+      "Contemporary jewellery with clean and elegant styling.",
   },
 
   {
-    name: "Vintage",
     slug: "vintage",
+    name: "Vintage",
+    title: "Vintage Collection",
     image: "/src/assets/images/vintage.jpg",
+    description:
+      "Inspired by iconic designs from a bygone era.",
   },
 ];
