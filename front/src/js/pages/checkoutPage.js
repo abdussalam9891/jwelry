@@ -25,32 +25,102 @@ import {
   openRazorpay,
 } from "../utils/razorpay.js";
 
-async function initCheckout() {
-  await loadCart();
+const mode =
+  new URLSearchParams(window.location.search).get("mode") ||
+  "cart";
+
+
+
+  async function initCheckout() {
   await loadWishlistState();
 
-  const cart =
-    getCartState();
+  if (mode === "buyNow") {
+    return initBuyNowCheckout();
+  }
+
+  return initCartCheckout();
+}
+
+
+
+async function initCartCheckout() {
+  await loadCart();
+
+  const cart = getCartState();
 
   if (!cart.length) {
-    window.location.href =
-      "/pages/cart.html";
+    window.location.href = "/pages/cart.html";
     return;
   }
 
   await initAddressManager({
-    containerId:
-      "addressContainer",
+    containerId: "addressContainer",
     mode: "checkout",
   });
 
   renderSummary({
-    showCheckoutButton:
-      false,
+    showCheckoutButton: false,
   });
 
   setupPlaceOrder();
 }
+
+
+
+async function initBuyNowCheckout() {
+  const preview = JSON.parse(
+    sessionStorage.getItem("gemora_buy_now")
+  );
+
+  if (!preview) {
+    window.location.href = "/";
+    return;
+  }
+
+  await initAddressManager({
+    containerId: "addressContainer",
+    mode: "checkout",
+  });
+
+  renderSummary({
+    showCheckoutButton: false,
+    buyNow: preview,
+  });
+
+  setupPlaceOrder();
+}
+
+
+
+
+
+
+// async function initCheckout() {
+//   await loadCart();
+//   await loadWishlistState();
+
+//   const cart =
+//     getCartState();
+
+//   if (!cart.length) {
+//     window.location.href =
+//       "/pages/cart.html";
+//     return;
+//   }
+
+//   await initAddressManager({
+//     containerId:
+//       "addressContainer",
+//     mode: "checkout",
+//   });
+
+//   renderSummary({
+//     showCheckoutButton:
+//       false,
+//   });
+
+//   setupPlaceOrder();
+// }
 
 function setupPlaceOrder() {
   const btn =
@@ -104,17 +174,60 @@ async function handleCheckout(
         )
       );
 
-    const response =
-      await createOrder({
-        addressId:
-          selectedAddress.value,
 
-        paymentMethod,
+let response;
 
-        couponCode:
-          appliedCoupon?.coupon
-            ?.code,
-      });
+if (mode === "buyNow") {
+
+  const preview = JSON.parse(
+    sessionStorage.getItem(
+      "gemora_buy_now"
+    )
+  );
+
+  response =
+    await createBuyNowOrder({
+
+      productId:
+        preview.item.productId,
+
+      variantId:
+        preview.item.variantId,
+
+      quantity:
+        preview.item.quantity,
+
+      addressId:
+        selectedAddress.value,
+
+      paymentMethod,
+
+      couponCode:
+        appliedCoupon?.coupon?.code,
+
+    });
+
+} else {
+
+  response =
+    await createOrder({
+
+      addressId:
+        selectedAddress.value,
+
+      paymentMethod,
+
+      couponCode:
+        appliedCoupon?.coupon?.code,
+
+    });
+
+}
+
+
+
+
+
 
     localStorage.removeItem(
       "appliedCoupon"

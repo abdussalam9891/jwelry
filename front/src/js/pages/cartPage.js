@@ -242,8 +242,11 @@ function setupCartEvents() {
   container.addEventListener("click", handleCartClick);
 }
 
-export function renderSummary({ showCheckoutButton = true } = {}) {
-  const data = getCartState();
+export function renderSummary({ buyNow = null,
+  showCheckoutButton = true,} = {}) {
+  const data = buyNow
+  ? [buyNow.item]
+  : getCartState();
 
   const el = document.getElementById("summaryContent");
 
@@ -259,56 +262,19 @@ export function renderSummary({ showCheckoutButton = true } = {}) {
     return;
   }
 
-  // CALCULATIONS
-  const subtotal = data.reduce((sum, item) => {
-    if (!item || typeof item.price !== "number") {
-      return sum;
-    }
+  const summary = buyNow
+  ? buyNow.summary
+  : calculateCartSummary(data);
 
-    return sum + item.price * item.quantity;
-  }, 0);
+const subtotal = summary.subtotal;
 
-  const originalTotal = data.reduce((sum, item) => {
-    if (!item || typeof item.originalPrice !== "number") {
-      return sum;
-    }
+const savings = summary.savings;
 
-    return sum + item.originalPrice * item.quantity;
-  }, 0);
+const shipping = summary.shipping;
 
- const savings = Math.max(
-  originalTotal - subtotal,
-  0
-);
-
-const totalItems =
-  data.reduce(
-    (sum, item) =>
-      sum + item.quantity,
-    0
-  );
-
-const appliedCoupon =
-  JSON.parse(
-    localStorage.getItem(
-      "appliedCoupon"
-    ) || "null"
-  );
-
-const discount =
-  appliedCoupon?.discount || 0;
-
-const couponCode =
-  appliedCoupon?.coupon?.code || "";
-
-const totalSavings =
-  savings + discount;
-
-const finalTotal =
-  Math.max(
-    subtotal - discount,
-    0
-  );
+const totalItems = buyNow
+  ? buyNow.item.quantity
+  : summary.itemCount;
 
   // UI
   el.innerHTML = `<!-- PRICE -->
@@ -816,13 +782,13 @@ async function renderAvailableCoupons() {
 
   try {
 
-    const subtotal =
-  getCartState()
-    .reduce(
+   const subtotal = buyNow
+  ? buyNow.summary.subtotal
+  : getCartState().reduce(
       (sum, item) =>
         sum +
         item.price *
-          item.quantity,
+        item.quantity,
       0
     );
 
