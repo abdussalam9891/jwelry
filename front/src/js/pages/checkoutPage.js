@@ -68,14 +68,23 @@ async function initCartCheckout() {
 
 
 async function initBuyNowCheckout() {
-  const preview = JSON.parse(
-    sessionStorage.getItem("gemora_buy_now")
-  );
+ const raw = sessionStorage.getItem("gemora_buy_now");
 
-  if (!preview) {
-    window.location.href = "/";
-    return;
-  }
+let preview = null;
+
+try {
+  preview = raw ? JSON.parse(raw) : null;
+} catch (err) {
+  console.error("Invalid Buy Now session data:", err);
+  sessionStorage.removeItem("gemora_buy_now");
+  window.location.href = "/";
+  return;
+}
+
+  // if (!preview) {
+  //   window.location.href = "/";
+  //   return;
+  // }
 
   await initAddressManager({
     containerId: "addressContainer",

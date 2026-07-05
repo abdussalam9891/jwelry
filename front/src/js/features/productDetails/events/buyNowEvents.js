@@ -58,10 +58,18 @@ async function handleBuyNow() {
       1
     );
 
+    console.log("Preview:", preview);
+console.log("Type:", typeof preview);
+
     sessionStorage.setItem(
       "gemora_buy_now",
       JSON.stringify(preview)
     );
+
+    console.log(
+  "Stored:",
+  sessionStorage.getItem("gemora_buy_now")
+);
 
     window.location.href =
       "/pages/checkout.html?mode=buyNow";
