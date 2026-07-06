@@ -1,5 +1,15 @@
 import api from "../core/api.js";
 
+
+
+export async function previewCheckout(data) {
+  return await api.post(
+    "/v1/orders/preview",
+    data
+  );
+}
+
+
 export async function createOrder(data) {
 
   return await api.post(

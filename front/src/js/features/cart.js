@@ -8,15 +8,21 @@ import { showToast } from "../components/toast.js";
 
 import { updateCartCount } from "../core/cartCount.js";
 
-let cartState = [];
+let cartState = {
+  items: [],
+  pricing: null,
+};
 
 export async function loadCart() {
   const data = await getCart();
 
-  cartState = data.items || [];
+  cartState = {
+  items: data.items || [],
+  pricing: data.pricing || null,
+};
 
   // Navbar badge update
-  const totalQty = cartState.reduce(
+  const totalQty = cartState.items.reduce(
     (total, item) => total + (item.quantity || 0),
     0
   );
@@ -36,7 +42,7 @@ export async function changeQuantity(
   id,
   delta
 ) {
-  const item = cartState.find(
+  const item = cartState.items.find(
     (i) => i._id === id
   );
 

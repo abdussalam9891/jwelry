@@ -1,7 +1,7 @@
 import Auth from "../../../core/auth.js";
 import { openAuthModal } from "../../../components/authModal.js";
 
-import { createBuyNowPreview } from "../../../services/buyNowService.js";
+import { previewCheckout } from "../../../services/orderService.js";
 
 import { showToast } from "../utils.js";
 import { productState } from "../state.js";
@@ -52,19 +52,20 @@ async function handleBuyNow() {
   }
 
   try {
-    const preview = await createBuyNowPreview(
-      product._id,
-      productState.selectedVariantId,
-      1
-    );
+  const preview = await previewCheckout({
+  mode: "buyNow",
 
-    console.log("Preview:", preview);
-console.log("Type:", typeof preview);
+  productId: product._id,
 
-    sessionStorage.setItem(
-      "gemora_buy_now",
-      JSON.stringify(preview)
-    );
+  variantId: productState.selectedVariantId,
+
+  quantity: 1,
+});
+
+sessionStorage.setItem(
+  "checkout_preview",
+  JSON.stringify(preview)
+);
 
     console.log(
   "Stored:",

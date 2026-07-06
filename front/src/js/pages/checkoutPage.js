@@ -1,8 +1,5 @@
 import { showToast } from "../components/toast.js";
-import {
-  getCartState,
-  loadCart,
-} from "../features/cart.js";
+
 import {
   loadWishlistState,
 } from "../features/wishlist.js";
@@ -10,11 +7,12 @@ import {
   initAddressManager,
 } from "../features/addressManager.js";
 
-import { renderSummary } from "./cartPage.js";
+
+
 
 import {
-  createOrder,
-} from "../services/orderService.js";
+  placeOrder,
+} from "../features/checkout/checkout.js";
 
 import {
   verifyPayment,
@@ -25,78 +23,38 @@ import {
   openRazorpay,
 } from "../utils/razorpay.js";
 
-const mode =
-  new URLSearchParams(window.location.search).get("mode") ||
-  "cart";
+
+
+import { checkoutState, initializeCheckoutState } from "../features/checkout/checkoutState.js";
+import { renderCouponSection } from "../features/checkout/coupon.js";
+import { renderSummary } from "../features/checkout/summary.js";
 
 
 
-  async function initCheckout() {
-  await loadWishlistState();
-
-  if (mode === "buyNow") {
-    return initBuyNowCheckout();
-  }
-
-  return initCartCheckout();
-}
 
 
 
-async function initCartCheckout() {
-  await loadCart();
-
-  const cart = getCartState();
-
-  if (!cart.length) {
-    window.location.href = "/pages/cart.html";
-    return;
-  }
-
-  await initAddressManager({
-    containerId: "addressContainer",
-    mode: "checkout",
-  });
-
-  renderSummary({
-    showCheckoutButton: false,
-  });
-
-  setupPlaceOrder();
-}
 
 
+async function initCheckout() {
+    await loadWishlistState();
 
-async function initBuyNowCheckout() {
- const raw = sessionStorage.getItem("gemora_buy_now");
+await initializeCheckoutState();
 
-let preview = null;
+    await initAddressManager({
+        containerId: "addressContainer",
+        mode: "checkout",
+    });
 
-try {
-  preview = raw ? JSON.parse(raw) : null;
-} catch (err) {
-  console.error("Invalid Buy Now session data:", err);
-  sessionStorage.removeItem("gemora_buy_now");
-  window.location.href = "/";
-  return;
-}
+    renderSummary({
+        items: checkoutState.items,
+        pricing: checkoutState.pricing,
+        showCheckoutButton: false,
+    });
 
-  // if (!preview) {
-  //   window.location.href = "/";
-  //   return;
-  // }
+    await renderCouponSection();
 
-  await initAddressManager({
-    containerId: "addressContainer",
-    mode: "checkout",
-  });
-
-  renderSummary({
-    showCheckoutButton: false,
-    buyNow: preview,
-  });
-
-  setupPlaceOrder();
+    setupPlaceOrder();
 }
 
 
@@ -104,32 +62,9 @@ try {
 
 
 
-// async function initCheckout() {
-//   await loadCart();
-//   await loadWishlistState();
 
-//   const cart =
-//     getCartState();
 
-//   if (!cart.length) {
-//     window.location.href =
-//       "/pages/cart.html";
-//     return;
-//   }
 
-//   await initAddressManager({
-//     containerId:
-//       "addressContainer",
-//     mode: "checkout",
-//   });
-
-//   renderSummary({
-//     showCheckoutButton:
-//       false,
-//   });
-
-//   setupPlaceOrder();
-// }
 
 function setupPlaceOrder() {
   const btn =
@@ -146,132 +81,47 @@ function setupPlaceOrder() {
   );
 }
 
-async function handleCheckout(
-  btn
-) {
+async function handleCheckout(btn) {
   try {
-    const selectedAddress =
-      document.querySelector(
-        'input[name="selectedAddress"]:checked'
-      );
+    const selectedAddress = document.querySelector(
+      'input[name="selectedAddress"]:checked'
+    );
 
     if (!selectedAddress) {
-      showToast(
-        "Please select an address"
-      );
+      showToast("Please select an address");
       return;
     }
 
-    const selectedPayment =
+    const paymentMethod =
       document.querySelector(
         'input[name="payment"]:checked'
-      );
-
-    const paymentMethod =
-      selectedPayment?.value ||
-      "COD";
+      )?.value || "COD";
 
     btn.disabled = true;
+    btn.textContent = "Placing Order...";
 
-    btn.textContent =
-      "Placing Order...";
-
-    const appliedCoupon =
-      JSON.parse(
-        localStorage.getItem(
-          "appliedCoupon"
-        )
-      );
-
-
-let response;
-
-if (mode === "buyNow") {
-
-  const preview = JSON.parse(
-    sessionStorage.getItem(
-      "gemora_buy_now"
-    )
-  );
-
-  response =
-    await createBuyNowOrder({
-
-      productId:
-        preview.item.productId,
-
-      variantId:
-        preview.item.variantId,
-
-      quantity:
-        preview.item.quantity,
-
-      addressId:
-        selectedAddress.value,
-
+    const response = await placeOrder({
+      addressId: selectedAddress.value,
       paymentMethod,
-
-      couponCode:
-        appliedCoupon?.coupon?.code,
-
     });
 
-} else {
-
-  response =
-    await createOrder({
-
-      addressId:
-        selectedAddress.value,
-
-      paymentMethod,
-
-      couponCode:
-        appliedCoupon?.coupon?.code,
-
-    });
-
-}
-
-
-
-
-
-
-    localStorage.removeItem(
-      "appliedCoupon"
-    );
-
-    if (
-      paymentMethod === "COD"
-    ) {
-      return handleCOD(
-        response.order
-      );
+    if (paymentMethod === "COD") {
+      return handleCOD(response.order);
     }
 
-    await handleRazorpayPayment(
-      response,
-      btn
-    );
+    await handleRazorpayPayment(response, btn);
 
   } catch (error) {
-
     console.error(error);
 
     btn.disabled = false;
-
-    btn.textContent =
-      "Place Order";
+    btn.textContent = "Place Order";
 
     showToast(
-      error.message ||
-        "Failed to place order"
+      error.message || "Failed to place order"
     );
-
   }
 }
-
 function handleCOD(
   order
 ) {
@@ -367,5 +217,15 @@ async function handleRazorpayPayment(
 
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 initCheckout();
