@@ -1,18 +1,38 @@
-let toastTimeout;
+// let toastTimeout;
+
+// export function showToast(message) {
+
+//   const toast = document.getElementById("toast");
+
+//   if (!toast) return;
+
+//   clearTimeout(toastTimeout);
+
+//   toast.textContent = message;
+
+//   toast.classList.remove("hidden");
+
+//   toastTimeout = setTimeout(() => {
+//     toast.classList.add("hidden");
+//   }, 3500);
+// }
+
+
+
 
 export function showToast(message) {
+  const toast = document.createElement("div");
 
-  const toast = document.getElementById("toast");
+  toast.className =
+    "fixed bg-black text-white px-4 py-2 rounded-lg shadow-lg text-sm";
 
-  if (!toast) return;
-
-  clearTimeout(toastTimeout);
+  toast.style.top = window.innerWidth < 768 ? "80px" : "140px";
+  toast.style.right = "16px";
+  toast.style.zIndex = "999999";
 
   toast.textContent = message;
 
-  toast.classList.remove("hidden");
+  document.body.appendChild(toast);
 
-  toastTimeout = setTimeout(() => {
-    toast.classList.add("hidden");
-  }, 3500);
+  setTimeout(() => toast.remove(), 3000);
 }

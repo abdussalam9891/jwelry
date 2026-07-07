@@ -78,6 +78,9 @@ export function attachVariantEvents(product) {
 
 
 
+ 
+
+
 function updateVariant(product) {
   const variant = product.variants.find(
     (v) =>
@@ -90,9 +93,8 @@ function updateVariant(product) {
   const priceEl = document.getElementById("productPrice");
   const originalEl = document.getElementById("originalPrice");
   const stockEl = document.getElementById("stockStatus");
-  const addToCartBtn = document.getElementById("addToCartBtn");
-  const stickyAddBtn = document.getElementById("stickyAddToCartBtn");
 
+  // No valid variant selected
   if (!variant) {
     productState.selectedVariantId = null;
 
@@ -100,19 +102,19 @@ function updateVariant(product) {
     if (originalEl) originalEl.textContent = "";
     if (stockEl) stockEl.textContent = "";
 
-    [addToCartBtn, stickyAddBtn].forEach((btn) => {
-      if (btn) btn.disabled = true;
-    });
+    updatePurchaseButtons(true);
 
     return;
   }
 
   productState.selectedVariantId = variant._id;
 
+  // Price
   if (priceEl) {
     priceEl.textContent = `₹${variant.price}`;
   }
 
+  // Original price
   if (originalEl) {
     if (
       product.originalPrice &&
@@ -124,6 +126,7 @@ function updateVariant(product) {
     }
   }
 
+  // Stock message
   if (stockEl) {
     if (variant.stock === 0) {
       stockEl.textContent = "Out of Stock";
@@ -139,28 +142,9 @@ function updateVariant(product) {
     }
   }
 
-  [addToCartBtn, stickyAddBtn].forEach((btn) => {
-    if (!btn) return;
-
-    if (variant.stock === 0) {
-      btn.disabled = true;
-      btn.textContent = "Out of Stock";
-      btn.classList.add(
-        "opacity-50",
-        "cursor-not-allowed"
-      );
-    } else {
-      btn.disabled = false;
-      btn.textContent = "ADD TO CART";
-      btn.classList.remove(
-        "opacity-50",
-        "cursor-not-allowed"
-      );
-    }
-  });
+  // Enable/disable Add to Cart + Buy Now
+  updatePurchaseButtons(variant.stock === 0);
 }
-
-
 
 
 
@@ -245,4 +229,25 @@ function resetButtons(selector) {
   });
 }
 
- 
+
+
+function updatePurchaseButtons(isDisabled) {
+  const buttons = [
+    { id: "addToCartBtn", label: "ADD TO CART" },
+    { id: "stickyAddToCartBtn", label: "ADD TO CART" },
+    { id: "buyNowBtn", label: "BUY NOW" },
+    { id: "stickyBuyNowBtn", label: "BUY NOW" },
+  ];
+
+  buttons.forEach(({ id, label }) => {
+    const btn = document.getElementById(id);
+
+    if (!btn) return;
+
+    btn.disabled = isDisabled;
+    btn.textContent = isDisabled ? "Out of Stock" : label;
+
+    btn.classList.toggle("opacity-50", isDisabled);
+    btn.classList.toggle("cursor-not-allowed", isDisabled);
+  });
+}

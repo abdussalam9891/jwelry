@@ -41,9 +41,9 @@ export async function renderCouponSection() {
     container.innerHTML = `
 <section
   class="
-    mt-6
+    mt-2
     overflow-hidden
-    rounded-3xl
+    rounded-xl
     border
     border-black/10
     bg-white

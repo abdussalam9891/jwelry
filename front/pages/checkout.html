@@ -1,97 +1,80 @@
 <!doctype html>
 <html lang="en">
   <head>
-  <!-- Basic -->
-  <meta charset="UTF-8" />
+    <!-- Basic -->
+    <meta charset="UTF-8" />
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO -->
-  <title>Checkout | Gemora</title>
+    <!-- SEO -->
+    <title>Checkout | Gemora</title>
 
-  <meta
-    name="description"
-    content="Complete your jewellery purchase securely with Gemora." />
+    <meta
+      name="description"
+      content="Complete your jewellery purchase securely with Gemora."
+    />
 
-  <meta
-    name="author"
-    content="Gemora" />
+    <meta name="author" content="Gemora" />
 
-  <meta
-    name="robots"
-    content="noindex, nofollow" />
+    <meta name="robots" content="noindex, nofollow" />
 
-  <meta
-    name="theme-color"
-    content="#6B1A2A" />
+    <meta name="theme-color" content="#6B1A2A" />
 
-  <!-- Canonical -->
-  <link
-    rel="canonical"
-    href="https://gemora-jwelry.vercel.app/pages/checkout.html" />
+    <!-- Canonical -->
+    <link
+      rel="canonical"
+      href="https://gemora-jwelry.vercel.app/pages/checkout.html"
+    />
 
-  <!-- Open Graph -->
-  <meta
-    property="og:type"
-    content="website" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
 
-  <meta
-    property="og:title"
-    content="Checkout | Gemora" />
+    <meta property="og:title" content="Checkout | Gemora" />
 
-  <meta
-    property="og:description"
-    content="Complete your jewellery purchase securely with Gemora." />
+    <meta
+      property="og:description"
+      content="Complete your jewellery purchase securely with Gemora."
+    />
 
-  <meta
-    property="og:image"
-    content="https://gemora-jwelry.vercel.app/src/assets/images/hero.webp" />
+    <meta
+      property="og:image"
+      content="https://gemora-jwelry.vercel.app/src/assets/images/hero.webp"
+    />
 
-  <meta
-    property="og:url"
-    content="https://gemora-jwelry.vercel.app/pages/checkout.html" />
+    <meta
+      property="og:url"
+      content="https://gemora-jwelry.vercel.app/pages/checkout.html"
+    />
 
-  <!-- Twitter -->
-  <meta
-    name="twitter:card"
-    content="summary_large_image" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
 
-  <meta
-    name="twitter:title"
-    content="Checkout | Gemora" />
+    <meta name="twitter:title" content="Checkout | Gemora" />
 
-  <meta
-    name="twitter:description"
-    content="Complete your jewellery purchase securely with Gemora." />
+    <meta
+      name="twitter:description"
+      content="Complete your jewellery purchase securely with Gemora."
+    />
 
-  <meta
-    name="twitter:image"
-    content="https://gemora-jwelry.vercel.app/src/assets/images/hero.webp" />
+    <meta
+      name="twitter:image"
+      content="https://gemora-jwelry.vercel.app/src/assets/images/hero.webp"
+    />
 
-  <!-- Performance -->
-  <link
-    rel="preconnect"
-    href="https://res.cloudinary.com" />
+    <!-- Performance -->
+    <link rel="preconnect" href="https://res.cloudinary.com" />
 
-  <!-- Favicon -->
-  <link
-    rel="icon"
-    href="../src/assets/icon/logo.png" />
+    <!-- Favicon -->
+    <link rel="icon" href="../src/assets/icon/logo.png" />
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Styles -->
-  <link
-    href="../src/css/main.css"
-    rel="stylesheet" />
+    <!-- Styles -->
+    <link href="../src/css/main.css" rel="stylesheet" />
 
-  <link
-    rel="stylesheet"
-    href="../src/css/animations.css" />
-</head>
+    <link rel="stylesheet" href="../src/css/animations.css" />
+  </head>
 
   <body>
     <header
@@ -122,7 +105,7 @@
               viewBox="0 0 24 24"
               stroke-width="1.8"
               stroke="currentColor"
-               aria-hidden="true"
+              aria-hidden="true"
               class="w-4 h-4"
             >
               <path
@@ -138,7 +121,6 @@
 
         <!-- RIGHT -->
         <div class="flex items-center gap-5">
-
           <!-- WISHLIST -->
 
           <a
@@ -152,7 +134,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                 aria-hidden="true"
+                aria-hidden="true"
                 class="w-8 h-8 text-[#6B1A2A]"
               >
                 <path
@@ -222,29 +204,21 @@
                 </div>
               </label>
 
-           <label
-  class="flex items-center justify-between border rounded-xl px-4 py-4 cursor-pointer hover:border-[#6B1A2A] transition"
->
-  <div class="flex items-center gap-3">
+              <label
+                class="flex items-center justify-between border rounded-xl px-4 py-4 cursor-pointer hover:border-[#6B1A2A] transition"
+              >
+                <div class="flex items-center gap-3">
+                  <input type="radio" name="payment" value="RAZORPAY" />
 
-    <input
-      type="radio"
-      name="payment"
-      value="RAZORPAY"
-    />
+                  <div>
+                    <p class="font-medium">Razorpay</p>
 
-    <div>
-      <p class="font-medium">
-        Razorpay
-      </p>
-
-      <p class="text-xs text-black/50">
-        UPI, Cards, NetBanking & Wallets
-      </p>
-    </div>
-
-  </div>
-</label>
+                    <p class="text-xs text-black/50">
+                      UPI, Cards, NetBanking & Wallets
+                    </p>
+                  </div>
+                </div>
+              </label>
             </div>
           </div>
         </div>
@@ -252,19 +226,22 @@
         <!-- RIGHT -->
         <div class="lg:col-span-1">
           <div
-            class="sticky top-24 bg-white border border-black/5 rounded-2xl p-5 shadow-sm"
+            class="sticky top-24 bg-white border border-black/5 rounded-2xl p-2 shadow-sm"
           >
+
+
+          <!-- coupon section  -->
+            <div id="couponSection" class="mb-5">
+              <div id="availableCoupons"></div>
+            </div>
+
             <h2 class="text-[1.35rem] font-semibold mb-5">Order Summary</h2>
+
+
 
             <div id="summaryContent"></div>
 
-<div
-  id="couponSection"
-  class="mt-5"
->
-  <div id="availableCoupons"></div>
-</div>
-
+            <!-- place order button  -->
             <button
               id="placeOrderBtn"
               class="w-full h-12 rounded-xl bg-[#6B1A2A] text-white font-medium hover:opacity-90 transition mt-5"
@@ -274,227 +251,189 @@
           </div>
         </div>
       </section>
-
+      <!-- address modal  -->
       <div
         id="addressModal"
         class="hidden fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
       >
         <div class="bg-white w-full max-w-lg rounded-2xl p-6 overflow-y-auto">
+          <div class="flex items-center justify-between mb-5">
+            <h2 id="addressModalTitle" class="text-xl font-semibold">
+              Add Address
+            </h2>
 
+            <button
+              id="closeAddressModal"
+              type="button"
+              class="w-9 h-9 rounded-full flex items-center justify-center text-xl text-black/50 hover:bg-black/5 transition"
+            >
+              ×
+            </button>
+          </div>
 
- <div class="flex items-center justify-between mb-5">
+          <form id="addressForm" class="space-y-4">
+            <input type="hidden" id="addressId" />
 
-    <h2
-      id="addressModalTitle"
-      class="text-xl font-semibold"
-    >
-      Add Address
-    </h2>
+            <!-- Full Name -->
+            <div>
+              <label class="block text-sm font-medium mb-1">
+                Full Name <span class="text-red-500">*</span>
+              </label>
 
-    <button
-      id="closeAddressModal"
-      type="button"
-      class="
-        w-9
-        h-9
-        rounded-full
-        flex
-        items-center
-        justify-center
-        text-xl
-        text-black/50
-        hover:bg-black/5
-        transition
-      "
-    >
-      ×
-    </button>
+              <input
+                id="fullName"
+                placeholder="Enter full name"
+                class="w-full border rounded-xl px-4 h-11"
+                required
+              />
+            </div>
 
-  </div>
+            <!-- Phone + Email -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  Phone Number <span class="text-red-500">*</span>
+                </label>
 
-<form id="addressForm" class="space-y-4">
+                <input
+                  id="phone"
+                  type="tel"
+                  inputmode="numeric"
+                  maxlength="10"
+                  placeholder="Phone number"
+                  class="w-full border rounded-xl px-4 h-11"
+                  required
+                />
+              </div>
 
-  <input
-    type="hidden"
-    id="addressId"
-  />
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  Email
+                  <span class="text-black/50 font-normal"> (Optional) </span>
+                </label>
 
-  <!-- Full Name -->
-  <div>
-    <label class="block text-sm font-medium mb-1">
-      Full Name <span class="text-red-500">*</span>
-    </label>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="your@email.com"
+                  class="w-full border rounded-xl px-4 h-11"
+                />
+              </div>
+            </div>
 
-    <input
-      id="fullName"
-      placeholder="Enter full name"
-      class="w-full border rounded-xl px-4 h-11"
-      required
-    />
-  </div>
+            <!-- Pincode + City -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  Pincode <span class="text-red-500">*</span>
+                </label>
 
-  <!-- Phone + Email -->
-  <div class="grid grid-cols-2 gap-4">
+                <input
+                  id="pincode"
+                  inputmode="numeric"
+                  maxlength="6"
+                  placeholder="Pincode"
+                  class="w-full border rounded-xl px-4 h-11"
+                  required
+                />
+              </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        Phone Number <span class="text-red-500">*</span>
-      </label>
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  City <span class="text-red-500">*</span>
+                </label>
 
-      <input
-        id="phone"
-        type="tel"
-        inputmode="numeric"
-        maxlength="10"
-        placeholder="Phone number"
-        class="w-full border rounded-xl px-4 h-11"
-        required
-      />
-    </div>
+                <input
+                  id="city"
+                  placeholder="City"
+                  class="w-full border rounded-xl px-4 h-11"
+                  required
+                />
+              </div>
+            </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        Email
-        <span class="text-black/50 font-normal">
-          (Optional)
-        </span>
-      </label>
+            <!-- State + Address Type -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  State <span class="text-red-500">*</span>
+                </label>
 
-      <input
-        id="email"
-        type="email"
-        placeholder="your@email.com"
-        class="w-full border rounded-xl px-4 h-11"
-      />
-    </div>
+                <input
+                  id="state"
+                  placeholder="State"
+                  class="w-full border rounded-xl px-4 h-11"
+                  required
+                />
+              </div>
 
-  </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  Address Type
+                </label>
 
-  <!-- Pincode + City -->
-  <div class="grid grid-cols-2 gap-4">
+                <select
+                  id="addressType"
+                  class="w-full border rounded-xl px-4 h-11"
+                >
+                  <option value="HOME">Home</option>
+                  <option value="WORK">Work</option>
+                  <option value="OTHER">Other</option>
+                </select>
+              </div>
+            </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        Pincode <span class="text-red-500">*</span>
-      </label>
+            <!-- Address Line 1 -->
+            <div>
+              <label class="block text-sm font-medium mb-1">
+                House / Flat / Building
+                <span class="text-red-500">*</span>
+              </label>
 
-      <input
-        id="pincode"
-        inputmode="numeric"
-        maxlength="6"
-        placeholder="Pincode"
-        class="w-full border rounded-xl px-4 h-11"
-        required
-      />
-    </div>
+              <input
+                id="addressLine1"
+                placeholder="House / Flat / Building"
+                class="w-full border rounded-xl px-4 h-11"
+                required
+              />
+            </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        City <span class="text-red-500">*</span>
-      </label>
+            <!-- Address Line 2 + Landmark -->
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  Address Line 2
+                  <span class="text-black/50 font-normal"> (Optional) </span>
+                </label>
 
-      <input
-        id="city"
-        placeholder="City"
-        class="w-full border rounded-xl px-4 h-11"
-        required
-      />
-    </div>
+                <input
+                  id="addressLine2"
+                  placeholder="Road / Area"
+                  class="w-full border rounded-xl px-4 h-11"
+                />
+              </div>
 
-  </div>
+              <div>
+                <label class="block text-sm font-medium mb-1">
+                  Landmark
+                  <span class="text-black/50 font-normal"> (Optional) </span>
+                </label>
 
-  <!-- State + Address Type -->
-  <div class="grid grid-cols-2 gap-4">
+                <input
+                  id="landmark"
+                  placeholder="Landmark"
+                  class="w-full border rounded-xl px-4 h-11"
+                />
+              </div>
+            </div>
 
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        State <span class="text-red-500">*</span>
-      </label>
-
-      <input
-        id="state"
-        placeholder="State"
-        class="w-full border rounded-xl px-4 h-11"
-        required
-      />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        Address Type
-      </label>
-
-      <select
-        id="addressType"
-        class="w-full border rounded-xl px-4 h-11"
-      >
-        <option value="HOME">Home</option>
-        <option value="WORK">Work</option>
-        <option value="OTHER">Other</option>
-      </select>
-    </div>
-
-  </div>
-
-  <!-- Address Line 1 -->
-  <div>
-    <label class="block text-sm font-medium mb-1">
-      House / Flat / Building
-      <span class="text-red-500">*</span>
-    </label>
-
-    <input
-      id="addressLine1"
-      placeholder="House / Flat / Building"
-      class="w-full border rounded-xl px-4 h-11"
-      required
-    />
-  </div>
-
-  <!-- Address Line 2 + Landmark -->
-  <div class="grid grid-cols-2 gap-4">
-
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        Address Line 2
-        <span class="text-black/50 font-normal">
-          (Optional)
-        </span>
-      </label>
-
-      <input
-        id="addressLine2"
-        placeholder="Road / Area"
-        class="w-full border rounded-xl px-4 h-11"
-      />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium mb-1">
-        Landmark
-        <span class="text-black/50 font-normal">
-          (Optional)
-        </span>
-      </label>
-
-      <input
-        id="landmark"
-        placeholder="Landmark"
-        class="w-full border rounded-xl px-4 h-11"
-      />
-    </div>
-
-  </div>
-
-  <button
-    type="submit"
-    class="w-full h-12 rounded-xl bg-[#6B1A2A] text-white font-medium hover:opacity-90 transition"
-  >
-    Save Address
-  </button>
-
-</form>
-
+            <button
+              type="submit"
+              class="w-full h-12 rounded-xl bg-[#6B1A2A] text-white font-medium hover:opacity-90 transition"
+            >
+              Save Address
+            </button>
+          </form>
         </div>
       </div>
 
@@ -503,7 +442,6 @@
         class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50"
       ></div>
     </main>
-
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script type="module">

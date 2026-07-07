@@ -46,13 +46,13 @@ await initializeCheckoutState();
         mode: "checkout",
     });
 
-    renderSummary({
+    await renderCouponSection();
+
+     renderSummary({
         items: checkoutState.items,
         pricing: checkoutState.pricing,
         showCheckoutButton: false,
     });
-
-    await renderCouponSection();
 
     setupPlaceOrder();
 }
