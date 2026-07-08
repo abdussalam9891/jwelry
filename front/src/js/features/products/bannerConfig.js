@@ -33,7 +33,7 @@ export const collectionBannerConfig = {
   },
 
   bracelets: {
-    image: "/src/assets/images/bangleNav .webp",
+    image: "/src/assets/images/bangleNav.webp",
 
     mobileTitle: "Bracelets",
 
@@ -44,7 +44,7 @@ export const collectionBannerConfig = {
   },
 
   default: {
-    image: "/src/assets/images/vintage .webp",
+    image: "/src/assets/images/vintage.webp",
 
     mobileTitle: "Jewellery",
 
