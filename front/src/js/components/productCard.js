@@ -59,7 +59,7 @@ export function createProductCard(product, options = {}) {
           <!-- IMAGE -->
           <img
             src="${img1}"
-            onerror="this.onerror=null;this.src='/src/assets/images/placeholder.jpg';"
+            onerror="this.onerror=null;this.src='/src/assets/images/placeholder .webp';"
             class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:opacity-0"
             loading="lazy"
           />
@@ -67,7 +67,7 @@ export function createProductCard(product, options = {}) {
           <!-- HOVER IMAGE -->
           <img
             src="${img2}"
-            onerror="this.onerror=null;this.src='/src/assets/images/placeholder.jpg';"
+            onerror="this.onerror=null;this.src='/src/assets/images/placeholder .webp';"
             class="w-full aspect-[4/5] object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
             loading="lazy"
           />

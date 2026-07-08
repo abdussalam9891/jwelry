@@ -193,25 +193,25 @@ export const moreCategories = [
   {
     label: "Bangles",
     category: "bangles",
-    image: "/src/assets/images/bangleNav.jpg",
+    image: "/src/assets/images/bangleNav.webp",
   },
 
   {
     label: "Anklets",
     category: "anklets",
-    image: "/src/assets/images/ankletNav.jpg",
+    image: "/src/assets/images/ankletNav.webp",
   },
 
   {
     label: "Nose Jewellery",
     category: "nose-jewellery",
-    image: "/src/assets/images/noseNav.jpg",
+    image: "/src/assets/images/noseNav.webp",
   },
 
   {
     label: "Jewellery Sets",
     category: "sets",
-    image: "/src/assets/images/setNav.jpg",
+    image: "/src/assets/images/setNav.webp",
   },
 ];
 
@@ -220,7 +220,7 @@ export const collections = [
     slug: "bridal",
     name: "Bridal",
     title: "Bridal Collection",
-    image: "/src/assets/images/bridal.jpg",
+    image: "/src/assets/images/bridal.webp",
     description:
       "Timeless pieces crafted for life's most beautiful moments.",
   },
@@ -229,7 +229,7 @@ export const collections = [
     slug: "luxury",
     name: "Luxury",
     title: "Luxury Collection",
-    image: "/src/assets/images/luxury.jpg",
+    image: "/src/assets/images/luxury.webp",
     description:
       "Statement jewellery designed to stand out.",
   },
@@ -238,7 +238,7 @@ export const collections = [
     slug: "minimal",
     name: "Minimal",
     title: "Minimal Collection",
-    image: "/src/assets/images/minimal.jpg",
+    image: "/src/assets/images/minimal.webp",
     description:
       "Elegant simplicity for everyday wear.",
   },
@@ -247,7 +247,7 @@ export const collections = [
     slug: "traditional",
     name: "Traditional",
     title: "Traditional Collection",
-    image: "/src/assets/images/traditional.jpg",
+    image: "/src/assets/images/traditional.webp",
     description:
       "Classic designs inspired by timeless heritage.",
   },
@@ -256,7 +256,7 @@ export const collections = [
     slug: "modern",
     name: "Modern",
     title: "Modern Collection",
-    image: "/src/assets/images/modern.jpg",
+    image: "/src/assets/images/modern.webp",
     description:
       "Contemporary jewellery with clean and elegant styling.",
   },
@@ -265,7 +265,7 @@ export const collections = [
     slug: "vintage",
     name: "Vintage",
     title: "Vintage Collection",
-    image: "/src/assets/images/vintage.jpg",
+    image: "/src/assets/images/vintage.webp",
     description:
       "Inspired by iconic designs from a bygone era.",
   },
