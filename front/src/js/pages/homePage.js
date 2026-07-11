@@ -8,11 +8,79 @@ import {
   collections,
 } from "../components/navbar/navbarNavigation.js";
 
+import { getHeroBanners } from "../services/heroBannerService.js";
+
 
 const homepageCategories = [
   ...jewelleryNavigation,
   ...moreCategories,
 ];
+
+
+
+let heroBanners = [];
+let currentBanner = 0;
+
+async function loadHeroBanner() {
+  try {
+    const response = await getHeroBanners();
+
+    heroBanners = response.data;
+
+    if (!heroBanners.length) return;
+
+    renderHeroBanner(currentBanner);
+
+    startHeroSlider();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function renderHeroBanner(index) {
+  const banner = heroBanners[index];
+
+  if (!banner) return;
+
+  const heroImage = document.getElementById("hero-image");
+  const heroLink = document.getElementById("hero-link");
+  const heroButton = document.getElementById("hero-button");
+
+  heroImage.src =
+    window.innerWidth >= 768
+      ? banner.desktopImage
+      : banner.mobileImage;
+
+  heroLink.href = banner.link || "#";
+  heroButton.href = banner.link || "#";
+}
+
+
+function startHeroSlider() {
+  if (heroBanners.length <= 1) return;
+
+  setInterval(() => {
+    currentBanner++;
+
+    if (currentBanner >= heroBanners.length) {
+      currentBanner = 0;
+    }
+
+    renderHeroBanner(currentBanner);
+  }, 5000);
+}
+
+window.addEventListener("resize", () => {
+  renderHeroBanner(currentBanner);
+});
+
+loadHeroBanner();
+
+
+
+
+
+
 
 function renderHomepageCategories() {
   const container =
@@ -162,7 +230,7 @@ function renderCollections() {
               ${collection.name} Collection
             </h3>
 
-            
+
 
           </div>
 
