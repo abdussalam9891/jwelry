@@ -1,6 +1,33 @@
+
+let isOpen = false;
+
+
+export function closeMobileDrawer() {
+  const mainNav = document.getElementById("mainNav");
+  const announcementBar = document.getElementById("announcementBar");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const navOverlay = document.getElementById("navOverlay");
+
+  if (!mobileMenu || !navOverlay) return;
+
+  mainNav.style.transform = "translateY(0)";
+  announcementBar.style.transform = "translateY(0)";
+
+  mobileMenu.classList.add("-translate-x-full");
+
+  navOverlay.classList.add(
+    "opacity-0",
+    "pointer-events-none"
+  );
+
+  document.body.classList.remove("overflow-hidden");
+
+  isOpen = false;
+}
+
 export function initializeNavbar() {
 
-  let isOpen = false;
+
 
   const mainNav =
     document.getElementById("mainNav");
@@ -64,33 +91,12 @@ announcementBar.style.transform =
 
   }
 
-  function closeMenu() {
+ function closeMenu() {
+  closeMobileDrawer();
+}
 
 
-    mainNav.style.transform = "translateY(0)";
 
-announcementBar.style.transform =
-  "translateY(0)";
-
-    mobileMenu.classList.add(
-      "-translate-x-full"
-    );
-
-    navOverlay.classList.add(
-      "opacity-0",
-      "pointer-events-none"
-    );
-
-    document.body.classList.remove(
-      "overflow-hidden"
-    );
-
-    mainNav.style.transform =
-      "translateY(0)";
-
-    isOpen = false;
-
-  }
 
   function toggleMenu() {
 

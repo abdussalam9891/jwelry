@@ -8,8 +8,11 @@ from "../../core/authState.js";
 
 import {
   openAuthModal
-}
-from "../../components/authModal.js";
+} from "../../components/authModal.js";
+
+import {
+  closeMobileDrawer
+} from "./navbarMobile.js";
 
 import { updateDropdownUser } from "./navbarUser.js";
 
@@ -67,14 +70,24 @@ function bindLoginButtons() {
     btn.textContent =
       "Login";
 
-    btn.onclick =
-      async (e) => {
+   btn.onclick = async (e) => {
+  e.preventDefault();
 
-        e.preventDefault();
+  closeMobileDrawer();
 
-        await openAuthModal();
+  const drawer =
+    document.getElementById("mobileMenu");
 
-      };
+  await new Promise((resolve) => {
+    drawer.addEventListener(
+      "transitionend",
+      resolve,
+      { once: true }
+    );
+  });
+
+  await openAuthModal();
+};
 
   });
 

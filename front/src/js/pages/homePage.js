@@ -48,10 +48,10 @@ function renderHeroSlides(banners) {
 
       <div class="swiper-slide h-full">
 
-        <a
-          href="${banner.link || "#"}"
-          class="block h-full w-full"
-        >
+       <a
+  href="${getBannerLink(banner.link)}"
+  class="block h-full w-full"
+>
 
           <picture>
 
@@ -99,6 +99,31 @@ function initializeHeroSwiper() {
       clickable: true,
     },
   });
+}
+
+
+
+function getBannerLink(link) {
+  if (!link || typeof link !== "string") {
+    return "#";
+  }
+
+  const trimmedLink = link.trim();
+
+  if (!trimmedLink) {
+    return "#";
+  }
+
+  if (
+    trimmedLink.startsWith("http://") ||
+    trimmedLink.startsWith("https://")
+  ) {
+    return trimmedLink;
+  }
+
+  return trimmedLink.startsWith("/")
+    ? trimmedLink
+    : `/${trimmedLink}`;
 }
 
 loadHeroBanner();
