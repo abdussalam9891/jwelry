@@ -95,7 +95,7 @@ export function createProductCard(product, options = {}) {
         </div>
 
         <!-- CONTENT -->
-        <div class="mt-2 space-y-1">
+        <div class="mt-2 space-y-1 px-3">
 
           <h3 class="text-[0.9rem] font-medium leading-snug line-clamp-1">
             ${product.name}

@@ -71,6 +71,8 @@
     <!-- Tailwind CDN (Replace later with compiled CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+
+
     <!-- Styles -->
     <link rel="stylesheet" href="./src/css/main.css" />
 
@@ -79,121 +81,58 @@
     <link rel="stylesheet" href="./src/css/animations.css" />
 
     <link rel="stylesheet" href="./src/css/homePage.css" />
+
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
   </head>
 
   <body>
     <div id="navbar-container"></div>
 
     <!-- Hero -->
-   
-    <section
-  class="page-content relative mt-24 h-[70svh] min-h-[500px] max-h-[850px] overflow-hidden sm:h-[75vh] sm:min-h-[600px]"
->
-  <!-- HERO IMAGE -->
-  <a id="hero-link" href="#">
-    <img
-      id="hero-image"
-      src=""
-      alt="Gemora Premium Jewellery Collection"
-      class="absolute inset-0 h-full w-full object-cover"
-      fetchpriority="high"
-      decoding="async"
-    />
-  </a>
 
-  <!-- OVERLAY -->
+ <section class="mt-32">
   <div
-    class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent"
-  ></div>
-
-  <!-- CONTENT -->
-  <div
-    class="relative z-10 flex h-full items-center pb-28 sm:pb-24 md:pb-20"
+    class="swiper heroSwiper relative
+           h-[42svh]
+           min-h-[380px]
+           max-h-[520px]
+           overflow-hidden"
   >
-    <div class="container-main">
-      <div class="max-w-2xl text-white">
-        <h1
-          class="mb-6 text-4xl font-light leading-tight sm:text-5xl md:text-6xl lg:text-7xl"
-        >
-          Crafted For Every Chapter Of Your Story
-        </h1>
 
-        <p
-          class="mb-8 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg md:text-xl"
-        >
-          Contemporary fine jewellery designed to celebrate everyday moments
-          and unforgettable milestones.
-        </p>
-
-        <div class="mb-8 flex flex-wrap gap-3">
-          <a
-            id="hero-button"
-            href="#"
-            class="rounded-full bg-white px-5 py-3 text-center text-sm font-medium text-black transition hover:scale-[1.02] sm:px-6 md:px-8 md:py-4 md:text-base"
-          >
-            Shop Jewellery
-          </a>
-
-          <a
-            href="#collections"
-            class="rounded-full border border-white px-5 py-3 text-center text-sm font-medium text-white transition hover:bg-white hover:text-black sm:px-6 md:px-8 md:py-4 md:text-base"
-          >
-            Explore Collections
-          </a>
-        </div>
-      </div>
+    <div class="swiper-wrapper h-full" id="hero-swiper-wrapper">
+      <!-- Slides injected here -->
     </div>
-  </div>
 
-  <!-- BOTTOM STRIP -->
-  <div
-    class="absolute bottom-0 left-0 w-full border-t border-white/10 bg-black/30 backdrop-blur-md"
-  >
-    <div
-      class="container-main grid grid-cols-2 divide-y divide-white/10 md:grid-cols-4 md:divide-x md:divide-y-0"
-    >
-      <div class="py-2 text-center md:py-3">
-        <p class="text-[11px] font-light leading-tight text-white/90 sm:text-xs md:text-sm">
-          Certified Jewellery
-        </p>
-      </div>
+    <!-- Pagination -->
+    <div class="swiper-pagination"></div>
 
-      <div class="py-2 text-center md:py-3">
-        <p class="text-[11px] font-light leading-tight text-white/90 sm:text-xs md:text-sm">
-          Lifetime Warranty
-        </p>
-      </div>
-
-      <div class="py-2 text-center md:py-3">
-        <p class="text-[11px] font-light leading-tight text-white/90 sm:text-xs md:text-sm">
-          Insured Shipping
-        </p>
-      </div>
-
-      <div class="py-2 text-center md:py-3">
-        <p class="text-[11px] font-light leading-tight text-white/90 sm:text-xs md:text-sm">
-          Easy Returns
-        </p>
-      </div>
-    </div>
   </div>
 </section>
+
+
 
     <!-- Category -->
     <section class="section-sm bg-[#F9F6F2]/80 py-10 md:py-12 lg:py-14">
       <div class="container-main">
         <!-- Section heading -->
-        <div class="text-center max-w-xl mx-auto mb-8 md:mb-10 lg:mb-12">
-          <h2
-            class="text-3xl md:text-4xl lg:text-[2.2rem] font-light text-[#1A1A1A] mb-3"
-          >
-            Explore Our Collections
-          </h2>
+       <div class="text-center max-w-2xl mx-auto mb-8 md:mb-14 px-4">
 
-          <p class="text-sm md:text-base text-black/60">
-            Timeless pieces crafted for every moment.
-          </p>
-        </div>
+  <h2
+    class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3"
+  >
+    Explore Our Collections
+  </h2>
+
+  <p
+    class="text-sm sm:text-base text-black/60 leading-6 sm:leading-7 max-w-xl mx-auto"
+  >
+    Timeless pieces crafted for every moment.
+  </p>
+
+</div>
 
         <div
           id="homepageCategories"
@@ -280,7 +219,7 @@
         <div class="relative">
           <div
             id="productContainer"
-            class="flex gap-6 overflow-x-auto px-4 py-6 scroll-smooth snap-x no-scrollbar"
+           class="flex gap-6 overflow-x-auto px-6 sm:px-4 py-6 scroll-smooth snap-x no-scrollbar"
           ></div>
 
           <!-- Right fade hint -->
@@ -295,23 +234,25 @@
 
     <section id="collections" class="py-10 md:py-14 lg:py-16 bg-[#F9F6F2]">
       <div class="container-main">
-        <div class="text-center max-w-3xl mx-auto mb-10 md:mb-16">
-          <h2
-            class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6"
-          >
-            Jewellery For Every Moment
-          </h2>
+     <div class="text-center max-w-2xl mx-auto mb-8 md:mb-16 px-4">
+  <h2
+    class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3 md:mb-5"
+  >
+    Jewellery For Every Moment
+  </h2>
 
-          <p class="text-black/60 leading-8">
-            Discover handcrafted collections designed for weddings,
-            celebrations, everyday elegance and timeless luxury.
-          </p>
-        </div>
+  <p
+    class="text-sm sm:text-base text-black/60 leading-6 sm:leading-8 max-w-xl mx-auto"
+  >
+    Discover handcrafted collections designed for weddings,
+    celebrations, everyday elegance and timeless luxury.
+  </p>
+</div>
 
-        <div
-          id="homepageCollections"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8"
-        ></div>
+       <div
+  id="homepageCollections"
+  class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 md:gap-5"
+></div>
       </div>
     </section>
 
@@ -895,5 +836,7 @@
 
     <script type="module" src="./src/js/components/scrollableCard.js"></script>
     <script type="module" src="./src/js/components/footer.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   </body>
 </html>

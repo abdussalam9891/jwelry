@@ -19,60 +19,87 @@ const homepageCategories = [
 
 
 let heroBanners = [];
-let currentBanner = 0;
 
 async function loadHeroBanner() {
   try {
     const response = await getHeroBanners();
 
-    heroBanners = response.data;
+    const banners = response.data;
 
-    if (!heroBanners.length) return;
+    if (!banners.length) return;
 
-    renderHeroBanner(currentBanner);
+    renderHeroSlides(banners);
 
-    startHeroSlider();
+    initializeHeroSwiper();
   } catch (error) {
     console.error(error);
   }
 }
 
-function renderHeroBanner(index) {
-  const banner = heroBanners[index];
 
-  if (!banner) return;
+function renderHeroSlides(banners) {
+  const wrapper = document.getElementById(
+    "hero-swiper-wrapper"
+  );
 
-  const heroImage = document.getElementById("hero-image");
-  const heroLink = document.getElementById("hero-link");
-  const heroButton = document.getElementById("hero-button");
+  wrapper.innerHTML = banners
+    .map(
+      (banner) => `
 
-  heroImage.src =
-    window.innerWidth >= 768
-      ? banner.desktopImage
-      : banner.mobileImage;
+      <div class="swiper-slide h-full">
 
-  heroLink.href = banner.link || "#";
-  heroButton.href = banner.link || "#";
+        <a
+          href="${banner.link || "#"}"
+          class="block h-full w-full"
+        >
+
+          <picture>
+
+            <source
+              media="(max-width:767px)"
+              srcset="${banner.mobileImage}"
+            >
+
+            <img
+              src="${banner.desktopImage}"
+              alt="Hero Banner"
+              class="block h-full w-full object-cover"
+              loading="lazy"
+            >
+
+          </picture>
+
+        </a>
+
+      </div>
+
+    `
+    )
+    .join("");
 }
 
 
-function startHeroSlider() {
-  if (heroBanners.length <= 1) return;
+function initializeHeroSwiper() {
+  new Swiper(".heroSwiper", {
+    loop: true,
 
-  setInterval(() => {
-    currentBanner++;
+    effect: "fade",
 
-    if (currentBanner >= heroBanners.length) {
-      currentBanner = 0;
-    }
+    speed: 700,
 
-    renderHeroBanner(currentBanner);
-  }, 5000);
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+
+
+
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
 }
-
-window.addEventListener("resize", () => {
-  renderHeroBanner(currentBanner);
-});
 
 loadHeroBanner();
 
@@ -83,8 +110,7 @@ loadHeroBanner();
 
 
 function renderHomepageCategories() {
-  const container =
-    document.getElementById("homepageCategories");
+  const container = document.getElementById("homepageCategories");
 
   if (!container) return;
 
@@ -103,7 +129,6 @@ function renderHomepageCategories() {
                 overflow-hidden
                 rounded-xl
                 mb-3
-                md:mb-4
               "
             >
 
@@ -112,10 +137,7 @@ function renderHomepageCategories() {
                 alt="${category.label}"
                 class="
                   w-full
-                  h-[180px]
-                  sm:h-[220px]
-                  md:h-[260px]
-                  lg:h-[300px]
+                  aspect-[5/4]
                   object-cover
                   transition
                   duration-500
@@ -128,9 +150,10 @@ function renderHomepageCategories() {
 
             <h3
               class="
-                text-base
-                sm:text-lg
-                md:text-xl
+                text-sm
+                sm:text-base
+                md:text-lg
+                lg:text-xl
                 font-light
                 text-[#1A1A1A]
                 transition
@@ -151,8 +174,7 @@ function renderHomepageCategories() {
 
 
 function renderCollections() {
-  const container =
-    document.getElementById("homepageCollections");
+  const container = document.getElementById("homepageCollections");
 
   if (!container) return;
 
@@ -164,11 +186,9 @@ function renderCollections() {
           class="
             group
             relative
-            h-[240px]
-            sm:h-[300px]
-            lg:h-[380px]
+            aspect-[5/4]
             overflow-hidden
-            rounded-2xl
+            rounded-xl
           "
         >
 
@@ -181,6 +201,7 @@ function renderCollections() {
               object-cover
               transition
               duration-700
+              ease-out
               group-hover:scale-105
             "
           />
@@ -190,8 +211,8 @@ function renderCollections() {
               absolute
               inset-0
               bg-gradient-to-t
-              from-black/80
-              via-black/20
+              from-black/65
+              via-black/15
               to-transparent
             "
           ></div>
@@ -199,10 +220,10 @@ function renderCollections() {
           <div
             class="
               absolute
-              bottom-5
-              left-5
-              sm:bottom-8
-              sm:left-8
+              bottom-3
+              left-3
+              sm:bottom-5
+              sm:left-5
               text-white
             "
           >
@@ -210,9 +231,10 @@ function renderCollections() {
             <p
               class="
                 uppercase
-                tracking-[0.3em]
-                text-xs
-                mb-2
+                tracking-[0.25em]
+                text-[10px]
+                sm:text-xs
+                mb-1
               "
             >
               ${collection.name}
@@ -220,17 +242,15 @@ function renderCollections() {
 
             <h3
               class="
-                text-xl
-                sm:text-2xl
-                lg:text-3xl
+                text-base
+                sm:text-xl
+                lg:text-2xl
                 font-light
-                mb-3
+                leading-tight
               "
             >
               ${collection.name} Collection
             </h3>
-
-
 
           </div>
 

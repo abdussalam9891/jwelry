@@ -2,3 +2,30 @@
   color: black;
   border-bottom: 2px solid black;
 }
+
+
+
+
+/* ==========================
+   Hero Swiper
+========================== */
+
+.heroSwiper,
+.heroSwiper .swiper-wrapper,
+.heroSwiper .swiper-slide {
+  height: 100%;
+}
+
+.heroSwiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.heroSwiper .swiper-pagination-bullet-active {
+  width: 28px;
+  border-radius: 999px;
+  background: #6B1A2A;
+}
