@@ -22,9 +22,7 @@ let heroBanners = [];
 
 async function loadHeroBanner() {
   try {
-    const response = await getHeroBanners();
-
-    const banners = response.data;
+    const banners = await getHeroBanners();
 
     if (!banners.length) return;
 
@@ -49,7 +47,7 @@ function renderHeroSlides(banners) {
       <div class="swiper-slide h-full">
 
        <a
-  href="${getBannerLink(banner.link)}"
+  href="${getBannerLink(banner.navigationTarget)}"
   class="block h-full w-full"
 >
 
@@ -103,27 +101,54 @@ function initializeHeroSwiper() {
 
 
 
-function getBannerLink(link) {
-  if (!link || typeof link !== "string") {
-    return "#";
+function getBannerLink(target) {
+  if (!target) return "#";
+
+  switch (target.type) {
+    case "page":
+      switch (target.value) {
+        case "home":
+          return "/";
+
+        case "products":
+          return "/pages/products.html";
+
+        case "collections":
+          return "/pages/collections.html";
+
+        case "about":
+          return "/pages/about.html";
+
+        case "contact":
+          return "/pages/contact.html";
+
+        default:
+          return "/";
+      }
+
+    case "category":
+      return `/pages/products.html?category=${encodeURIComponent(
+        target.value
+      )}`;
+
+    case "collection":
+      return `/pages/collection.html?slug=${encodeURIComponent(
+        target.value
+      )}&style=${encodeURIComponent(
+        target.value
+      )}&page=1`;
+
+    case "product":
+      return `/pages/product.html?id=${encodeURIComponent(
+        target.value
+      )}`;
+
+    case "external":
+      return target.value;
+
+    default:
+      return "#";
   }
-
-  const trimmedLink = link.trim();
-
-  if (!trimmedLink) {
-    return "#";
-  }
-
-  if (
-    trimmedLink.startsWith("http://") ||
-    trimmedLink.startsWith("https://")
-  ) {
-    return trimmedLink;
-  }
-
-  return trimmedLink.startsWith("/")
-    ? trimmedLink
-    : `/${trimmedLink}`;
 }
 
 loadHeroBanner();
