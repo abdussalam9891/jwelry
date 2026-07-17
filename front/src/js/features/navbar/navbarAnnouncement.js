@@ -1,35 +1,35 @@
-let announcementInterval;
+// let announcementInterval;
 
-export function initAnnouncementBar() {
-  const messages = [
-    "Free Shipping Across India",
-    "BIS Hallmarked Jewellery",
-    "Easy 7-Day Returns",
-    "100% Secure Payments",
-  ];
+// export function initAnnouncementBar() {
+//   const messages = [
+//     "Free Shipping Across India",
+//     "BIS Hallmarked Jewellery",
+//     "Easy 7-Day Returns",
+//     "100% Secure Payments",
+//   ];
 
-  const text =
-    document.getElementById(
-      "announcementText"
-    );
+//   const text =
+//     document.getElementById(
+//       "announcementText"
+//     );
 
-  if (!text) return;
+//   if (!text) return;
 
-  let index = 0;
+//   let index = 0;
 
-  if (announcementInterval) {
-    clearInterval(
-      announcementInterval
-    );
-  }
+//   if (announcementInterval) {
+//     clearInterval(
+//       announcementInterval
+//     );
+//   }
 
-  announcementInterval =
-    setInterval(() => {
-      index =
-        (index + 1) %
-        messages.length;
+//   announcementInterval =
+//     setInterval(() => {
+//       index =
+//         (index + 1) %
+//         messages.length;
 
-      text.textContent =
-        messages[index];
-    }, 3500);
-}
+//       text.textContent =
+//         messages[index];
+//     }, 3500);
+// }

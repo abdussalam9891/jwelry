@@ -270,3 +270,15 @@ export const collections = [
       "Inspired by iconic designs from a bygone era.",
   },
 ];
+
+
+
+
+collections.forEach((c) => {
+  const validStyle = jewelleryStyles.some((s) => s.value === c.slug);
+  if (!validStyle) {
+    console.warn(
+      `[navbarNavigation] Collection "${c.slug}" has no matching entry in jewelleryStyles — its collection page will show an empty product grid.`
+    );
+  }
+});

@@ -23,81 +23,76 @@ let heroBanners = [];
 async function loadHeroBanner() {
   try {
     const banners = await getHeroBanners();
-
     if (!banners.length) return;
 
     renderHeroSlides(banners);
-
-    initializeHeroSwiper();
+    initializeHeroSwiper(banners.length);   // ← pass count
   } catch (error) {
     console.error(error);
   }
 }
 
 
+
+
+let heroSwiperInstance = null;
+
+function initializeHeroSwiper(bannerCount) {
+  if (heroSwiperInstance) {
+    heroSwiperInstance.destroy(true, true);
+  }
+  heroSwiperInstance = new Swiper(".heroSwiper", {
+    loop: bannerCount > 1,
+    effect: "fade",
+    speed: 700,
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    pagination: { el: ".swiper-pagination", clickable: true },
+  });
+}
+
+
+
+
+
+
+
+// function initializeHeroSwiper(bannerCount) {
+//   new Swiper(".heroSwiper", {
+//     loop: bannerCount > 1,   // ← use it here
+//     effect: "fade",
+//     speed: 700,
+//     autoplay: { delay: 5000, disableOnInteraction: false },
+//     pagination: { el: ".swiper-pagination", clickable: true },
+//   });
+// }
+
+
 function renderHeroSlides(banners) {
-  const wrapper = document.getElementById(
-    "hero-swiper-wrapper"
-  );
+  const wrapper = document.getElementById("hero-swiper-wrapper");
 
   wrapper.innerHTML = banners
     .map(
       (banner) => `
-
       <div class="swiper-slide h-full">
-
-       <a
-  href="${getBannerLink(banner.navigationTarget)}"
-  class="block h-full w-full"
->
-
+        <a href="${getBannerLink(banner.navigationTarget)}" class="block h-full w-full">
           <picture>
-
-            <source
-              media="(max-width:767px)"
-              srcset="${banner.mobileImage}"
-            >
-
+            <source media="(max-width:767px)" srcset="${banner.mobileImage}">
             <img
               src="${banner.desktopImage}"
-              alt="Hero Banner"
+              alt="${banner.title || "Hero Banner"}"
               class="block h-full w-full object-cover"
               loading="lazy"
             >
-
           </picture>
-
         </a>
-
       </div>
-
     `
     )
     .join("");
 }
 
 
-function initializeHeroSwiper() {
-  new Swiper(".heroSwiper", {
-    loop: true,
 
-    effect: "fade",
-
-    speed: 700,
-
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-
-
-
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-  });
-}
 
 
 
@@ -116,12 +111,6 @@ function getBannerLink(target) {
         case "collections":
           return "/pages/collections.html";
 
-        case "about":
-          return "/pages/about.html";
-
-        case "contact":
-          return "/pages/contact.html";
-
         default:
           return "/";
       }
@@ -139,7 +128,7 @@ function getBannerLink(target) {
       )}&page=1`;
 
     case "product":
-      return `/pages/product.html?id=${encodeURIComponent(
+      return `/pages/productDetails.html?slug=${encodeURIComponent(
         target.value
       )}`;
 

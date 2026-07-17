@@ -1,4 +1,4 @@
-import { createNavbar } from "../../components/navbar/navbar.js";
+import { createNavbar, initAnnouncementBar } from "../../components/navbar/navbar.js";
 
 import { getCurrentUser, logout } from "../../core/authState.js";
 import { loadCart } from "../cart.js";
@@ -21,8 +21,7 @@ import {
   initSearchPlaceholder,
   initSearchSuggestions,
 } from "./navbarSearch.js";
-import { initAnnouncementBar }
-from "./navbarAnnouncement.js";
+
 
 export async function loadNavbar() {
   // GET USER FIRST
@@ -54,7 +53,7 @@ export async function loadNavbar() {
   initSearchHandlers();
   initSearchButton();
   initSearchSuggestions();
-  initAnnouncementBar();
+  await initAnnouncementBar();
 
   // MOBILE LOGOUT
   document

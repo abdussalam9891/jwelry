@@ -16,6 +16,7 @@ const {
   storeName = "Gemora",
   email = "",
   phone = "",
+  address = "",
   socialLinks = {},
 } = siteSettings;
 
@@ -274,24 +275,27 @@ console.log({
               <li><a href="/pages/warranty.html" class="hover:text-[#C6A96A] transition-colors">Warranty</a></li>
             </ul>
           </details>
+
+
+          
           <div class="mt-5 pt-5 border-t border-white/15 lg:border-none lg:pt-0 lg:mt-6 text-sm text-white/70 space-y-1.5">
+            ${address ? `<p>${address}</p>` : ""}
             <p>
-  <a
-    href="${email ? `mailto:${email}` : "#"}"
-    class="hover:text-[#C6A96A] transition-colors"
-  >
-    ${email || "Not Available"}
-  </a>
-</p>
-           <p>
-  <a
-    href="${phone ? `tel:${phone}` : "#"}"
-    class="hover:text-[#C6A96A] transition-colors"
-  >
-    ${phone || "Not Available"}
-  </a>
-</p>
+              <a href="${email ? `mailto:${email}` : "#"}" class="hover:text-[#C6A96A] transition-colors">
+                ${email || "Not Available"}
+              </a>
+            </p>
+            <p>
+              <a href="${phone ? `tel:${phone}` : "#"}" class="hover:text-[#C6A96A] transition-colors">
+                ${phone || "Not Available"}
+              </a>
+            </p>
           </div>
+        </div>
+      </div>
+
+
+
         </div>
       </div>
 
@@ -323,17 +327,12 @@ console.log({
 
 async function initializeFooter() {
   try {
-    const response = await getSiteSettings();
-
-    console.log(response);
-
-    loadFooter(response.data);
+    const settings = await getSiteSettings();   // already the real settings object
+    loadFooter(settings);                        // pass it directly, no .data
   } catch (error) {
     console.error(error);
-
     loadFooter();
   }
-
   initNewsletter();
 }
 
