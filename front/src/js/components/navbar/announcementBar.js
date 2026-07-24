@@ -4,31 +4,16 @@ export function createAnnouncementBarShell() {
   return `<div id="announcementBar" class="hidden"></div>`;
 }
 
-export async function initAnnouncementBar () {
- console.log("Announcement init");
-
+export async function initAnnouncementBar() {
   const container = document.getElementById("announcementBar");
-  console.log("Container:", container);
 
   if (!container) return;
 
   try {
     const announcement = await getAnnouncementBar();
 
-     console.log("Announcement:", announcement);
-
-    // Backend returns null when there is no active announcement
-    if (!announcement) {
-      return;
-    }
-
-    // Respect session dismiss
-    if (
-      sessionStorage.getItem("announcementDismissed") ===
-      announcement.message
-    ) {
-      return;
-    }
+    // No active announcement
+    if (!announcement) return;
 
     const content = announcement.link
       ? `
@@ -59,28 +44,7 @@ export async function initAnnouncementBar () {
       duration-300
     `;
 
-    container.innerHTML = `
-      ${content}
-
-      <button
-        id="dismissAnnouncement"
-        class="absolute right-4 text-white/70 transition hover:text-white"
-        aria-label="Dismiss announcement"
-      >
-        ✕
-      </button>
-    `;
-
-    document
-      .getElementById("dismissAnnouncement")
-      ?.addEventListener("click", () => {
-        sessionStorage.setItem(
-          "announcementDismissed",
-          announcement.message
-        );
-
-        container.remove();
-      });
+    container.innerHTML = content;
   } catch (error) {
     console.error("[AnnouncementBar]", error);
   }

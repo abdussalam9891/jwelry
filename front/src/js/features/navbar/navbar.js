@@ -48,12 +48,13 @@ export async function loadNavbar() {
   await checkAuthState();
 
   initSearchPlaceholder();
+  await initAnnouncementBar();
   initNavbarScroll();
   setActiveNav();
   initSearchHandlers();
   initSearchButton();
   initSearchSuggestions();
-  await initAnnouncementBar();
+
 
   // MOBILE LOGOUT
   document
