@@ -277,7 +277,7 @@ console.log({
           </details>
 
 
-          
+
           <div class="mt-5 pt-5 border-t border-white/15 lg:border-none lg:pt-0 lg:mt-6 text-sm text-white/70 space-y-1.5">
             ${address ? `<p>${address}</p>` : ""}
             <p>
@@ -296,8 +296,7 @@ console.log({
 
 
 
-        </div>
-      </div>
+        
 
       <!-- Popular Searches  -->
       <div class="py-6 border-t border-white/15">
