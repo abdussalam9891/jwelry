@@ -4,9 +4,7 @@
 export function getShareText(shareData) {
   return `Check out this beautiful jewellery from Gemora!
 
-${shareData.title}
-
-${shareData.url}`;
+${shareData.title}`;
 }
 
 /**
