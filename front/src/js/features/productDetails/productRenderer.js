@@ -1,4 +1,3 @@
-
 import {
   renderMainImage,
   renderThumbnails,
@@ -16,14 +15,30 @@ import {
 import { attachCartEvents } from "./events/cartEvents.js";
 import { attachBuyNowEvents } from "./events/buyNowEvents.js";
 
+import {
+  renderSizeGuideModal,
+  initSizeGuideModal,
+} from "./sizeGuideModal.js";
+
+import {
+  renderShareModal,
+  initShare,
+} from "./share/share.js";
 
 export function renderProduct(product) {
   const container = document.getElementById("productContainer");
 
+  const shareData = {
+    title: product.name,
+    url: window.location.href,
+    image: product.images?.[0]?.url || "",
+    price: product.price,
+  };
+
   container.innerHTML = `
     <div class="section-sm container-main max-w-7xl mx-auto px-4 md:px-6">
 
-      <div class="grid grid-cols-1 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr] gap-6 md:gap-10 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr] gap-6 md:gap-10 items-start">
 
         <!-- LEFT -->
         <div class="md:sticky md:top-24 self-start">
@@ -32,7 +47,7 @@ export function renderProduct(product) {
             ${renderThumbnails(product.images?.map((img) => img.url))}
 
             <div class="w-full">
-             ${renderMainImage(product.images?.[0]?.url)}
+              ${renderMainImage(product.images?.[0]?.url)}
             </div>
 
           </div>
@@ -40,19 +55,19 @@ export function renderProduct(product) {
 
         <!-- RIGHT -->
         <div>
-
           ${renderInfo(product)}
-
-
-
         </div>
 
       </div>
 
     </div>
+
+    ${renderSizeGuideModal(product)}
+
+    ${renderShareModal(shareData)}
   `;
 
-  //  ADD THIS RIGHT HERE
+  // Set initial price
   const prices = product.variants?.map((v) => v.price) || [];
 
   if (prices.length) {
@@ -62,22 +77,23 @@ export function renderProduct(product) {
     const priceEl = document.getElementById("productPrice");
 
     if (priceEl) {
-      priceEl.textContent = min === max ? `₹${min}` : `₹${min} – ₹${max}`;
+      priceEl.textContent =
+        min === max ? `₹${min}` : `₹${min} – ₹${max}`;
     }
   }
 
-  //  THEN attach events
- attachImageGalleryEvents();
+  // Initialize components
+  attachImageGalleryEvents();
+  attachVariantEvents(product);
+  attachDescriptionEvents();
+  attachReviewModalEvents();
+  attachReviewSubmitEvents();
+  attachCartEvents();
+  attachBuyNowEvents();
 
-attachVariantEvents(product);
+  // Initialize Size Guide
+  initSizeGuideModal();
 
-attachDescriptionEvents();
-
-attachReviewModalEvents();
-
-attachReviewSubmitEvents();
-
-attachCartEvents();
-
-attachBuyNowEvents();
+  // Initialize Share
+  initShare(shareData);
 }

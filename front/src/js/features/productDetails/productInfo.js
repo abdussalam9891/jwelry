@@ -3,6 +3,8 @@ import { renderDescriptionSection, renderProductMeta } from "./description.js";
 
 import { renderReviewsSection } from "./reviewsRenderer.js";
 
+import { renderShareButton } from "./share/share.js";
+
 
 import {
   renderOffers,
@@ -54,6 +56,71 @@ function renderPrice(product) {
 
 
 
+
+function renderSecondaryActions(product) {
+  return `
+    <div class="mt-5">
+
+      <div class="grid grid-cols-2 gap-3">
+
+        <!-- Wishlist -->
+        <button
+          id="wishlistBtn"
+          data-id="${product._id}"
+          class="
+            wishlist-btn
+            group
+            h-12 sm:h-13
+            rounded-xl
+            border
+            border-gray-200
+            bg-white
+            flex
+            items-center
+            justify-center
+            gap-2.5
+            text-gray-700
+            transition-all
+            duration-300
+            hover:border-[#6B1A2A]
+            hover:bg-[#FCFAF8]
+            hover:text-[#6B1A2A]
+            active:scale-[0.98]
+          "
+          aria-label="Add to Wishlist"
+        >
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 transition-colors duration-300"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.7"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25z"
+            />
+          </svg>
+
+          <span
+            class="text-sm font-medium tracking-wide"
+          >
+            Wishlist
+          </span>
+
+        </button>
+
+        ${renderShareButton()}
+
+      </div>
+
+    </div>
+  `;
+}
+
 // ctaRenderer.js
 
 function renderCTA(product) {
@@ -61,29 +128,7 @@ function renderCTA(product) {
     <!-- Desktop CTA -->
     <div class="hidden md:flex flex-col sm:flex-row gap-3 mt-6">
 
-      <!-- Wishlist -->
-      <button
-        id="wishlistBtn"
-        data-id="${product._id}"
-        class="wishlist-btn w-full sm:w-[56px] h-[52px] flex items-center justify-center border rounded-lg hover:bg-gray-50 transition order-3 sm:order-1"
-        aria-label="Add to Wishlist"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-5 h-5 text-black/70"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25z"
-          />
-        </svg>
-      </button>
+
 
       <div class="flex flex-1 gap-3 order-1 sm:order-2">
 
@@ -111,29 +156,10 @@ function renderCTA(product) {
     >
       <div class="flex items-center gap-3">
 
-        <!-- Wishlist -->
-        <button
-          id="stickyWishlistBtn"
-          data-id="${product._id}"
-          class="wishlist-btn w-12 h-12 flex items-center justify-center border rounded-lg flex-shrink-0"
-          aria-label="Add to Wishlist"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-black/70"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M21 8.25c0-2.485-2.239-4.5-5-4.5-1.74 0-3.27.86-4 2.09-.73-1.23-2.26-2.09-4-2.09-2.761 0-5 2.015-5 4.5 0 6 9 11.25 9 11.25s9-5.25 9-11.25z"
-            />
-          </svg>
-        </button>
+
+
+
+
 
         <!-- Add to Cart -->
         <button
@@ -169,6 +195,8 @@ export function renderInfo(product) {
       ${renderPrice(product)}
 
       ${renderVariantOptions(product)}
+
+      ${renderSecondaryActions(product)}
 
       ${renderCTA(product)}
 
