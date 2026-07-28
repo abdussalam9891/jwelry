@@ -1,6 +1,6 @@
 // features/wishlist.js
 
-import { openAuthModal } from "../components/authModal.js";
+import { openLoginFlow } from "../features/navbar/authHelpers.js";
 import Auth from "../core/auth.js";
 import {
   updateWishlistCount,
@@ -121,7 +121,7 @@ export function initWishlist() {
 
 if (!user) {
 
-  await openAuthModal();
+  await openLoginFlow();
 
   return;
 
@@ -262,7 +262,7 @@ export async function addToWishlist(
 
   if (!user) {
 
-    await openAuthModal();
+    await openLoginFlow();
 
     return;
 

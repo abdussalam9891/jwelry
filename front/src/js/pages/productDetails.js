@@ -1,5 +1,9 @@
 import { openAuthModal } from "../components/authModal.js";
 import { renderProduct } from "../features/productDetails/productRenderer.js";
+import {
+  saveRecentlyViewed,
+  loadRecentlyViewed,
+} from "../features/recentlyViewed/recentlyViewed.js";
 import { renderHorizontalSection } from "../components/horizontalProducts.js";
 import Auth from "../core/auth.js";
 import { initWishlist, loadWishlistState } from "../features/wishlist.js";
@@ -63,6 +67,9 @@ productState.currentUser = await Auth.getCurrentUser();
     initWishlist();
     await loadWishlistState();
 
+    // Save current product
+await saveRecentlyViewed(product._id);
+
     // Reviews
    await loadReviewPage(
   productState.currentProductId,
@@ -73,6 +80,10 @@ productState.currentUser = await Auth.getCurrentUser();
    attachReviewSort(
   productState.currentProductId,
   productState.currentUser
+);
+
+await loadRecentlyViewed(
+  "recentlyViewedSection"
 );
 
     // Similar + Recommended

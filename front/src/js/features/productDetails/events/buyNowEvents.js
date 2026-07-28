@@ -1,5 +1,5 @@
 import Auth from "../../../core/auth.js";
-import { openAuthModal } from "../../../components/authModal.js";
+import { openLoginFlow } from "../../../features/navbar/authHelpers.js";
 
 import { previewCheckout } from "../../../services/orderService.js";
 
@@ -47,7 +47,7 @@ async function handleBuyNow() {
   const user = await Auth.getCurrentUser();
 
   if (!user) {
-    await openAuthModal();
+    await openLoginFlow();
     return;
   }
 

@@ -6,18 +6,15 @@ import {
 }
 from "../../core/authState.js";
 
-import {
-  openAuthModal
-} from "../../components/authModal.js";
-
-import {
-  closeMobileDrawer
-} from "./navbarMobile.js";
+import { openLoginFlow } from "./authHelpers.js";
 
 import { updateDropdownUser } from "./navbarUser.js";
 
 
 export async function checkAuthState() {
+
+  console.log("checkAuthState called");
+
   const user =
     await getCurrentUser();
 
@@ -59,38 +56,18 @@ export async function checkAuthState() {
 
 
 function bindLoginButtons() {
-
   const loginBtns =
-    document.querySelectorAll(
-      ".loginBtn"
-    );
+    document.querySelectorAll(".loginBtn");
 
   loginBtns.forEach((btn) => {
+    btn.textContent = "Login";
 
-    btn.textContent =
-      "Login";
+    btn.onclick = async (e) => {
+      e.preventDefault();
 
-   btn.onclick = async (e) => {
-  e.preventDefault();
-
-  closeMobileDrawer();
-
-  const drawer =
-    document.getElementById("mobileMenu");
-
-  await new Promise((resolve) => {
-    drawer.addEventListener(
-      "transitionend",
-      resolve,
-      { once: true }
-    );
+      await openLoginFlow();
+    };
   });
-
-  await openAuthModal();
-};
-
-  });
-
 }
 
 
@@ -135,7 +112,7 @@ export async function handleProtectedRoute(
       path
     );
 
-    await openAuthModal();
+    await openLoginFlow();
 
   }
 

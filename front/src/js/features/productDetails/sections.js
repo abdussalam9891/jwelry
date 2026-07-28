@@ -2,17 +2,7 @@
 
 import { renderDeliveryChecker } from "../../components/deliveryChecker.js";
 
-export function renderOffers() {
-  return `
-    <div class="border rounded-xl p-3 sm:p-4 bg-black/[0.02]">
-      <p class="font-medium mb-1">Offers</p>
-
-      <div class="text-sm text-black/70">
-        Extra 10% off above ₹1999
-      </div>
-    </div>
-  `;
-}
+ 
 
 export function renderDeliverySection() {
   return `

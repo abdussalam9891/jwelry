@@ -1,6 +1,6 @@
 import { createProductCard } from "../components/productCard.js";
 import Auth from "../core/auth.js";
-import { openAuthModal } from "../components/authModal.js";
+import { openLoginFlow } from "../features/navbar/authHelpers.js";
 import { initWishlist, loadWishlistState, openVariantModal  } from "../features/wishlist.js";
 import { updateWishlistPageCount } from "../core/wishlistCount.js";
 import { CONFIG } from "../config.js";
@@ -38,7 +38,7 @@ async function loadWishlistPage() {
 
     if (!user) {
 
-      await openAuthModal();
+      await openLoginFlow();
 
       return;
 

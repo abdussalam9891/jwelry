@@ -63,14 +63,14 @@ export function createUserDropdown() {
   id="dropdownName"
   class="font-semibold text-[15px] text-black truncate"
 >
-  --
+  
 </p>
 
         <p
   id="dropdownEmail"
   class="text-sm text-black/45 truncate mt-0.5"
 >
-  --
+
 </p>
 
          <a

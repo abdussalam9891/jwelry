@@ -35,37 +35,38 @@ export function renderProduct(product) {
     price: product.price,
   };
 
-  container.innerHTML = `
-    <div class="section-sm container-main max-w-7xl mx-auto px-4 md:px-6">
+container.innerHTML = `
+  <div class="section-sm container-main max-w-7xl mx-auto px-4 md:px-6">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr] gap-6 md:gap-10 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr] gap-6 md:gap-10 items-start">
 
-        <!-- LEFT -->
-        <div class="md:sticky md:top-24 self-start">
-          <div class="flex flex-col md:flex-row gap-4">
+      <div class="md:sticky md:top-24 self-start">
+        <div class="flex flex-col md:flex-row gap-4">
 
-            ${renderThumbnails(product.images?.map((img) => img.url))}
+          ${renderThumbnails(product.images?.map((img) => img.url))}
 
-            <div class="w-full">
-              ${renderMainImage(product.images?.[0]?.url)}
-            </div>
-
+          <div class="w-full">
+            ${renderMainImage(product.images?.[0]?.url)}
           </div>
-        </div>
 
-        <!-- RIGHT -->
-        <div>
-          ${renderInfo(product)}
         </div>
+      </div>
 
+      <div>
+        ${renderInfo(product)}
       </div>
 
     </div>
 
-    ${renderSizeGuideModal(product)}
+  </div>
 
-    ${renderShareModal(shareData)}
-  `;
+
+ 
+
+  ${renderSizeGuideModal(product)}
+
+  ${renderShareModal(shareData)}
+`;
 
   // Set initial price
   const prices = product.variants?.map((v) => v.price) || [];

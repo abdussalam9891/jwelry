@@ -1,5 +1,5 @@
 import Auth from "../../../core/auth.js";
-import { openAuthModal } from "../../../components/authModal.js";
+import { openLoginFlow } from "../../../features/navbar/authHelpers.js";
 import { addToCart } from "../../../services/cartService.js";
 import { showToast } from "../utils.js";
 import { productState } from "../state.js";
@@ -32,7 +32,7 @@ async function handleAddToCart() {
   const user = await Auth.getCurrentUser();
 
   if (!user) {
-    await openAuthModal();
+    await openLoginFlow();
     return;
   }
 

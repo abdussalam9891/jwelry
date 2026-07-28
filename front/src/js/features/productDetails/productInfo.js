@@ -7,7 +7,7 @@ import { renderShareButton } from "./share/share.js";
 
 
 import {
-  renderOffers,
+  
   renderDeliverySection,
   renderTrustSection,
 } from "./sections.js";
@@ -200,7 +200,7 @@ export function renderInfo(product) {
 
       ${renderCTA(product)}
 
-      ${renderOffers()}
+
 
       ${renderDeliverySection()}
 
