@@ -240,9 +240,7 @@ const defaultBtn = `
 
             rounded-full
 
-            selectedStyles.length
-  ? activeBtn
-  : defaultBtn
+            ${selectedStyles.length ? activeBtn : defaultBtn}
 
             text-sm
             font-medium
