@@ -10,6 +10,8 @@ import {
 
 import { getHeroBanners } from "../services/heroBannerService.js";
 
+import { applyRevealStagger } from "../utils/scrollReveal.js";
+
 
 const homepageCategories = [
   ...jewelleryNavigation,
@@ -20,16 +22,77 @@ const homepageCategories = [
 
 let heroBanners = [];
 
+const HERO_CACHE_KEY = "gemora_hero_banners";
+
 async function loadHeroBanner() {
+  const cached = readCachedHeroBanners();
+
+  let loadingMessageTimer = null;
+
+  if (cached && cached.length) {
+    // Instant paint from last successful load; fetch below refreshes it silently.
+    renderHeroSlides(cached);
+    initializeHeroSwiper(cached.length);
+  } else {
+    // No cache (first-ever visit) — the static skeleton in index.html is
+    // already showing. Only nudge the user if the fetch is genuinely slow
+    // (e.g. Render free-tier cold start).
+    loadingMessageTimer = setTimeout(showHeroLoadingMessage, 5000);
+  }
+
   try {
     const banners = await getHeroBanners();
+
+    clearTimeout(loadingMessageTimer);
+    hideHeroLoadingMessage();
+
     if (!banners.length) return;
 
-    renderHeroSlides(banners);
-    initializeHeroSwiper(banners.length);   // ← pass count
+    const changed =
+      !cached || JSON.stringify(banners) !== JSON.stringify(cached);
+
+    if (changed) {
+      renderHeroSlides(banners);
+      initializeHeroSwiper(banners.length);   // ← pass count
+    }
+
+    cacheHeroBanners(banners);
   } catch (error) {
+    clearTimeout(loadingMessageTimer);
+    hideHeroLoadingMessage();
     console.error(error);
   }
+}
+
+function readCachedHeroBanners() {
+  try {
+    const raw = localStorage.getItem(HERO_CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function cacheHeroBanners(banners) {
+  try {
+    localStorage.setItem(HERO_CACHE_KEY, JSON.stringify(banners));
+  } catch {
+    // localStorage unavailable/full — caching is a nice-to-have, skip silently.
+  }
+}
+
+function showHeroLoadingMessage() {
+  const el = document.getElementById("hero-loading-message");
+  if (!el) return;
+  el.classList.remove("hidden");
+  el.classList.add("flex");
+}
+
+function hideHeroLoadingMessage() {
+  const el = document.getElementById("hero-loading-message");
+  if (!el) return;
+  el.classList.add("hidden");
+  el.classList.remove("flex");
 }
 
 
@@ -209,6 +272,8 @@ function renderHomepageCategories() {
       `
     )
     .join("");
+
+  applyRevealStagger(container);
 }
 
 
@@ -297,6 +362,8 @@ function renderCollections() {
       `
     )
     .join("");
+
+  applyRevealStagger(container);
 }
 
 document.addEventListener(
