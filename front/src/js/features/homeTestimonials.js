@@ -6,6 +6,10 @@ import {
   createTestimonialCard,
 } from "../components/testimonialCard.js";
 
+import {
+  applyRevealStagger,
+} from "../utils/scrollReveal.js";
+
 export async function loadTestimonials() {
   try {
     const reviews =
@@ -25,6 +29,8 @@ export async function loadTestimonials() {
           createTestimonialCard
         )
         .join("");
+
+    applyRevealStagger(grid);
   } catch (error) {
     console.error(
       "Failed to load testimonials",
