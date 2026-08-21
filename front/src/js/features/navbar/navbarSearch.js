@@ -49,25 +49,79 @@ function syncSearchInput() {
   }
 }
 
-// export function initMobileSearch() {
-//   const mobileSearchBtn = document.getElementById("mobileSearchBtn");
+export function initMobileSearch() {
+  const toggleBtn = document.getElementById("mobileSearchToggle");
+  const panel = document.getElementById("mobileSearchPanel");
+  const input = document.getElementById("mobileSearchInput");
 
-//   const mobileSearchBar = document.getElementById("mobileSearchBar");
+  if (!toggleBtn || !panel) return;
 
-//   const mobileSearchInput = document.getElementById("mobileSearchInput");
+  const searchIcon = toggleBtn.querySelector("[data-search-icon]");
+  const closeIcon = toggleBtn.querySelector("[data-close-icon]");
 
-//   if (!mobileSearchBtn || !mobileSearchBar) return;
+  let isOpen = false;
 
-//   mobileSearchBtn.addEventListener("click", () => {
-//     const isHidden = mobileSearchBar.classList.contains("hidden");
+  function openPanel() {
+    panel.classList.remove(
+      "scale-y-0",
+      "opacity-0",
+      "invisible",
+      "pointer-events-none"
+    );
+    panel.classList.add("scale-y-100", "opacity-100", "visible");
 
-//     mobileSearchBar.classList.toggle("hidden");
+    searchIcon?.classList.add("hidden");
+    closeIcon?.classList.remove("hidden");
 
-//     if (isHidden) {
-//       mobileSearchInput?.focus();
-//     }
-//   });
-// }
+    toggleBtn.setAttribute("aria-expanded", "true");
+
+    isOpen = true;
+
+    // Focus after the panel becomes visible so mobile keyboards behave.
+    requestAnimationFrame(() => input?.focus());
+  }
+
+  function closePanel() {
+    panel.classList.add(
+      "scale-y-0",
+      "opacity-0",
+      "invisible",
+      "pointer-events-none"
+    );
+    panel.classList.remove("scale-y-100", "opacity-100", "visible");
+
+    searchIcon?.classList.remove("hidden");
+    closeIcon?.classList.add("hidden");
+
+    toggleBtn.setAttribute("aria-expanded", "false");
+
+    isOpen = false;
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    isOpen ? closePanel() : openPanel();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!isOpen) return;
+    if (panel.contains(e.target) || toggleBtn.contains(e.target)) return;
+
+    closePanel();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) {
+      closePanel();
+      toggleBtn.focus();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && isOpen) {
+      closePanel();
+    }
+  });
+}
 
 export function initSearchButton() {
   document.querySelectorAll("[data-search-btn]").forEach((btn) => {
