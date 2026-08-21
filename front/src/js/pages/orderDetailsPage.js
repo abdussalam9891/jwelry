@@ -978,6 +978,17 @@ d="M2.25 12 12 3l9.75 9M4.5 10.5v8.25A2.25 2.25 0 0 0 6.75 21h10.5a2.25 2.25 0 0
 
 function renderItems(order) {
 
+  const totalItems =
+    order.items.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
+
+  document.getElementById(
+    "itemCount"
+  ).textContent =
+    `${totalItems} item${totalItems > 1 ? "s" : ""}`;
+
   const container =
     document.getElementById(
       "orderItemsContainer"
@@ -1387,73 +1398,11 @@ grid-cols-1
 
 md:grid-cols-2
 
-gap-6
+gap-x-8
+
+gap-y-6
 "
 >
-
-<!-- Recipient -->
-
-<div
-class="
-rounded-2xl
-
-border
-
-border-black/5
-
-bg-[#FAFAFA]
-
-p-5
-"
->
-
-<div
-class="
-flex
-
-items-center
-
-gap-3
-"
->
-
-<div
-class="
-w-11
-
-h-11
-
-rounded-xl
-
-bg-[#F8EEF1]
-
-flex
-
-items-center
-
-justify-center
-
-text-[#6B1A2A]
-"
->
-
-<svg
-xmlns="http://www.w3.org/2000/svg"
-fill="none"
-viewBox="0 0 24 24"
-stroke-width="1.8"
-stroke="currentColor"
- aria-hidden="true"
-class="w-5 h-5"
->
-<path
-stroke-linecap="round"
-stroke-linejoin="round"
-d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.118a7.5 7.5 0 0 1 15 0"
- />
-</svg>
-
-</div>
 
 <div>
 
@@ -1475,7 +1424,7 @@ Recipient
 
 <p
 class="
-mt-1
+mt-2
 
 font-semibold
 
@@ -1486,74 +1435,6 @@ text-lg
 ${address.fullName}
 
 </p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Phone -->
-
-<div
-class="
-rounded-2xl
-
-border
-
-border-black/5
-
-bg-[#FAFAFA]
-
-p-5
-"
->
-
-<div
-class="
-flex
-
-items-center
-
-gap-3
-"
->
-
-<div
-class="
-w-11
-
-h-11
-
-rounded-xl
-
-bg-[#F8EEF1]
-
-flex
-
-items-center
-
-justify-center
-
-text-[#6B1A2A]
-"
->
-
-<svg
-xmlns="http://www.w3.org/2000/svg"
-fill="none"
-viewBox="0 0 24 24"
-stroke-width="1.8"
-stroke="currentColor"
- aria-hidden="true"
-class="w-5 h-5"
->
-<path
-stroke-linecap="round"
-stroke-linejoin="round"
-d="M2.25 4.5A2.25 2.25 0 0 1 4.5 2.25h1.372c.516 0 .966.351 1.09.852l.64 2.561a1.125 1.125 0 0 1-.417 1.145l-1.294.97a11.035 11.035 0 0 0 5.331 5.331l.97-1.294a1.125 1.125 0 0 1 1.145-.417l2.561.64c.501.124.852.574.852 1.09V19.5A2.25 2.25 0 0 1 17.5 21.75h-.75C8.603 21.75 2.25 15.397 2.25 7.5V4.5Z"
-/>
-</svg>
 
 </div>
 
@@ -1577,7 +1458,7 @@ Phone
 
 <p
 class="
-mt-1
+mt-2
 
 font-semibold
 "
@@ -1589,84 +1470,7 @@ ${address.phone}
 
 </div>
 
-</div>
-
-</div>
-
-<!-- Address -->
-
-<div
-class="
-md:col-span-2
-
-rounded-2xl
-
-border
-
-border-black/5
-
-bg-[#FAFAFA]
-
-p-6
-"
->
-
-<div
-class="
-flex
-
-items-start
-
-gap-4
-"
->
-
-<div
-class="
-w-11
-
-h-11
-
-shrink-0
-
-rounded-xl
-
-bg-[#F8EEF1]
-
-flex
-
-items-center
-
-justify-center
-
-text-[#6B1A2A]
-"
->
-
-<svg
-xmlns="http://www.w3.org/2000/svg"
-fill="none"
-viewBox="0 0 24 24"
-stroke-width="1.8"
-stroke="currentColor"
- aria-hidden="true"
-class="w-5 h-5"
->
-<path
-stroke-linecap="round"
-stroke-linejoin="round"
-d="M12 21s6-5.25 6-11.25A6 6 0 1 0 6 9.75C6 15.75 12 21 12 21Z"
-/>
-<path
-stroke-linecap="round"
-stroke-linejoin="round"
-d="M12 10.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-/>
-</svg>
-
-</div>
-
-<div class="flex-1">
+<div class="md:col-span-2">
 
 <p
 class="
@@ -1686,7 +1490,7 @@ Delivery Address
 
 <p
 class="
-mt-3
+mt-2
 
 leading-7
 
@@ -1719,10 +1523,6 @@ ${
 }
 
 </p>
-
-</div>
-
-</div>
 
 </div>
 
