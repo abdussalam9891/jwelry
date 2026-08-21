@@ -22,9 +22,11 @@
     <meta name="twitter:description" content="Create your Gemora account to start shopping premium jewellery, track orders and save your favourites." />
     <meta name="twitter:image" content="https://gemora-jwelry.vercel.app/src/assets/images/og-image.png" />
 
-    <link rel="icon" type="image/png" href="/src/assets/icon/logo.png" />
+    <link rel="icon" type="image/png" href="../src/assets/icon/logo.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="../src/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/css/animations.css" />
   </head>
 
   <body class="min-h-screen bg-[#F9F6F2] overflow-hidden">
@@ -70,7 +72,7 @@
 
         <!-- logo -->
         <img
-          src="/src/assets/icon/logo.png"
+          src="../src/assets/icon/logo.png"
           alt="Gemora"
           class="w-[110px] mx-auto"
         />
@@ -92,6 +94,7 @@
             minlength="2"
             maxlength="50"
             placeholder="Full name"
+            aria-label="Full name"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
           />
 
@@ -101,6 +104,7 @@
             required
             autocomplete="email"
             placeholder="Email address"
+            aria-label="Email address"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
           />
 
@@ -113,6 +117,7 @@
               autocomplete="new-password"
               type="password"
               placeholder="Password"
+              aria-label="Password"
               class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
             />
 
@@ -120,6 +125,7 @@
               type="button"
               class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
               data-target="registerPassword"
+              aria-label="Show password"
             >
               <svg
                 class="w-5 h-5"
@@ -151,6 +157,7 @@
               autocomplete="new-password"
               type="password"
               placeholder="Confirm password"
+              aria-label="Confirm password"
               class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
             />
 
@@ -158,6 +165,7 @@
               type="button"
               class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
               data-target="confirmPassword"
+              aria-label="Show password"
             >
               <svg
                 class="w-5 h-5"
@@ -183,7 +191,7 @@
           <button
             id="registerBtn"
             type="submit"
-            class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+            class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium hover:opacity-90 transition"
           >
             Create Account
           </button>
@@ -194,7 +202,7 @@
           id="google-btn"
           class="mt-5 w-full border border-gray-200 rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition"
         >
-          <img src="../src/assets/icon/google.svg" class="w-5 h-5" />
+          <img src="../src/assets/icon/google.svg" alt="" class="w-5 h-5" />
           <span class="text-sm font-medium"> Continue with Google </span>
         </button>
 
@@ -214,10 +222,14 @@
     <!-- VERIFY EMAIL OTP MODAL -->
     <div
       id="verifyModal"
-      class="fixed inset-0 hidden bg-black/40 flex items-center justify-center p-4 z-50"
+      class="modal-backdrop fixed inset-0 hidden bg-black/40 flex items-center justify-center p-4 z-[var(--z-modal)]"
     >
-      <div class="bg-white rounded-2xl p-6 w-full max-w-[380px]">
-        <h2 class="text-lg font-semibold mb-4">Verify Email</h2>
+      <div class="modal-panel bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
+        <h2 class="text-xl font-semibold text-[#111] mb-1">Verify Email</h2>
+
+        <p class="text-sm text-gray-500 mb-5">
+          Enter the 6-digit code we sent to your email.
+        </p>
 
         <input
           id="emailOtpInput"
@@ -227,19 +239,20 @@
           required
           type="tel"
           placeholder="Enter OTP"
-          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
+          aria-label="6-digit verification code"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A] transition mb-4"
         />
 
         <button
           id="verifyEmailOtpBtn"
-          class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium hover:opacity-90 transition"
         >
           Verify Email
         </button>
 
         <button
           id="backToRegisterBtn"
-          class="w-full mt-3 text-sm text-[#6B1A2A]"
+          class="mt-5 w-full text-sm text-gray-500 hover:text-[#6B1A2A] transition"
         >
           Back
         </button>
@@ -249,7 +262,7 @@
     <!-- toast -->
     <div
       id="toast"
-      class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[9999]"
+      class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[var(--z-toast)]"
     ></div>
 
     <script type="module" src="../src/js/pages/register.js"></script>
