@@ -6,6 +6,8 @@ import {
 import { loadNavbar }
 from "./features/navbar/navbar.js";
 
+import { initScrollReveal } from "./utils/scrollReveal.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
 
   await loadNavbar();
@@ -41,43 +43,6 @@ async function loadTestimonials() {
 
 
 
-  const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
-
-    });
-
-  }, {
-    threshold: 0.15
-  });
-
-  document
-    .querySelectorAll(".reveal")
-    .forEach(el => observer.observe(el));
-
-
-
-
-  const headingObserver = new IntersectionObserver((entries) => {
-
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-        entry.target.classList.add("heading-revealed");
-      }
-
-    });
-
-  }, {
-    threshold: 0.3
-  });
-
-  document
-    .querySelectorAll(".section-heading")
-    .forEach(el => headingObserver.observe(el));
+  initScrollReveal();
 
 });
