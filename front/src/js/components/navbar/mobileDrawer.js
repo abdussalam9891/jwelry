@@ -123,7 +123,7 @@ const linksHTML = jewelleryNavigation
       border
       border-black/5
       rounded-2xl
-      bg-white
+      bg-[#F9F6F2]
       mt-4
       overflow-hidden
       group
@@ -210,7 +210,7 @@ const linksHTML = jewelleryNavigation
       border
       border-black/5
       rounded-2xl
-      bg-white
+      bg-[#F9F6F2]
       mt-4
       overflow-hidden
       group
@@ -482,8 +482,8 @@ const linksHTML = jewelleryNavigation
         border-black/5
       "
     >
-      <a
-        href="#"
+      <button
+        type="button"
         class="
           loginBtn
           w-full
@@ -501,7 +501,7 @@ const linksHTML = jewelleryNavigation
         "
       >
         Login / Signup
-      </a>
+      </button>
     </div>
   `
     : "";
@@ -551,7 +551,7 @@ const linksHTML = jewelleryNavigation
         pointer-events-none
         transition-opacity
         duration-300
-        z-[998]
+        z-[var(--z-overlay)]
       "
     ></div>
 
@@ -561,7 +561,7 @@ const linksHTML = jewelleryNavigation
   fixed
   top-0
   left-0
-  z-[11001]
+  z-[var(--z-drawer)]
   w-full
   max-w-[320px]
   h-[100dvh]
