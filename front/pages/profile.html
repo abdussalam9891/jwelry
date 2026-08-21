@@ -36,6 +36,8 @@
     href="../src/css/main.css"
     rel="stylesheet"
   />
+  <link rel="stylesheet" href="../src/css/navbar.css" />
+  <link rel="stylesheet" href="../src/css/animations.css" />
 </head>
 
 <body class="bg-[#F9F6F2]">
@@ -45,7 +47,7 @@
   <div id="navbar-container"></div>
 
   <main
-   class="container-main max-w-7xl mt-14 mx-auto px-4 py-32 md:py-32"
+   class="max-w-7xl mt-14 mx-auto px-4 py-32"
   >
 
 
@@ -55,7 +57,7 @@
 >
   <div>
     <h1
-      class="text-3xl md:text-4xl font-light text-[#1A1A1A]"
+      class="text-3xl md:text-4xl font-semibold text-[#1A1A1A]"
     >
       My Account
     </h1>
@@ -374,12 +376,13 @@
 <div
   id="addressModal"
   class="
+    modal-backdrop
     fixed
     inset-0
     bg-black/50
     hidden
     justify-center
-    z-50
+    z-[var(--z-modal)]
     pt-28
     px-6
     overflow-y-auto
@@ -388,6 +391,7 @@
 
   <div
     class="
+      modal-panel
       bg-white
       rounded-3xl
       w-full
@@ -448,6 +452,7 @@
     minlength="3"
     maxlength="50"
     placeholder="Full Name *"
+    aria-label="Full name"
     required
     class="
       w-full
@@ -468,6 +473,7 @@
       pattern="[0-9]{10}"
       maxlength="10"
       placeholder="Phone Number *"
+      aria-label="Phone number"
       required
       class="
         w-full
@@ -486,6 +492,7 @@
       pattern="[0-9]{6}"
       maxlength="6"
       placeholder="Pincode *"
+      aria-label="Pincode"
       required
       class="
         w-full
@@ -506,6 +513,7 @@
       type="email"
       maxlength="100"
       placeholder="Email Address (Optional)"
+      aria-label="Email address"
       class="
         w-full
         border
@@ -527,6 +535,7 @@
     <input
       id="state"
       placeholder="State *"
+      aria-label="State"
       required
       class="
         w-full
@@ -541,6 +550,7 @@
     <input
       id="city"
       placeholder="City *"
+      aria-label="City"
       required
       class="
         w-full
@@ -557,6 +567,7 @@
   <input
     id="addressLine1"
     placeholder="House / Flat / Building *"
+    aria-label="House / Flat / Building"
     required
     class="
       w-full
@@ -571,6 +582,7 @@
   <input
     id="addressLine2"
     placeholder="Road / Area / Colony"
+    aria-label="Road / Area / Colony"
     class="
       w-full
       border
@@ -586,6 +598,7 @@
     <input
       id="landmark"
       placeholder="Landmark"
+      aria-label="Landmark"
       class="
         w-full
         border
@@ -652,19 +665,21 @@
 <div
   id="profileModal"
   class="
+    modal-backdrop
     fixed
     inset-0
     bg-black/50
     hidden
     items-center
     justify-center
-    z-50
+    z-[var(--z-modal)]
     p-4
   "
 >
 
   <div
     class="
+      modal-panel
       bg-white
       rounded-3xl
       w-full
@@ -725,12 +740,14 @@
         id="profileName"
   minlength="3"
   maxlength="50"
-  require
+  required
       class="
         w-full
         border
         rounded-xl
         p-2.5
+        outline-none
+        focus:border-[#6B1A2A]
       "
     />
 
@@ -758,6 +775,8 @@
         border
         rounded-xl
         p-2.5
+        outline-none
+        focus:border-[#6B1A2A]
       "
     />
 
@@ -791,18 +810,20 @@
 <div
   id="deleteAddressModal"
   class="
+    modal-backdrop
     fixed
     inset-0
     bg-black/50
     hidden
     items-center
     justify-center
-    z-50
+    z-[var(--z-modal)]
   "
 >
 
   <div
     class="
+      modal-panel
       bg-white
       rounded-3xl
       p-6
@@ -872,7 +893,7 @@
 
  <div
         id="toast"
-        class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-50"
+        class="hidden fixed bottom-5 right-5 bg-black text-white px-4 py-2 rounded-lg shadow-lg z-[var(--z-toast)]"
       ></div>
 
   </main>
