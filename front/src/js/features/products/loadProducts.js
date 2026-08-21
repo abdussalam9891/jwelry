@@ -19,6 +19,10 @@ import {
   updateProductCount,
 } from "./productCount.js";
 
+import {
+  applyRevealStagger,
+} from "../../utils/scrollReveal.js";
+
 const grid =
   document.getElementById(
     "productsGrid"
@@ -162,6 +166,8 @@ export async function loadProducts() {
           )
         )
         .join("");
+
+    applyRevealStagger(grid);
 
     await loadWishlistState();
 
