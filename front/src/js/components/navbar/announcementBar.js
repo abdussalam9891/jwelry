@@ -33,7 +33,7 @@ export async function initAnnouncementBar() {
       top-0
       left-0
       right-0
-      z-[1001]
+      z-[var(--z-navbar)]
       h-10
       flex
       items-center

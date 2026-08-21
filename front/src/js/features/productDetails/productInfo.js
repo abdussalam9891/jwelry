@@ -152,7 +152,7 @@ function renderCTA(product) {
 
     <!-- Mobile Sticky CTA -->
     <div
-      class="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t shadow-2xl z-[9999] p-3"
+      class="fixed bottom-0 left-0 right-0 md:hidden bg-white border-t shadow-2xl z-[var(--z-sticky)] p-3"
     >
       <div class="flex items-center gap-3">
 

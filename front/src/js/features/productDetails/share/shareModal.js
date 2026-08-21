@@ -56,7 +56,7 @@ export function renderShareModal(shareData) {
   return `
 <div
   id="shareModal"
-  class="fixed inset-0 z-[99999] hidden"
+  class="fixed inset-0 z-[var(--z-modal)] hidden"
   role="dialog"
   aria-modal="true"
   aria-labelledby="shareModalTitle"

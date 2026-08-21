@@ -10,7 +10,7 @@ export function renderSizeGuideModal(product) {
   return `
     <div
       id="sizeGuideModal"
-      class="fixed inset-0 z-[9999] hidden"
+      class="fixed inset-0 z-[var(--z-modal)] hidden"
       role="dialog"
       aria-modal="true"
       aria-labelledby="sizeGuideTitle"

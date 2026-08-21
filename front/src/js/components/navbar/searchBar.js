@@ -37,7 +37,7 @@ export function createSearchBar(
           border
           border-black/10
           overflow-hidden
-          z-50
+          z-[var(--z-dropdown)]
         "
       ></div>
 

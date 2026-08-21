@@ -21,7 +21,7 @@ export function showShareToast(
       fixed
       left-1/2
       bottom-6
-      z-[99999]
+      z-[var(--z-toast)]
       -translate-x-1/2
       rounded-full
       px-5

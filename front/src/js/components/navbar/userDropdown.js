@@ -17,7 +17,7 @@ export function createUserDropdown() {
     translate-y-2
     transition-all
     duration-200
-    z-[1100]
+    z-[var(--z-dropdown)]
     overflow-hidden
   "
 >

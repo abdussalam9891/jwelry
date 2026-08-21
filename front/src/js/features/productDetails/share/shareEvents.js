@@ -103,7 +103,7 @@ function showToast(message) {
     toast.id = "shareToast";
 
     toast.className =
-      "fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-black text-white px-5 py-3 text-sm z-[99999] opacity-0 transition-all duration-300";
+      "fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-black text-white px-5 py-3 text-sm z-[var(--z-toast)] opacity-0 transition-all duration-300";
 
     document.body.appendChild(toast);
   }
