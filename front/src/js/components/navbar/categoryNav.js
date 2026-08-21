@@ -28,6 +28,8 @@ export function createCategoryNav() {
         )
         .join("");
 
+    const flyoutId = `flyout-${category.category}`;
+
     return `
       <li class="relative group">
 
@@ -35,6 +37,7 @@ export function createCategoryNav() {
   href="/pages/products.html?category=${category.category}"
   data-nav="${category.category}"
   class="
+    mega-trigger
     text-[#6B1A2A]
     text-[0.95rem]
     font-medium
@@ -43,6 +46,8 @@ export function createCategoryNav() {
     hover:text-[#6B1A2A]
     active-nav
   "
+  aria-expanded="false"
+  aria-controls="${flyoutId}"
 >
   ${category.label}
 
@@ -63,7 +68,9 @@ export function createCategoryNav() {
 </a>
 
         <div
+          id="${flyoutId}"
           class="
+            mega-panel
             absolute
             top-full
             left-1/2
@@ -71,7 +78,7 @@ export function createCategoryNav() {
             mt-4
             w-[420px]
             bg-white
-            rounded-[28px]
+            rounded-3xl
             shadow-[0_20px_80px_rgba(0,0,0,0.12)]
             border
             border-black/5
@@ -80,9 +87,11 @@ export function createCategoryNav() {
             invisible
             group-hover:opacity-100
             group-hover:visible
+            group-focus-within:opacity-100
+            group-focus-within:visible
             transition-all
             duration-300
-            z-50
+            z-[var(--z-dropdown)]
           "
         >
 
@@ -159,29 +168,34 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
       <a
         href="/pages/products.html?category=${item.category || item.slug}"
         class="
-          group
-          p-2
-          rounded-xl
+          group/cat
+          p-1.5
+          rounded-lg
           bg-[#FAF8F5]
           hover:bg-[#F6EEF0]
           transition
         "
       >
 
-        <img
-          src="${item.image}"
-          class="
-            w-full
-            h-[110px]
-            object-cover
-            rounded-xl
-          "
-        >
+        <div class="overflow-hidden rounded-lg">
+          <img
+            src="${item.image}"
+            class="
+              w-full
+              h-[76px]
+              object-cover
+              group-hover/cat:scale-105
+              transition
+              duration-700
+            "
+          >
+        </div>
 
         <p
           class="
-            mt-2
+            mt-1.5
             text-center
+            text-xs
             font-medium
           "
         >
@@ -226,7 +240,7 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
         <div
           class="
             overflow-hidden
-            rounded-3xl
+            rounded-2xl
           "
         >
 
@@ -234,7 +248,7 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
             src="${collection.image}"
             class="
               w-full
-              h-[160px]
+              h-[80px]
               object-cover
               group-hover/card:scale-105
               transition
@@ -246,8 +260,8 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
 
         <h4
           class="
-            mt-4
-            text-xl
+            mt-1.5
+            text-sm
             font-light
           "
         >
@@ -274,7 +288,7 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
     left-0
     right-0
     bg-[#F9F6F2]
-    z-[999]
+    z-[var(--z-navbar)]
     border-b
     border-black/10
     transition-[top]
@@ -294,45 +308,55 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
 
 
 
-<li class="relative group">
+<li class="group">
 
   <button
+    type="button"
     data-nav="all-jewellery"
     class="
+      mega-trigger
       text-[#1A1A1A]
       text-[0.95rem]
       font-medium
       hover:text-[#6B1A2A]
     "
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-controls="flyout-all-jewellery"
   >
     All Jewellery
   </button>
 
   <div
+   id="flyout-all-jewellery"
    class="
-  fixed
-  top-[100px]
+  mega-panel
+  absolute
+  top-full
   left-1/2
   -translate-x-1/2
+  mt-4
   w-[1280px]
   max-w-[95vw]
   bg-white
-  rounded-[24px]
+  rounded-3xl
   shadow-[0_30px_100px_rgba(0,0,0,0.12)]
   border
   border-black/5
-  p-6
+  p-5
   opacity-0
   invisible
   group-hover:opacity-100
   group-hover:visible
+  group-focus-within:opacity-100
+  group-focus-within:visible
   transition-all
   duration-300
-  z-[9999]
+  z-[var(--z-dropdown)]
 "
   >
 
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
 
       <!-- SHOP BY CATEGORY -->
 
@@ -344,7 +368,7 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
             uppercase
             tracking-[0.35em]
             text-black/40
-            mb-4
+            mb-3
           "
         >
           Shop By Category
@@ -353,8 +377,8 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
         <div
           class="
             grid
-            grid-cols-4
-            gap-4
+            grid-cols-8
+            gap-3
           "
         >
           ${categoryCardsHTML}
@@ -369,6 +393,9 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
           grid
           grid-cols-2
           gap-10
+          pt-4
+          border-t
+          border-black/10
         "
       >
 
@@ -380,7 +407,7 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
               uppercase
               tracking-[0.35em]
               text-black/40
-              mb-4
+              mb-3
             "
           >
             Collections
@@ -389,9 +416,9 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
           <div
             class="
               grid
-              grid-cols-2
-              gap-y-4
-              gap-x-8
+              grid-cols-3
+              gap-y-2
+              gap-x-6
             "
           >
             ${collectionLinks}
@@ -407,7 +434,7 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
               uppercase
               tracking-[0.35em]
               text-black/40
-              mb-4
+              mb-3
             "
           >
             Discover
@@ -416,9 +443,9 @@ const categoryCardsHTML = [...jewelleryNavigation, ...moreCategories]
           <div
             class="
               grid
-              grid-cols-2
-              gap-y-4
-              gap-x-8
+              grid-cols-3
+              gap-y-2
+              gap-x-6
             "
           >
 
@@ -485,40 +512,49 @@ ${linksHTML}
 
 
     <!-- COLLECTIONS MEGA MENU -->
-    <li class="relative group">
+    <li class="group">
 
       <button
+        type="button"
         class="
+          mega-trigger
           text-[#1A1A1A]
           text-[0.95rem]
           font-medium
           hover:text-[#6B1A2A]
         "
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="flyout-collections"
       >
         Collections
       </button>
 
       <div
+ id="flyout-collections"
  class="
+  mega-panel
   absolute
   top-full
   right-0
   mt-4
-  w-[1000px]
-  max-w-[90vw]
+  w-[620px]
+  max-w-[85vw]
   bg-white
-  rounded-[32px]
+  rounded-2xl
   shadow-[0_30px_100px_rgba(0,0,0,0.12)]
   border
   border-black/5
-  p-8
+  p-5
   opacity-0
   invisible
   group-hover:opacity-100
   group-hover:visible
+  group-focus-within:opacity-100
+  group-focus-within:visible
   transition-all
   duration-300
-  z-50
+  z-[var(--z-dropdown)]
 "
 >
 
@@ -528,7 +564,7 @@ ${linksHTML}
   class="
     grid
     grid-cols-3
-    gap-6
+    gap-4
   "
 >
   ${collectionCardsHTML}
