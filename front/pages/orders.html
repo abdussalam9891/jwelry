@@ -8,6 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link href="../src/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/css/navbar.css" />
+    <link rel="stylesheet" href="../src/css/animations.css" />
 
     <title>My Orders | Gemora</title>
 
@@ -32,51 +34,10 @@
   </head>
 
   <body class="bg-[#FAFAFA] text-[#111]">
-    <!-- HEADER -->
-    <header class="sticky top-0 z-40 bg-white border-b border-black/5">
-      <div
-        class="max-w-6xl mx-auto h-16 px-4 flex items-center justify-between"
-      >
-        <!-- LEFT -->
-        <div class="flex items-center gap-5">
-          <!-- LOGO -->
-          <a href="../index.html" class="shrink-0">
-            <img
-              src="../src/assets/icon/logo.png"
-              alt="Gemora"
-              class="h-10 w-auto"
-            />
-          </a>
-
-          <!-- BACK -->
-          <a
-            href="../index.html"
-            class="hidden sm:flex items-center gap-2 text-sm text-black/70 hover:text-[#6B1A2A] transition"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.8"
-              stroke="currentColor"
-               aria-hidden="true"
-              class="w-4 h-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-              />
-            </svg>
-
-            <span> Continue Shopping </span>
-          </a>
-        </div>
-      </div>
-    </header>
+    <div id="navbar-container"></div>
 
     <!-- MAIN -->
-    <main class="max-w-5xl mx-auto px-4 py-10">
+    <main class="max-w-6xl mx-auto px-4 py-10 page-content">
       <!-- TITLE -->
       <div class="mb-8">
         <h1 class="text-3xl font-semibold tracking-tight">My Orders</h1>
@@ -88,6 +49,11 @@
 
       <div id="ordersContainer"></div>
     </main>
+
+    <div id="footer-container"></div>
+
+    <script type="module" src="../src/js/main.js"></script>
+    <script type="module" src="../src/js/components/footer.js"></script>
     <script type="module" src="../src/js/pages/ordersPage.js"></script>
   </body>
 </html>
