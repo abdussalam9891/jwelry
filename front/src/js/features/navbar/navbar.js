@@ -13,9 +13,12 @@ import { initUserDropdown } from "./navbarDropdown.js";
 
 import { initializeNavbar } from "./navbarMobile.js";
 
+import { initMegaMenus } from "./navbarMegaMenu.js";
+
 import { initNavbarScroll } from "./navbarScroll.js";
 
 import {
+  initMobileSearch,
   initSearchButton,
   initSearchHandlers,
   initSearchPlaceholder,
@@ -44,6 +47,7 @@ export async function loadNavbar() {
   }
 
   initializeNavbar();
+  initMegaMenus();
   initUserDropdown();
   await checkAuthState();
 
@@ -54,6 +58,7 @@ export async function loadNavbar() {
   initSearchHandlers();
   initSearchButton();
   initSearchSuggestions();
+  initMobileSearch();
 
 
   // MOBILE LOGOUT
