@@ -2,6 +2,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
 
+:root {
+  /* Brand tokens — reference these instead of retyping hex values */
+  --color-brand: #6B1A2A;
+  --color-brand-dark: #5A1E2A;
+  --color-accent-gold: #C6A96A;
+  --color-cream: #F9F6F2;
+
+  /* Layering system — reference these instead of arbitrary z-[N] values.
+     Higher tiers always cover lower ones, so a toast can never be
+     trapped behind a modal, and a modal can never be trapped behind
+     the navbar. Purely local/decorative stacking (e.g. text over a
+     hero image) doesn't need to join this scale. */
+  --z-sticky: 20;      /* in-page sticky elements: filter bar, summary card, mobile CTA bar */
+  --z-navbar: 100;     /* announcement bar, main navbar, category row */
+  --z-dropdown: 200;   /* mega menus, user dropdown, search suggestions */
+  --z-overlay: 300;    /* backdrop behind a drawer or modal */
+  --z-drawer: 400;     /* mobile navigation drawer */
+  --z-modal: 500;      /* all dialogs: auth, address, variant, review, size guide, share, confirm */
+  --z-toast: 600;      /* toast notifications — always topmost */
+}
+
 body {
   font-family: 'Jost', sans-serif;
 }
@@ -16,8 +37,19 @@ html {
 }
 
 .page-content {
-  padding-top: 108px;
+  /* !important: Tailwind's CDN runtime injects its utility stylesheet
+     after main.css, so a same-specificity class like py-10 on the same
+     element would otherwise win the cascade and shrink this offset,
+     letting the fixed navbar cover the page's first content. */
+  padding-top: 108px !important;
   margin-top: 96px;
+}
+
+@media (max-width: 767px) {
+  .page-content {
+    padding-top: 84px !important;
+    margin-top: 0;
+  }
 }
 
 
@@ -41,6 +73,62 @@ html {
   width: 100%;
   max-width: 1000px;
   margin-inline: auto;
+}
+
+
+/* Primary CTA button — the recipe already used by checkout/cart/orders/login/nav */
+.btn-primary {
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: var(--color-brand);
+  color: #fff;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Secondary CTA — same shape/rhythm as primary, outline instead of filled */
+.btn-secondary {
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: transparent;
+  color: var(--color-brand);
+  border: 1px solid var(--color-brand);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-brand);
+  color: #fff;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Focus visibility for keyboard users on all interactive CTA/nav elements */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 
