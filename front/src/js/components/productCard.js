@@ -22,7 +22,7 @@ export function createProductCard(product, options = {}) {
   const productId = product._id || product.id;
 
   return `
-    <div data-product-id="${productId}" class="group relative w-full">
+    <div data-product-id="${productId}" class="group relative w-full transition-transform duration-300 ease-out hover:-translate-y-1">
 
       ${
         showRemoveButton
@@ -59,7 +59,7 @@ export function createProductCard(product, options = {}) {
           <!-- IMAGE -->
           <img
             src="${img1}"
-            onerror="this.onerror=null;this.src='/src/assets/images/placeholder .webp';"
+            onerror="this.onerror=null;this.src='/src/assets/images/placeholder.webp';"
             class="w-full aspect-[4/5] object-cover transition duration-500 group-hover:opacity-0"
             loading="lazy"
           />
@@ -67,7 +67,7 @@ export function createProductCard(product, options = {}) {
           <!-- HOVER IMAGE -->
           <img
             src="${img2}"
-            onerror="this.onerror=null;this.src='/src/assets/images/placeholder .webp';"
+            onerror="this.onerror=null;this.src='/src/assets/images/placeholder.webp';"
             class="w-full aspect-[4/5] object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500"
             loading="lazy"
           />
@@ -127,7 +127,7 @@ export function createProductCard(product, options = {}) {
         showMoveToCart
           ? `
         <button
-          class="move-to-cart w-full mt-2 bg-black text-white py-1.5 rounded text-xs font-medium hover:bg-black/80 transition"
+          class="move-to-cart btn-primary w-full mt-2 h-9 text-xs"
           data-id="${productId}"
         >
           Move to Cart
