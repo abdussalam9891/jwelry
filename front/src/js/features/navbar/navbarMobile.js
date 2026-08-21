@@ -7,6 +7,7 @@ export function closeMobileDrawer() {
   const announcementBar = document.getElementById("announcementBar");
   const mobileMenu = document.getElementById("mobileMenu");
   const navOverlay = document.getElementById("navOverlay");
+  const navToggle = document.getElementById("navToggle");
 
   if (!mobileMenu || !navOverlay) return;
 
@@ -21,6 +22,8 @@ export function closeMobileDrawer() {
   );
 
   document.body.classList.remove("overflow-hidden");
+
+  navToggle?.setAttribute("aria-expanded", "false");
 
   isOpen = false;
 }
@@ -65,11 +68,10 @@ export function initializeNavbar() {
 
   function openMenu() {
 
-
     mainNav.style.transform = "translateY(-100%)";
 
-announcementBar.style.transform =
-  "translateY(-100%)";
+    announcementBar.style.transform =
+      "translateY(-100%)";
 
     mobileMenu.classList.remove(
       "-translate-x-full"
@@ -84,8 +86,7 @@ announcementBar.style.transform =
       "overflow-hidden"
     );
 
-    mainNav.style.transform =
-      "translateY(-100%)";
+    navToggle.setAttribute("aria-expanded", "true");
 
     isOpen = true;
 
@@ -136,5 +137,12 @@ announcementBar.style.transform =
 
     }
   );
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) {
+      closeMenu();
+      navToggle.focus();
+    }
+  });
 
 }
