@@ -130,10 +130,9 @@
   <section
    class="
   sticky
-  top-0
-  md:top-[40px]
+  top-[var(--navbar-h,0px)]
 
-  z-30
+  z-[var(--z-sticky)]
 
   bg-white
 
@@ -169,12 +168,6 @@
   "
 ></div>
 
-<div
-  id="productsGrid"
-  class="..."
->
-</div>
-
     <div id="pagination"></div>
 
   </section>
@@ -188,7 +181,7 @@
     bg-black/30
     backdrop-blur-sm
     hidden
-    z-40
+    z-[var(--z-overlay)]
   "
 ></div>
 
@@ -211,35 +204,18 @@
 
     translate-x-full
 
-    z-50
+    z-[var(--z-drawer)]
   "
 >
 
-<button
-  id="openFilters"
-  class="
-    lg:hidden
-
-    fixed
-    bottom-6
-    left-1/2
-    -translate-x-1/2
-
-    h-12
-    px-6
-
-    rounded-full
-
-    bg-black
-    text-white
-
-    shadow-xl
-
-    z-40
-  "
->
-  Filters
-</button>
+  <button
+    id="closeFilters"
+    type="button"
+    aria-label="Close filters"
+    class="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center text-black/50 hover:bg-black/5 transition"
+  >
+    ✕
+  </button>
 
 </div>
 
