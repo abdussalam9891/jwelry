@@ -5,3 +5,11 @@
 #wishlistBtn:hover svg {
   transform: scale(1.1);
 }
+
+/* Mega menu: click/tap-driven open state (mirrors the CSS :hover /
+   :focus-within behavior already on .mega-panel) — set by navbarMegaMenu.js
+   for touch devices that don't have real hover. */
+.group.force-open > .mega-panel {
+  opacity: 1;
+  visibility: visible;
+}
