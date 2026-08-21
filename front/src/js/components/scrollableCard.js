@@ -1,6 +1,7 @@
 import { createProductCard } from "../components/productCard.js";
 import { initWishlist, loadWishlistState } from "../features/wishlist.js";
 import { CONFIG } from "../config.js";
+import { applyRevealStagger } from "../utils/scrollReveal.js";
 
 
 let url =
@@ -71,6 +72,8 @@ async function renderProducts(products) {
       </div>
     `)
     .join("");
+
+  applyRevealStagger(container);
 
       await loadWishlistState();
 }
