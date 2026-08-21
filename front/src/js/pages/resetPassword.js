@@ -81,7 +81,12 @@ function initPasswordToggle() {
 
       if (!input) return;
 
-      input.type = input.type === "password" ? "text" : "password";
+      const isHidden = input.type === "password";
+      input.type = isHidden ? "text" : "password";
+      btn.setAttribute(
+        "aria-label",
+        isHidden ? "Hide password" : "Show password"
+      );
     });
   });
 }
