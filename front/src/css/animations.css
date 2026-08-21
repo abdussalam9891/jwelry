@@ -34,18 +34,36 @@
 
 
 /* =========================
+   ABOVE-THE-FOLD ENTRANCE
+   Pure CSS, no IntersectionObserver dependency — the hero is already
+   in the viewport at load, so it must never depend on JS running to
+   become visible.
+========================= */
+
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-fade-in {
+  animation: hero-fade-in 0.7s cubic-bezier(.22,1,.36,1) both;
+}
+
+
+/* =========================
    SCROLL REVEAL (REFINED)
 ========================= */
 
 .reveal {
   --x: 0;
-  --y: 24px;
+  --y: 14px;
 
   opacity: 0;
   transform: translate(var(--x), var(--y));
 
-  transition: transform 0.6s cubic-bezier(.22,1,.36,1),
-              opacity 0.6s cubic-bezier(.22,1,.36,1);
+  transition: transform 0.5s cubic-bezier(.22,1,.36,1),
+              opacity 0.5s cubic-bezier(.22,1,.36,1);
+  transition-delay: var(--reveal-delay, 0ms);
 
   will-change: transform, opacity;
 }
@@ -86,16 +104,55 @@
 
 
 /* =========================
+   MODAL / DIALOG ENTRANCE
+   Pure CSS — plays automatically whenever a modal goes from
+   `hidden` (display:none) to shown, no JS changes required.
+========================= */
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-backdrop:not(.hidden) {
+  animation: backdrop-in 0.2s ease;
+}
+
+.modal-panel {
+  animation: panel-in 0.25s cubic-bezier(.22, 1, .36, 1);
+}
+
+
+/* =========================
    ACCESSIBILITY
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
+  .reveal-stagger > *,
   .section-label,
   .section-title {
     transition: none;
     transform: none;
     opacity: 1;
+  }
+
+  /* Global safety net: mutes every Tailwind transition/animation utility
+     and custom keyframe sitewide, not just the hand-picked reveal classes
+     above. Functional state changes (opacity/visibility toggles) still
+     happen instantly — only the motion is removed. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
