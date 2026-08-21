@@ -25,6 +25,8 @@
     <link rel="icon" type="image/png" href="../src/assets/icon/logo.png" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="../src/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../src/css/animations.css" />
   </head>
 
   <body class="min-h-screen bg-[#F9F6F2] overflow-hidden">
@@ -90,6 +92,7 @@
             id="loginEmail"
             type="email"
             placeholder="Email address"
+            aria-label="Email address"
             class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A]"
           />
 
@@ -99,6 +102,7 @@
               id="loginPassword"
               type="password"
               placeholder="Password"
+              aria-label="Password"
               class="w-full border border-gray-200 rounded-xl px-4 py-3 pr-11 text-sm outline-none focus:border-[#6B1A2A]"
             />
 
@@ -106,6 +110,7 @@
               type="button"
               class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#6B1A2A] transition"
               data-target="loginPassword"
+              aria-label="Show password"
             >
               <svg
                 class="w-5 h-5"
@@ -131,7 +136,7 @@
           <button
             id="loginBtn"
             type="submit"
-            class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+            class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium hover:opacity-90 transition"
           >
             Login
           </button>
@@ -161,7 +166,7 @@
           id="google-btn"
           class="mt-5 w-full border border-gray-200 rounded-xl py-3 flex items-center justify-center gap-3 hover:bg-gray-50 transition"
         >
-          <img src="../src/assets/icon/google.svg" class="w-5 h-5" />
+          <img src="../src/assets/icon/google.svg" alt="" class="w-5 h-5" />
           <span class="text-sm font-medium"> Continue with Google </span>
         </button>
 
@@ -180,10 +185,10 @@
 
     <div
       id="otpModal"
-      class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+      class="modal-backdrop fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-[var(--z-modal)]"
     >
       <div
-        class="bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+        class="modal-panel bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
       >
         <h2 class="text-xl font-semibold text-[#111] mb-1">Quick Login</h2>
 
@@ -194,7 +199,8 @@
           id="phoneInput"
           type="tel"
           placeholder="Enter mobile number"
-          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
+          aria-label="Mobile number"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A] transition mb-4"
         />
 
         <!-- OTP -->
@@ -204,14 +210,15 @@
             type="tel"
             maxlength="6"
             placeholder="Enter 6-digit OTP"
-            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none mb-4"
+            aria-label="6-digit OTP"
+            class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A] transition mb-4"
           />
         </div>
 
         <!-- REQUEST -->
         <button
           id="requestOtpBtn"
-          class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+          class="w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium hover:opacity-90 transition"
         >
           Request OTP
         </button>
@@ -219,7 +226,7 @@
         <!-- VERIFY -->
         <button
           id="verifyOtpBtn"
-          class="hidden w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium"
+          class="hidden w-full bg-[#6B1A2A] text-white py-3 rounded-xl font-medium hover:opacity-90 transition"
         >
           Verify OTP
         </button>
@@ -251,10 +258,10 @@
     <!-- FORGOT PASSWORD MODAL -->
     <div
       id="forgotModal"
-      class="fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+      class="modal-backdrop fixed inset-0 hidden bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-[var(--z-modal)]"
     >
       <div
-        class="bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+        class="modal-panel bg-white rounded-3xl p-7 w-full max-w-[390px] shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
       >
         <!-- heading -->
         <h2 class="text-xl font-semibold text-[#111] mb-1">Reset Password</h2>
@@ -268,6 +275,7 @@
           id="forgotEmail"
           type="email"
           placeholder="Enter email address"
+          aria-label="Email address"
           class="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#6B1A2A] transition mb-4"
         />
 
@@ -292,7 +300,7 @@
     <!-- toast -->
     <div
       id="toast"
-      class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[9999]"
+      class="hidden fixed top-5 right-5 bg-white text-[#6B1A2A] px-4 py-3 rounded-xl shadow-xl border border-[#EADBC8] text-sm z-[var(--z-toast)]"
     ></div>
 
     <script type="module" src="../src/js/pages/login.js"></script>
