@@ -106,7 +106,7 @@
     <div id="navbar-container"></div>
 
     <!-- MAIN PRODUCT SECTION -->
-    <main class="container-main py-32">
+    <main class="container-main pt-16 md:pt-32 pb-32">
       <!-- product  -->
       <div id="productContainer"></div>
 
@@ -115,7 +115,7 @@
   id="recentlyViewedWrapper"
   class="mt-12 hidden"
 >
-  <h2 class="text-lg font-semibold mb-4">
+  <h2 class="text-2xl md:text-3xl font-light mb-6">
     Recently Viewed
   </h2>
 
@@ -123,21 +123,21 @@
 </div>
 
       <div class="mt-12">
-        <h2 class="text-lg font-semibold mb-4">Similar Products</h2>
+        <h2 class="text-2xl md:text-3xl font-light mb-6">Similar Products</h2>
         <div id="similarSection"></div>
       </div>
 
       <div class="mt-12">
-        <h2 class="text-lg font-semibold mb-4">You may also like</h2>
+        <h2 class="text-2xl md:text-3xl font-light mb-6">You may also like</h2>
         <div id="recommendSection"></div>
       </div>
     </main>
 
     <div
       id="reviewModal"
-      class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+      class="modal-backdrop hidden fixed inset-0 bg-black/50 z-[var(--z-modal)] flex items-center justify-center"
     >
-      <div class="bg-white rounded-xl p-6 w-full max-w-md">
+      <div class="modal-panel bg-white rounded-xl p-6 w-full max-w-md">
         <h3 class="text-lg font-semibold mb-4">Write Review</h3>
 
         <select id="reviewRating" class="w-full border p-2 rounded mb-3">
@@ -170,13 +170,13 @@
         />
 
         <div class="flex justify-end gap-2">
-          <button id="closeReviewModal" class="border px-4 py-2 rounded">
+          <button id="closeReviewModal" class="border border-gray-200 px-4 py-2 rounded-xl hover:bg-gray-50 transition">
             Cancel
           </button>
 
           <button
             id="submitReviewBtn"
-            class="bg-[#6B1A2A] text-white px-4 py-2 rounded"
+            class="btn-primary px-4 h-10"
           >
             Submit
           </button>
@@ -186,9 +186,9 @@
 
     <div
   id="deleteReviewModal"
-  class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center"
+  class="modal-backdrop hidden fixed inset-0 bg-black/50 z-[var(--z-modal)] flex items-center justify-center"
 >
-  <div class="bg-white rounded-xl p-6 w-full max-w-md">
+  <div class="modal-panel bg-white rounded-xl p-6 w-full max-w-md">
 
     <h3 class="text-lg font-semibold">
       Delete Review
