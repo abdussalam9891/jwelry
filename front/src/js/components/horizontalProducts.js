@@ -1,6 +1,7 @@
 
 import { createProductCard } from "./productCard.js";
 import { loadWishlistState } from "../features/wishlist.js";
+import { applyRevealStagger } from "../utils/scrollReveal.js";
 
 export async function renderHorizontalSection({
   containerId,
@@ -31,6 +32,8 @@ export async function renderHorizontalSection({
 
   </div>
 `;
+
+  applyRevealStagger(container.firstElementChild);
 
   await loadWishlistState(); // keep wishlist synced
 }
