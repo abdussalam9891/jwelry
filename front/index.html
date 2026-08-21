@@ -93,7 +93,7 @@
 
     <!-- Hero -->
 
- <section class="mt-32">
+ <section class="mt-16 md:mt-32 hero-fade-in">
   <div
     class="swiper heroSwiper relative
            h-[42svh]
@@ -103,7 +103,24 @@
   >
 
     <div class="swiper-wrapper h-full" id="hero-swiper-wrapper">
-      <!-- Slides injected here -->
+      <!-- Default fallback shown until real banners load; replaced by JS -->
+      <div class="swiper-slide h-full">
+        <img
+          src="./src/assets/images/heronew.webp"
+          alt="Gemora Jewellery"
+          class="block h-full w-full object-cover"
+        >
+      </div>
+    </div>
+
+    <!-- Shown only if the fetch is still pending after a few seconds -->
+    <div
+      id="hero-loading-message"
+      class="hidden absolute inset-0 z-20 items-center justify-center pointer-events-none"
+    >
+      <span class="bg-black/60 text-white text-sm px-4 py-2 rounded-full">
+        Just a moment — waking up our server for you, thanks for your patience
+      </span>
     </div>
 
     <!-- Pagination -->
@@ -118,7 +135,7 @@
     <section class="section-sm bg-[#F9F6F2]/80 py-10 md:py-12 lg:py-14">
       <div class="container-main">
         <!-- Section heading -->
-       <div class="text-center max-w-2xl mx-auto mb-8 md:mb-14 px-4">
+       <div class="text-center max-w-2xl mx-auto mb-8 md:mb-14 px-4 reveal">
 
   <h2
     class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3"
@@ -144,7 +161,8 @@
     <section class="section-sm bg-[#F9F6F2]/80 py-14">
       <div class="container-main">
         <div
-          class="grid md:grid-cols-2 items-center gap-16 reveal reveal-stagger"
+          class="grid md:grid-cols-2 items-center gap-16"
+          data-reveal-group
         >
           <!-- Image -->
           <div>
@@ -201,7 +219,7 @@
     <section class="section-sm bg-[#F9F6F2]/80 py-14">
       <div class="max-w-7xl mx-auto">
         <!-- Heading -->
-        <div class="px-4 mb-4">
+        <div class="px-4 mb-4 reveal">
           <h2 class="text-lg font-semibold">Shop by Style</h2>
         </div>
 
@@ -234,7 +252,7 @@
 
     <section id="collections" class="py-10 md:py-14 lg:py-16 bg-[#F9F6F2]">
       <div class="container-main">
-     <div class="text-center max-w-2xl mx-auto mb-8 md:mb-16 px-4">
+     <div class="text-center max-w-2xl mx-auto mb-8 md:mb-16 px-4 reveal">
   <h2
     class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3 md:mb-5"
   >
@@ -281,7 +299,7 @@
       <div
         class="relative z-10 h-full flex items-center justify-center text-center px-6"
       >
-        <div class="max-w-xl">
+        <div class="max-w-xl reveal">
           <!-- Label -->
           <p
             class="text-[0.8rem] tracking-[0.3em] uppercase text-white/70 mb-4"
@@ -312,14 +330,14 @@
       <div class="container-main">
         <!-- Heading -->
         <div class="text-center mb-14 section-heading">
-          <h2 class="text-[2rem] md:text-[2.5rem] font-light mb-2">
+          <h2 class="section-title text-[2rem] md:text-[2.5rem] font-light mb-2">
             Curated For You
           </h2>
-          <p class="text-sm text-black/60 tracking-wide">For Every Occasion</p>
+          <p class="section-label text-sm text-black/60 tracking-wide">For Every Occasion</p>
         </div>
 
         <!-- Grid -->
-        <div class="grid md:grid-cols-3 gap-4 md:gap-4 md:gap-8">
+        <div class="grid md:grid-cols-3 gap-4 md:gap-4 md:gap-8" data-reveal-group>
           <!-- Card -->
           <a href="./pages/products.html?gender=her" class="group block">
             <div class="relative overflow-hidden rounded-xl">
@@ -596,7 +614,7 @@
           <!-- RIGHT (SCROLL CONTENT) -->
           <div class="flex flex-col gap-24">
             <!-- Block 1 -->
-            <div>
+            <div class="reveal">
               <img
                 src="./src/assets/images/highestQuality.webp"
                 class="w-full mb-6 rounded-[12px]"
@@ -611,7 +629,7 @@
             </div>
 
             <!-- Block 2 -->
-            <div>
+            <div class="reveal">
               <img
                 src="./src/assets/images/fairestPrice.webp"
                 class="w-full mb-6 rounded-[12px]"
@@ -626,7 +644,7 @@
             </div>
 
             <!-- Block 3 -->
-            <div>
+            <div class="reveal">
               <img
                 src="./src/assets/images/longestLife.webp"
                 class="w-full mb-6 rounded-[12px]"
@@ -648,19 +666,21 @@
     <section class="bg-[#F9F6F2]/80 py-24">
       <div class="container-main">
         <!-- Heading -->
-        <h2
-          class="text-center text-[2rem] md:text-[2.6rem] font-light text-[#1A1A1A]"
-        >
-          Stories Behind Every Sparkle
-        </h2>
+        <div class="reveal">
+          <h2
+            class="text-center text-[2rem] md:text-[2.6rem] font-light text-[#1A1A1A]"
+          >
+            Stories Behind Every Sparkle
+          </h2>
 
-        <!-- Subheading -->
-        <p
-          class="max-w-2xl mx-auto text-center text-black/55 mt-5 mb-16 leading-relaxed"
-        >
-          Thousands of customers have chosen Gemora to celebrate life's most
-          meaningful moments.
-        </p>
+          <!-- Subheading -->
+          <p
+            class="max-w-2xl mx-auto text-center text-black/55 mt-5 mb-16 leading-relaxed"
+          >
+            Thousands of customers have chosen Gemora to celebrate life's most
+            meaningful moments.
+          </p>
+        </div>
 
         <!-- Testimonials -->
         <div
@@ -675,7 +695,7 @@
     <section class="bg-[#F9F6F2]/80 py-10">
       <div class="container-main">
         <!-- Section heading -->
-        <div class="text-center max-w-xl mx-auto mb-14">
+        <div class="text-center max-w-xl mx-auto mb-14 reveal">
           <p
             class="text-[0.8rem] tracking-[0.25em] text-[#6B1A2A]/80 uppercase mb-4"
           >
@@ -687,7 +707,8 @@
         </div>
 
         <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-center reveal reveal-stagger"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-center"
+          data-reveal-group
         >
           <!-- Item -->
           <div
