@@ -5,7 +5,7 @@ export function createMainNavbar() {
   return `
     <nav
       id="mainNav"
-      class="fixed top-10 left-0 right-0 z-[1000] bg-[#F9F6F2] transition-transform duration-300"
+      class="fixed top-0 left-0 right-0 z-[calc(var(--z-navbar)+1)] bg-[#F9F6F2] transition-transform duration-300"
     >
 
       <div
@@ -18,14 +18,15 @@ export function createMainNavbar() {
           <!-- Mobile Hamburger -->
           <button
             id="navToggle"
+            type="button"
             class="md:hidden p-2 flex flex-col gap-1.5"
             aria-label="Open navigation menu"
-
-  aria-controls="mobileMenu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
           >
             <span class="block w-5 h-0.5 bg-[#6B1A2A]"></span>
             <span class="block w-5 h-0.5 bg-[#6B1A2A]"></span>
-            <span class="block w-3 h-0.5 bg-[#6B1A2A]"></span>
+            <span class="block w-2.5 h-0.5 bg-[#6B1A2A]"></span>
           </button>
 
           <!-- Logo -->
@@ -51,6 +52,56 @@ export function createMainNavbar() {
 
         <!-- RIGHT ICONS -->
         <div class="flex items-end gap-3 md:gap-4">
+
+          <!-- Mobile Search Toggle -->
+          <button
+            id="mobileSearchToggle"
+            type="button"
+            aria-label="Toggle search"
+            aria-expanded="false"
+            aria-controls="mobileSearchPanel"
+            class="md:hidden flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
+          >
+
+            <svg
+              data-search-icon
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              class="w-7 h-7 text-[#6B1A2A]"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 5.65 5.65a7.5 7.5 0 0 0 10.6 10.6Z"
+              />
+            </svg>
+
+            <svg
+              data-close-icon
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              class="hidden w-7 h-7 text-[#6B1A2A]"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+
+            <span class="mt-1 text-black/80 font-medium">
+              Search
+            </span>
+
+          </button>
 
           <!-- Wishlist -->
           <button
@@ -171,8 +222,31 @@ export function createMainNavbar() {
 
       </div>
 
-      <!-- Mobile Search -->
-      <div class="md:hidden px-4 py-4 pb-3">
+      <!-- Mobile Search Panel -->
+      <div
+        id="mobileSearchPanel"
+        class="
+          md:hidden
+          absolute
+          top-full
+          left-0
+          right-0
+          px-4
+          py-4
+          bg-[#F9F6F2]
+          border-b
+          border-black/10
+          shadow-lg
+          origin-top
+          scale-y-0
+          opacity-0
+          invisible
+          pointer-events-none
+          transition-all
+          duration-200
+          z-[var(--z-dropdown)]
+        "
+      >
 
         ${createSearchBar("mobileSearchInput", true)}
 
