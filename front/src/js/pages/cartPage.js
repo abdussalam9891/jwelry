@@ -73,6 +73,12 @@ function render() {
 
   // EMPTY CART
   if (!Array.isArray(items) || !items.length) {
+    // Span the full grid width so the empty state centers on the page —
+    // otherwise it stays confined to the 2/3-width column left behind
+    // once summaryWrapper below is hidden, and centers off to the left.
+    container.classList.remove("lg:col-span-2");
+    container.classList.add("lg:col-span-3");
+
     container.innerHTML = `
 
       <div
@@ -139,6 +145,8 @@ return;
 
 // Show summary when cart has items
 document.getElementById("summaryWrapper")?.classList.remove("hidden");
+container.classList.remove("lg:col-span-3");
+container.classList.add("lg:col-span-2");
 
 // RENDER ITEMS
 container.innerHTML = items.map(createCartItem).join("");
