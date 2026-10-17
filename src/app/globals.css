@@ -53,18 +53,10 @@
 }
 
 @layer components {
-  /* Offsets fixed-navbar pages. !important keeps a py-* utility on the
-     same element from shrinking it and tucking content under the navbar. */
+  /* Breathing room between the navbar spacer and a page heading.
+     !important keeps a py-* utility on the same element from overriding it. */
   .page-content {
-    padding-top: 108px !important;
-    margin-top: 96px;
-  }
-
-  @media (max-width: 767px) {
-    .page-content {
-      padding-top: 84px !important;
-      margin-top: 0;
-    }
+    padding-top: 2.5rem !important;
   }
 
   .container-main {
@@ -151,11 +143,19 @@
     transform: scale(1.1);
   }
 
-  /* Mega menu: click/tap-driven open state mirroring the CSS
-     :hover / :focus-within behaviour, for touch devices. */
+  /* Mega menu: tap-driven open state for touch devices, mirroring the
+     hover / keyboard-focus behaviour. */
   .group.force-open > .mega-panel {
     opacity: 1;
     visibility: visible;
+  }
+
+  /* A menu whose link was just clicked stays closed until the pointer
+     leaves it, even though it is still hovered. */
+  .group.mega-dismissed > .mega-panel {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: none;
   }
 
   /* Hero swiper */
