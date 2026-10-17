@@ -40,6 +40,8 @@ const iconButtonClass =
 // Fixed three-row header: announcement bar, main bar, desktop category row.
 // The main bar tucks away on scroll-down and returns on scroll-up; the
 // visible height is published as --navbar-h for in-page sticky elements.
+// An in-flow spacer of the full header height keeps page content from
+// starting underneath it.
 export default function Navbar() {
   const pathname = usePathname();
   const { goProtected } = useAuth();
@@ -49,6 +51,9 @@ export default function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  // Position changes only animate once the visitor has scrolled, so the
+  // rows don't visibly slide into place when the announcement loads.
+  const [animate, setAnimate] = useState(false);
   const [heights, setHeights] = useState({
     announcement: 0,
     nav: 64,
@@ -71,6 +76,11 @@ export default function Navbar() {
     setDrawerOpen(false);
     setMobileSearchOpen(false);
   }, [pathname, params]);
+
+  // A new page always starts with the full header visible.
+  useEffect(() => {
+    setHidden(false);
+  }, [pathname]);
 
   // Re-measure whenever a row changes size (fonts loading, the announcement
   // appearing or wrapping, switching to the mobile layout).
@@ -105,9 +115,12 @@ export default function Navbar() {
 
       if (Math.abs(diff) < SCROLL_THRESHOLD) return;
 
+      setAnimate(true);
+
       if (diff > 0 && currentScrollY > HIDE_AFTER_Y) {
         setHidden(true);
-      } else if (diff < 0) {
+        setMobileSearchOpen(false);
+      } else if (diff < 0 || currentScrollY <= HIDE_AFTER_Y) {
         setHidden(false);
       }
 
@@ -188,14 +201,19 @@ export default function Navbar() {
         id="mainNav"
         ref={navRef}
         style={{ top: heights.announcement, transform: navTransform }}
-        className="fixed top-0 left-0 right-0 z-[calc(var(--z-navbar)+1)] bg-[#F9F6F2] transition-transform duration-300"
+        className={`fixed top-0 left-0 right-0 z-[calc(var(--z-navbar)+1)] bg-[#F9F6F2] ${
+          animate ? "transition-transform duration-300" : ""
+        }`}
       >
         <div className="container-main flex items-center justify-between px-6 h-[64px] border-b border-black/5">
           {/* LEFT */}
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={() => setDrawerOpen((open) => !open)}
+              onClick={() => {
+                setAnimate(true);
+                setDrawerOpen((open) => !open);
+              }}
               className="md:hidden p-2 flex flex-col gap-1.5"
               aria-label="Open navigation menu"
               aria-expanded={drawerOpen}
@@ -303,8 +321,15 @@ export default function Navbar() {
       <CategoryNav
         navRef={categoryRef}
         activeCategory={activeCategory}
-        style={{ top: hidden ? heights.announcement : rowOneHeight }}
+        style={{
+          top: hidden ? heights.announcement : rowOneHeight,
+          transition: animate ? "top 300ms" : undefined,
+        }}
       />
+
+      {/* Reserves the header's height in the page flow. */}
+      <div aria-hidden="true" style={{ height: heights.announcement }} />
+      <div aria-hidden="true" className="h-16 md:h-[108px]" />
     </>
   );
 }
