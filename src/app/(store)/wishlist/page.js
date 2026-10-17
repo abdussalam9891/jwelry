@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 
 export default function WishlistPage() {
   return (
-    <main className="container-main section page-content mt-16 md:mt-32 py-14">
+    <main className="container-main page-content pb-14">
       <RequireAuth>
         <WishlistView />
       </RequireAuth>

@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-[#F9F6F2] py-8 mt-16 md:mt-28">
+      <section className="bg-[#F9F6F2] pt-12 pb-8">
         <div className="container-main">
           {/* Hero */}
 

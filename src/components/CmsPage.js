@@ -93,7 +93,7 @@ export default function CmsPage({ slug, fallbackTitle }) {
   }
 
   return (
-    <section className="bg-[#F9F6F2] py-28 mt-24">
+    <section className="bg-[#F9F6F2] pt-16 pb-28">
       <div className="container-main max-w-2xl">
         <h1 className="text-[2.4rem] md:text-[2.8rem] font-light leading-tight mb-12">
           {status === "loading" ? "Loading..." : page?.title || fallbackTitle}

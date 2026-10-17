@@ -14,7 +14,7 @@ export default async function ProductPage({ params }) {
   const { slug } = await params;
 
   return (
-    <main className="container-main pt-16 md:pt-32 pb-32">
+    <main className="container-main pt-6 pb-32">
       <ProductDetails key={slug} slug={slug} />
     </main>
   );

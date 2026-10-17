@@ -37,7 +37,7 @@ export default async function CollectionPage({ params }) {
 
   return (
     <main>
-      <section className="relative mt-16 md:mt-28 h-[38svh] min-h-[320px] sm:h-[42svh] lg:h-[46svh] lg:min-h-[420px] overflow-hidden">
+      <section className="relative h-[38svh] min-h-[320px] sm:h-[42svh] lg:h-[46svh] lg:min-h-[420px] overflow-hidden">
         <img
           src={collection.image}
           alt={collection.title}

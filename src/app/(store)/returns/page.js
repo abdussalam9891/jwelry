@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function ReturnsPage() {
   return (
     <>
-      <section className="py-32 mt-24">
+      <section className="pt-16 pb-32">
         <div className="container-main">
           <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight font-light max-w-3xl">
             Easy Returns.

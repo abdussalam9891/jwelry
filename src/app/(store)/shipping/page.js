@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function ShippingPage() {
   return (
     <>
-      <section className="bg-[#F9F6F2] py-8 mt-16 md:mt-24">
+      <section className="bg-[#F9F6F2] pt-12 pb-8">
         <section className="bg-[#F9F6F2]">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-[1fr_1.1fr] gap-20 items-center">

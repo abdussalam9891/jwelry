@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function AboutPage() {
   return (
     <>
-      <section className="section bg-[#F9F6F2] mt-16 md:mt-24">
+      <section className="section bg-[#F9F6F2]">
         <div className="container-main">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* LEFT TEXT */}

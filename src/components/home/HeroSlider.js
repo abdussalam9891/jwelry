@@ -69,7 +69,7 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <section className="mt-16 md:mt-32 hero-fade-in">
+    <section className="hero-fade-in">
       <div className="relative h-[42svh] min-h-[380px] max-h-[520px] overflow-hidden">
         {banners.length ? (
           <Swiper

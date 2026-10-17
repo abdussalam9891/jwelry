@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function ProfilePage() {
   return (
     <div className="bg-[#F9F6F2]">
-      <main className="max-w-7xl mt-14 mx-auto px-4 py-32">
+      <main className="max-w-7xl mx-auto px-4 py-12">
         <RequireAuth>
           <ProfileView />
         </RequireAuth>

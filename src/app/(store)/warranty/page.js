@@ -12,7 +12,7 @@ export const metadata = pageMetadata({
 export default function WarrantyPage() {
   return (
     <>
-      <section className="mt-44 pb-32">
+      <section className="pt-16 pb-32">
         <div className="container-main">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Content */}
