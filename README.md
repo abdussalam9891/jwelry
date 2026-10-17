@@ -43,7 +43,6 @@ src/
 ├── hooks/                # Reusable hooks (product listing, phone OTP, scroll lock)
 ├── data/                 # Static navigation, banner and size-guide data
 └── lib/                  # API client, services per resource, helpers
-front/                    # Previous static HTML/JS site, kept for reference
 ```
 
 ### Routes
