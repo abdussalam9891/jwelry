@@ -1,0 +1,269 @@
+export const jewelleryStyles = [
+  {
+    label: "Bridal",
+    value: "bridal",
+  },
+
+  {
+    label: "Luxury",
+    value: "luxury",
+  },
+
+  {
+    label: "Minimal",
+    value: "minimal",
+  },
+
+  {
+    label: "Modern",
+    value: "modern",
+  },
+
+  {
+    label: "Vintage",
+    value: "vintage",
+  },
+
+  {
+    label: "Traditional",
+    value: "traditional",
+  },
+
+  {
+    label: "Party",
+    value: "party",
+  },
+
+  {
+    label: "Casual",
+    value: "casual",
+  },
+
+  {
+    label: "Office",
+    value: "office",
+  },
+];
+
+export const audiences = [
+  {
+    label: "Women",
+    value: "women",
+  },
+
+  {
+    label: "Men",
+    value: "men",
+  },
+
+  {
+    label: "Unisex",
+    value: "unisex",
+  },
+
+  {
+    label: "Kids",
+    value: "kids",
+  },
+];
+
+export const jewelleryNavigation = [
+  {
+    category: "rings",
+
+    label: "Rings",
+
+    image: "/assets/images/ringNav.webp",
+
+    productTypes: [
+      {
+        label: "Engagement Rings",
+        value: "engagement-ring",
+      },
+
+      {
+        label: "Wedding Rings",
+        value: "wedding-ring",
+      },
+
+      {
+        label: "Statement Rings",
+        value: "statement-ring",
+      },
+    ],
+  },
+
+  {
+    category: "earrings",
+
+    label: "Earrings",
+
+    image: "/assets/images/earringNav.webp",
+
+    productTypes: [
+      {
+        label: "Stud",
+        value: "stud",
+      },
+
+      {
+        label: "Hoop",
+        value: "hoop",
+      },
+
+      {
+        label: "Drop",
+        value: "drop",
+      },
+
+      {
+        label: "Dangler",
+        value: "dangler",
+      },
+
+      {
+        label: "Jhumka",
+        value: "jhumka",
+      },
+
+      {
+        label: "Huggie",
+        value: "huggie",
+      },
+    ],
+  },
+
+  {
+    category: "neckwears",
+
+    label: "Neckwears",
+
+    image: "/assets/images/necklaceNav.webp",
+
+    productTypes: [
+      {
+        label: "Pendant",
+        value: "pendant",
+      },
+
+      {
+        label: "Chain",
+        value: "chain",
+      },
+
+      {
+        label: "Necklace",
+        value: "necklace",
+      },
+
+      {
+        label: "Choker",
+        value: "choker",
+      },
+
+      {
+        label: "Mangalsutra",
+        value: "mangalsutra",
+      },
+    ],
+  },
+
+  {
+    category: "bracelets",
+
+    label: "Bracelets",
+
+    image: "/assets/images/braceletNav.webp",
+
+    productTypes: [
+      {
+        label: "Bracelet",
+        value: "bracelet",
+      },
+
+      {
+        label: "Cuff",
+        value: "cuff",
+      },
+    ],
+  },
+];
+
+export const moreCategories = [
+  {
+    label: "Bangles",
+    category: "bangles",
+    image: "/assets/images/bangleNav.webp",
+  },
+
+  {
+    label: "Anklets",
+    category: "anklets",
+    image: "/assets/images/ankletNav.webp",
+  },
+
+  {
+    label: "Nose Jewellery",
+    category: "nose-jewellery",
+    image: "/assets/images/noseNav.webp",
+  },
+
+  {
+    label: "Jewellery Sets",
+    category: "sets",
+    image: "/assets/images/setNav.webp",
+  },
+];
+
+export const collections = [
+  {
+    slug: "bridal",
+    name: "Bridal",
+    title: "Bridal Collection",
+    image: "/assets/images/bridal.webp",
+    description: "Timeless pieces crafted for life's most beautiful moments.",
+  },
+
+  {
+    slug: "luxury",
+    name: "Luxury",
+    title: "Luxury Collection",
+    image: "/assets/images/luxury.webp",
+    description: "Statement jewellery designed to stand out.",
+  },
+
+  {
+    slug: "minimal",
+    name: "Minimal",
+    title: "Minimal Collection",
+    image: "/assets/images/minimal.webp",
+    description: "Elegant simplicity for everyday wear.",
+  },
+
+  {
+    slug: "traditional",
+    name: "Traditional",
+    title: "Traditional Collection",
+    image: "/assets/images/traditional.webp",
+    description: "Classic designs inspired by timeless heritage.",
+  },
+
+  {
+    slug: "modern",
+    name: "Modern",
+    title: "Modern Collection",
+    image: "/assets/images/modern.webp",
+    description: "Contemporary jewellery with clean and elegant styling.",
+  },
+
+  {
+    slug: "vintage",
+    name: "Vintage",
+    title: "Vintage Collection",
+    image: "/assets/images/vintage.webp",
+    description: "Inspired by iconic designs from a bygone era.",
+  },
+];
+
+// Everything the products filter bar can offer, in display order.
+export const filterCategories = [...jewelleryNavigation, ...moreCategories];
