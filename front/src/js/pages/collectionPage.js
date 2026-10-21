@@ -42,7 +42,7 @@ async function initCollectionPage() {
     updateSeo({
       title: config.title,
       description: config.description,
-      path: `/pages/collection.html?slug=${encodeURIComponent(slug)}`,
+      path: `/pages/collection?slug=${encodeURIComponent(slug)}`,
       image: config.image,
     });
 

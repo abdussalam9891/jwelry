@@ -163,8 +163,8 @@ export function setPageTitle() {
     title,
     description: `Shop ${title.toLowerCase()} at Gemora. Handcrafted premium jewellery for every occasion.`,
     path: category
-      ? `/pages/products.html?category=${encodeURIComponent(category)}`
-      : "/pages/products.html",
+      ? `/pages/products?category=${encodeURIComponent(category)}`
+      : "/pages/products",
   });
 }
 

@@ -142,7 +142,7 @@ function renderProductMessage(container, message) {
 }
 
 function updateProductSeo(product, slug) {
-  const path = `/pages/productDetails.html?slug=${encodeURIComponent(slug)}`;
+  const path = `/pages/productDetails?slug=${encodeURIComponent(slug)}`;
   const images = (product.images || []).map((img) => img.url).filter(Boolean);
   // description is either a plain string or { short, design, details }
   const rawDescription =
