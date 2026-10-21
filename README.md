@@ -1,6 +1,6 @@
 # Gemora — Premium Jewellery Store
 
-Gemora is a full-featured e-commerce frontend for a premium jewellery brand — rings, necklaces, earrings, bracelets and more. It's a Next.js (App Router, plain JavaScript) storefront that talks to a REST API backend for products, auth, orders and payments.
+Gemora is a full-featured e-commerce frontend for a premium jewellery brand — rings, necklaces, earrings, bracelets and more. It's a fast, static, vanilla-JavaScript storefront (no framework, no build step) that talks to a REST API backend for products, auth, orders and payments.
 
 **Live site:** https://gemora-jwelry.vercel.app/
 
@@ -14,69 +14,88 @@ Gemora is a full-featured e-commerce frontend for a premium jewellery brand — 
 - 👤 **Profile management** — saved addresses, account details
 - 📣 **CMS-driven content** — announcement bar, hero banners, testimonials, contact form, privacy/terms/shipping/returns/warranty pages
 - 🔎 **SEO & social sharing** — per-page Open Graph / Twitter meta tags with thumbnail images for rich link previews (WhatsApp, Facebook, Twitter, etc.)
-- 📱 Responsive, mobile-first UI built with React and Tailwind CSS
+- 📱 Responsive, mobile-first UI built with Tailwind CSS
 
 ## Tech Stack
 
-| Layer          | Technology                                                          |
-| -------------- | ------------------------------------------------------------------- |
-| Framework      | [Next.js](https://nextjs.org/) (App Router), React, JavaScript (no TypeScript) |
-| Styling        | [Tailwind CSS](https://tailwindcss.com/) v3 (PostCSS), global CSS in `src/app/globals.css` |
-| Carousels      | [Swiper](https://swiperjs.com/)                                     |
-| Auth           | Firebase phone OTP, email/password and Google OAuth against the API |
-| Payments       | [Razorpay](https://razorpay.com/)                                   |
-| Media          | [Cloudinary](https://cloudinary.com/) (product & CMS images)        |
-| Backend API    | Separate REST service — see `src/lib/config.js`                    |
-| Hosting        | [Vercel](https://vercel.com/)                                       |
+| Layer            | Technology                                      |
+| ----------------- | ------------------------------------------------ |
+| Markup/Styling    | HTML5, [Tailwind CSS](https://tailwindcss.com/) (CDN), custom CSS |
+| Client logic      | Vanilla JavaScript (ES Modules) — no framework, no bundler |
+| Carousels/UI      | [Swiper](https://swiperjs.com/)                   |
+| Auth              | Firebase (OTP), custom email/password auth against the API |
+| Payments          | [Razorpay](https://razorpay.com/)                 |
+| Media             | [Cloudinary](https://cloudinary.com/) (product & CMS images) |
+| Backend API       | REST API — see `front/src/js/config.js` (separate service) |
+| Hosting           | [Vercel](https://vercel.com/)                     |
+
+This project intentionally ships with **no package manager, bundler, or framework** — it's plain HTML/CSS/JS served as static files, which keeps the site fast and the setup trivial.
 
 ## Project Structure
 
 ```
-public/assets/            # Static images, icons, video
-src/
-├── app/
-│   ├── layout.js         # Root layout: fonts, global CSS, providers, default SEO
-│   ├── (store)/          # Pages with navbar + footer (home, products, cart, ...)
-│   └── (standalone)/     # Full-screen pages (login, register, auth callback, ...)
-├── components/           # UI, grouped by area (layout, product, cart, account, ...)
-├── context/              # Auth, cart, wishlist and toast state (React context)
-├── hooks/                # Reusable hooks (product listing, phone OTP, scroll lock)
-├── data/                 # Static navigation, banner and size-guide data
-└── lib/                  # API client, services per resource, helpers
+front/
+├── index.html                  # Home page
+├── pages/                      # All other routes (one .html file per page)
+│   ├── products.html
+│   ├── productDetails.html
+│   ├── collection.html
+│   ├── cart.html
+│   ├── checkout.html
+│   ├── orders.html / orderDetails.html / orderSuccess.html
+│   ├── wishlist.html / profile.html
+│   ├── login.html / register.html / auth.html / resetPassword.html
+│   ├── contact.html / about.html
+│   └── privacy.html / termsAndConditions.html / shipping.html / returns.html / warranty.html
+└── src/
+    ├── assets/
+    │   ├── icon/                # Logo & brand icons
+    │   └── images/              # Static imagery (banners, OG image, etc.)
+    ├── css/                     # Hand-written stylesheets
+    ├── htmlComponents/          # Reusable HTML partials (e.g. auth modal)
+    └── js/
+        ├── config.js            # Environment-aware API base URL
+        ├── main.js              # App entry point
+        ├── core/                # Auth state, API client, cart/wishlist counters
+        ├── services/            # One module per API resource (products, orders, cart, …)
+        ├── features/            # Feature logic (cart, checkout, wishlist, filters, …)
+        ├── components/          # Reusable UI components (navbar, footer, cards, …)
+        ├── pages/                # Per-page controllers, one per HTML page
+        └── utils/                # Small helpers (e.g. Razorpay wrapper)
 ```
-
-### Routes
-
-| Route                          | Old URL                                   |
-| ------------------------------ | ----------------------------------------- |
-| `/products`, `/products/[slug]` | `/pages/products.html`, `/pages/productDetails.html?slug=` |
-| `/collections/[slug]`          | `/pages/collection.html?slug=`            |
-| `/orders`, `/orders/[id]`      | `/pages/orders.html`, `/pages/orderDetails.html?id=` |
-| `/terms`, `/reset-password`    | `/pages/termsAndConditions.html`, `/pages/resetPassword.html` |
-| `/cart`, `/checkout`, `/login`, … | `/pages/<name>.html`                     |
-
-Every old `/pages/*.html` URL permanently redirects to its new route (see `next.config.mjs`), so emails, OAuth callbacks and existing links keep working.
 
 ## Getting Started
 
-```bash
-npm install
-npm run dev        # http://localhost:3000
-npm run build && npm start
-```
+### Prerequisites
 
-On `localhost` the app calls `http://localhost:5000/api`; elsewhere it calls the production API. Override with `NEXT_PUBLIC_API_BASE` (see `.env.example`).
+- Any static file server (e.g. the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VS Code extension, or `npx serve`)
+- A running instance of the [Gemora backend API](front/src/js/config.js) (or point `CONFIG.API_BASE` at a hosted instance)
 
-To develop against the deployed API (its CORS policy only allows the production site), proxy it through Next.js by creating `.env.local`:
+### Run locally
 
-```
-API_PROXY_TARGET=https://jwelry-backend.onrender.com/api
-NEXT_PUBLIC_API_BASE=/api
-```
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/abdussalam9891/jwelry.git
+   cd jwelry
+   ```
+
+2. Serve the `front/` directory as a static site.
+
+   - **VS Code Live Server** — this repo ships a `.vscode/settings.json` that roots Live Server at `/front`; just click "Go Live".
+   - **Or, with Node:**
+
+     ```bash
+     npx serve front
+     ```
+
+3. Open the site in your browser (Live Server defaults to `http://127.0.0.1:5500`).
+
+By default, the app talks to `http://localhost:5000/api` when running on `localhost`/`127.0.0.1`/`file:`, and falls back to the production API otherwise (see `front/src/js/config.js`). Run the backend locally on port `5000`, or edit `CONFIG.API_BASE` to point elsewhere.
 
 ## Deployment
 
-Deployed on **Vercel**. The project root is the repository root and the framework preset is **Next.js** (the old setup served `front/` as static files).
+The site is deployed on **Vercel** with the project root set to `front/`. Any push to `main` redeploys automatically. No build command is required — it's served as-is.
 
 ## Contributing
 

@@ -1,0 +1,18 @@
+function initOrderSuccess() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const orderId =
+    params.get("id");
+
+  document.getElementById(
+    "orderIdText"
+  ).textContent =
+    orderId || "--";
+
+}
+
+initOrderSuccess();

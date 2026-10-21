@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Character Encoding -->
+    <meta charset="UTF-8" />
+
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>Gemora | Premium Jewellery Store</title>
+
+    <meta
+      name="description"
+      content="Discover handcrafted premium jewellery including rings, necklaces, earrings and bracelets. Timeless elegance crafted for every occasion."
+    />
+
+    <meta
+      name="keywords"
+      content="Gemora, jewellery, rings, necklaces, earrings, bracelets, premium jewellery, diamond jewellery, gold jewellery"
+    />
+
+    <meta name="author" content="Gemora" />
+
+    <meta name="robots" content="index, follow" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#6B1A2A" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://gemora-jwelry.vercel.app/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+
+    <meta property="og:title" content="Gemora | Premium Jewellery Store" />
+
+    <meta
+      property="og:description"
+      content="Discover handcrafted premium jewellery for every occasion."
+    />
+
+    <meta
+      property="og:image"
+      content="https://gemora-jwelry.vercel.app/src/assets/images/og-image.png"
+    />
+
+    <meta property="og:url" content="https://gemora-jwelry.vercel.app/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="twitter:title" content="Gemora | Premium Jewellery Store" />
+
+    <meta
+      name="twitter:description"
+      content="Discover handcrafted premium jewellery for every occasion."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://gemora-jwelry.vercel.app/src/assets/images/og-image.png"
+    />
+
+    <!-- Performance -->
+    <link rel="preconnect" href="https://res.cloudinary.com" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./src/assets/icon/logo.png" />
+
+    <!-- Tailwind CDN (Replace later with compiled CSS) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./src/css/main.css" />
+
+    <link rel="stylesheet" href="./src/css/navbar.css" />
+
+    <link rel="stylesheet" href="./src/css/animations.css" />
+
+    <link rel="stylesheet" href="./src/css/homePage.css" />
+
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+  </head>
+
+  <body>
+    <div id="navbar-container"></div>
+
+    <!-- Hero -->
+
+ <section class="mt-16 md:mt-32 hero-fade-in">
+  <div
+    class="swiper heroSwiper relative
+           h-[42svh]
+           min-h-[380px]
+           max-h-[520px]
+           overflow-hidden"
+  >
+
+    <div class="swiper-wrapper h-full" id="hero-swiper-wrapper">
+      <!-- Default fallback shown until real banners load; replaced by JS -->
+      <div class="swiper-slide h-full">
+        <img
+          src="./src/assets/images/heronew.webp"
+          alt="Gemora Jewellery"
+          class="block h-full w-full object-cover"
+        >
+      </div>
+    </div>
+
+    <!-- Shown only if the fetch is still pending after a few seconds -->
+    <div
+      id="hero-loading-message"
+      class="hidden absolute inset-0 z-20 items-center justify-center pointer-events-none"
+    >
+      <span class="bg-black/60 text-white text-sm px-4 py-2 rounded-full">
+        Just a moment — waking up our server for you, thanks for your patience
+      </span>
+    </div>
+
+    <!-- Pagination -->
+    <div class="swiper-pagination"></div>
+
+  </div>
+</section>
+
+
+
+    <!-- Category -->
+    <section class="section-sm bg-[#F9F6F2]/80 py-10 md:py-12 lg:py-14">
+      <div class="container-main">
+        <!-- Section heading -->
+       <div class="text-center max-w-2xl mx-auto mb-8 md:mb-14 px-4 reveal">
+
+  <h2
+    class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3"
+  >
+    Explore Our Collections
+  </h2>
+
+  <p
+    class="text-sm sm:text-base text-black/60 leading-6 sm:leading-7 max-w-xl mx-auto"
+  >
+    Timeless pieces crafted for every moment.
+  </p>
+
+</div>
+
+        <div
+          id="homepageCategories"
+          class="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 lg:gap-8"
+        ></div>
+      </div>
+    </section>
+
+    <section class="section-sm bg-[#F9F6F2]/80 py-14">
+      <div class="container-main">
+        <div
+          class="grid md:grid-cols-2 items-center gap-16"
+          data-reveal-group
+        >
+          <!-- Image -->
+          <div>
+            <img
+              src="./src/assets/images/gemoraCollection.webp"
+              alt="Gemora Craftsmanship"
+              class="w-full aspect-[4/3] md:h-[420px] md:aspect-auto object-cover object-center"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="max-w-lg">
+            <!-- Heading -->
+            <h2
+              class="text-[2.2rem] md:text-[2.8rem] font-light text-[#1A1A1A] mb-6 leading-tight"
+            >
+              Crafted in Tradition, <br />
+              Designed for Today
+            </h2>
+
+            <!-- Description -->
+            <p
+              class="text-[1rem] md:text-[1.05rem] text-black/60 leading-relaxed mb-8"
+            >
+              At Gemora, every piece carries the essence of timeless Indian
+              craftsmanship blended with contemporary elegance. From festive
+              celebrations to everyday moments, our jewellery is created to be a
+              part of your story — rooted in tradition, yet made for the modern
+              world.
+            </p>
+
+            <!-- CTA -->
+            <a
+              href="./pages/products.html?category=neckwears"
+              class="group inline-flex items-center gap-3 text-[#6B1A2A] font-medium tracking-wide"
+            >
+              Discover Collection
+
+              <span
+                class="transition-transform duration-300 group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- scrollable product (category tab etc)  -->
+
+    <section class="section-sm bg-[#F9F6F2]/80 py-14">
+      <div class="max-w-7xl mx-auto">
+        <!-- Heading -->
+        <div class="px-4 mb-4 reveal">
+          <h2 class="text-lg font-semibold">Shop by Style</h2>
+        </div>
+
+        <!-- Tabs -->
+        <div
+          class="tabs flex gap-6 px-4 border-b overflow-x-auto scroll-smooth"
+        >
+          <button class="tab active pb-2" data-type="trending">Trending</button>
+          <button class="tab pb-2" data-type="new">New</button>
+          <button class="tab pb-2" data-type="rings">Rings</button>
+          <button class="tab pb-2" data-type="earrings">Earrings</button>
+        </div>
+
+        <!-- Horizontal Scroll -->
+        <div class="relative">
+          <div
+            id="productContainer"
+           class="flex gap-6 overflow-x-auto px-6 sm:px-4 py-6 scroll-smooth snap-x no-scrollbar"
+          ></div>
+
+          <!-- Right fade hint -->
+          <div
+            class="pointer-events-none absolute right-0 top-0 h-full w-10 bg-gradient-to-l from-white"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- collection  -->
+
+    <section id="collections" class="py-10 md:py-14 lg:py-16 bg-[#F9F6F2]">
+      <div class="container-main">
+     <div class="text-center max-w-2xl mx-auto mb-8 md:mb-16 px-4 reveal">
+  <h2
+    class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3 md:mb-5"
+  >
+    Jewellery For Every Moment
+  </h2>
+
+  <p
+    class="text-sm sm:text-base text-black/60 leading-6 sm:leading-8 max-w-xl mx-auto"
+  >
+    Discover handcrafted collections designed for weddings,
+    celebrations, everyday elegance and timeless luxury.
+  </p>
+</div>
+
+       <div
+  id="homepageCollections"
+  class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-3 md:gap-5"
+></div>
+      </div>
+    </section>
+
+    <!-- video section  -->
+
+    <section
+      class="relative w-full h-[75vh] min-h-[240px] sm:h-[300px] lg:h-[380px] overflow-hidden py-14"
+    >
+      <!-- VIDEO -->
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="./src/assets/images/video.webm" type="video/mp4" />
+      </video>
+
+      <!-- OVERLAY -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"
+      ></div>
+
+      <!-- CONTENT -->
+      <div
+        class="relative z-10 h-full flex items-center justify-center text-center px-6"
+      >
+        <div class="max-w-xl reveal">
+          <!-- Label -->
+          <p
+            class="text-[0.8rem] tracking-[0.3em] uppercase text-white/70 mb-4"
+          >
+            Crafted in Motion
+          </p>
+
+          <!-- Heading -->
+          <h2
+            class="text-white text-[2.2rem] md:text-[3rem] font-light leading-tight mb-6"
+          >
+            Designed to Shine With You
+          </h2>
+
+          <!-- CTA -->
+          <a
+            href="./pages/products.html?category=earrings"
+            class="inline-block px-6 py-3 border border-white text-white text-[0.95rem] tracking-wide hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Explore Collection
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- shop by gender  -->
+    <section class="section-sm py-14 bg-[#F9F6F2]">
+      <div class="container-main">
+        <!-- Heading -->
+        <div class="text-center mb-14 section-heading">
+          <h2 class="section-title text-[2rem] md:text-[2.5rem] font-light mb-2">
+            Curated For You
+          </h2>
+          <p class="section-label text-sm text-black/60 tracking-wide">For Every Occasion</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid md:grid-cols-3 gap-4 md:gap-4 md:gap-8" data-reveal-group>
+          <!-- Card -->
+          <a href="./pages/products.html?gender=her" class="group block">
+            <div class="relative overflow-hidden rounded-xl">
+              <!-- Image -->
+              <img
+                src="./src/assets/images/female.webp"
+                class="w-full h-[240px] sm:h-[300px] lg:h-[380px] object-cover transition duration-500 group-hover:scale-105"
+              />
+
+              <!-- Overlay -->
+              <div
+                class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"
+              ></div>
+            </div>
+
+            <!-- Label -->
+            <h3 class="text-center mt-4 text-[1.1rem] font-medium">For Her</h3>
+          </a>
+
+          <!-- Card -->
+          <a href="./pages/products.html?gender=him" class="group block">
+            <div class="relative overflow-hidden rounded-xl">
+              <img
+                src="./src/assets/images/men.webp"
+                class="w-full h-[240px] sm:h-[300px] lg:h-[380px] object-cover transition duration-500 group-hover:scale-105"
+              />
+
+              <div
+                class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"
+              ></div>
+            </div>
+
+            <h3 class="text-center mt-4 text-[1.1rem] font-medium">For Him</h3>
+          </a>
+
+          <!-- Card -->
+          <a href="./pages/products.html?gender=kids" class="group block">
+            <div class="relative overflow-hidden rounded-xl">
+              <img
+                src="./src/assets/images/kid.webp"
+                class="w-full h-[240px] sm:h-[300px] lg:h-[380px] object-cover transition duration-500 group-hover:scale-105"
+              />
+
+              <div
+                class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition"
+              ></div>
+            </div>
+
+            <h3 class="text-center mt-4 text-[1.1rem] font-medium">
+              For Little Ones
+            </h3>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation CTA -->
+
+    <section class="py-10 lg:py-28 bg-[#F9F6F2] reveal">
+      <div
+        class="container-main grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-16 items-center"
+      >
+        <!-- LEFT -->
+
+        <div>
+          <h2
+            class="text-4xl md:text-5xl lg:text-6xl font-light text-[#111111] leading-tight mb-6"
+          >
+            Need Help Choosing
+            <span class="italic"> The Perfect Piece? </span>
+          </h2>
+
+          <p class="text-black/60 leading-8 text-lg max-w-2xl mb-8">
+            Whether you're searching for bridal jewellery, a meaningful gift, or
+            a timeless investment piece, our jewellery specialists are here to
+            guide you with personalised recommendations.
+          </p>
+
+          <!-- BENEFITS -->
+
+          <div class="grid sm:grid-cols-2 gap-4 mb-10">
+            <!-- CARD -->
+
+            <div
+              class="bg-white rounded-2xl px-5 py-4 border border-black/5 flex items-center gap-4 hover:shadow-lg transition-all duration-300"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-[#F6EEF0] flex items-center justify-center shrink-0"
+              >
+                <!-- Sparkles -->
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.8"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="w-5 h-5 text-[#6B1A2A]"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9.813 15.904 9 18l-.813-2.096a4.5 4.5 0 0 0-2.291-2.291L3.75 12l2.146-.813a4.5 4.5 0 0 0 2.291-2.291L9 6.75l.813 2.146a4.5 4.5 0 0 0 2.291 2.291L14.25 12l-2.146.813a4.5 4.5 0 0 0-2.291 2.291Z"
+                  />
+                </svg>
+              </div>
+
+              <span class="font-medium text-[#1A1A1A]"> Expert Guidance </span>
+            </div>
+
+            <!-- CARD -->
+
+            <div
+              class="bg-white rounded-2xl px-5 py-4 border border-black/5 flex items-center gap-4 hover:shadow-lg transition-all duration-300"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-[#F6EEF0] flex items-center justify-center shrink-0"
+              >
+                <!-- Heart -->
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.8"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="w-5 h-5 text-[#6B1A2A]"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21.435 6.582a5.94 5.94 0 0 0-8.388 0L12 7.629l-1.047-1.047a5.94 5.94 0 1 0-8.388 8.388L12 21.75l9.435-9.03a5.94 5.94 0 0 0 0-8.388Z"
+                  />
+                </svg>
+              </div>
+
+              <span class="font-medium text-[#1A1A1A]">
+                Bridal Specialists
+              </span>
+            </div>
+
+            <!-- CARD -->
+
+            <div
+              class="bg-white rounded-2xl px-5 py-4 border border-black/5 flex items-center gap-4 hover:shadow-lg transition-all duration-300"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-[#F6EEF0] flex items-center justify-center shrink-0"
+              >
+                <!-- Diamond -->
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.8"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="w-5 h-5 text-[#6B1A2A]"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M6.75 3.75h10.5l3 4.5-8.25 12-8.25-12 3-4.5Z"
+                  />
+                </svg>
+              </div>
+
+              <span class="font-medium text-[#1A1A1A]">
+                Custom Jewellery Advice
+              </span>
+            </div>
+
+            <!-- CARD -->
+
+            <div
+              class="bg-white rounded-2xl px-5 py-4 border border-black/5 flex items-center gap-4 hover:shadow-lg transition-all duration-300"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-[#F6EEF0] flex items-center justify-center shrink-0"
+              >
+                <!-- Shield -->
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.8"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  class="w-5 h-5 text-[#6B1A2A]"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 12.75 11.25 15 15 9.75m6 2.25c0 5.523-3.84 10.29-9 11.622C6.84 22.29 3 17.523 3 12V5.378c0-.478.214-.928.584-1.226A17.37 17.37 0 0 1 12 1.5c2.928 0 5.68.746 8.416 2.652.37.298.584.748.584 1.226V12Z"
+                  />
+                </svg>
+              </div>
+
+              <span class="font-medium text-[#1A1A1A]">
+                Trusted Assistance
+              </span>
+            </div>
+          </div>
+
+          <!-- CTA -->
+
+          <a
+            href="https://wa.me/919006143335?text=Hello%20Gemora,%20I%20need%20help%20choosing%20jewellery."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#6B1A2A] hover:bg-[#571423] text-white uppercase tracking-[0.15em] text-xs font-medium transition-all duration-300"
+          >
+            Talk To A Jewellery Expert
+          </a>
+
+          <p class="mt-5 text-sm text-black/45">
+            Average response time under 10 minutes.
+          </p>
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="relative">
+          <img
+            src="/src/assets/images/jwelry-consultation.webp"
+            class="w-full h-[550px] object-cover rounded-[32px]"
+          />
+
+          <!-- FLOATING CARD -->
+
+          <div
+            class="absolute bottom-6 left-6 bg-white rounded-3xl p-5 shadow-xl max-w-[250px]"
+          >
+            <p class="text-xl mb-2">★★★★★</p>
+
+            <p class="text-sm text-black/70 leading-relaxed">
+              "The team helped me choose the perfect engagement ring and made
+              the process effortless."
+            </p>
+
+            <p class="mt-3 text-xs uppercase tracking-[0.15em] text-black/40">
+              Verified Customer
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- right scrollable left sticky  -->
+    <section class="bg-[#F9F6F2] py-14">
+      <div class="container-main">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+          <!-- LEFT (STICKY IMAGE) -->
+          <div class="h-fit md:sticky md:top-[120px]">
+            <div class="relative overflow-hidden rounded-[12px]">
+              <img
+                src="./src/assets/images/leftWhyUs.webp"
+                class="w-full h-[500px] object-cover"
+              />
+
+              <!-- Optional overlay text -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <p class="text-white text-lg text-center max-w-xs">
+                  Fine jewelry designed to be worthy of those who wear it
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT (SCROLL CONTENT) -->
+          <div class="flex flex-col gap-24">
+            <!-- Block 1 -->
+            <div class="reveal">
+              <img
+                src="./src/assets/images/highestQuality.webp"
+                class="w-full mb-6 rounded-[12px]"
+              />
+              <h3 class="text-xl tracking-wide mb-3">HIGHEST QUALITY</h3>
+              <p class="text-[1rem] text-black/60 leading-relaxed">
+                Every piece is crafted with precision using responsibly sourced
+                materials and expert finishing. From design to final polish, our
+                jewellery is made to meet the highest standards of durability,
+                shine, and comfort.
+              </p>
+            </div>
+
+            <!-- Block 2 -->
+            <div class="reveal">
+              <img
+                src="./src/assets/images/fairestPrice.webp"
+                class="w-full mb-6 rounded-[12px]"
+              />
+              <h3 class="text-xl tracking-wide mb-3">FAIR PRICING</h3>
+              <p class="text-[1rem] text-black/60 leading-relaxed">
+                Luxury should feel honest. By streamlining our process and
+                working directly with skilled artisans, we eliminate unnecessary
+                markups—so you get exceptional jewellery at a price that truly
+                reflects its value.
+              </p>
+            </div>
+
+            <!-- Block 3 -->
+            <div class="reveal">
+              <img
+                src="./src/assets/images/longestLife.webp"
+                class="w-full mb-6 rounded-[12px]"
+              />
+              <h3 class="text-xl tracking-wide mb-3">CRAFTED TO LAST</h3>
+              <p class="text-[1rem] text-black/60 leading-relaxed">
+                Designed for everyday elegance and special moments alike, each
+                piece is built to last beyond trends. Timeless forms, strong
+                settings, and careful detailing ensure your jewellery stays with
+                you for years.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customer Stories -->
+    <section class="bg-[#F9F6F2]/80 py-24">
+      <div class="container-main">
+        <!-- Heading -->
+        <div class="reveal">
+          <h2
+            class="text-center text-[2rem] md:text-[2.6rem] font-light text-[#1A1A1A]"
+          >
+            Stories Behind Every Sparkle
+          </h2>
+
+          <!-- Subheading -->
+          <p
+            class="max-w-2xl mx-auto text-center text-black/55 mt-5 mb-16 leading-relaxed"
+          >
+            Thousands of customers have chosen Gemora to celebrate life's most
+            meaningful moments.
+          </p>
+        </div>
+
+        <!-- Testimonials -->
+        <div
+          id="testimonialGrid"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        ></div>
+      </div>
+    </section>
+
+    <!-- Trust Section -->
+
+    <section class="bg-[#F9F6F2]/80 py-10">
+      <div class="container-main">
+        <!-- Section heading -->
+        <div class="text-center max-w-xl mx-auto mb-14 reveal">
+          <p
+            class="text-[0.8rem] tracking-[0.25em] text-[#6B1A2A]/80 uppercase mb-4"
+          >
+            Why Choose Gemora
+          </p>
+          <h2 class="text-[1.8rem] md:text-[2.2rem] font-light text-[#1A1A1A]">
+            Quality, Trust & Timeless Elegance
+          </h2>
+        </div>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 text-center"
+          data-reveal-group
+        >
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 8v4l3 3"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+            </svg>
+
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
+              10+ Years Legacy
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M12 3l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V7l7-4z"></path>
+            </svg>
+
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
+              Certified Jewellery
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M3 12h18"></path>
+              <path d="M7 8l-4 4 4 4"></path>
+            </svg>
+
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
+              Easy Returns
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"></path>
+            </svg>
+
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
+              Lifetime Warranty
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M3 7h13v10H3z"></path>
+              <path d="M16 10h4l2 3v4h-6z"></path>
+            </svg>
+
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
+              Free Shipping
+            </p>
+          </div>
+
+          <!-- Item -->
+          <div
+            class="group flex flex-col items-center gap-4 transition duration-300 hover:-translate-y-1"
+          >
+            <svg
+              class="w-8 h-8 text-[#6B1A2A] transition duration-300 group-hover:scale-110 group-hover:text-[#8B2C3C] group-hover:drop-shadow-[0_4px_10px_rgba(107,26,42,0.2)]"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M18 10c0 4-3 7-6 7s-6-3-6-7 3-7 6-7 6 3 6 7z"></path>
+              <path d="M12 17v4"></path>
+            </svg>
+
+            <p
+              class="text-[0.95rem] text-black/70 transition group-hover:text-black"
+            >
+              24/7 Support
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer  -->
+    <div id="footer-container"></div>
+
+    <script type="module" src="./src/js/main.js"></script>
+    <script type="module" src="./src/js/pages/homePage.js"></script>
+
+    <script type="module" src="./src/js/components/scrollableCard.js"></script>
+    <script type="module" src="./src/js/components/footer.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </body>
+</html>
