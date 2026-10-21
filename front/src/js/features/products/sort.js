@@ -108,7 +108,7 @@ export function renderSort() {
   return `
     <select
       id="sortSelect"
-      class="border border-black/10 rounded-md px-4 py-2 text-sm bg-white"
+      class="min-w-0 border border-black/10 rounded-md px-4 py-2 text-sm bg-white"
     >
       <option value="">Sort By</option>
       <option value="newest">Newest</option>

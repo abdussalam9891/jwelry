@@ -30,7 +30,7 @@ export function createMainNavbar() {
           </button>
 
           <!-- Logo -->
-          <a href="/index.html" aria-label="Go to Gemora home" class="flex-shrink-0">
+          <a href="/index.html" aria-label="Go to Gemora home" class="hidden md:block flex-shrink-0">
             <img
               src="/src/assets/icon/logo.png"
               class="h-16 w-auto object-contain"

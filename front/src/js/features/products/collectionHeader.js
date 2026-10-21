@@ -12,9 +12,12 @@ export function renderCollectionHeader() {
     <div
       class="
         flex
-        items-center
+        flex-col
+        sm:flex-row
+        sm:items-center
         justify-between
-        gap-6
+        gap-3
+        sm:gap-6
 
         pb-6
       "
@@ -39,13 +42,15 @@ export function renderCollectionHeader() {
         class="
           flex
           items-center
+          justify-between
           gap-5
         "
       >
 
         <div
           class="
-            text-right
+            shrink-0
+            sm:text-right
           "
         >
 
@@ -54,7 +59,9 @@ export function renderCollectionHeader() {
           <p
             id="productCount"
             class="
-  text-3xl
+  whitespace-nowrap
+  text-xl
+  sm:text-3xl
   font-light
   tracking-[-0.03em]
   text-black/80
