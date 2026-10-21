@@ -12,6 +12,7 @@ import { loadWishlistState } from "../features/wishlist.js";
 
 
 import { renderSummary } from "../features/checkout/summary.js";
+import { listSkeleton } from "../components/skeletons.js";
 
 
 let selectedId = null;
@@ -266,10 +267,43 @@ function setupCartEvents() {
 export async function initCartPage() {
   setupModal();
   setupCartEvents();
-  await loadCart();
-   await loadWishlistState();
-  render();
 
+  const container = document.getElementById("cartItems");
+  const summary = document.getElementById("summaryContent");
 
+  if (container) container.innerHTML = listSkeleton(3);
+  if (summary) {
+    summary.innerHTML = `
+      <div class="animate-pulse space-y-4" aria-hidden="true">
+        <div class="h-4 w-full bg-black/[0.06] rounded"></div>
+        <div class="h-4 w-full bg-black/[0.06] rounded"></div>
+        <div class="h-4 w-2/3 bg-black/[0.06] rounded"></div>
+        <div class="h-12 w-full bg-black/[0.06] rounded mt-6"></div>
+      </div>
+    `;
+  }
 
+  try {
+    await loadCart();
+    await loadWishlistState();
+    render();
+  } catch (err) {
+    console.error(err);
+
+    if (summary) summary.innerHTML = "";
+    if (container) {
+      container.innerHTML = `
+        <div class="rounded-2xl border border-red-100 bg-red-50 p-6 text-center">
+          <p class="text-red-600">We couldn't load your cart.</p>
+          <button
+            type="button"
+            onclick="location.reload()"
+            class="mt-4 text-sm font-medium text-[#6B1A2A] underline underline-offset-4"
+          >
+            Try again
+          </button>
+        </div>
+      `;
+    }
+  }
 }

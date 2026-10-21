@@ -1,4 +1,5 @@
- 
+import { updateSeo } from "../../utils/seo.js";
+
 export function setPageTitle() {
   const titleEl =
     document.getElementById(
@@ -56,6 +57,9 @@ export function setPageTitle() {
       breadcrumbEl.textContent =
         title;
     }
+
+    document.title =
+      `${title} | Gemora`;
 
     return;
   }
@@ -153,8 +157,15 @@ export function setPageTitle() {
       title;
   }
 
-  document.title =
-    `${title} | Jewellery Store`;
+  // Category listings are worth indexing on their own; every other filter
+  // combination points back to the plain category (or all-products) page.
+  updateSeo({
+    title,
+    description: `Shop ${title.toLowerCase()} at Gemora. Handcrafted premium jewellery for every occasion.`,
+    path: category
+      ? `/pages/products.html?category=${encodeURIComponent(category)}`
+      : "/pages/products.html",
+  });
 }
 
 function formatLabel(

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Account, cart and checkout pages carry a noindex meta tag instead of a
+# Disallow rule, so crawlers can still read it and drop them from results.
+
+Sitemap: https://gemora-jwelry.vercel.app/sitemap.xml

@@ -13,12 +13,25 @@ export function renderCollectionHeader() {
       class="
         flex
         items-center
-        justify-end
+        justify-between
         gap-6
 
         pb-6
       "
     >
+
+      <!-- LEFT -->
+      <h1
+        id="pageTitle"
+        class="
+          text-2xl
+          md:text-4xl
+          font-light
+          leading-tight
+        "
+      >
+        All Jewellery
+      </h1>
 
       <!-- RIGHT -->
 
@@ -46,6 +59,7 @@ export function renderCollectionHeader() {
   tracking-[-0.03em]
   text-black/80
 "
+          >
             0
           </p>
 

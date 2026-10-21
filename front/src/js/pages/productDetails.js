@@ -34,6 +34,13 @@ import {
   attachImageGalleryEvents,
 } from "../features/productDetails/imageGallery.js";
 
+import {
+  productDetailsSkeleton,
+  productRowSkeleton,
+} from "../components/skeletons.js";
+
+import { updateSeo, setJsonLd, SITE_NAME, SITE_URL } from "../utils/seo.js";
+
 document.addEventListener("DOMContentLoaded", loadProduct);
 
 
@@ -46,13 +53,18 @@ async function loadProduct() {
   const slug = new URLSearchParams(window.location.search).get("slug");
 
   if (!slug) {
-    container.innerHTML = "Product not found";
+    renderProductMessage(container, "Product not found");
     return;
   }
 
   try {
        resetProductState();
-    container.innerHTML = "Loading product...";
+    container.innerHTML = productDetailsSkeleton();
+
+    for (const id of ["similarSection", "recommendSection"]) {
+      const section = document.getElementById(id);
+      if (section) section.innerHTML = productRowSkeleton();
+    }
 
     // Product
     const product = await getProductBySlug(slug);
@@ -62,6 +74,7 @@ productState.currentProductId = product._id;
 productState.currentUser = await Auth.getCurrentUser();
 
     renderProduct(product);
+    updateProductSeo(product, slug);
 
     initDeliveryChecker();
     initWishlist();
@@ -106,12 +119,67 @@ await loadRecentlyViewed(
   } catch (err) {
     console.error(err);
 
-    container.innerHTML = `
-      <div class="text-center py-10">
-        Failed to load product
-      </div>
-    `;
+    renderProductMessage(container, "We couldn't load this product");
   }
+}
+
+function renderProductMessage(container, message) {
+  // Hide the "Similar Products" / "You may also like" blocks, headings included.
+  for (const id of ["similarSection", "recommendSection"]) {
+    const section = document.getElementById(id);
+    if (section) section.parentElement.hidden = true;
+  }
+
+  container.innerHTML = `
+    <div class="flex flex-col items-center justify-center text-center py-24">
+      <h1 class="text-2xl md:text-3xl font-light">${message}</h1>
+      <p class="mt-3 text-black/50">It may have been removed or the link is incorrect.</p>
+      <a href="/pages/products.html" class="btn-primary inline-flex items-center px-6 h-11 mt-8">
+        Browse Jewellery
+      </a>
+    </div>
+  `;
+}
+
+function updateProductSeo(product, slug) {
+  const path = `/pages/productDetails.html?slug=${encodeURIComponent(slug)}`;
+  const images = (product.images || []).map((img) => img.url).filter(Boolean);
+  // description is either a plain string or { short, design, details }
+  const rawDescription =
+    typeof product.description === "string"
+      ? product.description
+      : product.description?.short || product.description?.design;
+  const description =
+    rawDescription ||
+    `Shop ${product.name} at ${SITE_NAME}. Handcrafted premium jewellery.`;
+
+  updateSeo({
+    title: product.name,
+    description,
+    path,
+    image: images[0],
+  });
+
+  const inStock = (product.variants || []).some((v) => v.stock > 0);
+
+  setJsonLd("product-jsonld", {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: description.replace(/s+/g, " ").trim(),
+    image: images,
+    category: product.category,
+    brand: { "@type": "Brand", name: SITE_NAME },
+    offers: {
+      "@type": "Offer",
+      url: new URL(path, SITE_URL).href,
+      priceCurrency: "INR",
+      price: product.price,
+      availability: inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+    },
+  });
 }
 
 

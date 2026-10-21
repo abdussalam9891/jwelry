@@ -2,9 +2,10 @@ import { createProductCard } from "../components/productCard.js";
 import { initWishlist, loadWishlistState } from "../features/wishlist.js";
 import { CONFIG } from "../config.js";
 import { applyRevealStagger } from "../utils/scrollReveal.js";
+import { productCardSkeleton } from "./skeletons.js";
 
 
-let url =
+const BASE_URL =
   `${CONFIG.API_BASE}/v1/products?limit=8`;
 const container = document.getElementById("productContainer");
 const tabs = document.querySelectorAll(".tab");
@@ -23,9 +24,18 @@ async function fetchProducts(type) {
   const requestId = ++currentRequest;
 
   try {
-    container.innerHTML = `<div class="text-sm text-gray-500 px-4">Loading products...</div>`;
+    container.innerHTML = Array.from(
+      { length: 5 },
+      () => `
+        <div class="w-[200px] min-w-[200px] flex-shrink-0 animate-pulse">
+          ${productCardSkeleton()}
+        </div>
+      `,
+    ).join("");
 
-
+    // Build a fresh URL per request; appending to a shared one stacked the
+    // filters from every tab clicked before.
+    let url = BASE_URL;
     if (type === "trending") url += "&tag=trending";
     else if (type === "new") url += "&tag=new";
     else url += `&category=${type}`;

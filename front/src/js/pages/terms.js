@@ -9,8 +9,7 @@ document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
   try {
-    showLoading();
-
+    // The loading skeleton is static HTML in the page.
     const page = await getCMSPage("terms-conditions");
 
     if (!page) {
@@ -131,27 +130,6 @@ function updateProperty(property, value) {
   if (tag) {
     tag.setAttribute("content", value);
   }
-}
-
-function showLoading() {
-  contentEl.innerHTML = `
-    <div class="animate-pulse space-y-6">
-
-      <div class="h-8 w-1/2 rounded bg-gray-200"></div>
-
-      <div class="space-y-3">
-        <div class="h-4 rounded bg-gray-200"></div>
-        <div class="h-4 rounded bg-gray-200"></div>
-        <div class="h-4 w-4/5 rounded bg-gray-200"></div>
-      </div>
-
-      <div class="space-y-3">
-        <div class="h-4 rounded bg-gray-200"></div>
-        <div class="h-4 rounded bg-gray-200"></div>
-      </div>
-
-    </div>
-  `;
 }
 
 function renderError() {

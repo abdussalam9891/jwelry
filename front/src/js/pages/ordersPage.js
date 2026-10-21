@@ -1,11 +1,14 @@
 import { getMyOrders } from "../services/orderService.js";
 
 import { createOrderCard } from "../components/orderCard.js";
+import { listSkeleton } from "../components/skeletons.js";
 
 async function initOrdersPage() {
   const container = document.getElementById("ordersContainer");
 
   if (!container) return;
+
+  container.innerHTML = listSkeleton(3);
 
   try {
     const data = await getMyOrders();
@@ -130,9 +133,16 @@ async function initOrdersPage() {
     console.error(err);
 
     container.innerHTML = `
-      <p class="text-red-500">
-        Failed to load orders
-      </p>
+      <div class="rounded-2xl border border-red-100 bg-red-50 p-6 text-center">
+        <p class="text-red-600">We couldn't load your orders.</p>
+        <button
+          type="button"
+          onclick="location.reload()"
+          class="mt-4 text-sm font-medium text-[#6B1A2A] underline underline-offset-4"
+        >
+          Try again
+        </button>
+      </div>
     `;
   }
 }

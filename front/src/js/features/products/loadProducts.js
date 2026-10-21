@@ -23,6 +23,10 @@ import {
   applyRevealStagger,
 } from "../../utils/scrollReveal.js";
 
+import {
+  productGridSkeleton,
+} from "../../components/skeletons.js";
+
 const grid =
   document.getElementById(
     "productsGrid"
@@ -31,18 +35,7 @@ const grid =
 function showLoading() {
   if (!grid) return;
 
-  grid.innerHTML = `
-    <div
-      class="
-        col-span-full
-        py-16
-        text-center
-        text-black/50
-      "
-    >
-      Loading products...
-    </div>
-  `;
+  grid.innerHTML = productGridSkeleton(8);
 }
 
 function showError() {
@@ -72,6 +65,13 @@ function showEmpty() {
       .get("search")
       ?.trim() || "";
 
+  // The search term comes from the URL, so escape it before it hits innerHTML.
+  const safeSearch = search
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
   grid.innerHTML = `
     <div
       class="
@@ -93,7 +93,7 @@ function showEmpty() {
       >
         ${
           search
-            ? `No results for "${search}"`
+            ? `No results for "${safeSearch}"`
             : "No products found"
         }
       </p>

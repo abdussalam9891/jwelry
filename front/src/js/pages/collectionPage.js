@@ -12,6 +12,7 @@ import {
 } from "../features/wishlist.js";
 
 import { collections } from "../components/navbar/navbarNavigation.js";
+import { updateSeo } from "../utils/seo.js";
 
 const slug = new URLSearchParams(location.search).get("slug");
 
@@ -37,6 +38,13 @@ async function initCollectionPage() {
 
     document.getElementById("productsHeading").textContent =
       config.title;
+
+    updateSeo({
+      title: config.title,
+      description: config.description,
+      path: `/pages/collection.html?slug=${encodeURIComponent(slug)}`,
+      image: config.image,
+    });
 
     // Lock collection in URL
   // Lock collection in URL

@@ -1,5 +1,7 @@
 // reviewRenderer.js
 
+import { reviewsSkeleton } from "../../components/skeletons.js";
+
 export function renderReviewsSection() {
   return `
     <div class="border-t pt-6">
@@ -48,9 +50,7 @@ export function renderReviewsSection() {
         id="reviewsContainer"
         class="space-y-4"
       >
-        <div class="text-sm text-black/50">
-          Loading reviews...
-        </div>
+        ${reviewsSkeleton()}
       </div>
 
       <div

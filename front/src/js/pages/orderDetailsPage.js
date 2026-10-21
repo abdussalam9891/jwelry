@@ -488,6 +488,9 @@ async function initOrderDetailsPage() {
 
   }
 
+  const main =
+    document.getElementById("orderMain");
+
   try {
 
     const data =
@@ -498,6 +501,28 @@ async function initOrderDetailsPage() {
   } catch (err) {
 
     console.error(err);
+
+    if (main) {
+      main.innerHTML = `
+        <div class="min-h-[50vh] flex flex-col items-center justify-center text-center">
+          <h1 class="text-2xl font-semibold">We couldn't load this order</h1>
+          <p class="mt-2 text-black/50">Please check your connection and try again.</p>
+          <div class="mt-6 flex gap-4">
+            <button type="button" onclick="location.reload()" class="btn-primary px-6 h-11">
+              Try again
+            </button>
+            <a href="/pages/orders.html" class="inline-flex items-center px-6 h-11 rounded-xl border border-black/10">
+              My Orders
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+  } finally {
+
+    main?.classList.remove("animate-pulse", "pointer-events-none");
+    main?.removeAttribute("aria-busy");
 
   }
 

@@ -4,6 +4,7 @@ import { openLoginFlow } from "../features/navbar/authHelpers.js";
 import { initWishlist, loadWishlistState, openVariantModal  } from "../features/wishlist.js";
 import { updateWishlistPageCount } from "../core/wishlistCount.js";
 import { CONFIG } from "../config.js";
+import { productGridSkeleton } from "../components/skeletons.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   initWishlist();
@@ -32,24 +33,23 @@ async function loadWishlistPage() {
 
   try {
 
+    // Loading state — shown before the auth check too, since that is a
+    // network round trip of its own.
+    grid.innerHTML = productGridSkeleton(4);
+
     // Auth check
     const user =
       await Auth.getCurrentUser();
 
     if (!user) {
 
+      grid.innerHTML = "";
+
       await openLoginFlow();
 
       return;
 
     }
-
-    // Loading state
-    grid.innerHTML = `
-      <div class="text-sm text-black/60 animate-pulse text-center py-10">
-        Loading wishlist...
-      </div>
-    `;
 
     const res = await fetch(
       `${CONFIG.API_BASE}/v1/wishlist`,
@@ -82,7 +82,7 @@ async function loadWishlistPage() {
     if (!products.length) {
 
       grid.innerHTML = `
-        <p class="text-sm text-black/60 text-center py-10">
+        <p class="col-span-full text-sm text-black/60 text-center py-10">
           Your wishlist is empty
         </p>
       `;
@@ -146,7 +146,7 @@ async function loadWishlistPage() {
     console.error(err);
 
     grid.innerHTML = `
-      <p class="text-sm text-red-500 text-center py-10">
+      <p class="col-span-full text-sm text-red-500 text-center py-10">
         Failed to load wishlist
       </p>
     `;
