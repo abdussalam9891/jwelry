@@ -1,0 +1,11 @@
+{
+  "name": "gemora-frontend",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./front/src/css/tailwind.input.css -o ./front/src/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./front/src/css/tailwind.input.css -o ./front/src/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,6 +1,6 @@
 # Gemora — Premium Jewellery Store
 
-Gemora is a full-featured e-commerce frontend for a premium jewellery brand — rings, necklaces, earrings, bracelets and more. It's a fast, static, vanilla-JavaScript storefront (no framework, no build step) that talks to a REST API backend for products, auth, orders and payments.
+Gemora is a full-featured e-commerce frontend for a premium jewellery brand — rings, necklaces, earrings, bracelets and more. It's a fast, static, vanilla-JavaScript storefront (no framework, no bundler) that talks to a REST API backend for products, auth, orders and payments.
 
 **Live site:** https://gemora-jwelry.vercel.app/
 
@@ -20,7 +20,7 @@ Gemora is a full-featured e-commerce frontend for a premium jewellery brand — 
 
 | Layer            | Technology                                      |
 | ----------------- | ------------------------------------------------ |
-| Markup/Styling    | HTML5, [Tailwind CSS](https://tailwindcss.com/) (CDN), custom CSS |
+| Markup/Styling    | HTML5, [Tailwind CSS](https://tailwindcss.com/) v3 (prebuilt with the CLI), custom CSS |
 | Client logic      | Vanilla JavaScript (ES Modules) — no framework, no bundler |
 | Carousels/UI      | [Swiper](https://swiperjs.com/)                   |
 | Auth              | Firebase (OTP), custom email/password auth against the API |
@@ -29,7 +29,7 @@ Gemora is a full-featured e-commerce frontend for a premium jewellery brand — 
 | Backend API       | REST API — see `front/src/js/config.js` (separate service) |
 | Hosting           | [Vercel](https://vercel.com/)                     |
 
-This project intentionally ships with **no package manager, bundler, or framework** — it's plain HTML/CSS/JS served as static files, which keeps the site fast and the setup trivial.
+This project intentionally ships with **no bundler or framework** — it's plain HTML/CSS/JS served as static files, which keeps the site fast and the setup trivial. npm is used only to build the Tailwind stylesheet; the generated `front/src/css/tailwind.css` is committed, so the deployed site needs no build step.
 
 ## Project Structure
 
@@ -68,6 +68,7 @@ front/
 
 ### Prerequisites
 
+- Node.js (to rebuild the Tailwind CSS)
 - Any static file server (e.g. the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VS Code extension, or `npx serve`)
 - A running instance of the [Gemora backend API](front/src/js/config.js) (or point `CONFIG.API_BASE` at a hosted instance)
 
@@ -80,7 +81,14 @@ front/
    cd jwelry
    ```
 
-2. Serve the `front/` directory as a static site.
+2. Install dependencies and start the Tailwind watcher (rebuilds `front/src/css/tailwind.css` whenever you change classes in HTML or JS):
+
+   ```bash
+   npm install
+   npm run watch:css
+   ```
+
+3. Serve the `front/` directory as a static site.
 
    - **VS Code Live Server** — this repo ships a `.vscode/settings.json` that roots Live Server at `/front`; just click "Go Live".
    - **Or, with Node:**
@@ -89,13 +97,13 @@ front/
      npx serve front
      ```
 
-3. Open the site in your browser (Live Server defaults to `http://127.0.0.1:5500`).
+4. Open the site in your browser (Live Server defaults to `http://127.0.0.1:5500`).
 
 By default, the app talks to `http://localhost:5000/api` when running on `localhost`/`127.0.0.1`/`file:`, and falls back to the production API otherwise (see `front/src/js/config.js`). Run the backend locally on port `5000`, or edit `CONFIG.API_BASE` to point elsewhere.
 
 ## Deployment
 
-The site is deployed on **Vercel** with the project root set to `front/`. Any push to `main` redeploys automatically. No build command is required — it's served as-is.
+The site is deployed on **Vercel** with the project root set to `front/`. Any push to `main` redeploys automatically. No build command is required — it's served as-is. **Run `npm run build:css` and commit `front/src/css/tailwind.css` before pushing** whenever you add or change Tailwind classes, or the new classes won't have styles in production.
 
 ## Contributing
 
