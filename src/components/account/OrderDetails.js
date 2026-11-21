@@ -3,7 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { ArrowLeftIcon, CheckIcon } from "@/components/ui/icons";
+import {
+  ArrowLeftIcon,
+  CheckIcon,
+  MapPinIcon,
+  TagIcon,
+} from "@/components/ui/icons";
 import { ListSkeleton } from "@/components/ui/Skeletons";
 import { capitalize, formatCurrency, formatDate } from "@/lib/format";
 import { productUrl } from "@/lib/routes";
@@ -394,10 +399,10 @@ export default function OrderDetails({ orderId }) {
           <section className={`${cardClass} p-8`}>
             <div className="flex items-center gap-3">
               <div
-                className="w-12 h-12 rounded-2xl bg-[#F8EEF1] flex items-center justify-center text-xl"
+                className="w-12 h-12 rounded-2xl bg-[#F8EEF1] flex items-center justify-center text-[#6B1A2A]"
                 aria-hidden="true"
               >
-                📍
+                <MapPinIcon className="w-6 h-6" />
               </div>
               <div>
                 <h2 className="heading-section">Shipping Address</h2>
@@ -463,8 +468,11 @@ export default function OrderDetails({ orderId }) {
                     <strong>{formatCurrency(discount)}</strong> on this order.
                   </p>
                 </div>
-                <div className="text-5xl" aria-hidden="true">
-                  🏷️
+                <div
+                  className="w-14 h-14 rounded-full bg-white/70 border border-green-200 flex items-center justify-center text-green-700 shrink-0"
+                  aria-hidden="true"
+                >
+                  <TagIcon className="w-7 h-7" />
                 </div>
               </div>
             </section>
