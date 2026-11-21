@@ -61,7 +61,7 @@ export default function ResetPasswordForm() {
     <div className="min-h-screen bg-[#FDF6EC] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl border border-[#EADBC8] p-8">
         <div className="text-center">
-          <h1 className="text-2xl font-semibold text-[#1A1A1A]">
+          <h1 className="heading-section">
             Reset Password
           </h1>
           <p className="text-sm text-gray-500 mt-2">

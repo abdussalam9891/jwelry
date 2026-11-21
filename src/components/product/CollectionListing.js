@@ -28,7 +28,7 @@ export default function CollectionListing({ collection }) {
   return (
     <>
       <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-6 mb-8 sm:mb-12">
-        <h2 className="text-2xl sm:text-3xl font-light">{collection.title}</h2>
+        <h2 className="heading-title">{collection.title}</h2>
         <SortSelect basePath={basePath} queryString={viewQuery} />
       </div>
 

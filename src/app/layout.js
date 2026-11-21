@@ -1,22 +1,25 @@
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Fraunces, IBM_Plex_Sans } from "next/font/google";
 
 import Providers from "@/components/Providers";
 import { metadataBase, pageMetadata } from "@/lib/metadata";
 
 import "./globals.css";
 
-const jost = Jost({
+// Type pairing: Fraunces (variable serif) for headings, IBM Plex Sans for
+// body copy and UI.
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-jost",
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-plex",
   display: "swap",
 });
 
@@ -55,7 +58,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${jost.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${plexSans.variable}`}>
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" />
       </head>

@@ -181,7 +181,7 @@ export default function CheckoutView() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-semibold">Checkout</h1>
+        <h1 className="heading-title">Checkout</h1>
       </div>
 
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -195,7 +195,7 @@ export default function CheckoutView() {
           </div>
 
           <div className="bg-white border border-black/5 rounded-2xl p-5 shadow-sm">
-            <h2 className="text-lg font-semibold mb-5">Payment Method</h2>
+            <h2 className="heading-card mb-5">Payment Method</h2>
 
             <div className="space-y-3">
               {PAYMENT_METHODS.map((method) => (
@@ -236,7 +236,7 @@ export default function CheckoutView() {
                   </div>
                 )}
 
-                <h2 className="text-[1.35rem] font-semibold mb-5">
+                <h2 className="heading-section mb-5">
                   Order Summary
                 </h2>
                 <OrderSummary pricing={checkout.pricing} />

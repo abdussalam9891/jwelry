@@ -10,6 +10,23 @@ import {
   moreCategories,
 } from "@/data/navigation";
 import { collectionUrl, productsUrl } from "@/lib/routes";
+import {
+  BraceletIcon,
+  CollectionsIcon,
+  EarringIcon,
+  GemIcon,
+  NecklaceIcon,
+  RingIcon,
+} from "@/components/ui/icons";
+
+const CATEGORY_ICONS = {
+  rings: RingIcon,
+  earrings: EarringIcon,
+  neckwears: NecklaceIcon,
+  bracelets: BraceletIcon,
+};
+
+const navIconClass = "w-5 h-5 shrink-0 text-[#832729]";
 
 // Outer layer of every flyout. It starts flush with the bottom of the
 // category bar and its top padding is an invisible hover bridge, so the
@@ -26,7 +43,7 @@ const eyebrowClass =
   "text-[11px] uppercase tracking-[0.35em] text-black/40 mb-3";
 
 const triggerClass =
-  "mega-trigger text-[0.95rem] font-medium relative transition-colors hover:text-[#6B1A2A]";
+  "mega-trigger inline-flex items-center gap-2 text-base font-normal relative transition-colors hover:text-[#6B1A2A]";
 
 const DISCOVER_LINKS = [
   { label: "Best Sellers", params: { tag: "best-seller" } },
@@ -179,13 +196,14 @@ export default function CategoryNav({ activeCategory, style, navRef }) {
             className={`${triggerClass} ${
               onProducts && !activeCategory
                 ? "text-[#6B1A2A]"
-                : "text-[#1A1A1A]"
+                : "text-[#413F3A]"
             }`}
             aria-expanded={openMenu === "all-jewellery"}
             aria-haspopup="true"
             aria-controls="flyout-all-jewellery"
             onClick={(e) => handleTriggerClick(e, "all-jewellery", false)}
           >
+            <GemIcon className={navIconClass} />
             All Jewellery
           </button>
 
@@ -261,16 +279,18 @@ export default function CategoryNav({ activeCategory, style, navRef }) {
         {/* PER-CATEGORY MENUS — panels are centred under their label */}
         {jewelleryNavigation.map((category) => {
           const key = category.category;
+          const Icon = CATEGORY_ICONS[key] || GemIcon;
 
           return (
             <li key={key} {...groupProps(key, "relative")}>
               <Link
                 href={productsUrl({ category: key })}
-                className={`${triggerClass} text-[#6B1A2A]`}
+                className={`${triggerClass} text-[#413F3A]`}
                 aria-expanded={openMenu === key}
                 aria-controls={`flyout-${key}`}
                 onClick={(e) => handleTriggerClick(e, key, true)}
               >
+                <Icon className={navIconClass} />
                 {category.label}
                 <Underline active={onProducts && activeCategory === key} />
               </Link>
@@ -325,12 +345,13 @@ export default function CategoryNav({ activeCategory, style, navRef }) {
         <li {...groupProps("collections")}>
           <button
             type="button"
-            className={`${triggerClass} text-[#1A1A1A]`}
+            className={`${triggerClass} text-[#413F3A]`}
             aria-expanded={openMenu === "collections"}
             aria-haspopup="true"
             aria-controls="flyout-collections"
             onClick={(e) => handleTriggerClick(e, "collections", false)}
           >
+            <CollectionsIcon className={navIconClass} />
             Collections
           </button>
 

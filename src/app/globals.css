@@ -34,14 +34,18 @@
   }
 
   body {
-    font-family: var(--font-jost), sans-serif;
+    font-family: var(--font-plex), sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #222222;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    font-family: var(--font-cormorant), serif;
+    font-family: var(--font-fraunces), serif;
+    font-weight: 400;
   }
 
   /* Focus visibility for keyboard users on all interactive elements */
@@ -72,6 +76,65 @@
 
   .section-sm {
     padding-block: clamp(30px, 4vw, 50px);
+  }
+
+  /* Section heading scale: 20px on phones, 40px from tablets up. */
+  .heading-title {
+    font-family: var(--font-fraunces), serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #300708;
+  }
+
+  /* Line under a section title: 12px sans on phones, 24px light serif up. */
+  .heading-subtitle {
+    margin-top: 4px;
+    font-family: var(--font-plex), sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #56544e;
+  }
+
+  /* Card / section heading inside a page (Order Progress, Payment Summary,
+     auth card titles): 18px on phones, 24px from tablets up. */
+  .heading-section {
+    font-family: var(--font-fraunces), serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #300708;
+  }
+
+  /* Small panel and dialog titles: 17px on phones, 20px from tablets up. */
+  .heading-card {
+    font-family: var(--font-fraunces), serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #300708;
+  }
+
+  @media (min-width: 768px) {
+    .heading-title {
+      font-size: 40px;
+    }
+
+    .heading-section {
+      font-size: 24px;
+    }
+
+    .heading-card {
+      font-size: 20px;
+    }
+
+    .heading-subtitle {
+      margin-top: 8px;
+      font-family: var(--font-fraunces), serif;
+      font-size: 24px;
+      font-weight: 300;
+    }
   }
 
   /* Primary CTA button */
@@ -158,26 +221,6 @@
     transition: none;
   }
 
-  /* Hero swiper */
-  .heroSwiper,
-  .heroSwiper .swiper-wrapper,
-  .heroSwiper .swiper-slide {
-    height: 100%;
-  }
-
-  .heroSwiper .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.6);
-    opacity: 1;
-    transition: all 0.3s ease;
-  }
-
-  .heroSwiper .swiper-pagination-bullet-active {
-    width: 28px;
-    border-radius: 999px;
-    background: #6b1a2a;
-  }
 
   /* =========================
      SECTION HEADING REVEAL

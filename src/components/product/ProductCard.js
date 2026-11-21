@@ -107,7 +107,7 @@ export default function ProductCard({ product, onRemove, onMoveToCart }) {
         </div>
 
         <div className="mt-2 space-y-1 px-3">
-          <h3 className="text-[0.9rem] font-medium leading-snug line-clamp-1">
+          <h3 className="font-sans text-[0.9rem] font-medium leading-snug line-clamp-1">
             {product.name}
           </h3>
 

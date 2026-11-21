@@ -88,10 +88,9 @@ export default function UserDropdown() {
         onClick={() =>
           pointerType.current === "mouse" ? show() : setOpen((v) => !v)
         }
-        className="flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg"
+        className="flex items-center justify-center p-2 rounded-full hover:bg-black/5"
       >
-        <UserIcon className="w-7 h-7 text-[#6B1A2A]" />
-        <span className="mt-1 text-black/80 font-medium">Profile</span>
+        <UserIcon className="w-6 h-6 text-[#832729]" strokeWidth={1.25} />
       </button>
 
       {/* The top padding bridges the gap to the button so moving the

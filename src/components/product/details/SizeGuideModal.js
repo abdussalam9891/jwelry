@@ -26,7 +26,7 @@ export default function SizeGuideModal({ open, onClose, category }) {
           <div>
             <h2
               id="sizeGuideTitle"
-              className="text-2xl font-semibold tracking-tight"
+              className="heading-section"
             >
               {guide.title}
             </h2>

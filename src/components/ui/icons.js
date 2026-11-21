@@ -16,9 +16,9 @@ function Outline({ className, strokeWidth = 1.5, children }) {
   );
 }
 
-export function SearchIcon({ className = "w-5 h-5" }) {
+export function SearchIcon({ className = "w-5 h-5", strokeWidth }) {
   return (
-    <Outline className={className}>
+    <Outline className={className} strokeWidth={strokeWidth}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -52,13 +52,14 @@ export function HeartIcon({ className = "w-5 h-5", strokeWidth }) {
   );
 }
 
+// Shopping bag (used for the cart).
 export function CartIcon({ className = "w-5 h-5", strokeWidth }) {
   return (
     <Outline className={className} strokeWidth={strokeWidth}>
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M2.25 3h1.386a1.125 1.125 0 0 1 1.11.843l.383 1.437m0 0L6.75 14.25h10.5l1.621-6.072a1.125 1.125 0 0 0-1.088-1.428H5.13m0 0L4.5 3m2.25 11.25a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0m9 0a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0"
+        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z"
       />
     </Outline>
   );
@@ -169,5 +170,78 @@ export function Spinner({ className = "w-5 h-5" }) {
         d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
       />
     </svg>
+  );
+}
+
+// Thin line icons for the category row (Fine-jewellery style, 24px grid).
+
+export function GemIcon({ className = "w-5 h-5", strokeWidth = 1.2 }) {
+  return (
+    <Outline className={className} strokeWidth={strokeWidth}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.5 4h11l3.5 5-9 11L3 9l3.5-5Zm-3.5 5h18M9 4 7.5 9 12 20l4.5-11L15 4"
+      />
+    </Outline>
+  );
+}
+
+export function RingIcon({ className = "w-5 h-5", strokeWidth = 1.2 }) {
+  return (
+    <Outline className={className} strokeWidth={strokeWidth}>
+      <circle cx="12" cy="14.5" r="6.5" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9.5 8.5 8.5 5.5 10 3.5h4l1.5 2-1 3m-6-3h7"
+      />
+    </Outline>
+  );
+}
+
+export function EarringIcon({ className = "w-5 h-5", strokeWidth = 1.2 }) {
+  return (
+    <Outline className={className} strokeWidth={strokeWidth}>
+      <circle cx="12" cy="4" r="1.5" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 5.5V9m0 0-4 6.5a4 4 0 0 0 8 0L12 9Zm0 12.5V20"
+      />
+    </Outline>
+  );
+}
+
+export function NecklaceIcon({ className = "w-5 h-5", strokeWidth = 1.2 }) {
+  return (
+    <Outline className={className} strokeWidth={strokeWidth}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4 3c0 6 3.5 10 8 10s8-4 8-10M12 13v1.5m0 0-2.5 3L12 21l2.5-3.5-2.5-3Z"
+      />
+    </Outline>
+  );
+}
+
+export function BraceletIcon({ className = "w-5 h-5", strokeWidth = 1.2 }) {
+  return (
+    <Outline className={className} strokeWidth={strokeWidth}>
+      <ellipse cx="12" cy="12" rx="9" ry="6" />
+      <ellipse cx="12" cy="12" rx="6.5" ry="3.8" />
+    </Outline>
+  );
+}
+
+export function CollectionsIcon({ className = "w-5 h-5", strokeWidth = 1.2 }) {
+  return (
+    <Outline className={className} strokeWidth={strokeWidth}>
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3.75 11.25h16.5v9H3.75zm-.75-4.5h18v4.5H3zm9 0v13.5m0-13.5c-1-2.5-5-4-5-1.5 0 1.5 5 1.5 5 1.5Zm0 0c1-2.5 5-4 5-1.5 0 1.5-5 1.5-5 1.5Z"
+      />
+    </Outline>
   );
 }

@@ -32,7 +32,7 @@ function EmptyCart() {
         </svg>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-2">Your cart is empty</h2>
+      <h2 className="heading-section mb-2">Your cart is empty</h2>
       <p className="text-sm text-black/50 mb-6">
         Looks like you haven’t added anything yet.
       </p>
@@ -116,9 +116,9 @@ export default function CartView() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-semibold">
+        <h1 className="heading-title">
           My Cart
-          <span className="text-black/60 text-lg font-normal ml-2">
+          <span className="font-sans text-black/60 text-sm md:text-lg font-normal ml-2">
             {count} item{count === 1 ? "" : "s"}
           </span>
         </h1>
@@ -151,7 +151,7 @@ export default function CartView() {
 
               <div className="lg:col-span-1">
                 <div className="sticky top-24 bg-white border border-black/5 rounded-2xl p-5 shadow-sm">
-                  <h2 className="text-[1.35rem] font-semibold mb-5">
+                  <h2 className="heading-section mb-5">
                     Order Summary
                   </h2>
                   <OrderSummary pricing={pricing} showCheckoutButton />
@@ -168,7 +168,7 @@ export default function CartView() {
         labelledBy="removeItemTitle"
         panelClassName="bg-white p-6 rounded-xl w-80"
       >
-        <h2 id="removeItemTitle" className="font-semibold mb-4">
+        <h2 id="removeItemTitle" className="heading-card mb-4">
           Remove item?
         </h2>
 

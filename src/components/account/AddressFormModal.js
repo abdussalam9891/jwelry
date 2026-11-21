@@ -125,7 +125,7 @@ export default function AddressFormModal({ address, onClose, onSaved }) {
       panelClassName="bg-white w-full max-w-lg rounded-2xl p-6"
     >
       <div className="flex items-center justify-between mb-5">
-        <h2 id="addressModalTitle" className="text-xl font-semibold">
+        <h2 id="addressModalTitle" className="heading-card">
           {editing ? "Edit Address" : "Add Address"}
         </h2>
 

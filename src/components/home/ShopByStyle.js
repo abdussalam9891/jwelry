@@ -85,7 +85,7 @@ export default function ShopByStyle() {
     <section className="section-sm bg-[#F9F6F2]/80 py-14">
       <div className="max-w-7xl mx-auto">
         <div className="px-4 mb-4 reveal">
-          <h2 className="text-lg font-semibold">Shop by Style</h2>
+          <h2 className="heading-title">Shop by Style</h2>
         </div>
 
         <div

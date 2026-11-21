@@ -35,7 +35,7 @@ function NameRow({ address, children }) {
   return (
     <div className="flex items-center justify-between mb-3">
       <div className="flex items-center gap-2 flex-wrap">
-        <h4 className="font-semibold text-lg">{address.fullName}</h4>
+        <h4 className="font-sans font-semibold text-base md:text-lg">{address.fullName}</h4>
         {address.isDefault && (
           <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
             Default
@@ -218,7 +218,7 @@ export default function AddressManager({
   return (
     <>
       <div className="flex items-center justify-between mb-5">
-        <h2 className="text-lg font-semibold">
+        <h2 className="heading-card">
           {isCheckout ? "Select Delivery Address" : "Saved Addresses"}
         </h2>
 
@@ -252,7 +252,7 @@ export default function AddressManager({
         className="items-center justify-center bg-black/50"
         panelClassName="bg-white rounded-3xl p-6 w-full max-w-md mx-4"
       >
-        <h3 id="deleteAddressTitle" className="text-xl font-semibold mb-2">
+        <h3 id="deleteAddressTitle" className="heading-card mb-2">
           Delete Address
         </h3>
         <p className="text-black/60 mb-6">

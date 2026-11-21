@@ -14,8 +14,8 @@ export default function OrdersPage() {
     <div className="bg-[#FAFAFA] text-[#111]">
       <main className="max-w-6xl mx-auto px-4 py-10 page-content">
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold tracking-tight">My Orders</h1>
-          <p className="text-sm text-black/50 mt-2">
+          <h1 className="heading-title">My Orders</h1>
+          <p className="heading-subtitle">
             Track and manage your recent purchases
           </p>
         </div>

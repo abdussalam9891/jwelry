@@ -173,7 +173,7 @@ export default function ShareButton({ title }) {
         <div className="border-b px-6 py-5">
           <div className="flex items-center justify-between">
             <div>
-              <h2 id="shareModalTitle" className="text-xl font-semibold">
+              <h2 id="shareModalTitle" className="heading-card">
                 Share Product
               </h2>
               <p className="mt-1 text-sm text-gray-500">

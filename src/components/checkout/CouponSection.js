@@ -26,7 +26,7 @@ export default function CouponSection({ pricing, onApply, onRemove }) {
     <section className="mt-2 overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
       <div className="flex items-center justify-between px-6 py-5 border-b border-black/5">
         <div>
-          <h3 className="text-[15px] font-semibold">Offers</h3>
+          <h3 className="font-sans text-[15px] font-semibold">Offers</h3>
           <p className="mt-1 text-[13px] text-black/45">
             Best available savings for this order
           </p>

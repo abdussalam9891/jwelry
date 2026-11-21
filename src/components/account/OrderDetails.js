@@ -160,7 +160,7 @@ function OrderItem({ item }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className="text-lg font-semibold leading-6">{item.name}</h3>
+          <h3 className="font-sans text-base md:text-lg font-medium leading-6">{item.name}</h3>
 
           {item.variant?.sku && (
             <p className="mt-2 text-xs tracking-wide text-black/35">
@@ -308,7 +308,7 @@ export default function OrderDetails({ orderId }) {
             <p className="uppercase tracking-[0.3em] text-xs text-[#6B1A2A]/70 font-semibold">
               ORDER DETAILS
             </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight">
+            <h1 className="mt-3 heading-title">
               Order Summary
             </h1>
             <p className="mt-6 text-lg font-semibold text-[#6B1A2A]">
@@ -336,7 +336,7 @@ export default function OrderDetails({ orderId }) {
               <div className="inline-flex items-center gap-2 rounded-full bg-[#F8EEF1] px-4 py-1.5 text-xs font-semibold text-[#6B1A2A]">
                 Invoice Available
               </div>
-              <h2 className="mt-5 text-2xl font-semibold">Tax Invoice</h2>
+              <h2 className="mt-5 heading-section">Tax Invoice</h2>
               <p className="mt-3 font-medium text-black/70">
                 Invoice #{order.invoice.invoiceNumber}
               </p>
@@ -361,7 +361,7 @@ export default function OrderDetails({ orderId }) {
       {/* TIMELINE */}
       <section className="mt-8 rounded-[30px] border border-black/5 bg-white p-8">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Order Progress</h2>
+          <h2 className="heading-section">Order Progress</h2>
           <p className="text-sm text-black/40">Track your order journey</p>
         </div>
         <Timeline status={order.orderStatus} />
@@ -373,7 +373,7 @@ export default function OrderDetails({ orderId }) {
           <section className={`${cardClass} overflow-hidden`}>
             <div className="flex items-center justify-between px-8 py-6 border-b border-black/5">
               <div>
-                <h2 className="text-2xl font-semibold">Ordered Items</h2>
+                <h2 className="heading-section">Ordered Items</h2>
                 <p className="mt-1 text-sm text-black/45">
                   Products included in this order
                 </p>
@@ -400,7 +400,7 @@ export default function OrderDetails({ orderId }) {
                 📍
               </div>
               <div>
-                <h2 className="text-2xl font-semibold">Shipping Address</h2>
+                <h2 className="heading-section">Shipping Address</h2>
                 <p className="text-sm text-black/45">Delivery destination</p>
               </div>
             </div>
@@ -455,7 +455,7 @@ export default function OrderDetails({ orderId }) {
                   <p className="text-xs uppercase tracking-[0.2em] text-green-600">
                     Coupon Applied
                   </p>
-                  <h3 className="mt-3 text-2xl font-semibold text-green-700">
+                  <h3 className="mt-3 font-sans text-xl md:text-2xl font-semibold text-green-700">
                     {order.coupon.code}
                   </h3>
                   <p className="mt-3 text-green-700">
@@ -476,7 +476,7 @@ export default function OrderDetails({ orderId }) {
             {/* PAYMENT SUMMARY */}
             <section className={`${cardClass} overflow-hidden`}>
               <div className="px-8 py-6 border-b border-black/5">
-                <h2 className="text-2xl font-semibold">Payment Summary</h2>
+                <h2 className="heading-section">Payment Summary</h2>
                 <p className="mt-1 text-sm text-black/45">
                   Order payment breakdown
                 </p>
@@ -521,7 +521,7 @@ export default function OrderDetails({ orderId }) {
 
                 <div className="rounded-2xl bg-[#FAFAFA] p-5">
                   <p className="text-sm text-black/50">Total Paid</p>
-                  <h3 className="mt-1 text-3xl font-bold tracking-tight">
+                  <h3 className="mt-1 font-sans text-2xl md:text-3xl font-semibold tracking-tight">
                     {formatCurrency(order.totalPrice)}
                   </h3>
                   {discount > 0 && (
@@ -561,7 +561,7 @@ export default function OrderDetails({ orderId }) {
 
             {/* QUICK ACTIONS */}
             <section className={`${cardClass} p-8`}>
-              <h2 className="text-xl font-semibold">Quick Actions</h2>
+              <h2 className="heading-section">Quick Actions</h2>
               <div className="mt-6 space-y-3">
                 <Link
                   href="/orders"

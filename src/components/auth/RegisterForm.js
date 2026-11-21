@@ -111,7 +111,7 @@ export default function RegisterForm() {
             className="w-[110px] mx-auto"
           />
 
-          <h1 className="text-[1.5rem] font-semibold text-center text-[#1A1A1A]">
+          <h1 className="heading-section text-center">
             Create Account
           </h1>
           <p className="mt-2 text-sm text-black/55 text-center mb-4">
@@ -193,7 +193,7 @@ export default function RegisterForm() {
       >
         <h2
           id="verifyEmailTitle"
-          className="text-xl font-semibold text-[#111] mb-1"
+          className="heading-card mb-1"
         >
           Verify Email
         </h2>

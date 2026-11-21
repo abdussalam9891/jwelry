@@ -28,14 +28,16 @@ function CountBadge({ count }) {
   if (!count) return null;
 
   return (
-    <span className="absolute -top-1 -right-1 text-[10px] px-1.5 py-0.5 rounded-full bg-[#6B1A2A] text-white">
+    <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-1 flex items-center justify-center text-[10px] leading-none rounded-full bg-[#832729] text-white">
       {count}
     </span>
   );
 }
 
 const iconButtonClass =
-  "flex flex-col items-center justify-center text-[11px] p-2 hover:bg-black/5 rounded-lg";
+  "flex items-center justify-center p-2 rounded-full hover:bg-black/5";
+
+const headerIconClass = "w-6 h-6 text-[#832729]";
 
 // Fixed three-row header: announcement bar, main bar, desktop category row.
 // The main bar tucks away on scroll-down and returns on scroll-up; the
@@ -179,7 +181,9 @@ export default function Navbar() {
 
   let navTransform = "translateY(0)";
   if (drawerOpen) navTransform = "translateY(-100%)";
-  else if (hidden) navTransform = `translateY(-${rowOneHeight}px)`;
+  // Slide up by the nav's own height only, tucking it behind the
+  // announcement bar, so it moves in lockstep with the category row.
+  else if (hidden) navTransform = `translateY(-${heights.nav}px)`;
 
   const currentSearch = params?.get("search") || "";
   const activeCategory = params?.get("category") || null;
@@ -250,7 +254,7 @@ export default function Navbar() {
           </div>
 
           {/* RIGHT ICONS */}
-          <div className="flex items-end gap-3 md:gap-4">
+          <div className="flex items-center gap-1 md:gap-3">
             <button
               ref={mobileSearchToggleRef}
               type="button"
@@ -261,11 +265,10 @@ export default function Navbar() {
               className={`md:hidden ${iconButtonClass}`}
             >
               {mobileSearchOpen ? (
-                <CloseIcon className="w-7 h-7 text-[#6B1A2A]" />
+                <CloseIcon className={headerIconClass} strokeWidth={1.25} />
               ) : (
-                <SearchIcon className="w-7 h-7 text-[#6B1A2A]" />
+                <SearchIcon className={headerIconClass} strokeWidth={1.25} />
               )}
-              <span className="mt-1 text-black/80 font-medium">Search</span>
             </button>
 
             <button
@@ -276,10 +279,9 @@ export default function Navbar() {
               className={`${iconButtonClass} relative`}
             >
               <div className="relative">
-                <HeartIcon className="w-7 h-7 text-[#6B1A2A]" />
+                <HeartIcon className={headerIconClass} strokeWidth={1.25} />
                 <CountBadge count={wishlistCount} />
               </div>
-              <span className="mt-1 text-black/80 font-medium">Wishlist</span>
             </button>
 
             <button
@@ -289,10 +291,9 @@ export default function Navbar() {
               className={iconButtonClass}
             >
               <div className="relative">
-                <CartIcon className="w-7 h-7 text-[#6B1A2A]" />
+                <CartIcon className={headerIconClass} strokeWidth={1.25} />
                 <CountBadge count={cartCount} />
               </div>
-              <span className="mt-1 text-black/80 font-medium">Cart</span>
             </button>
 
             <UserDropdown />
@@ -322,8 +323,11 @@ export default function Navbar() {
         navRef={categoryRef}
         activeCategory={activeCategory}
         style={{
-          top: hidden ? heights.announcement : rowOneHeight,
-          transition: animate ? "top 300ms" : undefined,
+          top: rowOneHeight,
+          transform: hidden ? `translateY(-${heights.nav}px)` : undefined,
+          transition: animate
+            ? "transform 300ms cubic-bezier(0.4, 0, 0.2, 1)"
+            : undefined,
         }}
       />
 

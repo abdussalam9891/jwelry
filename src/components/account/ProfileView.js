@@ -133,7 +133,7 @@ function EditProfileModal({ user, onClose, onSaved }) {
       panelClassName="bg-white rounded-3xl w-full max-w-md p-6"
     >
       <div className="flex justify-between items-center mb-5">
-        <h2 id="editProfileTitle" className="text-xl font-semibold">
+        <h2 id="editProfileTitle" className="heading-card">
           Edit Profile
         </h2>
         <button
@@ -242,10 +242,10 @@ export default function ProfileView() {
     <>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl md:text-4xl font-semibold text-[#1A1A1A]">
+          <h1 className="heading-title">
             My Account
           </h1>
-          <p className="text-black/50 mt-2">
+          <p className="heading-subtitle">
             Manage your profile, addresses and preferences.
           </p>
         </div>
@@ -279,7 +279,7 @@ export default function ProfileView() {
                 </div>
               )}
 
-              <h2 className="text-xl font-semibold mt-4">
+              <h2 className="heading-section mt-4">
                 {error
                   ? "Unable to load profile"
                   : user
@@ -324,7 +324,7 @@ export default function ProfileView() {
         {/* CONTENT */}
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white rounded-3xl p-6">
-            <h3 className="font-semibold text-lg mb-5">Account Details</h3>
+            <h3 className="heading-card mb-5">Account Details</h3>
             <div className="grid md:grid-cols-2 gap-5">
               <Detail label="Name" value={user?.name || "-"} />
               <Detail label="Email" value={user?.email || "-"} />
@@ -348,7 +348,7 @@ export default function ProfileView() {
           </div>
 
           <div className="bg-white rounded-3xl p-6">
-            <h3 className="font-semibold text-lg mb-5">Security</h3>
+            <h3 className="heading-card mb-5">Security</h3>
             <div className="space-y-4">
               <div className="flex justify-between">
                 <span>Email Status</span>

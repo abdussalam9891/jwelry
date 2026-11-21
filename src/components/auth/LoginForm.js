@@ -72,7 +72,7 @@ function OtpLoginModal({ open, onClose, onSuccess }) {
       className="items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
       panelClassName={modalPanelClass}
     >
-      <h2 id="otpLoginTitle" className="text-xl font-semibold text-[#111] mb-1">
+      <h2 id="otpLoginTitle" className="heading-card mb-1">
         Quick Login
       </h2>
       <p className="text-sm text-gray-500 mb-5">Sign in with OTP</p>
@@ -185,7 +185,7 @@ function ForgotPasswordModal({ open, onClose }) {
     >
       <h2
         id="forgotPasswordTitle"
-        className="text-xl font-semibold text-[#111] mb-1"
+        className="heading-card mb-1"
       >
         Reset Password
       </h2>
@@ -284,7 +284,7 @@ export default function LoginForm() {
             className="w-[110px] mx-auto"
           />
 
-          <h1 className="text-[1.5rem] font-semibold text-center text-[#1A1A1A]">
+          <h1 className="heading-section text-center">
             Welcome Back
           </h1>
           <p className="mt-2 text-sm text-black/55 text-center mb-6">

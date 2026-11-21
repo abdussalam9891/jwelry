@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-jost)", "sans-serif"],
-        serif: ["var(--font-cormorant)", "serif"],
+        sans: ["var(--font-plex)", "sans-serif"],
+        serif: ["var(--font-fraunces)", "serif"],
       },
     },
   },

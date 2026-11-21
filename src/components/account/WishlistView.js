@@ -88,7 +88,7 @@ function MoveToCartModal({ productId, onClose, onMoved }) {
       labelledBy="variantModalTitle"
       panelClassName="bg-white p-5 rounded-lg w-[90%] max-w-md"
     >
-      <h2 id="variantModalTitle" className="text-lg font-semibold mb-4">
+      <h2 id="variantModalTitle" className="heading-card mb-4">
         Select Options
       </h2>
 
@@ -235,9 +235,9 @@ export default function WishlistView() {
   return (
     <>
       <div className="mb-8">
-        <h1 className="text-2xl md:text-3xl font-semibold">
+        <h1 className="heading-title">
           My Wishlist
-          <span className="text-black/60 text-lg font-normal ml-2">
+          <span className="font-sans text-black/60 text-sm md:text-lg font-normal ml-2">
             {count} item{count === 1 ? "" : "s"}
           </span>
         </h1>

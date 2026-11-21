@@ -26,12 +26,12 @@ export default function ProductsListing() {
     <div className="page-content">
       <section className="container-main py-6 md:py-8">
         <div className="flex flex-wrap items-end justify-between gap-4 sm:gap-6 pb-6">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[-0.03em] text-[#1A1A1A] break-words min-w-0">
+          <h1 className="heading-title break-words min-w-0">
             {listingTitle(searchParams)}
           </h1>
 
           <div className="flex items-center gap-4 sm:gap-5 ml-auto">
-            <p className="text-right text-lg sm:text-2xl font-light tracking-[-0.03em] text-black/60 whitespace-nowrap">
+            <p className="text-right text-sm md:text-base text-black/60 whitespace-nowrap">
               {count.toLocaleString()} Products
             </p>
 

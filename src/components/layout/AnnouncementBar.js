@@ -21,7 +21,7 @@ export default function AnnouncementBar({ barRef, style }) {
       style={style}
       className={
         announcement
-          ? "fixed top-0 left-0 right-0 z-[var(--z-navbar)] h-10 flex items-center justify-center bg-[#6B1A2A] text-white transition-transform duration-300"
+          ? "fixed top-0 left-0 right-0 z-[calc(var(--z-navbar)+2)] h-10 flex items-center justify-center bg-[#6B1A2A] text-white transition-transform duration-300"
           : "hidden"
       }
     >

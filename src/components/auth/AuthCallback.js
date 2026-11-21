@@ -45,7 +45,7 @@ export default function AuthCallback() {
             </div>
           )}
 
-          <h1 className="text-[1.35rem] font-semibold tracking-[-0.02em] text-[#1A1A1A]">
+          <h1 className="heading-section">
             Securing your session
           </h1>
 

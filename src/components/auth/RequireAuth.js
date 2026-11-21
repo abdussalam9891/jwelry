@@ -21,7 +21,7 @@ export default function RequireAuth({ children }) {
   if (!user) {
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center text-center gap-4">
-        <h2 className="text-2xl font-semibold">Please sign in</h2>
+        <h2 className="heading-section">Please sign in</h2>
         <p className="text-sm text-black/50">
           You need to be logged in to view this page.
         </p>

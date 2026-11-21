@@ -17,7 +17,7 @@ import {
 function Section({ title, products }) {
   return (
     <div className="mt-12">
-      <h2 className="text-2xl md:text-3xl font-light mb-6">{title}</h2>
+      <h2 className="heading-title mb-6">{title}</h2>
       {products ? (
         <ProductRow products={products} />
       ) : (

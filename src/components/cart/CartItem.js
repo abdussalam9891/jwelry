@@ -70,7 +70,7 @@ export default function CartItem({
           <div className="flex justify-between gap-5">
             <div className="min-w-0">
               <Link href={href}>
-                <h3 className="text-lg font-medium leading-snug hover:text-[#6B1A2A] transition line-clamp-2">
+                <h3 className="font-sans text-base md:text-lg font-medium leading-snug hover:text-[#6B1A2A] transition line-clamp-2">
                   {name}
                 </h3>
               </Link>
@@ -143,7 +143,7 @@ export default function CartItem({
           <div className="flex-1 min-w-0">
             <div className="flex justify-between gap-2">
               <Link href={href} className="min-w-0">
-                <h3 className="text-[15px] font-medium leading-snug line-clamp-2">
+                <h3 className="font-sans text-[15px] font-medium leading-snug line-clamp-2">
                   {name}
                 </h3>
               </Link>

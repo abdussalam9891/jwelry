@@ -47,7 +47,7 @@ function OrderCard({ order }) {
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className="text-[15px] font-medium truncate">{title}</h3>
+          <h3 className="font-sans text-[15px] font-medium truncate">{title}</h3>
           <p className="text-sm text-black/55 mt-1">
             {totalItems} item{totalItems > 1 ? "s" : ""} • ₹
             {order.totalPrice?.toLocaleString()}
@@ -105,7 +105,7 @@ function NoOrders() {
         </svg>
       </div>
 
-      <h2 className="text-3xl font-semibold tracking-tight mb-3">
+      <h2 className="heading-title mb-3">
         No orders yet
       </h2>
       <p className="text-sm text-black/50 max-w-sm leading-6 mb-8">

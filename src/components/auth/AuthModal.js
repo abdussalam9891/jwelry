@@ -54,7 +54,7 @@ export default function AuthModal({ open, onClose }) {
 
       <h2
         id="authModalTitle"
-        className="text-xl font-semibold text-center text-[#6B1A2A]"
+        className="heading-section text-center"
       >
         Welcome to Gemora
       </h2>

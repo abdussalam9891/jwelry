@@ -43,7 +43,7 @@ export default function OrderSuccessPage() {
             </div>
 
             {/* TITLE */}
-            <h1 className="text-[2rem] md:text-[2.3rem] font-bold tracking-tight text-black mb-3">
+            <h1 className="heading-title mb-3">
               Order Confirmed
             </h1>
 

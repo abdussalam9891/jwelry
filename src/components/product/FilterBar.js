@@ -42,7 +42,7 @@ function PanelHeading({ title }) {
       <p className="uppercase tracking-[0.28em] text-[11px] text-black/40 mb-2">
         Browse By
       </p>
-      <h3 className="text-2xl md:text-3xl font-light text-black">{title}</h3>
+      <h3 className="heading-section">{title}</h3>
     </div>
   );
 }

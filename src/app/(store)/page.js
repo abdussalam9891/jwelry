@@ -54,11 +54,11 @@ export default function HomePage() {
         <div className="container-main">
           {/* Section heading */}
           <div className="text-center max-w-2xl mx-auto mb-8 md:mb-14 px-4 reveal">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3">
+            <h2 className="heading-title">
               Explore Our Collections
             </h2>
 
-            <p className="text-sm sm:text-base text-black/60 leading-6 sm:leading-7 max-w-xl mx-auto">
+            <p className="heading-subtitle">
               Timeless pieces crafted for every moment.
             </p>
           </div>
@@ -110,7 +110,7 @@ export default function HomePage() {
             {/* Content */}
             <div className="max-w-lg">
               {/* Heading */}
-              <h2 className="text-[2.2rem] md:text-[2.8rem] font-light text-[#1A1A1A] mb-6 leading-tight">
+              <h2 className="heading-title mb-6">
                 Crafted in Tradition, <br />
                 Designed for Today
               </h2>
@@ -149,11 +149,11 @@ export default function HomePage() {
       >
         <div className="container-main">
           <div className="text-center max-w-2xl mx-auto mb-8 md:mb-16 px-4 reveal">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-3 md:mb-5">
+            <h2 className="heading-title">
               Jewellery For Every Moment
             </h2>
 
-            <p className="text-sm sm:text-base text-black/60 leading-6 sm:leading-8 max-w-xl mx-auto">
+            <p className="heading-subtitle">
               Discover handcrafted collections designed for weddings,
               celebrations, everyday elegance and timeless luxury.
             </p>
@@ -215,7 +215,7 @@ export default function HomePage() {
             </p>
 
             {/* Heading */}
-            <h2 className="text-white text-[2.2rem] md:text-[3rem] font-light leading-tight mb-6">
+            <h2 className="heading-title !text-white mb-6">
               Designed to Shine With You
             </h2>
 
@@ -235,10 +235,10 @@ export default function HomePage() {
         <div className="container-main">
           {/* Heading */}
           <div className="text-center mb-14 section-heading">
-            <h2 className="section-title text-[2rem] md:text-[2.5rem] font-light mb-2">
+            <h2 className="section-title heading-title">
               Curated For You
             </h2>
-            <p className="section-label text-sm text-black/60 tracking-wide">
+            <p className="section-label heading-subtitle">
               For Every Occasion
             </p>
           </div>
@@ -312,7 +312,7 @@ export default function HomePage() {
           {/* LEFT */}
 
           <div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-[#111111] leading-tight mb-6">
+            <h2 className="heading-title mb-6">
               Need Help Choosing
               <span className="italic"> The Perfect Piece? </span>
             </h2>
@@ -564,12 +564,12 @@ export default function HomePage() {
         <div className="container-main">
           {/* Heading */}
           <div className="reveal">
-            <h2 className="text-center text-[2rem] md:text-[2.6rem] font-light text-[#1A1A1A]">
+            <h2 className="heading-title text-center">
               Stories Behind Every Sparkle
             </h2>
 
             {/* Subheading */}
-            <p className="max-w-2xl mx-auto text-center text-black/55 mt-5 mb-16 leading-relaxed">
+            <p className="heading-subtitle text-center mb-10 md:mb-16">
               Thousands of customers have chosen Gemora to celebrate life's most
               meaningful moments.
             </p>
@@ -589,7 +589,7 @@ export default function HomePage() {
             <p className="text-[0.8rem] tracking-[0.25em] text-[#6B1A2A]/80 uppercase mb-4">
               Why Choose Gemora
             </p>
-            <h2 className="text-[1.8rem] md:text-[2.2rem] font-light text-[#1A1A1A]">
+            <h2 className="heading-title">
               Quality, Trust & Timeless Elegance
             </h2>
           </div>

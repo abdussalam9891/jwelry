@@ -314,7 +314,7 @@ export default function ProductReviews({ productId }) {
         className="items-center justify-center bg-black/50"
         panelClassName="bg-white rounded-xl p-6 w-full max-w-md"
       >
-        <h3 id="reviewModalTitle" className="text-lg font-semibold mb-4">
+        <h3 id="reviewModalTitle" className="heading-card mb-4">
           {editingId ? "Edit Review" : "Write Review"}
         </h3>
 
@@ -378,7 +378,7 @@ export default function ProductReviews({ productId }) {
         className="items-center justify-center bg-black/50"
         panelClassName="bg-white rounded-xl p-6 w-full max-w-md"
       >
-        <h3 id="deleteReviewTitle" className="text-lg font-semibold">
+        <h3 id="deleteReviewTitle" className="heading-card">
           Delete Review
         </h3>
         <p className="mt-2 text-sm text-black/60">
