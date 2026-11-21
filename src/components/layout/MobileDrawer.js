@@ -15,7 +15,11 @@ import {
   jewelleryNavigation,
   moreCategories,
 } from "@/data/navigation";
-import { collectionUrl, productsUrl } from "@/lib/routes";
+import {
+  ADMIN_DASHBOARD_URL,
+  collectionUrl,
+  productsUrl,
+} from "@/lib/routes";
 
 const summaryClass =
   "list-none flex items-center justify-between cursor-pointer text-[15px] font-medium text-[#1A1A1A] [&::-webkit-details-marker]:hidden";
@@ -263,6 +267,16 @@ export default function MobileDrawer({ open, onClose }) {
           >
             {user ? "Logout" : "Login / Signup"}
           </button>
+
+          <a
+            href={ADMIN_DASHBOARD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            className="mt-3 w-full h-11 rounded-2xl border border-[#6B1A2A]/25 text-[#6B1A2A] text-sm font-medium flex items-center justify-center hover:bg-[#F9F3F4] transition"
+          >
+            Admin Login
+          </a>
         </div>
       </div>
     </>

@@ -11,13 +11,17 @@ import {
   moreCategories,
 } from "@/data/navigation";
 import { EMAIL_REGEX } from "@/lib/format";
-import { collectionUrl, productsUrl } from "@/lib/routes";
+import {
+  ADMIN_DASHBOARD_URL,
+  collectionUrl,
+  productsUrl,
+} from "@/lib/routes";
 import {
   getSiteSettings,
   subscribeNewsletter,
 } from "@/lib/services/contentService";
 
-const linkClass = "hover:text-[var(--color-accent-gold)] transition-colors";
+const linkClass ="hover:text-[var(--color-accent-gold)] transition-colors";
 
 const COMPANY_LINKS = [
   { href: "/about", label: "About Us" },
@@ -314,6 +318,14 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-white transition-colors">
               Terms &amp; Conditions
             </Link>
+            <a
+              href={ADMIN_DASHBOARD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Admin Login
+            </a>
           </div>
         </div>
       </div>

@@ -1,6 +1,11 @@
 // Single place for building internal URLs so pages and components never
 // hand-assemble paths.
 
+// External: the admin dashboard lives on its own deployment.
+export const ADMIN_DASHBOARD_URL =
+  process.env.NEXT_PUBLIC_ADMIN_URL ||
+  "https://jwelry-admin-dashboard.vercel.app/login";
+
 export function productUrl(slug) {
   return `/products/${encodeURIComponent(slug || "")}`;
 }
