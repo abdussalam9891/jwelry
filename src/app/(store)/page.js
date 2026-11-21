@@ -8,13 +8,45 @@ import {
   jewelleryNavigation,
   moreCategories,
 } from "@/data/navigation";
+import { SITE_URL } from "@/lib/config";
 import { collectionUrl, productsUrl } from "@/lib/routes";
 
 const homepageCategories = [...jewelleryNavigation, ...moreCategories];
 
+const siteJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Gemora",
+      url: `${SITE_URL}/`,
+      logo: `${SITE_URL}/icon-512.png`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Gemora",
+      url: `${SITE_URL}/`,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE_URL}/products?search={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
+      />
+      <h1 className="sr-only">Gemora — Handcrafted Premium Jewellery</h1>
+
       <HeroSlider />
 
       {/* Category */}

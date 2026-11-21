@@ -18,9 +18,9 @@ export default function WarrantyPage() {
             {/* Content */}
 
             <div>
-              <h2 className="text-4xl md:text-5xl font-light leading-tight mb-8 tracking-[-0.03em]">
+              <h1 className="text-4xl md:text-5xl font-light leading-tight mb-8 tracking-[-0.03em]">
                 Jewellery Created To Be Part Of Your Story
-              </h2>
+              </h1>
 
               <p className="text-black/60 leading-relaxed mb-6">
                 Every Gemora piece is carefully crafted with attention to

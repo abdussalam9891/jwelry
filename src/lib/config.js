@@ -20,3 +20,14 @@ export function getApiBase() {
     ? LOCAL_API
     : PRODUCTION_API;
 }
+
+// Absolute API base for server-side fetches (metadata, JSON-LD). A relative
+// NEXT_PUBLIC_API_BASE such as "/api" only works in the browser, so on the
+// server fall back to the proxy target or the production API.
+export function getServerApiBase() {
+  const base = process.env.NEXT_PUBLIC_API_BASE;
+
+  if (base && /^https?:\/\//.test(base)) return base;
+
+  return process.env.API_PROXY_TARGET || PRODUCTION_API;
+}
