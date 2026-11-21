@@ -6,6 +6,7 @@ import Link from "next/link";
 import CartItem from "./CartItem";
 import OrderSummary from "./OrderSummary";
 import Modal from "@/components/ui/Modal";
+import { ListSkeleton } from "@/components/ui/Skeletons";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -126,9 +127,9 @@ export default function CartView() {
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {!loaded ? (
-            <p className="lg:col-span-3 text-sm text-black/50">
-              Loading cart...
-            </p>
+            <div className="lg:col-span-2">
+              <ListSkeleton label="Loading cart" />
+            </div>
           ) : !items.length ? (
             <EmptyCart />
           ) : (

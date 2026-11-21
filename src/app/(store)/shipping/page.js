@@ -29,23 +29,23 @@ export default function ShippingPage() {
                   we ensure your order arrives safely and beautifully presented.
                 </p>
 
-                <div className="mt-12 grid grid-cols-3 gap-8 border-t border-black/10 pt-8">
+                <div className="mt-12 grid grid-cols-3 gap-4 sm:gap-8 border-t border-black/10 pt-8">
                   <div>
-                    <p className="text-3xl font-light">100%</p>
+                    <p className="text-xl sm:text-3xl font-light">100%</p>
                     <p className="text-sm text-black/60 mt-2">
                       Insured Shipping
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-3xl font-light">24h</p>
+                    <p className="text-xl sm:text-3xl font-light">24h</p>
                     <p className="text-sm text-black/60 mt-2">
                       Tracking Updates
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-3xl font-light">Premium</p>
+                    <p className="text-xl sm:text-3xl font-light">Premium</p>
                     <p className="text-sm text-black/60 mt-2">
                       Protective Packaging
                     </p>

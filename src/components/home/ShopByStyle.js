@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import ProductCard from "@/components/product/ProductCard";
+import { ProductRowSkeleton } from "@/components/ui/Skeletons";
 import { getProducts } from "@/lib/services/productService";
 
 const TABS = [
@@ -61,7 +62,7 @@ export default function ShopByStyle() {
     );
   } else if (!products) {
     content = (
-      <div className="text-sm text-gray-500 px-4">Loading products...</div>
+      <ProductRowSkeleton />
     );
   } else if (!products.length) {
     content = (

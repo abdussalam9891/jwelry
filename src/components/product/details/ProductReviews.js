@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import Modal from "@/components/ui/Modal";
+import { ReviewsSkeleton } from "@/components/ui/Skeletons";
 import { StarIcon } from "@/components/ui/icons";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/context/ToastContext";
@@ -254,7 +255,7 @@ export default function ProductReviews({ productId }) {
 
       <div className="space-y-4">
         {!data ? (
-          <div className="text-sm text-black/50">Loading reviews...</div>
+          <ReviewsSkeleton />
         ) : reviews.length ? (
           reviews.map((review) => (
             <ReviewCard

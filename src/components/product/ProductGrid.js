@@ -1,4 +1,5 @@
 import ProductCard from "./ProductCard";
+import { ProductGridSkeleton } from "@/components/ui/Skeletons";
 
 const gridClass =
   "grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-14";
@@ -8,9 +9,7 @@ export default function ProductGrid({ listing, search = "" }) {
   if (listing.status === "loading") {
     return (
       <div className={gridClass}>
-        <div className="col-span-full py-16 text-center text-black/50">
-          Loading products...
-        </div>
+        <ProductGridSkeleton />
       </div>
     );
   }

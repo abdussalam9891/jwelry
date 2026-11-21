@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { ListSkeleton } from "@/components/ui/Skeletons";
+
 import { capitalize, formatDate } from "@/lib/format";
 import { orderUrl } from "@/lib/routes";
 import { getMyOrders } from "@/lib/services/orderService";
@@ -136,7 +138,7 @@ export default function OrdersList() {
 
   if (error) return <p className="text-red-500">Failed to load orders</p>;
   if (!orders)
-    return <p className="text-sm text-black/50">Loading orders...</p>;
+    return <ListSkeleton label="Loading orders" />;
   if (!orders.length) return <NoOrders />;
 
   return (

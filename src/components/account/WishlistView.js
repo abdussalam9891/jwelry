@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import ProductCard from "@/components/product/ProductCard";
 import Modal from "@/components/ui/Modal";
+import { ProductGridSkeleton } from "@/components/ui/Skeletons";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -212,9 +213,7 @@ export default function WishlistView() {
     );
   } else if (!products) {
     content = (
-      <div className="col-span-full text-sm text-black/60 animate-pulse text-center py-10">
-        Loading wishlist...
-      </div>
+      <ProductGridSkeleton count={4} />
     );
   } else if (!products.length) {
     content = (

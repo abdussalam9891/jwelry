@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { ArrowLeftIcon, CheckIcon } from "@/components/ui/icons";
+import { ListSkeleton } from "@/components/ui/Skeletons";
 import { capitalize, formatCurrency, formatDate } from "@/lib/format";
 import { productUrl } from "@/lib/routes";
 import { getOrderById } from "@/lib/services/orderService";
@@ -284,7 +285,7 @@ export default function OrderDetails({ orderId }) {
     return (
       <>
         {backLink}
-        <p className="text-lg font-semibold text-[#6B1A2A]">Loading...</p>
+        <ListSkeleton count={2} label="Loading order" />
       </>
     );
   }

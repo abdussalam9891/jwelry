@@ -37,7 +37,7 @@ export default function SortSelect({ basePath, queryString }) {
       value={current}
       onChange={handleChange}
       aria-label="Sort products"
-      className="border border-black/10 rounded-md px-4 py-2 text-sm bg-white"
+      className="min-w-0 border border-black/10 rounded-md px-4 py-2 text-sm bg-white"
     >
       <option value="">Sort By</option>
       <option value="newest">Newest</option>

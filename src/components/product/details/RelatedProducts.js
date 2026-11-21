@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import ProductRow from "@/components/product/ProductRow";
+import { ProductRowSkeleton } from "@/components/ui/Skeletons";
 import { useAuth } from "@/context/AuthContext";
 import {
   addRecentlyViewed,
@@ -17,7 +18,13 @@ function Section({ title, products }) {
   return (
     <div className="mt-12">
       <h2 className="text-2xl md:text-3xl font-light mb-6">{title}</h2>
-      {products && <ProductRow products={products} />}
+      {products ? (
+        <ProductRow products={products} />
+      ) : (
+        <div className="flex gap-4 overflow-hidden pb-2">
+          <ProductRowSkeleton />
+        </div>
+      )}
     </div>
   );
 }
@@ -63,7 +70,12 @@ export default function RelatedProducts({ product }) {
         setSimilar(similarData?.products || []);
         setTrending(trendingData?.products || []);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        if (cancelled) return;
+        setSimilar([]);
+        setTrending([]);
+      });
 
     return () => {
       cancelled = true;

@@ -13,6 +13,7 @@ import SizeGuideModal from "./SizeGuideModal";
 import TrustSection from "./TrustSection";
 import VariantSelector from "./VariantSelector";
 import { HeartIcon } from "@/components/ui/icons";
+import { ProductDetailsSkeleton } from "@/components/ui/Skeletons";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
@@ -114,7 +115,7 @@ export default function ProductDetails({ slug }) {
     : null;
 
   if (status === "loading") {
-    return <div className="py-10">Loading product...</div>;
+    return <ProductDetailsSkeleton />;
   }
 
   if (status === "error" || !product) {
